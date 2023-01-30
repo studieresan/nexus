@@ -1,0 +1,55 @@
+{
+  "homepage.intro": "Ansluter Stockholm med KTH:s toppstudenter inom teknik",
+  "homepage.work.title": "Samarbeta med oss",
+  "homepage.work.description": "Om du är intresserad av att ha ett evenemang med oss eller om du är nyfiken och vill veta mer, tveka inte på att kontakta oss.",
+  "homepage.work.button": "Kontakta oss",
+  
+  "homepage.project.title": "Projektet",
+  "homepage.project.description": "Studs är ett årligt ideellt projekt från KTH som leds av en urval av 29 ingenjörsstudenter i masterprogram som är relevanta för datavetenskap.",
+  "homepage.project.button": "Läs mer",
+  
+  "homepage.events.title": "Evenemangen",
+  "homepage.events.description": "Under året träffar Studs-medlemmar företag under evenemang, vanligtvis arrangerade på företagskontor.",
+  "homepage.events.button": "Läs mer",
+
+  "about.intro": "Här kommer information om sidan att finnas.",
+  "events.intro": "Här kommer information om kommande evenemang att finnas.",
+  
+  "blog.title": "Reseblogg",
+  "blog.intro": "Här finns alla blogg-inlägg som lagts upp under resans gång.",
+  "blog.groupTitle": "Study Trip",
+  "blog.primaryButton": "Skapa blogg-inlägg",
+  "blog.secondaryButton": "Läs mer",
+  "view": "Läs",
+  "edit": "Ändra",
+  
+  "groups.title": "Möt grupperna",
+  "groups.intro": "Studs består av sex olika grupper med varsitt arbetsområde och varsin ledare, där alla gruppers insats är lika viktiga för att projektet ska lyckas. Mycket av arbetet i Studs sker grupperna emellan och det är därför viktigt att du som gruppmedlem är samarbetsvillig och förstår att vi alla arbetar mot ett gemensamt mål. Studs kommer inte att bara ge dig goda kunskaper inom allt vad projektarbete innebär, utan du kommer också att ha ett otroligt roligt år och knyta värdefulla relationer med näringslivet och inom gruppen!",
+  "groups.contact": "Har du några frågor? Kontakta ",
+  "groups.primaryButton": "Ansök",
+  "groups.secondaryButton": "Läs mer",
+  "groups.economy.title": "Ekonomigruppen",
+  "groups.economy.description": "Ekonomigruppen är en liten grupp som jobbar nära varandra och projektledarna med att skapa projektets budget och se till att den efterföljs. Gruppen är även ansvarig för att tillgodose de andra gruppernas ekonomiska behov. Nytt för i år är att gruppen inte kommer behöva hantera någon bokföring eftersom den kommer skötas externt. Kontinuerlig arbetsbelastning under året men mest arbete under hösten samt vid resan.",
+  "groups.event.title": "Eventgruppen",
+  "groups.event.description": "Eventgruppen ansvarar för planerandet och genomförandet av alla företagsevent och arbetar tillsammans med företagen för att skapa evenemang som är relevanta, intressanta och roliga både för projektmedlemmarna och företagen. Gruppen hjälper företagen att anpassa eventen efter deras önskemål och genomföra så bra event som möjligt. Arbetet är därmed kreativt då företagen skiljer sig mycket och kräver olika lösningar. Att vara med i eventgruppen innebär en kontinuerlig arbetsbelastning under hösten och våren.",
+
+  "groups.info.title": "Infogruppen",
+  "groups.info.description": "Infogruppen ansvarar för att skapa allt innehåll, den grafiska profilen som kommer synas i våra olika kanaler och rapporten. Gruppen består av två fotografer, två redaktörer och två art directors. Fotograferna tar porträttbilder av projektgruppen samt fotograferar alla event och resan. Redaktörerna producerar all text i sociala medier och rapporten. Art directors skapar den grafiska profilen och är ansvariga för webb-, app- och UX-design. De ansvar också för rapportens layout. Kontinuerlig arbetsbelastning under hösten och våren.",
+
+  "groups.it.title": "IT-gruppen",
+  "groups.it.description": "IT-gruppen är en liten grupp som ansvarar för Studs webbsida, backend och de interna mobilapplikationerna som finns för både Android och iOS. Du bör ha ett intresse för programmering och/eller webbdesign samt viljan att lära dig nya saker. Det är ett plus om du har tidigare erfarenhet, men det är inget krav. Kontinuerlig arbetsbelastning under hösten och våren.",
+
+  "groups.travel.title": "Resegruppen",
+  "groups.travel.description": "Resegruppen ansvarar för all planering och genomförandet av resan som avslutar projektet, allt från resrutt och flyg till koordinering av dagsaktiviteter. Utöver planering och logistik så jobbar vi även med att ta fram inspiration och förslag på resmål. Som medlem i resegruppen leder du hela projektgruppen under resan, ser till att alla har det bra och hanterar oförutsägbara situationer. Kontinuerlig arbetsbelastning under hela året men mest intensivt under hösten och själva resan.",
+
+  "groups.sales.title": "Säljgruppen",
+  "groups.sales.description": "Medlemmarna i säljgruppen skapar den första kontakten mellan Studs och företag och säljer in event. Det är viktigt att du som medlem i säljgruppen är utåtriktad och social, och inte tappar glöden om du får ett nej. Säljgruppen jobbar nära flera andra grupper, framförallt eventgruppen som tar över när ett event har blivit bokat. Hög belastning under hösten och en bit in under våren.",
+
+
+  "login.intro": "This is where the login page will be.",
+  "about.name": "About",
+  "events.name": "Events",
+  "blog.name": "Blog",
+  "groups.name": "Groups",
+  "login.name": "Login"
+  }

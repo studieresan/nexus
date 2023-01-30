@@ -1,0 +1,55 @@
+{
+  "homepage.intro": "Connecting Stockholm with KTH’s top tier tech students",
+  "homepage.work.title": "Work with us",
+  "homepage.work.description": "If you are interested in having an event with us or if you are curious and want to learn more, do not hesitate to contact us.",
+  "homepage.work.button": "Contact us",
+
+  "homepage.project.title": "The Project",
+  "homepage.project.description": "Studs is an annual nonprofit project from KTH run by a selection of 29 engineering students in master programs relevant to computer science.",
+  "homepage.project.button": "Learn more",
+
+  "homepage.events.title": "The Events",
+  "homepage.events.description": "During the year, Studs members will meet with companies during events, usually arranged at corporate offices.",
+  "homepage.events.button": "Learn more",
+  
+  "about.intro": "This is where the about page will be.",
+  "events.intro": "This is where the events page will be.",
+
+  "blog.title": "Blog posts",
+  "blog.intro": "Here is a collection of blog posts made throughout our study trip at the end of the course.",
+  "blog.groupTitle": "Study Trip",
+  "blog.primaryButton": "Create blog post",
+  "blog.secondaryButton": "Learn more",
+  "view": "View",
+  "edit": "Edit",
+  
+  "groups.title": "Meet the groups",
+  "groups.intro": "Studs consists of six different groups with different focuses and a different leader, where the effort of all groups are equally important for the project to succeed. Much of the work in Studs happens between the groups and it is therefore important that you as a group member is cooperative and understands that we all strive towards a common goal. Studs will not only give you great knowledge with whatever project work implies, but you will also have an amazing year and will create valuable relations with the industry and withing the group.",
+  "groups.contact": "Do you have any questions? Contact ",
+  "groups.primaryButton": "Apply now",
+  "groups.secondaryButton": "Learn more",
+  "groups.economy.title": "Economy Group",
+  "groups.economy.description": "The Economy Group is a small group that works closely with each other and the project managers to create the project's budget and ensure that it is followed. The group is also responsible for meeting the financial needs of the other groups. New for this year is that the group will not have to handle any bookkeeping because it will be managed externally. Continuous workload during the year but most work in the autumn and during the trip.",
+  "groups.event.title": "Event Group",
+  "groups.event.description": "The Event Group is responsible for planning and carrying out all business events and collaborate with the companies to create events that are relevant, interesting and fun for both the project members and the companies. The group assists the companies with customising the events according to their wishes and to host events of the highest standard. The work is very creative and solution-oriented as different companies have different needs. As an event group member you can expect an even workload throughout both spring and autumn semesters.",
+
+  "groups.info.title": "Info Group",
+  "groups.info.description": "The Info Group is responsible for creating all the content, the graphic profile that will appear in our various channels and the report. The team consists of two photographers, two editors and two art directors. The photographers take portraits of the project team and photograph all events and the trip. The editors produce all the text on social media and the report. The art directors create the graphic profile and are responsible for the web, app and UX design. They are also responsible for the layout of the report. Continuous workload during autumn and spring.",
+
+  "groups.it.title": "IT Group",
+  "groups.it.description": "The IT Group is a small group responsible for Studs' webpage, backend and the apps that exist for both Android and iOS. You should have an interest in programming and/or web design, in addition to the will to learn new stuff. It is a bonus if you have previous experience, but it is not a requirement. The workload is evenly spread during Fall and Spring.",
+
+  "groups.travel.title": "Travel Group",
+  "groups.travel.description": "The Travel Group is responsible for everything related to the trip at the end of the project, from planning the itinerary and booking the flights to coordinating the activities. Apart from planning and logistics, we also find inspiration and destinations to propose to the project group. As part of the travel group, you will lead the project group during the trip, making sure everyone is having a good time, and handling unforeseen situations. Continuous workload during the year, but most intense during the fall and the trip.",
+
+  "groups.sales.title": "Sales Group",
+  "groups.sales.description": "The Sales Group is the first point of contact between Studs and companies. This is where we as the sales team impress and recruit companies for events. As a sales team member you should be highly social and outwards, not afraid to make new connections and to not give up after a rejection. The sales team is the biggest group in Studs so you have a great team to assist and of course me as the sales team manager will help out to make you feel comfortable. We in the sales team also work closely with the event team since they take over after the event is booked! High workload during the autumn periods P1, P2.",
+
+
+  "login.intro": "This is where the login page will be.",
+  "about.name": "About",
+  "events.name": "Events",
+  "blog.name": "Blog",
+  "groups.name": "Groups",
+  "login.name": "Login"
+}
