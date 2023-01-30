@@ -1,5 +1,5 @@
 # nexus
-Recreation of the Studs-website using modern libraries
+Recreation of the Studs-website using modern libraries.
 ## Info
 This is a **React 18.2** project built with **Vite 3.0**.
 
