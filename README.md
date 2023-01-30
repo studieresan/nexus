@@ -7,6 +7,10 @@ The project uses **Bootstrap 5.2**, meaning no CSS files. To style the component
 
 The project also uses the **react-bootstrap** library which has several prebuilt components.
 
+The project follows this structure: `https://github.com/alan2207/bulletproof-react`
+
+The project uses **ESLint** configured to standard-jsx to ensure that tabs, spacing, naming, importing and much more is automatically corrected acoording to a consistent standard. The ESLint extention needs to be installed in VSCode.
+
 For translations, **i18n** is used.
 
 ## How to run
