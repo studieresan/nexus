@@ -9,7 +9,7 @@ The project uses the **react-bootstrap** library which has several prebuilt comp
 
 The project uses the **react-icons** library for all usage of icons. 
 
-The project follows [this](https://github.com/alan2207/bulletproof-react) React convention.
+The project follows [this](https://github.com/alan2207/bulletproof-react) React convention to a certain extent.
 
 The project uses **ESLint** configured to standard-jsx to ensure that tabs, spacing, naming, importing and much more is automatically corrected acoording to a consistent standard. The ESLint extention needs to be installed in VSCode.
 
