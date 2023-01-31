@@ -9,10 +9,10 @@ export default function BlogIntro () {
         <div className='mx-auto'>
           <h1 className='fw-light'>{t('blog.title')}</h1>
           <p className='lead text-muted'>{t('blog.intro')}</p>
-          {/* <div>
-            <Button className='m-1'>{t('blog.primaryButton')}</Button>
-            <Button className='m-1' variant='secondary'>{t('blog.secondaryButton')}</Button>
-          </div> */}
+          <div className='d-flex gap-2'>
+            <Button>{t('blog.primaryButton')}</Button>
+            <Button variant='secondary'>{t('blog.secondaryButton')}</Button>
+          </div>
         </div>
       </div>
     </div>

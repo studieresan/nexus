@@ -2,7 +2,7 @@ import { Collapse, Spinner } from 'react-bootstrap'
 import { BiChevronDown, BiChevronUp } from 'react-icons/bi'
 import BlogCard from './BlogCard.jsx'
 
-export default function BlogGroup ({ appData, showGroup, group, groupIndex, handleClick }) {
+export default function BlogGroup ({ appData, showGroup, group, groupIndex, handleClick, handleModals }) {
   return (
     <div
       key={groupIndex}
@@ -17,7 +17,7 @@ export default function BlogGroup ({ appData, showGroup, group, groupIndex, hand
       <Collapse in={showGroup[groupIndex]}>
         <div className='row row-cols-1 row-cols-xxl-2 align-items-stretch g-4 py-3'>
           {appData.blogPosts && appData.blogPosts.filter((e) => parseInt(e.date.slice(0, 4)) === group.year).map((post, index) => (
-            <BlogCard key={`group-${groupIndex}-card-${index}`} post={post} />
+            <BlogCard key={`group-${groupIndex}-card-${index}`} post={post} handleModals={handleModals} />
           ))}
         </div>
       </Collapse>

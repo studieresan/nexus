@@ -3,7 +3,7 @@ import { Spinner } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 import BlogGroup from './components/BlogGroup.jsx'
 import BlogIntro from './components/BlogIntro.jsx'
-export default function Blog ({ appData }) {
+export default function Blog ({ appData, handleModals }) {
   const { t, i18n } = useTranslation()
   const [showGroup, setShowGroup] = useState(null)
   const [groupsInfo, setGroupsInfo] = useState(null)
@@ -32,7 +32,7 @@ export default function Blog ({ appData }) {
         <BlogIntro />
         <div className='w-75'>
           {groupsInfo && showGroup && groupsInfo.map((group, groupIndex) => (
-            <BlogGroup key={`group-${groupIndex}`} appData={appData} showGroup={showGroup} setShowGroup={setShowGroup} group={group} groupIndex={groupIndex} handleClick={handleClick} />
+            <BlogGroup key={`group-${groupIndex}`} appData={appData} showGroup={showGroup} setShowGroup={setShowGroup} group={group} groupIndex={groupIndex} handleClick={handleClick} handleModals={handleModals} />
           ))}
         </div>
       </div>

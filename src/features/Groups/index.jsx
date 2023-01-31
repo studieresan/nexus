@@ -8,7 +8,6 @@ export default function Groups ({ appData }) {
   const { t, i18n } = useTranslation()
   const [groupsInfo, setGroupsInfo] = useState(null)
   const [showGroup, setShowGroup] = useState(null)
-  const containerRef = useRef(null)
   // Go through each group and find the master from appData.users and store it in groupsInfo
   useEffect(() => {
     if (appData.users) {
@@ -27,13 +26,10 @@ export default function Groups ({ appData }) {
     const newShowGroupMasterInfo = [...showGroup]
     newShowGroupMasterInfo[index] = !newShowGroupMasterInfo[index]
     setShowGroup(newShowGroupMasterInfo)
-    setTimeout(() => {
-      containerRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' })
-    }, 350)
   }
 
   return (
-    <div className='d-flex vstack justify-content-center align-items-center' id='hanging-icons' ref={containerRef}>
+    <div className='d-flex vstack justify-content-center align-items-center' id='hanging-icons'>
       <div className='py-5 w-75'>
         <div className='py-5'>
           <div>
