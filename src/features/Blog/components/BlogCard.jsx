@@ -7,9 +7,6 @@ export default function BlogCard ({ post, handleModals }) {
   const { t, i18n } = useTranslation()
   const imageRef = useRef(null)
   const optionsRef = useRef(null)
-  const handleConfirm = () => {
-    console.log('confirm')
-  }
   return (
     <div className='col'>
       <div
@@ -19,7 +16,7 @@ export default function BlogCard ({ post, handleModals }) {
             name: 'BlogPostModal',
             id: 'BlogPostModal-View',
             post,
-            handleConfirm
+            mode: 'view'
           })
         }}
         onMouseEnter={(e) => {
@@ -56,7 +53,18 @@ export default function BlogCard ({ post, handleModals }) {
             <Button className='p-2' variant='danger' size='lg'>
               <BsTrash className='d-block' size={17} />
             </Button>
-            <Button className='p-2' variant='light' size='lg'>
+            <Button
+              className='p-2' variant='light' size='lg'
+              onClick={(e) => {
+                e.stopPropagation()
+                handleModals.on({
+                  name: 'BlogPostModal',
+                  id: 'BlogPostModal-View',
+                  post,
+                  mode: 'edit'
+                })
+              }}
+            >
               <BsPencil className='d-block' size={17} />
             </Button>
           </div>

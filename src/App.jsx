@@ -9,7 +9,6 @@ import Groups from './features/Groups/index.jsx'
 import Blog from './features/Blog/index.jsx'
 import Login from './features/Login/index.jsx'
 import { useFetchUsersAndBlogPosts } from './hooks/useFetchUsersAndBlogPosts.js'
-import BlogPost from './features/BlogPostModal/index.jsx'
 import { useModalManager } from './hooks/useModalManager.js'
 import Modals from './features/Modals/index.jsx'
 function App () {
@@ -22,7 +21,7 @@ function App () {
 
   return (
     <AppDataContext.Provider value={appData}>
-      <Modals modal={handleModals} {...appData} />
+      <Modals modal={handleModals} appData={{ ...appData }} />
       <Header />
       <Routes>
         <Route path='/' element={<Homepage />} />

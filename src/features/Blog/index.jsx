@@ -29,7 +29,7 @@ export default function Blog ({ appData, handleModals }) {
   if (groupsInfo && showGroup) {
     return (
       <div className='d-flex row justify-content-center'>
-        <BlogIntro />
+        <BlogIntro handleModals={handleModals} />
         <div className='w-75'>
           {groupsInfo && showGroup && groupsInfo.map((group, groupIndex) => (
             <BlogGroup key={`group-${groupIndex}`} appData={appData} showGroup={showGroup} setShowGroup={setShowGroup} group={group} groupIndex={groupIndex} handleClick={handleClick} handleModals={handleModals} />
