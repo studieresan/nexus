@@ -1,10 +1,11 @@
 import { ModifiedButton } from '@/components/ModifiedButton.jsx'
-import { Nav, Navbar } from 'react-bootstrap'
+import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap'
 import { BiLogIn } from 'react-icons/bi'
 import { useNavigate } from 'react-router-dom'
 import LanguageDropDown from '../LanguageDropdown/index.jsx'
+import studsLogo from '@/assets/images/Logo_ROUND.png'
 import { useTranslation } from 'react-i18next'
-export default function Header () {
+function test () {
   const { t, i18n } = useTranslation()
   const navigateTo = useNavigate()
 
@@ -25,6 +26,38 @@ export default function Header () {
           {t('login.name')} <BiLogIn />
         </ModifiedButton>
       </Nav>
+    </Navbar>
+  )
+}
+
+export default function Header () {
+  const { t, i18n } = useTranslation()
+  const navigateTo = useNavigate()
+  return (
+    <Navbar bg='dark' variant='dark' className='px-3' expand='lg'>
+      <Navbar.Brand onClick={() => navigateTo('/')} style={{ cursor: 'pointer' }}><img
+        alt=''
+        src={studsLogo}
+        width='30'
+        height='30'
+        className='d-inline-block align-top'
+                                                                                  />{' '}STUDS
+      </Navbar.Brand>
+      <Navbar.Toggle aria-controls='basic-navbar-nav' />
+      <Navbar.Collapse id='basic-navbar-nav'>
+        <Nav className='mr-auto'>
+          <ModifiedButton onClick={() => navigateTo('/about')}>{t('about.name')}</ModifiedButton>
+          <ModifiedButton onClick={() => navigateTo('/events')}>{t('events.name')}</ModifiedButton>
+          <ModifiedButton onClick={() => navigateTo('/groups')}>{t('groups.name')}</ModifiedButton>
+          <ModifiedButton onClick={() => navigateTo('/blog')}>{t('blog.name')}</ModifiedButton>
+        </Nav>
+        <Nav className='ms-auto pe-2 align-items-center'>
+          <LanguageDropDown />
+          <ModifiedButton onClick={() => navigateTo('/login')}>
+            {t('login.name')} <BiLogIn />
+          </ModifiedButton>
+        </Nav>
+      </Navbar.Collapse>
     </Navbar>
   )
 }

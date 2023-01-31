@@ -7,31 +7,35 @@ export function IntroSection ({ overlayGroups, imagesLoaded, handleImageLoaded }
   const { t, i18n } = useTranslation()
 
   return (
-    <div>
-      <div className='overlay' />
+    <div style={{ position: 'relative', width: '100%', height: '100%' }}>
       <img src={introBg} style={{ width: '100%', height: '100%', objectFit: 'cover' }} onLoad={() => handleImageLoaded('intro')} />
+      <div className='overlay' style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }} />
       {imagesLoaded.intro
         ? (
-          <div className='container px-4 py-5 text-white' style={{ position: 'absolute', top: '45%', left: '50%', transform: 'translate(-50%, -50%)' }} id='featured-3'>
+          <div className='container text-white' style={{ position: 'absolute', top: '45%', left: '50%', transform: 'translate(-50%, -50%)' }} id='featured-3'>
             <div className='content text-white fs-1 w-100' style={{ textAlign: 'center' }}>
               {t('homepage.intro')}
             </div>
-            <hr style={{ height: 10, opacity: 1 }} />
-            <div className='row justify-content-center w-100 row-cols-1 row-cols-lg-3'>
-              {overlayGroups && overlayGroups.map((group, index) => (
-                <div key={index} className='row g-4 py-2'>
-                  <div className='feature col'>
-                    <div className='feature-icon d-inline-flex align-items-center justify-content-center fs-2 mb-3'>
-                      {group.icon}
+            <div className='d-none d-xl-flex row py-4 w-100 container'>
+              <hr style={{ height: 10, opacity: 1 }} />
+              <div className='row justify-content-center w-100 row-cols-3'>
+                {overlayGroups && overlayGroups.map((group, index) => (
+                  <div key={index} className='row'>
+                    <div className='feature col'>
+                      <div className='feature-icon d-inline-flex align-items-center justify-content-center fs-2 mb-3'>
+                        {group.icon}
+                      </div>
+                      <h3 className='fs-2'>{group.title}</h3>
+                      <div>
+                        <p>{group.description}</p>
+                      </div>
+                      <Button>
+                        {group.button}
+                      </Button>
                     </div>
-                    <h3 className='fs-2'>{group.title}</h3>
-                    <p>{group.description}</p>
-                    <Button>
-                      {group.button}
-                    </Button>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
           )
@@ -44,7 +48,6 @@ export function IntroSection ({ overlayGroups, imagesLoaded, handleImageLoaded }
             </div>
           </div>
           )}
-
     </div>
   )
 }

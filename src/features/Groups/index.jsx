@@ -32,7 +32,7 @@ export default function Groups ({ appData }) {
   return (
     <div className='d-flex justify-content-center row' id='hanging-icons'>
       <section className='py-5 text-center container'>
-        <div className='row py-lg-5'>
+        <div className='row py-5'>
           <div className='col-lg-6 col-md-8 mx-auto'>
             <h1 className='fw-light'>{t('groups.title')}</h1>
             <p className='lead text-muted'>{t('groups.intro')}</p>

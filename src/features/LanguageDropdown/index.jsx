@@ -18,7 +18,8 @@ export default function LanguageDropDown () {
         key='upLanguage'
         id='dropdown-button-drop-down'
         drop='down'
-        variant='light shadow-none'
+        variant='dark shadow-none'
+        menuVariant='dark'
         title={flagAndCountry[lang]?.icon}
         size='md'
       >
