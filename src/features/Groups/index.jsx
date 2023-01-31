@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Button } from 'react-bootstrap'
 import Group from './components/Group.jsx'
@@ -8,7 +8,7 @@ export default function Groups ({ appData }) {
   const { t, i18n } = useTranslation()
   const [groupsInfo, setGroupsInfo] = useState(null)
   const [showGroup, setShowGroup] = useState(null)
-
+  const containerRef = useRef(null)
   // Go through each group and find the master from appData.users and store it in groupsInfo
   useEffect(() => {
     if (appData.users) {
@@ -27,23 +27,26 @@ export default function Groups ({ appData }) {
     const newShowGroupMasterInfo = [...showGroup]
     newShowGroupMasterInfo[index] = !newShowGroupMasterInfo[index]
     setShowGroup(newShowGroupMasterInfo)
+    setTimeout(() => {
+      containerRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' })
+    }, 350)
   }
 
   return (
-    <div className='d-flex justify-content-center row' id='hanging-icons'>
-      <section className='py-5 text-center container'>
-        <div className='row py-5'>
-          <div className='col-lg-6 col-md-8 mx-auto'>
+    <div className='d-flex vstack justify-content-center align-items-center' id='hanging-icons' ref={containerRef}>
+      <div className='py-5 w-75'>
+        <div className='py-5'>
+          <div>
             <h1 className='fw-light'>{t('groups.title')}</h1>
             <p className='lead text-muted'>{t('groups.intro')}</p>
-            <div>
-              <Button className='m-1'>{t('groups.primaryButton')}</Button>
-              <Button className='m-1' variant='secondary'>{t('groups.secondaryButton')}</Button>
+            <div className='d-flex gap-2'>
+              <Button>{t('groups.primaryButton')}</Button>
+              <Button variant='secondary'>{t('groups.secondaryButton')}</Button>
             </div>
           </div>
         </div>
-      </section>
-      <div className='row w-75 g-1 row-cols-1 row-cols-xxl-2'>
+      </div>
+      <div className='row g-1 w-75 row-cols-1 row-cols-xxl-2'>
         {groupsInfo && groupsInfo.map((group, index) => (
           <Group key={index} handleClick={handleClick} group={group} groupIndex={index} showGroup={showGroup} />
         ))}

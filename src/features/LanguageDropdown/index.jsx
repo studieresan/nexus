@@ -1,52 +1,51 @@
 import { flagAndCountry } from '@/components/icons/Flags.jsx'
-import { useRef, useState } from 'react'
-import { Dropdown, DropdownButton, OverlayTrigger, Tooltip } from 'react-bootstrap'
+import { useEffect, useState } from 'react'
+import { Dropdown } from 'react-bootstrap'
 import i18n from '@/i18n'
+
 export default function LanguageDropDown () {
-  const tooltipContainerRef = useRef()
-
   const [lang, setLang] = useState(i18n.languages[0])
+  const [drop, setDrop] = useState('down')
 
-  function handleLanguageChange (lang) {
-    setLang(lang)
-    i18n.changeLanguage(flagAndCountry[lang].code)
+  useEffect(() => {
+    const handleWindowResize = () => {
+      if (window.innerWidth < 768) { // md breakpoint
+        setDrop('up')
+      } else {
+        setDrop('down')
+      }
+    }
+
+    handleWindowResize()
+    window.addEventListener('resize', handleWindowResize)
+    return () => window.removeEventListener('resize', handleWindowResize)
+  }, [])
+  function handleLanguageChange (language) {
+    setLang(language)
+    i18n.changeLanguage(flagAndCountry[language].code)
   }
 
   return (
-    <>
-      <DropdownButton
-        key='upLanguage'
-        id='dropdown-button-drop-down'
-        drop='down'
-        variant='dark shadow-none'
-        menuVariant='dark'
-        title={flagAndCountry[lang]?.icon}
-        size='md'
+    <Dropdown drop={drop} style={{ position: 'relative' }}>
+      <Dropdown.Toggle className='d-flex align-items-center' variant='dark' id='language-dropdown'>
+        <div className='d-flex '>
+          {flagAndCountry[lang]?.icon}
+        </div>
+      </Dropdown.Toggle>
+
+      <Dropdown.Menu
+        align={{ lg: 'center' }}
+        style={{ position: 'absolute', top: 'auto', bottom: drop === 'down' ? 'auto' : '100%', left: 0, right: 0, zIndex: 1000 }}
       >
-        {Object.entries(flagAndCountry).map(([language, value], index) => (
-          <OverlayTrigger
-            key={language + 'overlay'}
-            placement='left'
-            defaultShow={false}
-            overlay={
-              <Tooltip id='tooltip-left'>
-                {value?.text}
-              </Tooltip>
-            }
+        {Object.entries(flagAndCountry).map(([language, value]) => (
+          <Dropdown.Item
+            key={language}
+            onClick={() => handleLanguageChange(language)}
           >
-            <Dropdown.Item
-              key={language}
-              eventKey={index + 1}
-              size='lg'
-              className='d-flex align-items-center gap-1'
-              onClick={() => handleLanguageChange(language)}
-              onMouseEnter={(e) => e.target.nextSibling.show()}
-              onMouseLeave={(e) => e.target.nextSibling.hide()}
-            >{value?.icon}{value?.text}
-            </Dropdown.Item>
-          </OverlayTrigger>
+            {value?.icon} {value?.text}
+          </Dropdown.Item>
         ))}
-      </DropdownButton>
-    </>
+      </Dropdown.Menu>
+    </Dropdown>
   )
 }

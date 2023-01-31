@@ -34,7 +34,7 @@ export default function Header () {
   const { t, i18n } = useTranslation()
   const navigateTo = useNavigate()
   return (
-    <Navbar bg='dark' variant='dark' className='px-3' expand='lg'>
+    <Navbar bg='dark' variant='dark' className='px-3' expand='md'>
       <Navbar.Brand onClick={() => navigateTo('/')} style={{ cursor: 'pointer' }}><img
         alt=''
         src={studsLogo}
@@ -51,7 +51,7 @@ export default function Header () {
           <ModifiedButton onClick={() => navigateTo('/groups')}>{t('groups.name')}</ModifiedButton>
           <ModifiedButton onClick={() => navigateTo('/blog')}>{t('blog.name')}</ModifiedButton>
         </Nav>
-        <Nav className='ms-auto pe-2 align-items-center'>
+        <Nav className='ms-auto align-items-center'>
           <LanguageDropDown />
           <ModifiedButton onClick={() => navigateTo('/login')}>
             {t('login.name')} <BiLogIn />
