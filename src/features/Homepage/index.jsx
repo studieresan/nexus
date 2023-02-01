@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { homepagePredeterminedOverlayGroups } from '@/utils/predeterminedInformation.jsx'
 import { IntroSection } from './components/IntroSection.jsx'
 import { HeroSectionProject } from './components/HeroSectionProject.jsx'
-export default function Homepage () {
+export default function Homepage ({ appData }) {
   const { t, i18n } = useTranslation()
   const [overlayGroups, setOverlayGroups] = useState(null)
   const [imagesLoaded, setImageLoaded] = useState({
@@ -23,13 +23,12 @@ export default function Homepage () {
   }, [i18n.language])
 
   function handleImageLoaded (section) {
-    console.log('Entered')
     setImageLoaded({ ...imagesLoaded, [section]: true })
   }
 
   return (
     <div>
-      <IntroSection overlayGroups={overlayGroups} imagesLoaded={imagesLoaded} handleImageLoaded={handleImageLoaded} />
+      <IntroSection appData={appData} overlayGroups={overlayGroups} imagesLoaded={imagesLoaded} handleImageLoaded={handleImageLoaded} />
       {imagesLoaded.intro && <HeroSectionProject handleImageLoaded={handleImageLoaded} />}
     </div>
   )

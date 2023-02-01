@@ -17,7 +17,7 @@ export default function EditPost ({ modal, appData, post }) {
         description: post.description || '',
         frontPicture: post.frontPicture || '',
         pictures: post.pictures || [],
-        author: post.author || appData.users[0]
+        author: post?.author?.id || appData.users[0].id
       }
       setFormData(newFormData)
     }
@@ -25,8 +25,10 @@ export default function EditPost ({ modal, appData, post }) {
 
   function handleSubmit () {
     console.log('formData: ', formData)
+    formData.date = new Date().toISOString()
     if (formData.id) {
-      updateBlogPost(formData).then((response) => {
+      const { id, ...formDataWithoutId } = formData
+      updateBlogPost(id, formDataWithoutId).then((response) => {
         console.log('response: ', response)
         modal.off(modal)
       })
@@ -74,10 +76,13 @@ export default function EditPost ({ modal, appData, post }) {
         addImagesRef.current.value = ''
         break
       case 'title':
-        setFormData({ ...formData, name: e.target.value })
+        setFormData({ ...formData, title: e.target.value })
         break
       case 'description':
         setFormData({ ...formData, description: e.target.value })
+        break
+      case 'author':
+        setFormData({ ...formData, author: e.target.value })
         break
       default:
         console.log('Unknown handleChange')

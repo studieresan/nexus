@@ -1,8 +1,8 @@
-import { fetchUsers, getBlogPosts } from '@/requests/api'
+import { fetchEvents, fetchUsers, getBlogPosts } from '@/requests/api'
 import { useEffect } from 'react'
 
 // check and fetch both users and blog posts, and make one combined update to appData
-export function useFetchUsersAndBlogPosts (appData, setAppData) {
+export default function useFetchCollections (appData, setAppData) {
   useEffect(() => {
     async function fetchData () {
       const toUpdateAppData = {}
@@ -13,6 +13,9 @@ export function useFetchUsersAndBlogPosts (appData, setAppData) {
       }
       if (appData.blogPosts === null) {
         toUpdateAppData.blogPosts = await getBlogPosts(2022)
+      }
+      if (appData.events === null) {
+        toUpdateAppData.events = await fetchEvents()
       }
       if (Object.keys(toUpdateAppData).length > 0) {
         console.log('updating appData:', toUpdateAppData)

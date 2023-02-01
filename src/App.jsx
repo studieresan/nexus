@@ -8,28 +8,31 @@ import Events from './features/Events/index.jsx'
 import Groups from './features/Groups/index.jsx'
 import Blog from './features/Blog/index.jsx'
 import Login from './features/Login/index.jsx'
-import { useFetchUsersAndBlogPosts } from './hooks/useFetchUsersAndBlogPosts.js'
+import useFetchCollections from './hooks/useFetchCollections.js'
 import { useModalManager } from './hooks/useModalManager.js'
 import Modals from './features/Modals/index.jsx'
 function App () {
   const [appData, setAppData] = useState({
     users: null,
-    blogPosts: null
+    blogPosts: null,
+    events: null,
+    loggedIn: localStorage.loggedIn || false,
+    userDetails: null
   })
   const handleModals = useModalManager()
-  useFetchUsersAndBlogPosts(appData, setAppData)
+  useFetchCollections(appData, setAppData)
 
   return (
     <AppDataContext.Provider value={appData}>
       <Modals modal={handleModals} appData={{ ...appData }} />
-      <Header />
+      <Header appData={appData} setAppData={setAppData} />
       <Routes>
-        <Route path='/' element={<Homepage />} />
+        <Route path='/' element={<Homepage appData={appData} />} />
         <Route path='/about' element={<About />} />
         <Route path='/events' element={<Events />} />
         <Route path='/groups' element={<Groups appData={appData} />} />
         <Route path='/blog' element={<Blog appData={appData} handleModals={handleModals} />} />
-        <Route path='/login' element={<Login />} />
+        <Route path='/login' element={<Login appData={appData} setAppData={setAppData} />} />
       </Routes>
     </AppDataContext.Provider>
   )

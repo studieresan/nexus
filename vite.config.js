@@ -24,6 +24,10 @@ export default defineConfig({
         target: 'https://devapi.studs.se/',
         changeOrigin: true
       },
+      '/login': {
+        target: 'https://devapi.studs.se/',
+        changeOrigin: true
+      },
       '/uploads': {
         target: 'https://studs23.s3.eu-north-1.amazonaws.com',
         changeOrigin: true
