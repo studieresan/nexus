@@ -1,19 +1,14 @@
-import { loginUser } from '@/requests/api'
-import { setLoggedIn } from '@/requests/auth'
-import { useState } from 'react'
-import { Button, FloatingLabel, Form } from 'react-bootstrap'
+import { HandleInstructionsContext } from '@/context'
+import { useContext, useState } from 'react'
+import { Button, Form } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
-import { useNavigate } from 'react-router-dom'
 export default function Login ({ appData, setAppData }) {
   const { t, i18n } = useTranslation()
   const [formData, setFormData] = useState({ email: '', password: '' })
-  const navigateTo = useNavigate()
-  function login () {
-    loginUser(formData.email, formData.password).then((user) => {
-      setLoggedIn(user.token)
-      setAppData({ ...appData, loggedIn: true, userDetails: user })
-      navigateTo('/')
-    })
+  const handleInstructions = useContext(HandleInstructionsContext)
+
+  async function login () {
+    await handleInstructions('loginUser', { email: formData.email, password: formData.password })
   }
   function handleChange (e) {
     setFormData({ ...formData, [e.target.name]: e.target.value })

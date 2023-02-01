@@ -27,7 +27,7 @@ export default function BlogCard ({ id, cardTitle, cornerImg, cornerText, cardDa
           optionsRef.current.style.opacity = '0'
         }}
       >
-        <div ref={imageRef} className='d-flex flex-column h-100' style={{ transitionDuration: '0.2s', backgroundImage: `url(${bgImg})`, backgroundSize: 'cover', backgroundPosition: 'center', filter: 'brightness(80%)', position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }} />
+        <div ref={imageRef} className='d-flex flex-column bg-dark h-100' style={{ transitionDuration: '0.2s', backgroundImage: `url(${bgImg})`, backgroundSize: 'cover', backgroundPosition: 'center', filter: 'brightness(80%)', position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }} />
         <div className='d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1' style={{ position: 'relative' }}>
           <h3 className='pt-5 mt-5 mb-4 display-6 lh-1 fw-bold'>{cardTitle}</h3>
           <div className='d-flex mt-auto'>

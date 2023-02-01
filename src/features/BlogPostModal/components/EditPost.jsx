@@ -17,7 +17,6 @@ export default function EditPost ({ modal, appData, post }) {
   useEffect(() => {
     if (post) {
       const newFormData = {
-        id: post.id || null,
         title: post.title || '',
         description: post.description || '',
         frontPicture: post.frontPicture || '',
@@ -25,17 +24,18 @@ export default function EditPost ({ modal, appData, post }) {
         author: post?.author?.id || appData.users[0].id,
         date: post.date || null
       }
+      if (post.id) newFormData.id = post.id
       setFormData(newFormData)
     }
   }, [post])
 
   async function handleSubmit () {
-    console.log('formData: ', formData)
-    formData.date = formData.date || new Date().toISOString()
-    if (formData.id) {
-      await handleInstructions('updateBlogPost', { post: formData })
+    const payload = { ...formData, date: formData.date || new Date().toISOString() }
+    console.log('payload: ', { ...payload })
+    if (payload.id) {
+      await handleInstructions('updateBlogPost', { post: payload })
     } else {
-      await handleInstructions('createBlogPost', { post: formData })
+      await handleInstructions('createBlogPost', { post: payload })
     }
     modal.off(modal)
   }
@@ -53,7 +53,6 @@ export default function EditPost ({ modal, appData, post }) {
   async function handleChange (e) {
     switch (e.target.name) {
       case 'pictures': {
-        console.log('entered')
         const urls = []
         for (let i = 0; i < e.target.files.length; i++) {
           const file = e.target.files[i]
@@ -111,7 +110,7 @@ export default function EditPost ({ modal, appData, post }) {
         <Form>
           <Form.Group className='mb-3' controlId='formBasicEmail'>
             <FloatingLabel controlId='floatingSelect' label={t('blog.edit.label.author')}>
-              <Form.Control as='select' name='author' defaultValue={formData.author.id} onChange={(e) => handleChange(e)}>
+              <Form.Control as='select' name='author' defaultValue={formData.author} onChange={(e) => handleChange(e)}>
                 {appData.users.map((user, index) => (
                   <option key={index} value={user.id}>{user.firstName}{' '}{user.lastName}</option>
                 ))}

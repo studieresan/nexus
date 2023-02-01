@@ -1,22 +1,19 @@
 import { ModifiedButton } from '@/components/ModifiedButton.jsx'
-import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap'
+import { Nav, Navbar } from 'react-bootstrap'
 import { BiLogIn, BiLogOut } from 'react-icons/bi'
 import { useNavigate } from 'react-router-dom'
 import LanguageDropDown from '../LanguageDropdown/index.jsx'
 import studsLogo from '@/assets/images/Logo_ROUND.png'
 import { useTranslation } from 'react-i18next'
-import { setLoggedOut } from '@/requests/auth.js'
-import { useEffect, useState } from 'react'
+import { useContext } from 'react'
+import { HandleInstructionsContext } from '@/context.js'
 
 export default function Header ({ appData, setAppData }) {
   const { t, i18n } = useTranslation()
   const navigateTo = useNavigate()
-  const [loggedIn, setLoggedIn] = useState(false)
-
-  function logout () {
-    setLoggedOut()
-    setAppData({ ...appData, loggedIn: false, userDetails: null })
-    navigateTo('/')
+  const handleInstructions = useContext(HandleInstructionsContext)
+  async function logout () {
+    await handleInstructions('logoutUser')
   }
   return (
     <Navbar bg='dark' variant='dark' className='px-3' expand='md'>

@@ -1,5 +1,5 @@
-import { useRef, useState } from 'react'
-import { Routes, Route } from 'react-router-dom'
+import { useEffect, useRef, useState } from 'react'
+import { Routes, Route, useNavigate } from 'react-router-dom'
 import { AppDataContext, HandleInstructionsContext } from '@/context'
 import Header from './features/Header/index.jsx'
 import Homepage from './features/Homepage/index.jsx'
@@ -18,10 +18,15 @@ function App () {
     blogPosts: null,
     events: null,
     loggedIn: localStorage.loggedIn || false,
-    userDetails: null
+    userDetails: (localStorage.userDetails && JSON.parse(localStorage.userDetails)) || null
   })
+
+  useEffect(() => {
+    console.log('appData: ', appData)
+  }, [appData])
+  const navigateTo = useNavigate()
   const args = useRef()
-  args.current = { appData, setAppData }
+  args.current = { appData, setAppData, navigateTo }
   const handleModals = useModalManager()
   useFetchCollections(appData, setAppData)
 

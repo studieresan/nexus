@@ -1,11 +1,13 @@
-export function setLoggedIn (token) {
+export function setLoggedIn (response) {
   localStorage.loggedIn = 'true'
-  localStorage.token = token
+  localStorage.token = response.token
+  localStorage.userDetails = JSON.stringify(response)
 }
 
 export function setLoggedOut () {
-  localStorage.loggedIn = null
-  localStorage.token = null
+  localStorage.removeItem('loggedIn')
+  localStorage.removeItem('token')
+  localStorage.removeItem('userDetails')
 }
 
 export function loggedIn () {

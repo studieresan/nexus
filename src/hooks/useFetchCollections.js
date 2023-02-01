@@ -18,7 +18,6 @@ export default function useFetchCollections (appData, setAppData) {
         toUpdateAppData.events = await fetchEvents()
       }
       if (Object.keys(toUpdateAppData).length > 0) {
-        console.log('updating appData:', toUpdateAppData)
         setAppData({ ...appData, ...toUpdateAppData })
       }
     }

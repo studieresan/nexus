@@ -1,4 +1,5 @@
-import { createBlogPost, deleteBlogpost, updateBlogPost } from '@/requests/api'
+import { createBlogPost, deleteBlogpost, loginUser, updateBlogPost } from '@/requests/api'
+import { setLoggedIn, setLoggedOut } from '@/requests/auth'
 
 export default async function instructionSwitchboard (args, instruction, data) {
   switch (instruction) {
@@ -10,7 +11,8 @@ export default async function instructionSwitchboard (args, instruction, data) {
     }
     case 'createBlogPost': {
       const response = await createBlogPost(data.post)
-      args.setAppData({ ...args.appData, blogPosts: [...args.appData.blogPosts, response] })
+      console.log('new post response: ', response)
+      args.setAppData({ ...args.appData, blogPosts: [...args.appData.blogPosts, response.blogCreate] })
       break
     }
     case 'deleteBlogPost': {
@@ -18,12 +20,19 @@ export default async function instructionSwitchboard (args, instruction, data) {
       args.setAppData({ ...args.appData, blogPosts: args.appData.blogPosts.filter(post => post.id !== data.toDeleteId) })
       break
     }
-    case 'login':
-      console.log('login', data)
+    case 'loginUser': {
+      const response = await loginUser(data.email, data.password)
+      setLoggedIn(response)
+      args.setAppData({ ...args.appData, loggedIn: true, userDetails: response })
+      args.navigateTo('/')
       break
-    case 'logout':
-      console.log('logout', data)
+    }
+    case 'logoutUser': {
+      setLoggedOut()
+      args.setAppData({ ...args.appData, loggedIn: false, userDetails: null })
+      args.navigateTo('/')
       break
+    }
     default:
       console.log('instructionSwitchboard: default')
   }
