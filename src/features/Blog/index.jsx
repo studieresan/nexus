@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react'
+import { HandleInstructionsContext } from '@/context.js'
+import { useContext, useEffect, useState } from 'react'
 import { Spinner } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 import BlogGroup from './components/BlogGroup.jsx'
@@ -7,6 +8,7 @@ export default function Blog ({ appData, handleModals }) {
   const { t, i18n } = useTranslation()
   const [showGroup, setShowGroup] = useState(null)
   const [groupsInfo, setGroupsInfo] = useState(null)
+  const handleInstructions = useContext(HandleInstructionsContext)
 
   useEffect(() => {
     if (appData.blogPosts && groupsInfo) {
@@ -16,23 +18,62 @@ export default function Blog ({ appData, handleModals }) {
 
   useEffect(() => {
     if (appData.blogPosts) {
-      const years = [...new Set(appData.blogPosts.map((e) => parseInt(e.date.slice(0, 4))))].sort((a, b) => b - a).reverse()
+      const years = [...new Set(appData.blogPosts.map((e) => parseInt(e.date.slice(0, 4))))].sort((a, b) => b - a)
       setGroupsInfo(years.map((year) => ({ year, title: t('blog.groupTitle') + ' ' + year })))
     }
   }, [appData.blogPosts, i18n.language])
 
-  function handleClick (groupIndex) {
+  function handleClickGroup (groupIndex) {
     const newShowGroup = [...showGroup]
     newShowGroup[groupIndex] = !newShowGroup[groupIndex]
     setShowGroup(newShowGroup)
   }
+
+  function handleClickCard (id) {
+    handleModals.on({
+      name: 'BlogPostModal',
+      id: 'BlogPostModal-View',
+      post: appData.blogPosts.find((e) => e.id === id),
+      mode: 'view'
+    })
+  }
+
+  function handleClickEdit (id) {
+    handleModals.on({
+      name: 'BlogPostModal',
+      id: 'BlogPostModal-Edit',
+      post: appData.blogPosts.find((e) => e.id === id),
+      mode: 'edit'
+    })
+  }
+
+  async function handleConfirmDelete ({ modal, data }) {
+    await handleInstructions('deleteBlogPost', { toDeleteId: data.post.id })
+    modal.off(modal)
+  }
+
+  async function handleClickDelete (id) {
+    const post = appData.blogPosts.find((e) => e.id === id)
+    handleModals.on({
+      name: 'ConfirmModal',
+      id: 'BlogPostModal-Delete',
+      title: t('blog.deletePostTitle'),
+      children: <div><span className='fw-light'>{t('blog.deletePostDescription')}{': '}</span><span className='fw-bold'>{post.title}</span></div>,
+      mode: 'delete',
+      post: appData.blogPosts.find((e) => e.id === id),
+      handleConfirm: handleConfirmDelete
+    })
+  }
+
   if (groupsInfo && showGroup) {
     return (
       <div className='d-flex row justify-content-center'>
         <BlogIntro handleModals={handleModals} />
         <div className='w-75'>
           {groupsInfo && showGroup && groupsInfo.map((group, groupIndex) => (
-            <BlogGroup key={`group-${groupIndex}`} appData={appData} showGroup={showGroup} setShowGroup={setShowGroup} group={group} groupIndex={groupIndex} handleClick={handleClick} handleModals={handleModals} />
+            <div key={`group-${groupIndex}`} className='mb-2'>
+              <BlogGroup appData={appData} showGroup={showGroup} setShowGroup={setShowGroup} group={group} groupIndex={groupIndex} handleClickGroup={handleClickGroup} handleClickCard={handleClickCard} handleClickEdit={handleClickEdit} handleClickDelete={handleClickDelete} />
+            </div>
           ))}
         </div>
       </div>

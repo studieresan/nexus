@@ -1,6 +1,8 @@
 import BlogPostModal from '@/features/BlogPostModal/index.jsx'
+import ConfirmModal from '@/features/ConfirmModal/index.jsx'
 const modals = {
-  BlogPostModal
+  BlogPostModal,
+  ConfirmModal
 }
 // This component is reused from a TellusTalk AB React project with permission. // William Bigert 2023-01-31
 export default function Modals ({ modal, ...props }) {

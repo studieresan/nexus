@@ -11,38 +11,33 @@ export default function ViewPost ({ post, modal }) {
   }, [post])
 
   function parseInputBlocks (input) {
-    const split = input.trim().split(/\n\\image-[0-9]+/g)
-    const blocks = split.slice(0, split.length - 1)
-    const tokens = input.trim().match(/\n\\image-[0-9]+/g)
-    const imageBlocks = []
-    blocks.forEach((block, index) => {
-      const imgIndex = tokens[index].split('-')[1].trim()
-      if (index < blocks.length - 1) {
-        if (imageBlocks.length === 0 || imageBlocks[imageBlocks.length - 1].images.length > 0) {
-          imageBlocks.push({
-            text: block.trim(),
-            images: [post.pictures[imgIndex]]
+    const lines = input.split('\n')
+    const blocks = [{
+      text: '',
+      images: []
+    }]
+    let currentBlockIdx = 0
+    let encounteredImg = false
+    for (let i = 0; i < lines.length; i++) {
+      if (lines[i].startsWith('\\image-')) {
+        encounteredImg = true
+        const imgIndex = lines[i].split('-')[1].trim()
+        blocks[currentBlockIdx].images.push(post.pictures[imgIndex])
+      } else {
+        if (encounteredImg) {
+          currentBlockIdx++
+          encounteredImg = false
+          blocks.push({
+            text: '',
+            images: []
           })
-        } else {
-          imageBlocks[imageBlocks.length - 1].text += `\n${block.trim()}`
-          imageBlocks[imageBlocks.length - 1].images.push(post.pictures[index])
         }
-      } else {
-        imageBlocks[imageBlocks.length - 1].text += `\n${block.trim()}`
-      }
-    })
-
-    const result = []
-    for (let i = 0; i < imageBlocks.length; i++) {
-      if (imageBlocks[i].text.trim() === '' && i > 0) {
-        result[result.length - 1].images = result[result.length - 1].images.concat(imageBlocks[i].images)
-      } else {
-        result.push(imageBlocks[i])
+        blocks[currentBlockIdx].text += `\n${lines[i]}`.trim()
       }
     }
-
-    return result
+    return blocks
   }
+
   return (
     <Modal show={modal.show} onHide={() => modal.off(modal)} size='xl' keyboard={false}>
       <Modal.Header closeButton className='py-2 text-gray-700'>

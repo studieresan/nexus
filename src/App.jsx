@@ -1,6 +1,6 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { Routes, Route } from 'react-router-dom'
-import { AppDataContext } from '@/context'
+import { AppDataContext, HandleInstructionsContext } from '@/context'
 import Header from './features/Header/index.jsx'
 import Homepage from './features/Homepage/index.jsx'
 import About from './features/About/index.jsx'
@@ -11,6 +11,7 @@ import Login from './features/Login/index.jsx'
 import useFetchCollections from './hooks/useFetchCollections.js'
 import { useModalManager } from './hooks/useModalManager.js'
 import Modals from './features/Modals/index.jsx'
+import instructionSwitchboard from './utils/instructionSwitchboard.js'
 function App () {
   const [appData, setAppData] = useState({
     users: null,
@@ -19,22 +20,30 @@ function App () {
     loggedIn: localStorage.loggedIn || false,
     userDetails: null
   })
+  const args = useRef()
+  args.current = { appData, setAppData }
   const handleModals = useModalManager()
   useFetchCollections(appData, setAppData)
 
+  async function handleInstructions (instruction, data = {}) {
+    return await instructionSwitchboard(args.current, instruction, data)
+  }
+
   return (
-    <AppDataContext.Provider value={appData}>
-      <Modals modal={handleModals} appData={{ ...appData }} />
-      <Header appData={appData} setAppData={setAppData} />
-      <Routes>
-        <Route path='/' element={<Homepage appData={appData} />} />
-        <Route path='/about' element={<About />} />
-        <Route path='/events' element={<Events />} />
-        <Route path='/groups' element={<Groups appData={appData} />} />
-        <Route path='/blog' element={<Blog appData={appData} handleModals={handleModals} />} />
-        <Route path='/login' element={<Login appData={appData} setAppData={setAppData} />} />
-      </Routes>
-    </AppDataContext.Provider>
+    <HandleInstructionsContext.Provider value={handleInstructions}>
+      <AppDataContext.Provider value={appData}>
+        <Modals modal={handleModals} appData={{ ...appData }} />
+        <Header appData={appData} setAppData={setAppData} />
+        <Routes>
+          <Route path='/' element={<Homepage appData={appData} />} />
+          <Route path='/about' element={<About />} />
+          <Route path='/events' element={<Events />} />
+          <Route path='/groups' element={<Groups appData={appData} />} />
+          <Route path='/blog' element={<Blog appData={appData} handleModals={handleModals} />} />
+          <Route path='/login' element={<Login appData={appData} setAppData={setAppData} />} />
+        </Routes>
+      </AppDataContext.Provider>
+    </HandleInstructionsContext.Provider>
   )
 }
 

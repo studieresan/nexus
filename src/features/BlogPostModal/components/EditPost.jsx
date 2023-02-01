@@ -1,5 +1,6 @@
+import { HandleInstructionsContext } from '@/context.js'
 import { createBlogPost, updateBlogPost, uploadImage } from '@/requests/api'
-import { useEffect, useRef, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import { Alert, Button, FloatingLabel, Form, FormControl, Modal } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 import { AddedImage } from './AddedImage.jsx'
@@ -9,6 +10,10 @@ export default function EditPost ({ modal, appData, post }) {
   const addImagesRef = useRef(null)
   const imageRefs = useRef([])
   const iconRefs = useRef([])
+  const frontImageRefs = useRef([])
+  const frontIconRefs = useRef([])
+
+  const handleInstructions = useContext(HandleInstructionsContext)
   useEffect(() => {
     if (post) {
       const newFormData = {
@@ -17,27 +22,22 @@ export default function EditPost ({ modal, appData, post }) {
         description: post.description || '',
         frontPicture: post.frontPicture || '',
         pictures: post.pictures || [],
-        author: post?.author?.id || appData.users[0].id
+        author: post?.author?.id || appData.users[0].id,
+        date: post.date || null
       }
       setFormData(newFormData)
     }
   }, [post])
 
-  function handleSubmit () {
+  async function handleSubmit () {
     console.log('formData: ', formData)
-    formData.date = new Date().toISOString()
+    formData.date = formData.date || new Date().toISOString()
     if (formData.id) {
-      const { id, ...formDataWithoutId } = formData
-      updateBlogPost(id, formDataWithoutId).then((response) => {
-        console.log('response: ', response)
-        modal.off(modal)
-      })
+      await handleInstructions('updateBlogPost', { post: formData })
     } else {
-      createBlogPost(formData).then((response) => {
-        console.log('response: ', response)
-        modal.off(modal)
-      })
+      await handleInstructions('createBlogPost', { post: formData })
     }
+    modal.off(modal)
   }
 
   function handleDeleteFrontPicture () {
@@ -111,7 +111,7 @@ export default function EditPost ({ modal, appData, post }) {
         <Form>
           <Form.Group className='mb-3' controlId='formBasicEmail'>
             <FloatingLabel controlId='floatingSelect' label={t('blog.edit.label.author')}>
-              <Form.Control as='select' defaultValue={formData.author.id} onChange={(e) => handleChange(e)}>
+              <Form.Control as='select' name='author' defaultValue={formData.author.id} onChange={(e) => handleChange(e)}>
                 {appData.users.map((user, index) => (
                   <option key={index} value={user.id}>{user.firstName}{' '}{user.lastName}</option>
                 ))}
@@ -132,7 +132,7 @@ export default function EditPost ({ modal, appData, post }) {
             <Form.Control ref={addImagesRef} type='file' name='frontPicture' onChange={(e) => handleChange(e)} />
           </Form.Group>
           <div className='d-flex mb-3'>
-            {formData.frontPicture && <AddedImage isFrontPicture picture={formData.frontPicture} index={0} handleDeleteImage={handleDeleteFrontPicture} imageRefs={imageRefs} iconRefs={iconRefs} />}
+            {formData.frontPicture && <AddedImage isFrontPicture picture={formData.frontPicture} index={0} handleDeleteImage={handleDeleteFrontPicture} imageRefs={frontImageRefs} iconRefs={frontIconRefs} />}
           </div>
 
           <Form.Group className='mb-3' controlId='formFileMultiple'>
@@ -142,7 +142,7 @@ export default function EditPost ({ modal, appData, post }) {
           <div className='row g-3 row-cols-6 justify-content-start align-items-center'>
             {formData.pictures &&
     formData.pictures.map((picture, index) => (
-      <AddedImage key={index} picture={picture} index={index + 1} handleDeleteImage={handleDeleteImage} imageRefs={imageRefs} iconRefs={iconRefs} />
+      <AddedImage key={index} picture={picture} index={index} handleDeleteImage={handleDeleteImage} imageRefs={imageRefs} iconRefs={iconRefs} />
     ))}
           </div>
           <Alert className='my-3' variant='success'>
