@@ -47,10 +47,10 @@ export default function Groups ({ appData }) {
           <div>
             <h1 className='fw-light'>{t('groups.title')}</h1>
             <p className='lead text-muted'>{t('groups.intro')}</p>
-            <div className='d-flex gap-2'>
+            {/* <div className='d-flex gap-2'>
               <Button>{t('groups.primaryButton')}</Button>
               <Button variant='secondary'>{t('groups.secondaryButton')}</Button>
-            </div>
+            </div> */}
           </div>
         </div>
         <div className='container-fluid col-9'>

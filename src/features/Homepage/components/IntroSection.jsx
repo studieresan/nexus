@@ -10,7 +10,7 @@ export function IntroSection ({ appData, overlayGroups, imagesLoaded, handleImag
     <div style={{ position: 'relative', width: '100%', height: '100%' }}>
       <img src={introBg} style={{ width: '100%', height: '100%', objectFit: 'cover' }} onLoad={() => handleImageLoaded('intro')} />
       <div className='overlay' style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }} />
-      {appData.userDetails &&
+      {imagesLoaded.intro && appData.userDetails &&
         <div className='d-none d-xl-flex fs-1 fw-light  justify-content-center mb-5 text-bold text-white' style={{ position: 'absolute', top: '10%', left: '50%', transform: 'translate(-50%, -50%)' }}>
           <div className='bg-dark rounded p-3'>
             {t('homepage.loggedIn')}{': '}{appData.userDetails.name}

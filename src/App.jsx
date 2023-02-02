@@ -42,7 +42,7 @@ function App () {
         <Routes>
           <Route path='/' element={<Homepage appData={appData} />} />
           <Route path='/about' element={<About />} />
-          <Route path='/events' element={<Events />} />
+          <Route path='/events' element={<Events appData={appData} handleModals={handleModals} />} />
           <Route path='/groups' element={<Groups appData={appData} />} />
           <Route path='/blog' element={<Blog appData={appData} handleModals={handleModals} />} />
           <Route path='/login' element={<Login appData={appData} setAppData={setAppData} />} />

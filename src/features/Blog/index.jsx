@@ -1,33 +1,43 @@
 import { HandleInstructionsContext } from '@/context.js'
 import { useContext, useEffect, useState } from 'react'
-import { Spinner } from 'react-bootstrap'
+import { Button, Spinner } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
-import BlogGroup from './components/BlogGroup.jsx'
-import BlogIntro from './components/BlogIntro.jsx'
+import { IoPersonSharp } from 'react-icons/io5'
+import GroupOfCards from './components/GroupOfCards.jsx'
 export default function Blog ({ appData, handleModals }) {
   const { t, i18n } = useTranslation()
-  const [showGroup, setShowGroup] = useState(null)
   const [groupsInfo, setGroupsInfo] = useState(null)
   const handleInstructions = useContext(HandleInstructionsContext)
 
   useEffect(() => {
-    if (appData.blogPosts && groupsInfo) {
-      setShowGroup(showGroup ? [...showGroup] : Array(groupsInfo.length).fill(true))
-    }
-  }, [appData.blogPosts, groupsInfo])
-
-  useEffect(() => {
     if (appData.blogPosts) {
       const years = [...new Set(appData.blogPosts.map((e) => parseInt(e.date.slice(0, 4))))].sort((a, b) => b - a)
-      setGroupsInfo(years.map((year) => ({ year, title: t('blog.groupTitle') + ' ' + year })))
+      const newGroupsInfo = years.map((year) => ({ year, title: t('blog.groupTitle') + ' ' + year }))
+      for (let i = 0; i < newGroupsInfo.length; i++) {
+        const matchedBlogPosts = appData.blogPosts.filter((e) => parseInt(e.date.slice(0, 4)) === newGroupsInfo[i].year)
+        newGroupsInfo[i].elements = matchedBlogPosts.map((e) => ({
+          id: e.id,
+          cardTitle: e.title,
+          cornerImg:
+                    e.author.info.picture
+                      ? (
+                        <div className='me-2 ratio ratio-1x1 rounded-circle overflow-hidden' style={{ width: 50, height: 50 }}>
+                          <img src={e.author.info.picture} className='card-img-top img-cover' alt='alt' />
+                        </div>
+                        )
+                      : (
+                        <div className='me-2 ratio ratio-1x1 rounded-circle overflow-hidden' style={{ width: 50, height: 50 }}>
+                          <IoPersonSharp />
+                        </div>
+                        ),
+          cornerText: `${e.author.firstName} ${e.author.lastName}`,
+          dateText: e.date.slice(0, 10),
+          bgImg: e.frontPicture
+        }))
+      }
+      setGroupsInfo(newGroupsInfo)
     }
   }, [appData.blogPosts, i18n.language])
-
-  function handleClickGroup (groupIndex) {
-    const newShowGroup = [...showGroup]
-    newShowGroup[groupIndex] = !newShowGroup[groupIndex]
-    setShowGroup(newShowGroup)
-  }
 
   function handleClickCard (id) {
     handleModals.on({
@@ -65,19 +75,35 @@ export default function Blog ({ appData, handleModals }) {
     })
   }
 
-  if (groupsInfo && showGroup) {
+  function handleCreateClick () {
+    handleModals.on({
+      name: 'BlogPostModal',
+      id: 'BlogPostModal-View',
+      post: {},
+      mode: 'edit'
+    })
+  }
+
+  if (groupsInfo) {
     return (
-      <div className='container-fluid'>
-        <div className='row row-cols-1 w-100 justify-content-center'>
-          <div className='col my-5 w-75'>
-            <BlogIntro handleModals={handleModals} />
+      <div className='container-fluid' id='hanging-icons'>
+        <div className='row row-cols-1 col-12 justify-content-center'>
+          <div className='my-5 col-9'>
+            <h1 className='fw-light'>{t('blog.title')}</h1>
+            <p className='lead text-muted'>{t('blog.intro')}</p>
+            <div className='d-flex gap-2'>
+              <Button onClick={() => handleCreateClick()}>{t('blog.primaryButton')}</Button>
+              <Button variant='secondary'>{t('blog.secondaryButton')}</Button>
+            </div>
           </div>
           <div className='col w-75'>
-            {groupsInfo && showGroup && groupsInfo.map((group, groupIndex) => (
-              <div key={`group-${groupIndex}`} className='mb-2'>
-                <BlogGroup appData={appData} showGroup={showGroup} setShowGroup={setShowGroup} group={group} groupIndex={groupIndex} handleClickGroup={handleClickGroup} handleClickCard={handleClickCard} handleClickEdit={handleClickEdit} handleClickDelete={handleClickDelete} />
-              </div>
-            ))}
+            {groupsInfo && appData.blogPosts && groupsInfo.map((group, groupIndex) => {
+              return (
+                <div key={`group-${groupIndex}`} className='mb-2'>
+                  <GroupOfCards appData={appData} group={group} idx={groupIndex} groupTitle={group.title} elements={group.elements} handleClickCard={handleClickCard} handleClickEdit={handleClickEdit} handleClickDelete={handleClickDelete} />
+                </div>
+              )
+            })}
           </div>
         </div>
       </div>

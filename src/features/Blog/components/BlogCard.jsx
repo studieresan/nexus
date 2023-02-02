@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { BsCalendarDate, BsPencil, BsTrash } from 'react-icons/bs'
 import { IoPersonSharp } from 'react-icons/io5'
 
-export default function BlogCard ({ id, cardTitle, cornerImg, cornerText, cardDate, bgImg, handleClickCard, handleClickEdit, handleClickDelete }) {
+export default function BlogCard ({ id, cardTitle, cornerImg, cornerText, dateText, bgImg, handleClickCard, handleClickEdit, handleClickDelete }) {
   const { t, i18n } = useTranslation()
   const imageRef = useRef(null)
   const optionsRef = useRef(null)
@@ -31,15 +31,13 @@ export default function BlogCard ({ id, cardTitle, cornerImg, cornerText, cardDa
         <div className='d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1' style={{ position: 'relative' }}>
           <h3 className='pt-5 mt-5 mb-4 display-6 lh-1 fw-bold'>{cardTitle}</h3>
           <div className='d-flex mt-auto'>
-            <div className='me-2 ratio ratio-1x1 rounded-circle overflow-hidden' style={{ width: 50, height: 50 }}>
-              {cornerImg ? <img src={cornerImg} className='card-img-top img-cover' alt='alt' /> : <IoPersonSharp />}
-            </div>
+            {cornerImg}
             <div className='me-auto d-flex col align-items-center me-3 overflow-hidden'>
               <small>{cornerText}</small>
             </div>
             <div className='d-flex align-items-center gap-2 '>
               <BsCalendarDate />
-              <small>{cardDate}</small>
+              <small>{dateText}</small>
             </div>
           </div>
           <div
