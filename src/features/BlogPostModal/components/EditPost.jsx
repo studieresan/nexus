@@ -2,7 +2,7 @@ import { HandleInstructionsContext } from '@/context.js'
 import { createBlogPost, updateBlogPost, uploadImage } from '@/requests/api'
 import { useContext, useEffect, useRef, useState } from 'react'
 import { Alert, Button, FloatingLabel, Form, FormControl, Modal } from 'react-bootstrap'
-import { useTranslation } from 'react-i18next'
+import { Trans, useTranslation } from 'react-i18next'
 import { AddedImage } from './AddedImage.jsx'
 export default function EditPost ({ modal, appData, post }) {
   const [formData, setFormData] = useState(null)
@@ -105,7 +105,13 @@ export default function EditPost ({ modal, appData, post }) {
   return (
     <Modal show={modal.show} onHide={() => modal.off(modal)} size='xl' backdrop='static'>
       <Modal.Header closeButton className='py-2 text-gray-700'>
-        <Modal.Title>{t('blog.edit.label.editing')} {post.title}</Modal.Title>
+        {post.title
+          ? (
+            <Modal.Title>{t('blog.edit.label.editing')}{': '}{post.title}</Modal.Title>
+            )
+          : (
+            <Modal.Title>{t('blog.edit.label.creating')}</Modal.Title>
+            )}
       </Modal.Header>
       <Modal.Body>
         <Form>
@@ -118,33 +124,34 @@ export default function EditPost ({ modal, appData, post }) {
               </Form.Control>
             </FloatingLabel>
           </Form.Group>
-          <Form.Group className='mb-3' controlId='formBlogTitle'>
-            <FloatingLabel controlId='floatingInput' label={t('blog.edit.label.title')}>
+          <Form.Group className='mb-3' controlId='formPostTitle'>
+            <FloatingLabel label={t('blog.edit.label.title')}>
               <Form.Control type='text' placeholder={t('blog.edit.label.title')} name='title' defaultValue={formData.title} onChange={(e) => handleChange(e)} />
             </FloatingLabel>
           </Form.Group>
-          <Form.Group className='mb-3' controlId='formBlogTitle'>
-            <Form.Label>{t('blog.edit.label.description')}</Form.Label>
-            <Form.Control as='textarea' rows='10' cols='70' type='text' name='description' defaultValue={formData.description} onChange={(e) => handleChange(e)} />
+          <Form.Group className='mb-3' controlId='formPostDescription'>
+            <FloatingLabel label={t('blog.edit.label.description')}>
+              <Form.Control as='textarea' type='text' name='description' defaultValue={formData.description} onChange={(e) => handleChange(e)} style={{ height: '150px' }} />
+            </FloatingLabel>
           </Form.Group>
           <Form.Group className='mb-3' controlId='formFileMultiple'>
             <Form.Label>{t('blog.edit.label.addFrontImage')}</Form.Label>
             <Form.Control ref={addFrontImageRef} type='file' name='frontPicture' onChange={(e) => handleChange(e)} />
+            <div className='d-flex my-3'>
+              {formData.frontPicture && <AddedImage isFrontPicture picture={formData.frontPicture} index={0} handleDeleteImage={handleDeleteFrontPicture} imageRefs={frontImageRefs} iconRefs={frontIconRefs} />}
+            </div>
           </Form.Group>
-          <div className='d-flex mb-3'>
-            {formData.frontPicture && <AddedImage isFrontPicture picture={formData.frontPicture} index={0} handleDeleteImage={handleDeleteFrontPicture} imageRefs={frontImageRefs} iconRefs={frontIconRefs} />}
-          </div>
 
           <Form.Group className='mb-3' controlId='formFileMultiple'>
             <Form.Label>{t('blog.edit.label.addImages')}</Form.Label>
             <Form.Control ref={addImagesRef} type='file' name='pictures' multiple onChange={(e) => handleChange(e)} />
-          </Form.Group>
-          <div className='row g-3 row-cols-6 justify-content-start align-items-center'>
-            {formData.pictures &&
+            <div className='row g-3 row-cols-6 justify-content-start align-items-center my-3'>
+              {formData.pictures &&
     formData.pictures.map((picture, index) => (
       <AddedImage key={index} picture={picture} index={index} handleDeleteImage={handleDeleteImage} imageRefs={imageRefs} iconRefs={iconRefs} />
     ))}
-          </div>
+            </div>
+          </Form.Group>
           <Alert className='my-3' variant='success'>
             <Alert.Heading>{t('blog.edit.alertHeader')}</Alert.Heading>
             <p>
@@ -152,7 +159,7 @@ export default function EditPost ({ modal, appData, post }) {
             </p>
             <hr />
             <p className='mb-0'>
-              {t('blog.edit.alertFooter')}
+              <Trans i18nKey='blog.edit.alertFooter' />
             </p>
           </Alert>
           <div className='mt-3 d-flex justify-content-end'>

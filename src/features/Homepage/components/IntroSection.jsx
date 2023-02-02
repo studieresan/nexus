@@ -18,29 +18,33 @@ export function IntroSection ({ appData, overlayGroups, imagesLoaded, handleImag
         </div>}
       {imagesLoaded.intro
         ? (
-          <div className='container text-white' style={{ position: 'absolute', top: '40%', left: '50%', transform: 'translate(-50%, -50%)' }} id='featured-3'>
-            <div className='content fs-1 w-100' style={{ textAlign: 'center' }}>
-              {t('homepage.intro')}
-            </div>
-            <div className='d-none d-xl-flex row py-4 w-100 container'>
-              <hr style={{ height: 10, opacity: 1 }} />
-              <div className='row justify-content-center w-100 row-cols-3'>
-                {overlayGroups && overlayGroups.map((group, index) => (
-                  <div key={index} className='row'>
-                    <div className='feature col'>
-                      <div className='feature-icon d-inline-flex align-items-center justify-content-center fs-2 mb-3'>
-                        {group.icon}
+          <div className='container-fuid'>
+            <div className='row row-cols-1 col-12 justify-content-center text-white' style={{ position: 'absolute', top: '40%', left: '50%', transform: 'translate(-50%, -50%)' }} id='featured-3'>
+              <div className='fs-1 col-9' style={{ textAlign: 'center' }}>
+                {t('homepage.intro')}
+              </div>
+              <div className='col-10 d-none d-xl-block'>
+                <hr style={{ height: 10, opacity: 1 }} />
+              </div>
+              <div className='container-fluid col-9 d-none d-xl-block'>
+                <div className='row row-cols-3 justify-content-center'>
+                  {overlayGroups && overlayGroups.map((group, index) => (
+                    <div key={index} className='row'>
+                      <div className='feature col-12'>
+                        <div className='feature-icon d-inline-flex align-items-center justify-content-center fs-2 mb-3'>
+                          {group.icon}
+                        </div>
+                        <h3 className='fs-2'>{group.title}</h3>
+                        <div>
+                          <p>{group.description}</p>
+                        </div>
+                        <Button>
+                          {group.button}
+                        </Button>
                       </div>
-                      <h3 className='fs-2'>{group.title}</h3>
-                      <div>
-                        <p>{group.description}</p>
-                      </div>
-                      <Button>
-                        {group.button}
-                      </Button>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             </div>
           </div>

@@ -5,7 +5,7 @@
   "homepage.work.button": "Kontakta oss",
   
   "homepage.project.title": "Projektet",
-  "homepage.project.description": "Studs är ett årligt ideellt projekt från KTH som leds av en urval av 29 ingenjörsstudenter i masterprogram som är relevanta för datavetenskap.",
+  "homepage.project.description": "Studs är ett årligt ideellt projekt från KTH som leds av ett urval av 29 ingenjörsstudenter i masterprogram som är relevanta för datavetenskap.",
   "homepage.project.button": "Läs mer",
   
   "homepage.events.title": "Evenemangen",
@@ -16,12 +16,31 @@
   "events.intro": "Här kommer information om kommande evenemang att finnas.",
   
   "blog.title": "Reseblogg",
-  "blog.intro": "Här finns alla blogg-inlägg som lagts upp under resans gång.",
-  "blog.groupTitle": "Study Trip",
-  "blog.primaryButton": "Skapa blogg-inlägg",
+  "blog.intro": "Här finns alla blogginlägg som lagts upp under resans gång.",
+  "blog.groupTitle": "Studieresa",
+  "blog.primaryButton": "Skapa blogginlägg",
   "blog.secondaryButton": "Läs mer",
+
+  "blog.edit.label.editing": "Redigerar",
+  "blog.edit.label.creating": "Skapar nytt blogginlägg",
+  "blog.edit.label.author": "Skribent",
+  "blog.edit.label.title": "Titel",
+  "blog.edit.label.description": "Beskrivning",
+  "blog.edit.label.addFrontImage": "Lägg till framsida bild",
+  "blog.edit.label.addImages": "Lägg till bilder att använda i beskrivningen",
+  "blog.edit.alertHeader": "Hur man struktuerar bloggens beskrivning",
+  "blog.edit.alertDescription": "För att snygga till din blogg kan du inkludera bilder i den. För att lägga till en bild, skriv \\image-0, \\image-1, \\image-2 etc. i din beskrivning. Dessa bilder kommer sedan att ersättas med de bilder du laddar upp i fältet ovan. Följande är ett exempel på hur du kan göra det.",
+  "blog.edit.alertFooter": "Det här är ett exempel på en beskrivning. Nedan kommer en karusell av två bilder att synas. <br/> <br/> \\image-0\n <br/> \\image-1 <br/> <br/>Det här är ett nytt textblock nedanför karusellen av bilder. Nedanför denna text kommer endast en bild att synas. <br/> <br/>\\image-2",
+  "blog.edit.submit": "Spara",
+  "blog.deletePostTitle": "Raderar blogginlägg",
+  "blog.deletePostDescription": "Är du säker på att du vill radera blogginlägg",
+  "confirm": "Bekräfta",
+  "cancel": "Avbryt",
+
   "view": "Läs",
   "edit": "Ändra",
+  "logout": "Logga ut",
+  "login": "Logga in",
   
   "groups.title": "Möt grupperna",
   "groups.intro": "Studs består av sex olika grupper med varsitt arbetsområde och varsin ledare, där alla gruppers insats är lika viktiga för att projektet ska lyckas. Mycket av arbetet i Studs sker grupperna emellan och det är därför viktigt att du som gruppmedlem är samarbetsvillig och förstår att vi alla arbetar mot ett gemensamt mål. Studs kommer inte att bara ge dig goda kunskaper inom allt vad projektarbete innebär, utan du kommer också att ha ett otroligt roligt år och knyta värdefulla relationer med näringslivet och inom gruppen!",
@@ -47,9 +66,15 @@
 
 
   "login.intro": "This is where the login page will be.",
-  "about.name": "About",
-  "events.name": "Events",
-  "blog.name": "Blog",
-  "groups.name": "Groups",
-  "login.name": "Login"
+  "about.name": "Om oss",
+  "events.name": "Evengemang",
+  "blog.name": "Blogg",
+  "groups.name": "Grupper",
+  "login.name": "Logga in",
+  "login.title": "Logga in",
+  "login.label.email": "E-Post",
+  "login.label.password": "Lösenord",
+  "login.primaryButton": "Logga in",
+  "login.secondaryButton": "Glömt lösenordet?"
+
   }

@@ -20,8 +20,27 @@
   "blog.groupTitle": "Study Trip",
   "blog.primaryButton": "Create blog post",
   "blog.secondaryButton": "Learn more",
+
+  "blog.edit.label.editing": "Editing",
+  "blog.edit.label.creating": "Creating new blog post",
+  "blog.edit.label.author": "Author",
+  "blog.edit.label.title": "Title",
+  "blog.edit.label.description": "Description",
+  "blog.edit.label.addFrontImage": "Add front image",
+  "blog.edit.label.addImages": "Add images to use in your blog description",
+  "blog.edit.alertHeader": "How to structure your blog post description",
+  "blog.edit.alertDescription": "To make your blog post look nice you can include images. To add images to your blog post description you need to add the following text to your description: \\image-0, \\image-1, \\image-2, etc. The number after the image tag is the index of the image in the list of images you added to your blog post. The following is an example of a blog post description that includes images.",
+  "blog.edit.alertFooter": "This is an example. This text is the start of the blog description and will have a carousel of two images below it.<br/> <br/> \\image-0\n <br/> \\image-1 <br/> <br/>This is a text block below the above carousel of images. Below this block will be just a single image. <br/> <br/>\\image-2",
+  "blog.edit.submit": "Save",
+  "blog.deletePostTitle": "Deleting blog post",
+  "blog.deletePostDescription": "Are you sure that you want to delete blog post",
+  "confirm": "Confirm",
+  "cancel": "Cancel",
+
   "view": "View",
   "edit": "Edit",
+  "logout": "Logout",
+  "login": "Login",
   
   "groups.title": "Meet the groups",
   "groups.intro": "Studs consists of six different groups with different focuses and a different leader, where the effort of all groups are equally important for the project to succeed. Much of the work in Studs happens between the groups and it is therefore important that you as a group member is cooperative and understands that we all strive towards a common goal. Studs will not only give you great knowledge with whatever project work implies, but you will also have an amazing year and will create valuable relations with the industry and withing the group.",
@@ -51,5 +70,10 @@
   "events.name": "Events",
   "blog.name": "Blog",
   "groups.name": "Groups",
-  "login.name": "Login"
+  "login.name": "Login",
+  "login.title": "Login",
+  "login.label.email": "Email",
+  "login.label.password": "Password",
+  "login.primaryButton": "Login",
+  "login.secondaryButton": "Forgot password?"
 }
