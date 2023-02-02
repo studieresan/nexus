@@ -8,6 +8,7 @@ export default function EditPost ({ modal, appData, post }) {
   const [formData, setFormData] = useState(null)
   const { t, i18n } = useTranslation()
   const addImagesRef = useRef(null)
+  const addFrontImageRef = useRef(null)
   const imageRefs = useRef([])
   const iconRefs = useRef([])
   const frontImageRefs = useRef([])
@@ -72,7 +73,7 @@ export default function EditPost ({ modal, appData, post }) {
           setFormData({ ...formData, frontPicture: url })
         })
 
-        addImagesRef.current.value = ''
+        addFrontImageRef.current.value = ''
         break
       case 'title':
         setFormData({ ...formData, title: e.target.value })
@@ -128,7 +129,7 @@ export default function EditPost ({ modal, appData, post }) {
           </Form.Group>
           <Form.Group className='mb-3' controlId='formFileMultiple'>
             <Form.Label>{t('blog.edit.label.addFrontImage')}</Form.Label>
-            <Form.Control ref={addImagesRef} type='file' name='frontPicture' onChange={(e) => handleChange(e)} />
+            <Form.Control ref={addFrontImageRef} type='file' name='frontPicture' onChange={(e) => handleChange(e)} />
           </Form.Group>
           <div className='d-flex mb-3'>
             {formData.frontPicture && <AddedImage isFrontPicture picture={formData.frontPicture} index={0} handleDeleteImage={handleDeleteFrontPicture} imageRefs={frontImageRefs} iconRefs={frontIconRefs} />}

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Button } from 'react-bootstrap'
+import { Button, Spinner } from 'react-bootstrap'
 import Group from './components/Group.jsx'
 import { groupsPredeterminedInfo } from '@/utils/predeterminedInformation.jsx'
 
@@ -28,10 +28,22 @@ export default function Groups ({ appData }) {
     setShowGroup(newShowGroupMasterInfo)
   }
 
+  if (!groupsInfo) {
+    return (
+      <div className='d-flex justify-content-center align-items-center vh-100'>
+        <div className='w-80 d-flex'>
+          <Spinner variant='primary' animation='grow' role='status' style={{ width: 75, height: 75 }}>
+            <span className='visually-hidden'>Loading...</span>
+          </Spinner>
+        </div>
+      </div>
+    )
+  }
+
   return (
-    <div className='d-flex vstack justify-content-center align-items-center' id='hanging-icons'>
-      <div className='py-5 w-75'>
-        <div className='py-5'>
+    <div className='container-fluid' id='hanging-icons'>
+      <div className='row row-cols-1 col-12 justify-content-center'>
+        <div className='my-5 col-9'>
           <div>
             <h1 className='fw-light'>{t('groups.title')}</h1>
             <p className='lead text-muted'>{t('groups.intro')}</p>
@@ -41,12 +53,15 @@ export default function Groups ({ appData }) {
             </div>
           </div>
         </div>
-      </div>
-      <div className='row g-1 w-75 row-cols-1 row-cols-xxl-2'>
-        {groupsInfo && groupsInfo.map((group, index) => (
-          <Group key={index} handleClick={handleClick} group={group} groupIndex={index} showGroup={showGroup} />
-        ))}
-
+        <div className='container-fluid col-9'>
+          <div className='row'>
+            {groupsInfo.map((group, index) => (
+              <div key={index} className='col-12'>
+                <Group handleClick={handleClick} group={group} groupIndex={index} showGroup={showGroup} />
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   )

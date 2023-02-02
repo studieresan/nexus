@@ -67,14 +67,18 @@ export default function Blog ({ appData, handleModals }) {
 
   if (groupsInfo && showGroup) {
     return (
-      <div className='d-flex row justify-content-center'>
-        <BlogIntro handleModals={handleModals} />
-        <div className='w-75'>
-          {groupsInfo && showGroup && groupsInfo.map((group, groupIndex) => (
-            <div key={`group-${groupIndex}`} className='mb-2'>
-              <BlogGroup appData={appData} showGroup={showGroup} setShowGroup={setShowGroup} group={group} groupIndex={groupIndex} handleClickGroup={handleClickGroup} handleClickCard={handleClickCard} handleClickEdit={handleClickEdit} handleClickDelete={handleClickDelete} />
-            </div>
-          ))}
+      <div className='container-fluid'>
+        <div className='row row-cols-1 w-100 justify-content-center'>
+          <div className='col my-5 w-75'>
+            <BlogIntro handleModals={handleModals} />
+          </div>
+          <div className='col w-75'>
+            {groupsInfo && showGroup && groupsInfo.map((group, groupIndex) => (
+              <div key={`group-${groupIndex}`} className='mb-2'>
+                <BlogGroup appData={appData} showGroup={showGroup} setShowGroup={setShowGroup} group={group} groupIndex={groupIndex} handleClickGroup={handleClickGroup} handleClickCard={handleClickCard} handleClickEdit={handleClickEdit} handleClickDelete={handleClickDelete} />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     )

@@ -22,7 +22,7 @@ export default function Group ({ handleClick, showGroup, group, groupIndex }) {
             containerRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' })
           }
         }, 300)
-      }} className='d-flex align-items-start p-4 text-dark' style={{ cursor: 'pointer' }}
+      }} className='d-flex align-items-start py-1 text-dark' style={{ cursor: 'pointer' }}
     >
       <div className='row icon-square text-bg-light d-inline-flex align-items-center justify-content-center fs-1 flex-shrink-0 me-3'>
         {group.icon}
@@ -30,7 +30,7 @@ export default function Group ({ handleClick, showGroup, group, groupIndex }) {
       <div className='w-100'>
         <div>
           <div className='d-flex'>
-            <h3 className='fs-2'>{group.title}</h3>
+            <h2 className='fw-light'>{group.title}</h2>
                 &nbsp;
             <div className='d-flex justify-content-center align-items-center'>
               {showGroup[groupIndex] ? <BiChevronUp size={30} /> : <BiChevronDown size={30} />}
@@ -50,7 +50,7 @@ export default function Group ({ handleClick, showGroup, group, groupIndex }) {
               </div>
             </div>
           </Collapse>
-          <hr className='w-100' style={{ height: 1, opacity: 1 }} />
+          <hr className='w-100 opacity-25' style={{ height: 1, opacity: 1 }} />
         </div>
       </div>
     </div>
