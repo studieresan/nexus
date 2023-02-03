@@ -15,19 +15,23 @@ export default function Footer () {
       <div className='text-center'>
         <h1 className='fw-light'>{t('footer.collaborations')}</h1>
       </div>
-      <div className='row gap-4 row-cols-1 p-4'>
-        <div className='col'>
-          <div className='row justify-content-center'>
-            <img src={goldman_sachs} alt='Goldman Sachs' className='col-1 img-fluid' />
-            <img src={karma} alt='Karma' className='col-1 mg-fluid' />
-            <img src={scania} alt='Scania' className='col-1 img-fluid' />
-          </div>
+      <div className='d-flex justify-content-center align-items-center row gap-4'>
+        <div className='col-1 d-flex justify-content-center'>
+          <img src={goldman_sachs} alt='Goldman Sachs' className='img-fluid custom-img' />
         </div>
-        <div className='col'>
-          <div className='row justify-content-center'>
-            <img src={storykit} alt='Storykit' className='col-1 img-fluid' />
-            <img src={fra} alt='FRA' className='col-1 img-fluid' />
-          </div>
+        <div className='col-1 d-flex justify-content-center'>
+          <img src={karma} alt='Karma' className='img-fluid custom-img' />
+        </div>
+        <div className='col-1 d-flex justify-content-center'>
+          <img src={scania} alt='Scania' className='img-fluid custom-img' />
+        </div>
+      </div>
+      <div className='d-flex justify-content-center align-items-center row gap-4 mb-4'>
+        <div className='col-1 d-flex justify-content-center'>
+          <img src={storykit} alt='Storykit' className='img-fluid custom-img' />
+        </div>
+        <div className='col-1 d-flex justify-content-center'>
+          <img src={fra} alt='FRA' className='img-fluid custom-img' />
         </div>
       </div>
       <div className='row row-cols-1 col-12 justify-content-center'>
