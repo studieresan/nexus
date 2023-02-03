@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from 'react'
 import { Button, Spinner } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 import { IoPersonSharp } from 'react-icons/io5'
-import GroupOfCards from './components/GroupOfCards.jsx'
+import GroupOfCards from '../../components/CardGroup.jsx'
 export default function Blog ({ appData, handleModals }) {
   const { t, i18n } = useTranslation()
   const [groupsInfo, setGroupsInfo] = useState(null)
@@ -86,7 +86,7 @@ export default function Blog ({ appData, handleModals }) {
 
   if (groupsInfo) {
     return (
-      <div className='container-fluid' id='hanging-icons'>
+      <div className='container-fluid mb-5' id='hanging-icons'>
         <div className='row row-cols-1 col-12 justify-content-center'>
           <div className='my-5 col-9'>
             <h1 className='fw-light'>{t('blog.title')}</h1>

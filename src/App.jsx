@@ -12,6 +12,8 @@ import useFetchCollections from './hooks/useFetchCollections.js'
 import { useModalManager } from './hooks/useModalManager.js'
 import Modals from './features/Modals/index.jsx'
 import instructionSwitchboard from './utils/instructionSwitchboard.js'
+import Footer from './features/Footer/index.jsx'
+import Divider from './components/Divider.jsx'
 function App () {
   const [appData, setAppData] = useState({
     users: null,
@@ -47,6 +49,8 @@ function App () {
           <Route path='/blog' element={<Blog appData={appData} handleModals={handleModals} />} />
           <Route path='/login' element={<Login appData={appData} setAppData={setAppData} />} />
         </Routes>
+        <Divider />
+        <Footer />
       </AppDataContext.Provider>
     </HandleInstructionsContext.Provider>
   )

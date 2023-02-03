@@ -41,7 +41,7 @@ export const groupsPredeterminedInfo = {
 }
 
 export const homepagePredeterminedOverlayGroups = [
-  { name: 'work', icon: <FiSend style={{ backgroundColor: 'transparent' }} /> },
   { name: 'project', icon: <AiOutlineFundProjectionScreen style={{ backgroundColor: 'transparent' }} /> },
-  { name: 'events', icon: <RiTeamFill style={{ backgroundColor: 'transparent' }} /> }
+  { name: 'events', icon: <RiTeamFill style={{ backgroundColor: 'transparent' }} /> },
+  { name: 'work', icon: <FiSend style={{ backgroundColor: 'transparent' }} /> }
 ]

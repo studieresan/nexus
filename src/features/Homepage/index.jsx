@@ -3,7 +3,12 @@ import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { homepagePredeterminedOverlayGroups } from '@/utils/predeterminedInformation.jsx'
 import { IntroSection } from './components/IntroSection.jsx'
-import { HeroSectionProject } from './components/HeroSectionProject.jsx'
+import bgContact from '@/assets/images/DSC00833.jpg'
+import bgEvents from '@/assets/images/b48.jpg'
+import bgProject from '@/assets/images/b28.jpg'
+
+import DynamicHero from '@/components/DynamicHero.jsx'
+import Divider from '@/components/Divider.jsx'
 export default function Homepage ({ appData }) {
   const { t, i18n } = useTranslation()
   const [overlayGroups, setOverlayGroups] = useState(null)
@@ -29,7 +34,12 @@ export default function Homepage ({ appData }) {
   return (
     <div>
       <IntroSection appData={appData} overlayGroups={overlayGroups} imagesLoaded={imagesLoaded} handleImageLoaded={handleImageLoaded} />
-      {imagesLoaded.intro && <HeroSectionProject handleImageLoaded={handleImageLoaded} />}
+      <Divider />
+      {imagesLoaded.intro && <DynamicHero align='left' title='Project title aaaaaaaa' description='Studs är ett årligt ideellt projekt från KTH som leds av ett urval av 29 ingenjörsstudenter i masterprogram som är relevanta för datavetenskap.' bgImg={bgProject} primaryButtonText='test!!' secondaryButtonText='test!' />}
+      <Divider />
+      {imagesLoaded.intro && <DynamicHero align='right' title='Event title aaaaaaaa' description='Studs är ett årligt ideellt projekt från KTH som leds av ett urval av 29 ingenjörsstudenter i masterprogram som är relevanta för datavetenskap.' bgImg={bgEvents} primaryButtonText='test!!' secondaryButtonText='test!' />}
+      <Divider />
+      {imagesLoaded.intro && <DynamicHero align='left' title='Contact us title aaaaaaaa' description='Studs är ett årligt ideellt projekt från KTH som leds av ett urval av 29 ingenjörsstudenter i masterprogram som är relevanta för datavetenskap.' bgImg={bgContact} primaryButtonText='test!!' secondaryButtonText='test!' />}
     </div>
   )
 }

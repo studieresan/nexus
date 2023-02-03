@@ -3,7 +3,7 @@ import { Button } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 import { BsPinMap } from 'react-icons/bs'
 import { IoPersonSharp } from 'react-icons/io5'
-import GroupOfCards from '../Blog/components/GroupOfCards.jsx'
+import GroupOfCards from '../../components/CardGroup.jsx'
 export default function Events ({ appData, handleModals }) {
   const { t, i18n } = useTranslation()
   const [groupsInfo, setGroupsInfo] = useState(null)
@@ -58,7 +58,7 @@ export default function Events ({ appData, handleModals }) {
   }
 
   return (
-    <div className='container-fluid' id='hanging-icons'>
+    <div className='container-fluid mb-5' id='hanging-icons'>
       <div className='row row-cols-1 col-12 justify-content-center'>
         <div className='my-5 col-9'>
           <div>

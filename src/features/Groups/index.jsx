@@ -41,7 +41,7 @@ export default function Groups ({ appData }) {
   }
 
   return (
-    <div className='container-fluid' id='hanging-icons'>
+    <div className='container-fluid mb-5' id='hanging-icons'>
       <div className='row row-cols-1 col-12 justify-content-center'>
         <div className='my-5 col-9'>
           <div>
