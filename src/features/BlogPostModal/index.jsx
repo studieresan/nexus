@@ -5,7 +5,6 @@ import EditPost from './components/EditPost.jsx'
 import ViewPost from './components/ViewPost.jsx'
 export default function BlogPost ({ modal, data, appData }) {
   const { t, i18n } = useTranslation()
-  console.log('data: ', data)
   return data.mode === 'view'
     ? (
       <ViewPost modal={modal} post={data.post} />

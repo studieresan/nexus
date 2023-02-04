@@ -3,7 +3,7 @@ import { Collapse, Spinner } from 'react-bootstrap'
 import { BiChevronDown, BiChevronUp } from 'react-icons/bi'
 import BlogCard from './DynamicCard.jsx'
 
-export default function GroupOfCards ({ appData, idx, groupTitle, elements, handleClickCard, handleClickEdit, handleClickDelete }) {
+export default function GroupOfCards ({ appData, showTools, idx, groupTitle, elements, handleClickCard, handleClickEdit, handleClickDelete }) {
   const [showGroup, setShowGroup] = useState(true)
 
   return (
@@ -31,6 +31,7 @@ export default function GroupOfCards ({ appData, idx, groupTitle, elements, hand
               handleClickCard={handleClickCard}
               handleClickEdit={handleClickEdit}
               handleClickDelete={handleClickDelete}
+              showTools={showTools}
             />
           ))}
         </div>

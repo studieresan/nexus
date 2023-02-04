@@ -42,7 +42,7 @@ export default function Groups ({ appData }) {
 
   return (
     <div className='container-fluid mb-5' id='hanging-icons'>
-      <div className='row row-cols-1 col-12 justify-content-center'>
+      <div className='row row-cols-1 justify-content-center'>
         <div className='my-5 col-9'>
           <div>
             <h1 className='fw-light'>{t('groups.title')}</h1>
@@ -53,7 +53,7 @@ export default function Groups ({ appData }) {
             </div> */}
           </div>
         </div>
-        <div className='container-fluid col-9'>
+        <div className='col-9'>
           <div className='row'>
             {groupsInfo.map((group, index) => (
               <div key={index} className='col-12'>

@@ -62,22 +62,26 @@ export default function Blog ({ appData, handleModals }) {
     })
   }
 
+  const showTools = (appData?.userDetails?.permissions || []).includes('blog_permission') || (appData?.userDetails?.permissions || []).includes('admin_permission')
+
   if (groupsInfo) {
     return (
       <div className='container-fluid mb-5' id='hanging-icons'>
-        <div className='row row-cols-1 col-12 justify-content-center'>
-          <div className='my-5 col-9'>
+        <div className='row row-cols-1 justify-content-center'>
+          <div className='mt-5 mb-5 col-9'>
             <h1 className='fw-light'>{t('blog.title')}</h1>
             <p className='lead text-muted'>{t('blog.intro')}</p>
-            <div className='d-flex gap-2'>
-              <Button onClick={() => handleCreateClick()}>{t('blog.primaryButton')}</Button>
-            </div>
+            {showTools && (
+              <div className='d-flex gap-2'>
+                <Button onClick={() => handleCreateClick()}>{t('blog.primaryButton')}</Button>
+              </div>
+            )}
           </div>
           <div className='col w-75'>
             {groupsInfo && appData.blogPosts && groupsInfo.map((group, groupIndex) => {
               return (
                 <div key={`group-${groupIndex}`} className='mb-2'>
-                  <GroupOfCards appData={appData} group={group} idx={groupIndex} groupTitle={group.title} elements={group.elements} handleClickCard={handleClickCard} handleClickEdit={handleClickEdit} handleClickDelete={handleClickDelete} />
+                  <GroupOfCards showTools={showTools} appData={appData} group={group} idx={groupIndex} groupTitle={group.title} elements={group.elements} handleClickCard={handleClickCard} handleClickEdit={handleClickEdit} handleClickDelete={handleClickDelete} />
                 </div>
               )
             })}

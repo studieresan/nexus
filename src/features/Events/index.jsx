@@ -10,10 +10,9 @@ export default function Events ({ appData, handleModals }) {
   const cornerIcon = <BsPinMap size={10} />
   useEffect(() => {
     if (appData.events) {
-      console.log('entered')
       // event groups divided based on year
       const years = [...new Set(appData.events.map((e) => parseInt(e.date.getFullYear())))].sort((a, b) => b - a)
-      const newGroupsInfo = years.map((year) => ({ year, title: t('event.groupTitle') + ' ' + year }))
+      const newGroupsInfo = years.map((year) => ({ year, title: t('events.groupTitle') + ' ' + year }))
       for (let i = 0; i < newGroupsInfo.length; i++) {
         const matchedBlogPosts = appData.events.filter((e) => parseInt(e.date.getFullYear()) === newGroupsInfo[i].year)
         const elements = matchedBlogPosts.map((e) => ({
@@ -57,17 +56,20 @@ export default function Events ({ appData, handleModals }) {
     console.log('clicked delete', id)
   }
 
+  const showTools = (appData?.userDetails?.permissions || []).includes('event_permission') || (appData?.userDetails?.permissions || []).includes('admin_permission')
+
   return (
     <div className='container-fluid mb-5' id='hanging-icons'>
-      <div className='row row-cols-1 col-12 justify-content-center'>
+      <div className='row row-cols-1 justify-content-center'>
         <div className='my-5 col-9'>
           <div>
             <h1 className='fw-light'>{t('events.title')}</h1>
             <p className='lead text-muted'>{t('events.intro')}</p>
-            <div className='d-flex gap-2'>
-              <Button>{t('events.primaryButton')}</Button>
-              <Button variant='secondary'>{t('events.secondaryButton')}</Button>
-            </div>
+            {showTools && (
+              <div className='d-flex gap-2'>
+                <Button>{t('events.primaryButton')}</Button>
+              </div>
+            )}
           </div>
         </div>
         <div className='container-fluid col-9'>
@@ -75,7 +77,7 @@ export default function Events ({ appData, handleModals }) {
             {groupsInfo && appData.events && groupsInfo.map((group, groupIndex) => {
               return (
                 <div key={`group-${groupIndex}`} className='mb-2'>
-                  <GroupOfCards appData={appData} group={group} idx={groupIndex} groupTitle={group.title} elements={group.elements} handleClickCard={handleClickCard} handleClickEdit={handleClickEdit} handleClickDelete={handleClickDelete} />
+                  <GroupOfCards showTools={showTools} appData={appData} group={group} idx={groupIndex} groupTitle={group.title} elements={group.elements} handleClickCard={handleClickCard} handleClickEdit={handleClickEdit} handleClickDelete={handleClickDelete} />
                 </div>
               )
             })}

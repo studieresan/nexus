@@ -24,7 +24,11 @@
   "homepage.events.buttonPrimary": "Previous events",
   
   "about.intro": "This is where the about page will be.",
-  "events.intro": "This is where the events page will be.",
+
+  "events.title": "Previous events",
+  "events.intro": "Here is a collection of events that we have arranged together with companies in the past.",
+  "events.groupTitle": "Events",
+  "events.primaryButton": "Create event",
 
   "blog.title": "Blog posts",
   "blog.intro": "Here is a collection of blog posts made throughout our study trip at the end of the course.",

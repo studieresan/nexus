@@ -23,9 +23,13 @@
   "homepage.events.description": "Under året kommer medlemmarna i Studs att träffa företag under evenemang, vanligtvis arrangerade på företagens kontor. För studenterna är detta en möjlighet att få djupare insikter om hur arbetslivet på företaget ser ut och om företagets verksamhet. Studs hjälper företagen att skräddarsy evenemangen till deras behov, vilket garanterar att varje evenemang är lika unikt som företaget som arrangerat det.",
   "homepage.events.buttonPrimary": "Tidigare Evengemang",
 
-  "about.intro": "Här kommer information om sidan att finnas.",
-  "events.intro": "Här kommer information om kommande evenemang att finnas.",
+  "events.title": "Tidigare evenemang",
+  "events.intro": "Här kan du se alla tidigare evenemang som Studs har arrangerat tillsammans med företag.",
+  "events.groupTitle": "Evenemang",
+  "events.primaryButton": "Skapa evenemang",
   
+  "about.intro": "Här kommer information om sidan att finnas.",
+
   "blog.title": "Reseblogg",
   "blog.intro": "Här finns alla blogginlägg som lagts upp under resans gång.",
   "blog.groupTitle": "Studieresa",

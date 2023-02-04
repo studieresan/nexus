@@ -9,7 +9,6 @@ export default function Modals ({ modal, ...props }) {
   return modal.data.map(entry => {
     const ModalComponent = modals[entry.name]
     const propsPrior = { ...props, configStateHookProps: undefined }
-    console.log('propsPrior: ', propsPrior)
     return (
       <ModalComponent
         key={entry.id ?? entry.name}
