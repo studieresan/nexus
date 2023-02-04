@@ -3,15 +3,15 @@ import { Collapse, Spinner } from 'react-bootstrap'
 import { BiChevronDown, BiChevronUp } from 'react-icons/bi'
 import BlogCard from './DynamicCard.jsx'
 
-export default function GroupOfCards ({ appData, showTools, idx, groupTitle, elements, handleClickCard, handleClickEdit, handleClickDelete }) {
-  const [showGroup, setShowGroup] = useState(true)
+export default function CardGroup ({ appData, showTools, expandStart, idx, groupTitle, elements, handleClickCard, handleClickEdit, handleClickDelete }) {
+  const [showGroup, setShowGroup] = useState(expandStart || false)
 
   return (
     <div
       key={idx}
     >
       <div className='d-flex' onClick={() => setShowGroup(!showGroup)} style={{ cursor: 'pointer' }}>
-        <h2 className='fw-light d-flex'>({elements.length})&nbsp;{groupTitle}</h2>
+        <h2 className='fw-light d-flex'>{groupTitle}&nbsp;({elements.length})</h2>
       &nbsp;
         <div className='d-flex align-items-center'>
           {showGroup ? <BiChevronUp size={30} /> : <BiChevronDown size={30} />}

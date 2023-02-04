@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
-import { Button } from 'react-bootstrap'
+import { Button, Spinner } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 import { BsPinMap } from 'react-icons/bs'
 import { IoPersonSharp } from 'react-icons/io5'
-import GroupOfCards from '../../components/CardGroup.jsx'
+import CardGroup from '../../components/CardGroup.jsx'
 export default function Events ({ appData, handleModals }) {
   const { t, i18n } = useTranslation()
   const [groupsInfo, setGroupsInfo] = useState(null)
@@ -57,33 +57,44 @@ export default function Events ({ appData, handleModals }) {
   }
 
   const showTools = (appData?.userDetails?.permissions || []).includes('event_permission') || (appData?.userDetails?.permissions || []).includes('admin_permission')
-
-  return (
-    <div className='container-fluid mb-5' id='hanging-icons'>
-      <div className='row row-cols-1 justify-content-center'>
-        <div className='my-5 col-9'>
-          <div>
-            <h1 className='fw-light'>{t('events.title')}</h1>
-            <p className='lead text-muted'>{t('events.intro')}</p>
-            {showTools && (
-              <div className='d-flex gap-2'>
-                <Button>{t('events.primaryButton')}</Button>
-              </div>
-            )}
-          </div>
-        </div>
-        <div className='container-fluid col-9'>
-          <div className='row'>
-            {groupsInfo && appData.events && groupsInfo.map((group, groupIndex) => {
-              return (
-                <div key={`group-${groupIndex}`} className='mb-2'>
-                  <GroupOfCards showTools={showTools} appData={appData} group={group} idx={groupIndex} groupTitle={group.title} elements={group.elements} handleClickCard={handleClickCard} handleClickEdit={handleClickEdit} handleClickDelete={handleClickDelete} />
+  if (groupsInfo) {
+    return (
+      <div className='container-fluid mb-5' id='hanging-icons'>
+        <div className='row row-cols-1 justify-content-center'>
+          <div className='my-5 col-9'>
+            <div>
+              <h1 className='fw-light'>{t('events.title')}</h1>
+              <p className='lead text-muted'>{t('events.intro')}</p>
+              {showTools && (
+                <div className='d-flex gap-2'>
+                  <Button>{t('events.primaryButton')}</Button>
                 </div>
-              )
-            })}
+              )}
+            </div>
+          </div>
+          <div className='container-fluid col-9'>
+            <div className='row'>
+              {groupsInfo && appData.events && groupsInfo.map((group, groupIndex) => {
+                return (
+                  <div key={`group-${groupIndex}`} className='mb-2'>
+                    <CardGroup showTools={showTools} appData={appData} group={group} idx={groupIndex} groupTitle={group.title} elements={group.elements} handleClickCard={handleClickCard} handleClickEdit={handleClickEdit} handleClickDelete={handleClickDelete} />
+                  </div>
+                )
+              })}
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  )
+    )
+  } else {
+    return (
+      <div className='d-flex justify-content-center align-items-center vh-100'>
+        <div className='w-80 d-flex'>
+          <Spinner variant='primary' animation='grow' role='status' style={{ width: 75, height: 75 }}>
+            <span className='visually-hidden'>Loading...</span>
+          </Spinner>
+        </div>
+      </div>
+    )
+  }
 }

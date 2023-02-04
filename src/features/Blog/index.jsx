@@ -4,7 +4,7 @@ import { Button, Spinner } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 import { AiOutlinePlus } from 'react-icons/ai'
 import { IoPersonSharp } from 'react-icons/io5'
-import GroupOfCards from '../../components/CardGroup.jsx'
+import CardGroup from '../../components/CardGroup.jsx'
 import generateGroupsInfo from './utils/generateGroupsInfo.jsx'
 export default function Blog ({ appData, handleModals }) {
   const { t, i18n } = useTranslation()
@@ -81,7 +81,7 @@ export default function Blog ({ appData, handleModals }) {
             {groupsInfo && appData.blogPosts && groupsInfo.map((group, groupIndex) => {
               return (
                 <div key={`group-${groupIndex}`} className='mb-2'>
-                  <GroupOfCards showTools={showTools} appData={appData} group={group} idx={groupIndex} groupTitle={group.title} elements={group.elements} handleClickCard={handleClickCard} handleClickEdit={handleClickEdit} handleClickDelete={handleClickDelete} />
+                  <CardGroup expandStart showTools={showTools} appData={appData} group={group} idx={groupIndex} groupTitle={group.title} elements={group.elements} handleClickCard={handleClickCard} handleClickEdit={handleClickEdit} handleClickDelete={handleClickDelete} />
                 </div>
               )
             })}
