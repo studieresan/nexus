@@ -45,3 +45,10 @@ export const homepagePredeterminedOverlayGroups = [
   { name: 'events', icon: <RiTeamFill style={{ backgroundColor: 'transparent' }} /> },
   { name: 'contact', icon: <FiSend style={{ backgroundColor: 'transparent' }} /> }
 ]
+
+export const salesMaster = {
+  firstName: 'Tobias',
+  lastName: 'Vinsa',
+  email: 'tobias-v@studs.se',
+  phone: '+46 76-162 82 20'
+}

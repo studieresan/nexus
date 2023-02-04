@@ -5,7 +5,7 @@
   "homepage.contact.short.description": "Tveka inte på att kontakta oss om ni är intresserade av att ha ett evenemang eller vill veta mer.",
   "homepage.contact.short.button": "Kontakta oss",
   "homepage.contact.title": "Samarbeta med oss",
-  "homepage.contact.description": "Om ni är intresserade av att ha ett evenemang med oss eller om ni är nyfikna och vill veta mer, tveka inte på att kontakta säljansvarig <strong>{{name}}</strong>.",
+  "homepage.contact.description": "Vi letar ständigt efter nya samarbeten. Om ni är intresserade av att ha ett evenemang med oss eller är nyfikna och vill veta mer, tveka inte på att kontakta vår säljansvarig <strong>{{name}}</strong>.",
   "homepage.contact.buttonPrimary": "Kontakta oss",
   
   "homepage.project.short.title": "Projektet",
@@ -88,6 +88,7 @@
   "login.label.email": "E-Post",
   "login.label.password": "Lösenord",
   "login.primaryButton": "Logga in",
-  "login.secondaryButton": "Glömt lösenordet?"
+  "login.secondaryButton": "Glömt lösenordet?",
 
+  "footer.collaborations": "Några av våra tidigare samarbeten"
   }

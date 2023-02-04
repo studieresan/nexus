@@ -1,4 +1,4 @@
-export default function DynamicHero ({ bgImg, bottomElement, title, description, primaryButtonText, secondaryButtonText, handleClickPrimary, handleClickSecondary, align }) {
+export default function DynamicHero ({ insertRef, bgImg, bottomElement, title, description, primaryButtonText, secondaryButtonText, handleClickPrimary, handleClickSecondary, align }) {
   const elements = [
     (
       <div key={1} className='col-10 col-sm-8 col-lg-6'>
@@ -20,7 +20,7 @@ export default function DynamicHero ({ bgImg, bottomElement, title, description,
   if (align === 'left') elements.reverse()
 
   return (
-    <div className='container col-xxl-8 px-4 py-5'>
+    <div ref={insertRef} className='container col-xxl-8 px-4 py-5'>
       <div className='row flex-lg-row-reverse align-items-center g-5 py-5'>
         {elements}
       </div>

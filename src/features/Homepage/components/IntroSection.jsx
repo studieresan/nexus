@@ -35,7 +35,10 @@ export function IntroSection ({ appData, overlayGroups, imagesLoaded, handleImag
                           <div>
                             <p>{group.description}</p>
                           </div>
-                          <Button>
+                          <Button onClick={() => {
+                            group.ref.current.scrollIntoView({ behavior: 'smooth', block: 'center' })
+                          }}
+                          >
                             {group.button}
                           </Button>
                         </div>
