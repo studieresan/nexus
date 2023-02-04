@@ -1,16 +1,27 @@
 {
   "homepage.intro": "Ansluter Stockholm med KTH:s toppstudenter inom teknik",
-  "homepage.work.title": "Samarbeta med oss",
-  "homepage.work.description": "Om du är intresserad av att ha ett evenemang med oss eller om du är nyfiken och vill veta mer, tveka inte på att kontakta oss.",
-  "homepage.work.button": "Kontakta oss",
+
+  "homepage.contact.short.title": "Kontakt",
+  "homepage.contact.short.description": "Tveka inte på att kontakta oss om ni är intresserade av att ha ett evenemang eller vill veta mer.",
+  "homepage.contact.short.button": "Kontakta oss",
+  "homepage.contact.title": "Samarbeta med oss",
+  "homepage.contact.description": "Om ni är intresserade av att ha ett evenemang med oss eller om ni är nyfikna och vill veta mer, tveka inte på att kontakta säljansvarig <strong>{{name}}</strong>.",
+  "homepage.contact.buttonPrimary": "Kontakta oss",
   
+  "homepage.project.short.title": "Projektet",
+  "homepage.project.short.description": "Studs är ett projekt som leds av ingenjörsstudenter i masterprogram som är relevanta för datavetenskap.",
+  "homepage.project.short.button": "Läs mer",
   "homepage.project.title": "Projektet",
-  "homepage.project.description": "Studs är ett årligt ideellt projekt från KTH som leds av ett urval av 29 ingenjörsstudenter i masterprogram som är relevanta för datavetenskap.",
-  "homepage.project.button": "Läs mer",
-  
+  "homepage.project.description": "Studs är ett årligt ideellt projekt från KTH som leds av ett urval av 29 ingenjörsstudenter i masterprogram som är relevanta för datavetenskap. Genom att organisera evenemang tillsammans med företag skapar vi möjligheter att ge både studenter och deras potentiella arbetsgivare värdefull tid tillsammans. I slutet av kursen Studs på en studiersa för kapitalet som samlats in under året.",
+  "homepage.project.buttonPrimary": "Om oss",
+  "homepage.project.buttonSecondary": "Resebloggen",
+
+  "homepage.events.short.title": "Evenemangen",
+  "homepage.events.short.description": "Under året träffar Studs-medlemmar företag under evenemang, vanligtvis arrangerade på företagskontor.",
+  "homepage.events.short.button": "Läs mer",
   "homepage.events.title": "Evenemangen",
-  "homepage.events.description": "Under året träffar Studs-medlemmar företag under evenemang, vanligtvis arrangerade på företagskontor.",
-  "homepage.events.button": "Läs mer",
+  "homepage.events.description": "Under året kommer medlemmarna i Studs att träffa företag under evenemang, vanligtvis arrangerade på företagens kontor. För studenterna är detta en möjlighet att få djupare insikter om hur arbetslivet på företaget ser ut och om företagets verksamhet. Studs hjälper företagen att skräddarsy evenemangen till deras behov, vilket garanterar att varje evenemang är lika unikt som företaget som arrangerat det.",
+  "homepage.events.buttonPrimary": "Tidigare Evengemang",
 
   "about.intro": "Här kommer information om sidan att finnas.",
   "events.intro": "Här kommer information om kommande evenemang att finnas.",
@@ -41,7 +52,9 @@
   "edit": "Ändra",
   "logout": "Logga ut",
   "login": "Logga in",
-  
+  "email": "Email",
+  "phone": "Telefon",
+
   "groups.title": "Möt grupperna",
   "groups.intro": "Studs består av sex olika grupper med varsitt arbetsområde och varsin ledare, där alla gruppers insats är lika viktiga för att projektet ska lyckas. Mycket av arbetet i Studs sker grupperna emellan och det är därför viktigt att du som gruppmedlem är samarbetsvillig och förstår att vi alla arbetar mot ett gemensamt mål. Studs kommer inte att bara ge dig goda kunskaper inom allt vad projektarbete innebär, utan du kommer också att ha ett otroligt roligt år och knyta värdefulla relationer med näringslivet och inom gruppen!",
   "groups.contact": "Har du några frågor? Kontakta ",
