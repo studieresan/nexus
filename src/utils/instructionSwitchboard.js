@@ -1,4 +1,4 @@
-import { createBlogPost, deleteBlogpost, loginUser, updateBlogPost } from '@/requests/api'
+import { createBlogPost, deleteBlogpost, loginUser, saveEvent, updateBlogPost } from '@/requests/api'
 import { setLoggedIn, setLoggedOut } from '@/requests/auth'
 
 export default async function instructionSwitchboard (args, instruction, data) {
@@ -18,6 +18,23 @@ export default async function instructionSwitchboard (args, instruction, data) {
     case 'deleteBlogPost': {
       const response = await deleteBlogpost(data.toDeleteId)
       args.setAppData({ ...args.appData, blogPosts: args.appData.blogPosts.filter(post => post.id !== data.toDeleteId) })
+      break
+    }
+    case 'updateEvent': {
+      const { id, ...postWithoutId } = data.post
+      const response = await saveEvent({ id, args: postWithoutId })
+      args.setAppData({ ...args.appData, events: args.appData.events.map(event => event.id === id ? response : event) })
+      break
+    }
+    case 'createEvent': {
+      const response = await saveEvent({ id: null, args: data.post })
+      console.log('new events response: ', response)
+      args.setAppData({ ...args.appData, events: [...args.appData.events, response.eventCreate] })
+      break
+    }
+    case 'deleteEvent': {
+      const response = await deleteBlogpost(data.toDeleteId)
+      args.setAppData({ ...args.appData, events: args.appData.events.filter(post => post.id !== data.toDeleteId) })
       break
     }
     case 'loginUser': {

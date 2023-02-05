@@ -1,9 +1,7 @@
-import { useEffect, useState } from 'react'
-import { Carousel, Modal } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 import EditPost from './components/EditPost.jsx'
 import ViewPost from './components/ViewPost.jsx'
-export default function BlogPost ({ modal, data, appData }) {
+export default function BlogPostModal ({ modal, data, appData }) {
   const { t, i18n } = useTranslation()
   return data.mode === 'view'
     ? (

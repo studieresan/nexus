@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react'
+import { HandleInstructionsContext } from '@/context.js'
+import { useContext, useEffect, useState } from 'react'
 import { Button, Spinner } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 import { BsPinMap } from 'react-icons/bs'
@@ -7,7 +8,8 @@ import CardGroup from '../../components/CardGroup.jsx'
 export default function Events ({ appData, handleModals }) {
   const { t, i18n } = useTranslation()
   const [groupsInfo, setGroupsInfo] = useState(null)
-  const cornerIcon = <BsPinMap size={10} />
+  const handleInstructions = useContext(HandleInstructionsContext)
+
   useEffect(() => {
     if (appData.events) {
       // event groups divided based on year
@@ -41,19 +43,48 @@ export default function Events ({ appData, handleModals }) {
   }, [appData])
 
   function handleClickCard (id) {
-    console.log('clicked card', id)
+    handleModals.on({
+      name: 'EventModal',
+      id: 'EventModal-View',
+      post: appData.events.find((e) => e.id === id),
+      mode: 'view'
+    })
   }
 
   function handleClickEdit (id) {
-    console.log('clicked edit', id)
+    handleModals.on({
+      name: 'EventModal',
+      id: 'EventModal-Edit',
+      post: appData.events.find((e) => e.id === id),
+      mode: 'edit'
+    })
   }
 
   async function handleConfirmDelete ({ modal, data }) {
-    console.log('clicked delete', data)
+    await handleInstructions('deleteEvent', { toDeleteId: data.post.id })
+    modal.off(modal)
   }
 
   async function handleClickDelete (id) {
-    console.log('clicked delete', id)
+    const post = appData.blogPosts.find((e) => e.id === id)
+    handleModals.on({
+      name: 'ConfirmModal',
+      id: 'EventModal-Delete',
+      title: t('blog.deleteEventTitle'),
+      children: <div><span className='fw-light'>{t('event.deleteEventDescription')}{': '}</span><span className='fw-bold'>{post.title}</span></div>,
+      mode: 'delete',
+      post: appData.events.find((e) => e.id === id),
+      handleConfirm: handleConfirmDelete
+    })
+  }
+
+  function handleCreateClick () {
+    handleModals.on({
+      name: 'EventModal',
+      id: 'EventModal-View',
+      post: {},
+      mode: 'edit'
+    })
   }
 
   const showTools = (appData?.userDetails?.permissions || []).includes('event_permission') || (appData?.userDetails?.permissions || []).includes('admin_permission')
@@ -67,7 +98,7 @@ export default function Events ({ appData, handleModals }) {
               <p className='lead text-muted'>{t('events.intro')}</p>
               {showTools && (
                 <div className='d-flex gap-2'>
-                  <Button>{t('events.primaryButton')}</Button>
+                  <Button onClick={() => handleCreateClick()}>{t('events.primaryButton')}</Button>
                 </div>
               )}
             </div>
@@ -77,7 +108,7 @@ export default function Events ({ appData, handleModals }) {
               {groupsInfo && appData.events && groupsInfo.map((group, groupIndex) => {
                 return (
                   <div key={`group-${groupIndex}`} className='mb-2'>
-                    <CardGroup showTools={showTools} appData={appData} group={group} idx={groupIndex} groupTitle={group.title} elements={group.elements} handleClickCard={handleClickCard} handleClickEdit={handleClickEdit} handleClickDelete={handleClickDelete} />
+                    <CardGroup expandStart={groupIndex === 0} showTools={showTools} appData={appData} group={group} idx={groupIndex} groupTitle={group.title} elements={group.elements} handleClickCard={handleClickCard} handleClickEdit={handleClickEdit} handleClickDelete={handleClickDelete} />
                   </div>
                 )
               })}

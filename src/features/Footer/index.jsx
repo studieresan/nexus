@@ -12,18 +12,18 @@ export default function Footer () {
 
   return (
     <div className='container-fluid p-4'>
-      <div className='text-center fst-italic fs-4'>
+      <div className='text-center fst-italic fs-5'>
         {t('footer.collaborations')}
       </div>
       <div className='row row-cols-2 my-4'>
         <div className='col-12 d-flex flex-wrap justify-content-center gap-3 mb-4'>
-          <img src={goldman_sachs} alt='Goldman Sachs' style={{ width: '200px', height: 'auto' }} />
-          <img src={karma} alt='Karma' style={{ width: '200px', height: 'auto' }} />
-          <img src={scania} alt='Scania' style={{ width: '200px', height: 'auto' }} />
+          <img src={goldman_sachs} alt='Goldman Sachs' style={{ width: '160px', height: 'auto' }} />
+          <img src={karma} alt='Karma' style={{ width: '160px', height: 'auto' }} />
+          <img src={scania} alt='Scania' style={{ width: '160px', height: 'auto' }} />
         </div>
         <div className='col-12 d-flex flex-wrap justify-content-center gap-3'>
-          <img src={storykit} alt='Storykit' style={{ width: '200px', height: 'auto' }} />
-          <img src={fra} alt='FRA' style={{ width: '200px', height: 'auto' }} />
+          <img src={storykit} alt='Storykit' style={{ width: '160px', height: 'auto' }} />
+          <img src={fra} alt='FRA' style={{ width: '160px', height: 'auto' }} />
         </div>
       </div>
       <div className='row row-cols-1 col-12 justify-content-center'>

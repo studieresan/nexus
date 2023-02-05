@@ -51,7 +51,7 @@
   "blog.deletePostDescription": "Are you sure that you want to delete blog post",
   "confirm": "Confirm",
   "cancel": "Cancel",
-
+  "leader": "Leader",
   "view": "View",
   "edit": "Edit",
   "logout": "Logout",

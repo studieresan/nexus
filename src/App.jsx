@@ -19,6 +19,7 @@ function App () {
     users: null,
     blogPosts: null,
     events: null,
+    companies: null,
     loggedIn: localStorage.loggedIn || false,
     userDetails: (localStorage.userDetails && JSON.parse(localStorage.userDetails)) || null
   })

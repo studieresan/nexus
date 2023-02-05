@@ -1,4 +1,4 @@
-import { fetchEvents, fetchUsers, getBlogPosts } from '@/requests/api'
+import { fetchCompanies, fetchEvents, fetchUsers, getBlogPosts } from '@/requests/api'
 import { useEffect } from 'react'
 
 // check and fetch both users and blog posts, and make one combined update to appData
@@ -16,6 +16,9 @@ export default function useFetchCollections (appData, setAppData) {
       }
       if (appData.events === null) {
         toUpdateAppData.events = await fetchEvents()
+      }
+      if (appData.companies === null) {
+        toUpdateAppData.companies = await fetchCompanies()
       }
       if (Object.keys(toUpdateAppData).length > 0) {
         setAppData({ ...appData, ...toUpdateAppData })

@@ -1,3 +1,4 @@
+import Contact from '@/components/Contact.jsx'
 import { useRef } from 'react'
 import { Collapse } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
@@ -39,15 +40,7 @@ export default function Group ({ handleClick, showGroup, group, groupIndex }) {
           <Collapse in={showGroup[groupIndex]}>
             <div>
               <p className='lead text-muted'> {group.description}</p>
-              <div className='row row-cols-2'>
-                <div className='d-flex ratio ratio-1x1 rounded-circle overflow-hidden' style={{ width: 75, height: 75 }}>
-                  {group.master.info.picture ? <img src={group.master.info.picture} className='card-img-top img-cover' alt='alt' /> : <IoPersonSharp className='bg-white' />}
-                </div>
-                <div className='vstack my-auto'>
-                  <small className='text-muted fs-6'>{group.master.firstName}&nbsp;{group.master.lastName}  </small>
-                  <cite title='Source Title'>{group.master.info.email}</cite>
-                </div>
-              </div>
+              <Contact picture={group.master.info.picture} name={`${t('leader')}: ${group.master.firstName} ${group.master.lastName}`} email={group.master.info.email} />
             </div>
           </Collapse>
           <hr className='w-100 opacity-25' style={{ height: 1, opacity: 1 }} />

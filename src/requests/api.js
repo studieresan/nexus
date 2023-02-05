@@ -1,5 +1,6 @@
 import { pickBy } from 'lodash'
 
+// This file was copied and reused from the old frontend repository
 const BASE_URL = 'http://localhost:5173' // process.env.API_BASE_URL || 'http://localhost:5173/'
 const GRAPHQL = '/graphql'
 const SIGNUP = '/signup'
