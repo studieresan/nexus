@@ -5,7 +5,7 @@
   "homepage.contact.short.description": "Do not hesitate to contact us if you are interested in having an event or want to learn more.",
   "homepage.contact.short.button": "Learn more",
   "homepage.contact.title": "Work with us",
-  "homepage.contact.description": "If you are interested in having an event with us or are curious and want to learn more, do not hesitate to contact head of sales <strong>{{name}}</strong>.",
+  "homepage.contact.description": "If you are interested in having an event with us or are curious and want to learn more, do not hesitate to contact <strong>{{name}}</strong>.",
   "homepage.contact.buttonPrimary": "Contact us",
   
   "homepage.project.short.title": "The Project",
@@ -29,6 +29,21 @@
   "events.intro": "Here is a collection of events that we have arranged together with companies in the past.",
   "events.groupTitle": "Events",
   "events.primaryButton": "Create event",
+  "event": "Event",
+  "events.edit.label.author": "Author",
+  "events.edit.label.company": "Company",
+  "events.edit.label.description": "Description",
+  "events.edit.label.addFrontImage": "Add front image",
+  "events.edit.label.addImages": "Add images to use in your event description",
+  "events.edit.alertHeader": "How to structure your event description",
+  "events.edit.alertDescription": "To make your event look nice you can include images. To add images to your event description you need to add the following text to your description: \\image-0, \\image-1, \\image-2, etc. The number after the image tag is the index of the image in the list of images you added to your event. The following is an example of an event description that includes images.",
+  "events.edit.alertFooter": "This is an example. This text is the start of the event description and will have a carousel of two images below it.<br/> <br/> \\image-0\n <br/> \\image-1 <br/> <br/>This is a text block below the above carousel of images. Below this block will be just a single image. <br/> <br/>\\image-2",
+  "events.edit.submit": "Save",
+  "events.edit.label.creating": "Creating new event",
+  "events.edit.label.editing": "Editing",
+  "events.edit.label.published": "Published",
+  "event.deletePostTitle": "Deleting event",
+  "event.deletePostDescription": "Are you sure that you want to delete event",
 
   "blog.title": "Blog posts",
   "blog.intro": "Here is a collection of blog posts made throughout our study trip at the end of the course.",
@@ -58,6 +73,15 @@
   "login": "Login",
   "email": "Email",
   "phone": "Phone",
+  "projectLeader": "Project Manager",
+  "economyLeader": "Head of Economy",
+  "eventLeader": "Head of Events",
+  "infoLeader": "Head of Information",
+  "itLeader": "Head of IT",
+  "travelLeader": "Head of Travel",
+  "salesLeader": "Head of Sales",
+  "role": "Role",
+
   "groups.title": "Meet the groups",
   "groups.intro": "Studs consists of six different groups with different focuses and a different leader, where the effort of all groups are equally important for the project to succeed. Much of the work in Studs happens between the groups and it is therefore important that you as a group member is cooperative and understands that we all strive towards a common goal. Studs will not only give you great knowledge with whatever project work implies, but you will also have an amazing year and will create valuable relations with the industry and withing the group.",
   "groups.contact": "Do you have any questions? Contact ",
@@ -93,5 +117,6 @@
   "login.primaryButton": "Login",
   "login.secondaryButton": "Forgot password?",
 
-  "footer.collaborations": "Some of our previous collaborations"
+  "footer.collaborations": "Some of our previous collaborations",
+  "footer.questions": "Questions?"
 }

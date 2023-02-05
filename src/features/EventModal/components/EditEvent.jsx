@@ -23,7 +23,8 @@ export default function EditEventPost ({ modal, appData, post }) {
         frontPicture: post.frontPicture || '',
         pictures: post.pictures || [],
         author: post?.author?.id || appData.users[0].id,
-        date: post.date || null
+        date: post.date || null,
+        published: post.published || false
       }
       if (post.id) newFormData.id = post.id
       setFormData(newFormData)
@@ -84,6 +85,9 @@ export default function EditEventPost ({ modal, appData, post }) {
       case 'author':
         setFormData({ ...formData, author: e.target.value })
         break
+      case 'published':
+        setFormData({ ...formData, published: e.target.checked })
+        break
       default:
         console.log('Unknown handleChange')
         break
@@ -115,6 +119,9 @@ export default function EditEventPost ({ modal, appData, post }) {
       </Modal.Header>
       <Modal.Body>
         <Form>
+          <Form.Group className='mb-3' controlId='formPublished'>
+            <Form.Check type='switch' label={t('events.edit.label.published')} name='published' checked={formData.published} onChange={(e) => setFormData({ ...formData, published: e.target.checked })} />
+          </Form.Group>
           <Form.Group className='mb-3' controlId='formBasicEmail'>
             <FloatingLabel controlId='floatingSelect' label={t('events.edit.label.author')}>
               <Form.Control as='select' name='author' defaultValue={formData.author} onChange={(e) => handleChange(e)}>

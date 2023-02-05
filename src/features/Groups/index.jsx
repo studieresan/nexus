@@ -14,7 +14,7 @@ export default function Groups ({ appData }) {
       const groupsInfo = []
       Object.keys(groupsPredeterminedInfo).forEach(group => {
         const master = appData.users.find(user => user.firstName === groupsPredeterminedInfo[group].masterFirstName && user.lastName === groupsPredeterminedInfo[group].masterLastName)
-        groupsInfo.push({ master, title: t(`groups.${group}.title`), description: t(`groups.${group}.description`), icon: groupsPredeterminedInfo[group].icon })
+        groupsInfo.push({ master, name: group, title: t(`groups.${group}.title`), description: t(`groups.${group}.description`), icon: groupsPredeterminedInfo[group].icon })
       })
       console.log('groupsInfo', groupsInfo)
       setGroupsInfo(groupsInfo)

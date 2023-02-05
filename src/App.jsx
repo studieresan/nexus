@@ -51,7 +51,7 @@ function App () {
           <Route path='/login' element={<Login appData={appData} setAppData={setAppData} />} />
         </Routes>
         <Divider />
-        <Footer />
+        <Footer appData={appData} />
       </AppDataContext.Provider>
     </HandleInstructionsContext.Provider>
   )

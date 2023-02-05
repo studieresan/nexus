@@ -30,10 +30,10 @@ export default function Homepage ({ appData }) {
   useEffect(() => {
     const salesMasterUser = appData.users ? appData.users.find(user => user.firstName === salesMaster.firstName && user.lastName === salesMaster.lastName) : null
     setSalesInfo({
-      bottomElement: <Contact picture={salesMasterUser?.info?.picture} name={`${salesMaster.firstName} ${salesMaster.lastName}`} phone={salesMaster.phone} email={salesMaster.email} />,
+      bottomElement: <Contact role={t('salesLeader')} picture={salesMasterUser?.info?.picture} name={`${salesMaster.firstName} ${salesMaster.lastName}`} phone={salesMaster.phone} email={salesMaster.email} />,
       description: <Trans i18nKey='homepage.contact.description'>{{ name: `${salesMaster.firstName} ${salesMaster.lastName}` }}</Trans>
     })
-  }, [appData.users])
+  }, [appData.users, i18n.language])
 
   useEffect(() => {
     setOverlayGroups((homepagePredeterminedOverlayGroups).map((group, index) => ({

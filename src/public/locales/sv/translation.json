@@ -5,7 +5,7 @@
   "homepage.contact.short.description": "Tveka inte på att kontakta oss om ni är intresserade av att ha ett evenemang eller vill veta mer.",
   "homepage.contact.short.button": "Kontakta oss",
   "homepage.contact.title": "Samarbeta med oss",
-  "homepage.contact.description": "Vi letar ständigt efter nya samarbeten. Om ni är intresserade av att ha ett evenemang med oss eller är nyfikna och vill veta mer, tveka inte på att kontakta vår säljansvarig <strong>{{name}}</strong>.",
+  "homepage.contact.description": "Vi letar ständigt efter nya samarbeten. Om ni är intresserade av att ha ett evenemang med oss eller är nyfikna och vill veta mer, tveka inte på att kontakta <strong>{{name}}</strong>.",
   "homepage.contact.buttonPrimary": "Kontakta oss",
   
   "homepage.project.short.title": "Projektet",
@@ -22,13 +22,28 @@
   "homepage.events.title": "Evenemangen",
   "homepage.events.description": "Under året kommer medlemmarna i Studs att träffa företag under evenemang, vanligtvis arrangerade på företagens kontor. För studenterna är detta en möjlighet att få djupare insikter om hur arbetslivet på företaget ser ut och om företagets verksamhet. Studs hjälper företagen att skräddarsy evenemangen till deras behov, vilket garanterar att varje evenemang är lika unikt som företaget som arrangerat det.",
   "homepage.events.buttonPrimary": "Tidigare Evengemang",
-
+  
+  "about.intro": "Här kommer information om sidan att finnas.",
+  
   "events.title": "Tidigare evenemang",
   "events.intro": "Här kan du se alla tidigare evenemang som Studs har arrangerat tillsammans med företag.",
   "events.groupTitle": "Evenemang",
   "events.primaryButton": "Skapa evenemang",
-  
-  "about.intro": "Här kommer information om sidan att finnas.",
+  "event": "Evengemang",
+  "events.edit.label.author": "Skribent",
+  "events.edit.label.company": "Företag",
+  "events.edit.label.description": "Beskrivning",
+  "events.edit.label.addFrontImage": "Lägg till framsida bild",
+  "events.edit.label.addImages": "Lägg till bilder att använda i beskrivningen",
+  "events.edit.alertHeader": "Hur man struktuerar evenemangets beskrivning",
+  "events.edit.alertDescription": "För att snygga till ditt evenemang kan du inkludera bilder i beskrivningen. För att lägga till en bild, skriv \\image-0, \\image-1, \\image-2 etc. i din beskrivning. Dessa bilder kommer sedan att ersättas med de bilder du laddar upp i fältet ovan. Följande är ett exempel på hur du kan göra det.",
+  "events.edit.alertFooter": "Det här är ett exempel på en beskrivning. Nedan kommer en karusell av två bilder att synas. <br/> <br/> \\image-0\n <br/> \\image-1 <br/> <br/>Det här är ett nytt textblock nedanför karusellen av bilder. Nedanför denna text kommer endast en bild att synas. <br/> \\image-2 <br/> <br/>Det här är ett nytt textblock nedanför den sista bilden. <br/> <br/>",
+  "events.edit.submit": "Spara",
+  "events.edit.label.creating": "Skapar nytt evenemang",
+  "events.edit.label.editing": "Redigerar",
+  "events.edit.label.published": "Publicerad",
+  "event.deletePostTitle": "Ta bort evenemang",
+  "event.deletePostDescription": "Är du säker på att du vill ta bort evenemanget",
 
   "blog.title": "Reseblogg",
   "blog.intro": "Här finns alla blogginlägg som lagts upp under resans gång.",
@@ -58,6 +73,15 @@
   "login": "Logga in",
   "email": "Email",
   "phone": "Telefon",
+  "projectLeader": "Projektledare",
+  "economyLeader": "Ekonomiansvarig",
+  "eventLeader": "Eventansvarig",
+  "infoLeader": "Infoansvarig",
+  "itLeader": "IT-ansvarig",
+  "travelLeader": "Reseansvarig",
+  "salesLeader": "Säljansvarig",
+  "role": "Roll",
+
   "groups.title": "Möt grupperna",
   "groups.intro": "Studs består av sex olika grupper med varsitt arbetsområde och varsin ledare, där alla gruppers insats är lika viktiga för att projektet ska lyckas. Mycket av arbetet i Studs sker grupperna emellan och det är därför viktigt att du som gruppmedlem är samarbetsvillig och förstår att vi alla arbetar mot ett gemensamt mål. Studs kommer inte att bara ge dig goda kunskaper inom allt vad projektarbete innebär, utan du kommer också att ha ett otroligt roligt år och knyta värdefulla relationer med näringslivet och inom gruppen!",
   "groups.contact": "Har du några frågor? Kontakta ",
@@ -93,5 +117,6 @@
   "login.primaryButton": "Logga in",
   "login.secondaryButton": "Glömt lösenordet?",
 
-  "footer.collaborations": "Några av våra tidigare samarbeten"
+  "footer.collaborations": "Några av våra tidigare samarbeten",
+  "footer.questions": "Frågor?"
   }

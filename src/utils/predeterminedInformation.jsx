@@ -52,3 +52,16 @@ export const salesMaster = {
   email: 'tobias-v@studs.se',
   phone: '+46 76-162 82 20'
 }
+
+export const projectMasters = [
+  {
+    firstName: 'Marcus',
+    lastName: 'Nordstedt',
+    email: 'marcus@studs.se'
+  },
+  {
+    firstName: 'Daniel',
+    lastName: 'Grünler',
+    email: 'daniel-g@studs.se'
+  }
+]

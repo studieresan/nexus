@@ -40,7 +40,7 @@ export default function Group ({ handleClick, showGroup, group, groupIndex }) {
           <Collapse in={showGroup[groupIndex]}>
             <div>
               <p className='lead text-muted'> {group.description}</p>
-              <Contact picture={group.master.info.picture} name={`${t('leader')}: ${group.master.firstName} ${group.master.lastName}`} email={group.master.info.email} />
+              <Contact role={t(`${group.name}Leader`)} picture={group.master.info.picture} name={`${group.master.firstName} ${group.master.lastName}`} email={group.master.info.email} />
             </div>
           </Collapse>
           <hr className='w-100 opacity-25' style={{ height: 1, opacity: 1 }} />

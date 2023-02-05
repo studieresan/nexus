@@ -16,7 +16,7 @@ export default function Events ({ appData, handleModals }) {
       const years = [...new Set(appData.events.map((e) => parseInt(e.date.getFullYear())))].sort((a, b) => b - a)
       const newGroupsInfo = years.map((year) => ({ year, title: t('events.groupTitle') + ' ' + year }))
       for (let i = 0; i < newGroupsInfo.length; i++) {
-        const matchedBlogPosts = appData.events.filter((e) => parseInt(e.date.getFullYear()) === newGroupsInfo[i].year)
+        const matchedBlogPosts = appData.events.filter((e) => e.published && parseInt(e.date.getFullYear()) === newGroupsInfo[i].year)
         const elements = matchedBlogPosts.map((e) => ({
           id: e.id,
           cardTitle: e.company.name,
