@@ -24,10 +24,11 @@
   "homepage.events.buttonPrimary": "Previous events",
   
   "about.intro": "This is where the about page will be.",
-
   "events.title": "Previous events",
   "events.intro": "Here is a collection of events that we have arranged together with companies in the past.",
   "events.groupTitle": "Events",
+  "events.notPublished": "This event is not yet published",
+  "events.noLocation": "Not specified",
   "events.primaryButton": "Create event",
   "event": "Event",
   "events.edit.label.author": "Author",

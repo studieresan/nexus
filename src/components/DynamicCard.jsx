@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { BsCalendarDate, BsPencil, BsTrash } from 'react-icons/bs'
 import { IoPersonSharp } from 'react-icons/io5'
 
-export default function BlogCard ({ id, cardTitle, cornerImg, cornerText, dateText, bgImg, handleClickCard, handleClickEdit, handleClickDelete, showTools }) {
+export default function BlogCard ({ id, cardTitle, cornerImg, cornerText, dateText, bgImg, handleClickCard, handleClickEdit, handleClickDelete, showTools, danger, success }) {
   const { t, i18n } = useTranslation()
   const imageRef = useRef(null)
   const optionsRef = useRef(null)
@@ -33,7 +33,10 @@ export default function BlogCard ({ id, cardTitle, cornerImg, cornerText, dateTe
       >
         <div ref={imageRef} className='d-flex flex-column bg-dark h-100' style={{ transitionDuration: '0.2s', backgroundImage: `url(${bgImg})`, backgroundSize: 'cover', backgroundPosition: 'center', filter: 'brightness(80%)', position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }} />
         <div className='d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1' style={{ position: 'relative' }}>
-          <h3 className='pt-5 mt-5 mb-4 display-6 lh-1 fw-bold'>{cardTitle}</h3>
+          <div className={`pt-5 ${danger ? 'mt-3' : 'mt-5'} mb-4`}>
+            {danger && <small className='lead text-warning'>{danger}</small>}
+            <h3 className='display-6 lh-1 fw-bold'>{cardTitle}</h3>
+          </div>
           <div className='d-flex mt-auto'>
             {cornerImg}
             <div className='me-auto d-flex col align-items-center me-3 overflow-hidden'>

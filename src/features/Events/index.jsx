@@ -15,32 +15,25 @@ export default function Events ({ appData, handleModals }) {
       // event groups divided based on year
       const years = [...new Set(appData.events.map((e) => parseInt(e.date.getFullYear())))].sort((a, b) => b - a)
       const newGroupsInfo = years.map((year) => ({ year, title: t('events.groupTitle') + ' ' + year }))
+
       for (let i = 0; i < newGroupsInfo.length; i++) {
-        const matchedBlogPosts = appData.events.filter((e) => e.published && parseInt(e.date.getFullYear()) === newGroupsInfo[i].year)
+        const includeUnpublished = appData.loggedIn && ((appData?.userDetails?.permissions || []).includes('event_permission') || (appData?.userDetails?.permissions || []).includes('admin_permission'))
+        const matchedBlogPosts = appData.events.filter((e) => (e.published || includeUnpublished) && parseInt(e.date.getFullYear()) === newGroupsInfo[i].year)
         const elements = matchedBlogPosts.map((e) => ({
           id: e.id,
           cardTitle: e.company.name,
-          cornerImg:
-          e.location
-            ? (
-              <div className='me-2 ratio ratio-1x1' style={{ width: 25, height: 25 }}>
-                <BsPinMap />
-              </div>
-              )
-            : (
-              <div />
-              ),
-
-          cornerText: e.location,
+          cornerImg: <div className='me-2 ratio ratio-1x1' style={{ width: 25, height: 25 }}><BsPinMap /></div>,
+          cornerText: e.location || t('events.noLocation'),
           dateText: e.date.toISOString().slice(0, 10),
-          bgImg: e.pictures[0]
+          bgImg: e.pictures[0],
+          danger: e.published ? null : t('events.notPublished')
         }))
         newGroupsInfo[i].elements = elements
       }
 
       setGroupsInfo(newGroupsInfo)
     }
-  }, [appData])
+  }, [appData, i18n.language])
 
   function handleClickCard (id) {
     handleModals.on({

@@ -28,6 +28,8 @@
   "events.title": "Tidigare evenemang",
   "events.intro": "Här kan du se alla tidigare evenemang som Studs har arrangerat tillsammans med företag.",
   "events.groupTitle": "Evenemang",
+  "events.notPublished": "Evenemanget är inte ännu publicerat",
+  "events.noLocation": "Ej angivet",
   "events.primaryButton": "Skapa evenemang",
   "event": "Evengemang",
   "events.edit.label.author": "Skribent",

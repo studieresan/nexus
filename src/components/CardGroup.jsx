@@ -32,6 +32,7 @@ export default function CardGroup ({ appData, showTools, expandStart, idx, group
               handleClickEdit={handleClickEdit}
               handleClickDelete={handleClickDelete}
               showTools={showTools}
+              danger={element.danger}
             />
           ))}
         </div>
