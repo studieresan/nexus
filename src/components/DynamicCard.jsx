@@ -35,7 +35,13 @@ export default function BlogCard ({ id, cardTitle, cornerImg, cornerText, dateTe
         <div className='d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1' style={{ position: 'relative' }}>
           <div className={`pt-5 ${danger ? 'mt-3' : 'mt-5'} mb-4`}>
             {danger && <small className='lead text-warning'>{danger}</small>}
-            <h3 className='display-6 lh-1 fw-bold'>{cardTitle}</h3>
+            {cardTitle
+              ? (
+                <h3 className='display-6 lh-1 fw-bold'>{cardTitle}</h3>
+                )
+              : (
+                <h3 className='display-6 lh-1 fw-bold text-warning'>{t('card.noTitle')}</h3>
+                )}
           </div>
           <div className='d-flex mt-auto'>
             {cornerImg}

@@ -4,7 +4,8 @@ import { Button, Spinner } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 import { BsPinMap } from 'react-icons/bs'
 import { IoPersonSharp } from 'react-icons/io5'
-import CardGroup from '../../components/CardGroup.jsx'
+import ElementGroup from '../../components/ElementGroup.jsx'
+import generateGroupsInfo from './utils/generateGroupsInfo.jsx'
 export default function Events ({ appData, handleModals }) {
   const { t, i18n } = useTranslation()
   const [groupsInfo, setGroupsInfo] = useState(null)
@@ -12,47 +13,41 @@ export default function Events ({ appData, handleModals }) {
 
   useEffect(() => {
     if (appData.events) {
-      // event groups divided based on year
-      const years = [...new Set(appData.events.map((e) => parseInt(e.date.getFullYear())))].sort((a, b) => b - a)
-      const newGroupsInfo = years.map((year) => ({ year, title: t('events.groupTitle') + ' ' + year }))
-
-      for (let i = 0; i < newGroupsInfo.length; i++) {
-        const includeUnpublished = appData.loggedIn && ((appData?.userDetails?.permissions || []).includes('event_permission') || (appData?.userDetails?.permissions || []).includes('admin_permission'))
-        const matchedBlogPosts = appData.events.filter((e) => (e.published || includeUnpublished) && parseInt(e.date.getFullYear()) === newGroupsInfo[i].year)
-        const elements = matchedBlogPosts.map((e) => ({
-          id: e.id,
-          cardTitle: e.company.name,
-          cornerImg: <div className='me-2 ratio ratio-1x1' style={{ width: 25, height: 25 }}><BsPinMap /></div>,
-          cornerText: e.location || t('events.noLocation'),
-          dateText: e.date.toISOString().slice(0, 10),
-          bgImg: e.pictures[0],
-          danger: e.published ? null : t('events.notPublished')
-        }))
-        newGroupsInfo[i].elements = elements
-      }
-
-      setGroupsInfo(newGroupsInfo)
+      const groupsInfo = generateGroupsInfo(appData)
+      console.log('groupsInfo', groupsInfo)
+      setGroupsInfo(groupsInfo)
     }
   }, [appData, i18n.language])
 
   function handleClickCard (id) {
     handleModals.on({
-      name: 'EventModal',
-      id: 'EventModal-View',
+      name: 'PostModal',
+      id: 'PostModal-View',
       post: appData.events.find((e) => e.id === id),
-      mode: 'view'
+      mode: 'view',
+      type: 'Event'
     })
   }
 
   function handleClickEdit (id) {
     handleModals.on({
-      name: 'EventModal',
-      id: 'EventModal-Edit',
+      name: 'PostModal',
+      id: 'PostModal-Edit',
       post: appData.events.find((e) => e.id === id),
-      mode: 'edit'
+      mode: 'edit',
+      type: 'Event'
     })
   }
 
+  function handleCreateClick () {
+    handleModals.on({
+      name: 'PostModal',
+      id: 'PostModal-View',
+      post: {},
+      mode: 'edit',
+      type: 'Event'
+    })
+  }
   async function handleConfirmDelete ({ modal, data }) {
     await handleInstructions('deleteEvent', { toDeleteId: data.post.id })
     modal.off(modal)
@@ -63,20 +58,11 @@ export default function Events ({ appData, handleModals }) {
     handleModals.on({
       name: 'ConfirmModal',
       id: 'EventModal-Delete',
-      title: t('blog.deleteEventTitle'),
-      children: <div><span className='fw-light'>{t('event.deleteEventDescription')}{': '}</span><span className='fw-bold'>{post.title}</span></div>,
+      title: t('post.deletePostTitle'),
+      children: <div><span className='fw-light'>{t('post.deleteDescription')}{': '}</span><span className='fw-bold'>{post.title}</span></div>,
       mode: 'delete',
       post: appData.events.find((e) => e.id === id),
       handleConfirm: handleConfirmDelete
-    })
-  }
-
-  function handleCreateClick () {
-    handleModals.on({
-      name: 'EventModal',
-      id: 'EventModal-View',
-      post: {},
-      mode: 'edit'
     })
   }
 
@@ -101,7 +87,7 @@ export default function Events ({ appData, handleModals }) {
               {groupsInfo && appData.events && groupsInfo.map((group, groupIndex) => {
                 return (
                   <div key={`group-${groupIndex}`} className='mb-2'>
-                    <CardGroup expandStart={groupIndex === 0} showTools={showTools} appData={appData} group={group} idx={groupIndex} groupTitle={group.title} elements={group.elements} handleClickCard={handleClickCard} handleClickEdit={handleClickEdit} handleClickDelete={handleClickDelete} />
+                    <ElementGroup expandStart={groupIndex === 0} type='cards' showTools={showTools} appData={appData} group={group} idx={groupIndex} groupTitle={group.title} elements={group.elements} handleClickCard={handleClickCard} handleClickEdit={handleClickEdit} handleClickDelete={handleClickDelete} />
                   </div>
                 )
               })}

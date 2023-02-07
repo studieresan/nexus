@@ -22,12 +22,12 @@ export default async function instructionSwitchboard (args, instruction, data) {
     }
     case 'updateEvent': {
       const { id, ...postWithoutId } = data.post
-      const response = await saveEvent({ id, args: postWithoutId })
+      const response = await saveEvent({ id, ...postWithoutId })
       args.setAppData({ ...args.appData, events: args.appData.events.map(event => event.id === id ? response : event) })
       break
     }
     case 'createEvent': {
-      const response = await saveEvent({ id: null, args: data.post })
+      const response = await saveEvent({ id: null, ...data.post })
       console.log('new events response: ', response)
       args.setAppData({ ...args.appData, events: [...args.appData.events, response.eventCreate] })
       break

@@ -3,15 +3,16 @@ import { Carousel, Modal } from 'react-bootstrap'
 
 export default function ViewPost ({ post, modal }) {
   const [inputBlocks, setInputBlocks] = useState(null)
-
+  console.log('post 222: ', post)
   useEffect(() => {
-    if (post.description) {
-      setInputBlocks(parseInputBlocks(post.description))
+    if (post.description || post.publicDescription) {
+      setInputBlocks(parseInputBlocks(post.description || post.publicDescription))
     }
   }, [post])
 
   function parseInputBlocks (input) {
     const lines = input.split('\n')
+    console.log(lines)
     const blocks = [{
       text: '',
       images: []

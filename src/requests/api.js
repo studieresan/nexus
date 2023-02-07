@@ -641,6 +641,7 @@ export const getPDFURL = file => {
 
 const BLOG_FIELDS = `
 id
+published
 title
 description
 pictures

@@ -31,7 +31,7 @@ export default function Footer ({ appData }) {
           <Contact role={t('projectLeader')} picture={pictures ? pictures[1] : null} name={projectMasters[1].firstName + ' ' + projectMasters[1].lastName} phone={projectMasters[1].phone} email={projectMasters[1].email} />
         </div>
       </div>
-      <div className='text-center fst-italic fs-5'>
+      <div className='text-center fw-bold fs-3'>
         {t('footer.collaborations')}
       </div>
 

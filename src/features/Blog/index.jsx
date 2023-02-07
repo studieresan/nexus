@@ -2,9 +2,7 @@ import { HandleInstructionsContext } from '@/context.js'
 import { useContext, useEffect, useState } from 'react'
 import { Button, Spinner } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
-import { AiOutlinePlus } from 'react-icons/ai'
-import { IoPersonSharp } from 'react-icons/io5'
-import CardGroup from '../../components/CardGroup.jsx'
+import ElementGroup from '../../components/ElementGroup.jsx'
 import generateGroupsInfo from './utils/generateGroupsInfo.jsx'
 export default function Blog ({ appData, handleModals }) {
   const { t, i18n } = useTranslation()
@@ -19,19 +17,31 @@ export default function Blog ({ appData, handleModals }) {
 
   function handleClickCard (id) {
     handleModals.on({
-      name: 'BlogPostModal',
-      id: 'BlogPostModal-View',
+      name: 'PostModal',
+      id: 'PostModal-View',
       post: appData.blogPosts.find((e) => e.id === id),
-      mode: 'view'
+      mode: 'view',
+      type: 'BlogPost'
     })
   }
 
   function handleClickEdit (id) {
     handleModals.on({
-      name: 'BlogPostModal',
-      id: 'BlogPostModal-Edit',
+      name: 'PostModal',
+      id: 'PostModal-Edit',
       post: appData.blogPosts.find((e) => e.id === id),
-      mode: 'edit'
+      mode: 'edit',
+      type: 'BlogPost'
+    })
+  }
+
+  function handleCreateClick () {
+    handleModals.on({
+      name: 'PostModal',
+      id: 'PostModal-View',
+      post: {},
+      mode: 'edit',
+      type: 'BlogPost'
     })
   }
 
@@ -50,15 +60,6 @@ export default function Blog ({ appData, handleModals }) {
       mode: 'delete',
       post: appData.blogPosts.find((e) => e.id === id),
       handleConfirm: handleConfirmDelete
-    })
-  }
-
-  function handleCreateClick () {
-    handleModals.on({
-      name: 'BlogPostModal',
-      id: 'BlogPostModal-View',
-      post: {},
-      mode: 'edit'
     })
   }
 
@@ -81,7 +82,7 @@ export default function Blog ({ appData, handleModals }) {
             {groupsInfo && appData.blogPosts && groupsInfo.map((group, groupIndex) => {
               return (
                 <div key={`group-${groupIndex}`} className='mb-2'>
-                  <CardGroup expandStart showTools={showTools} appData={appData} group={group} idx={groupIndex} groupTitle={group.title} elements={group.elements} handleClickCard={handleClickCard} handleClickEdit={handleClickEdit} handleClickDelete={handleClickDelete} />
+                  <ElementGroup expandStart type='cards' showTools={showTools} appData={appData} group={group} idx={groupIndex} groupTitle={group.title} elements={group.elements} handleClickCard={handleClickCard} handleClickEdit={handleClickEdit} handleClickDelete={handleClickDelete} />
                 </div>
               )
             })}

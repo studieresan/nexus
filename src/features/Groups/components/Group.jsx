@@ -12,25 +12,28 @@ export default function Group ({ handleClick, showGroup, group, groupIndex }) {
   return (
     <div
       ref={containerRef}
-      onClick={() => {
-        handleClick(groupIndex)
-        setTimeout(() => {
-          const viewportHeight = window.innerHeight
-          const currentScroll = window.pageYOffset || document.documentElement.scrollTop
-          const containerBottom = containerRef.current.offsetTop + containerRef.current.offsetHeight
-
-          if (containerBottom > currentScroll + viewportHeight) {
-            containerRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' })
-          }
-        }, 300)
-      }} className='d-flex align-items-start py-1 text-dark' style={{ cursor: 'pointer' }}
+      className='d-flex align-items-start py-1 text-dark'
     >
       <div className='row icon-square text-bg-light d-inline-flex align-items-center justify-content-center fs-1 flex-shrink-0 me-3'>
         {group.icon}
       </div>
       <div className='w-100'>
         <div>
-          <div className='d-flex'>
+          <div
+            className='d-flex' onClick={() => {
+              handleClick(groupIndex)
+              setTimeout(() => {
+                const viewportHeight = window.innerHeight
+                const currentScroll = window.pageYOffset || document.documentElement.scrollTop
+                const containerBottom = containerRef.current.offsetTop + containerRef.current.offsetHeight
+
+                if (containerBottom > currentScroll + viewportHeight) {
+                  containerRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' })
+                }
+              }, 300)
+            }}
+            style={{ cursor: 'pointer' }}
+          >
             <h2 className='fw-light'>{group.title}</h2>
                 &nbsp;
             <div className='d-flex justify-content-center align-items-center'>

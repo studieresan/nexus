@@ -14,7 +14,7 @@ export function IntroSection ({ appData, overlayGroups, imagesLoaded, handleImag
         ? (
           <div className='container-fluid' style={{ position: 'absolute', top: '40%', left: '50%', transform: 'translate(-50%, -50%)' }}>
             <div className='row justify-content-center text-white' id='featured-3'>
-              <div className='fs-1 fs-lg-2 col-12 text-grow' style={{ textAlign: 'center' }}>
+              <div className='fs-1 fs-lg-2 col-12 text-grow ' style={{ textAlign: 'center' }}>
                 {t('homepage.intro')}
               </div>
               <div className='col-9 d-none d-xxl-block'>
@@ -24,7 +24,7 @@ export function IntroSection ({ appData, overlayGroups, imagesLoaded, handleImag
                 <div className='row row-cols-3 justify-content-center'>
                   {overlayGroups && overlayGroups.map((group, index) => (
                     <div key={index} className='d-flex'>
-                      <div className='justify-content-center d-flex align-items-top fs-2 flex-shrink-1 p-1'>
+                      <div className='justify-content-center d-flex align-items-top me-3 mt-0'>
                         {group.icon}
                       </div>
                       <div className='w-100'>

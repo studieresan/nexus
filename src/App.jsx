@@ -19,7 +19,6 @@ function App () {
     users: null,
     blogPosts: null,
     events: null,
-    companies: null,
     loggedIn: localStorage.loggedIn || false,
     userDetails: (localStorage.userDetails && JSON.parse(localStorage.userDetails)) || null
   })
@@ -44,7 +43,7 @@ function App () {
         <Header appData={appData} setAppData={setAppData} />
         <Routes>
           <Route path='/' element={<Homepage appData={appData} />} />
-          <Route path='/about' element={<About />} />
+          <Route path='/about' element={<About appData={appData} />} />
           <Route path='/events' element={<Events appData={appData} handleModals={handleModals} />} />
           <Route path='/groups' element={<Groups appData={appData} />} />
           <Route path='/blog' element={<Blog appData={appData} handleModals={handleModals} />} />

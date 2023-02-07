@@ -1,10 +1,10 @@
 import { HandleInstructionsContext } from '@/context.js'
-import { uploadImage } from '@/requests/api'
+import { createBlogPost, updateBlogPost, uploadImage } from '@/requests/api'
 import { useContext, useEffect, useRef, useState } from 'react'
 import { Alert, Button, FloatingLabel, Form, FormControl, Modal } from 'react-bootstrap'
 import { Trans, useTranslation } from 'react-i18next'
-import { AddedEventImage } from './AddedEventImage.jsx'
-export default function EditEventPost ({ modal, appData, post }) {
+import { AddedImage } from './AddedImage.jsx'
+export default function EditPost ({ modal, appData, post, handleSubmit }) {
   const [formData, setFormData] = useState(null)
   const { t, i18n } = useTranslation()
   const addImagesRef = useRef(null)
@@ -14,15 +14,14 @@ export default function EditEventPost ({ modal, appData, post }) {
   const frontImageRefs = useRef([])
   const frontIconRefs = useRef([])
 
-  const handleInstructions = useContext(HandleInstructionsContext)
   useEffect(() => {
     if (post) {
       const newFormData = {
-        company: post.company || appData.companies[0],
-        description: post.publicDescription || '',
+        title: post.title || post?.company?.name || '',
+        description: post.description || post.publicDescription || '',
         frontPicture: post.frontPicture || '',
         pictures: post.pictures || [],
-        author: post?.author?.id || appData.users[0].id,
+        author: post?.author?.id || post?.responsible?.id || appData.users[0].id,
         date: post.date || null,
         published: post.published || false
       }
@@ -30,17 +29,6 @@ export default function EditEventPost ({ modal, appData, post }) {
       setFormData(newFormData)
     }
   }, [post])
-
-  async function handleSubmit () {
-    const payload = { ...formData, date: formData.date || new Date().toISOString() }
-    console.log('payload: ', { ...payload })
-    if (payload.id) {
-      await handleInstructions('updateEvent', { post: payload })
-    } else {
-      await handleInstructions('createEvent', { post: payload })
-    }
-    modal.off(modal)
-  }
 
   function handleDeleteFrontPicture () {
     setFormData({ ...formData, frontPicture: '' })
@@ -76,8 +64,8 @@ export default function EditEventPost ({ modal, appData, post }) {
 
         addFrontImageRef.current.value = ''
         break
-      case 'company':
-        setFormData({ ...formData, company: e.target.value })
+      case 'title':
+        setFormData({ ...formData, title: e.target.value })
         break
       case 'description':
         setFormData({ ...formData, description: e.target.value })
@@ -111,10 +99,10 @@ export default function EditEventPost ({ modal, appData, post }) {
       <Modal.Header closeButton className='py-2 text-gray-700'>
         {post.title
           ? (
-            <Modal.Title>{t('events.edit.label.editing')}{': '}{post.title}</Modal.Title>
+            <Modal.Title>{t('blog.edit.label.editing')}{': '}{post.title}</Modal.Title>
             )
           : (
-            <Modal.Title>{t('events.edit.label.creating')}</Modal.Title>
+            <Modal.Title>{t('blog.edit.label.creating')}</Modal.Title>
             )}
       </Modal.Header>
       <Modal.Body>
@@ -123,7 +111,7 @@ export default function EditEventPost ({ modal, appData, post }) {
             <Form.Check type='switch' label={t('events.edit.label.published')} name='published' checked={formData.published} onChange={(e) => setFormData({ ...formData, published: e.target.checked })} />
           </Form.Group>
           <Form.Group className='mb-3' controlId='formBasicEmail'>
-            <FloatingLabel controlId='floatingSelect' label={t('events.edit.label.author')}>
+            <FloatingLabel controlId='floatingSelect' label={t('blog.edit.label.author')}>
               <Form.Control as='select' name='author' defaultValue={formData.author} onChange={(e) => handleChange(e)}>
                 {appData.users.map((user, index) => (
                   <option key={index} value={user.id}>{user.firstName}{' '}{user.lastName}</option>
@@ -131,40 +119,46 @@ export default function EditEventPost ({ modal, appData, post }) {
               </Form.Control>
             </FloatingLabel>
           </Form.Group>
-          <Form.Group className='mb-3' controlId='formBasicEmail'>
-            <FloatingLabel controlId='floatingSelect' label={t('events.edit.label.company')}>
-              <Form.Control as='select' name='company' defaultValue={formData.company.id} onChange={(e) => handleChange(e)}>
-                {appData.companies.map((company, index) => (
-                  <option key={index} value={company.id}>{company.name}</option>
-                ))}
-              </Form.Control>
+          <Form.Group className='mb-3' controlId='formPostTitle'>
+            <FloatingLabel label={t('blog.edit.label.title')}>
+              <Form.Control type='text' placeholder={t('blog.edit.label.title')} name='title' defaultValue={formData.title} onChange={(e) => handleChange(e)} />
             </FloatingLabel>
           </Form.Group>
           <Form.Group className='mb-3' controlId='formPostDescription'>
-            <FloatingLabel label={t('events.edit.label.description')}>
+            <FloatingLabel label={t('blog.edit.label.description')}>
               <Form.Control as='textarea' type='text' name='description' defaultValue={formData.description} onChange={(e) => handleChange(e)} style={{ height: '150px' }} />
             </FloatingLabel>
           </Form.Group>
           <Form.Group className='mb-3' controlId='formFileMultiple'>
-            <Form.Label>{t('events.edit.label.addFrontImage')}</Form.Label>
+            <Form.Label>{t('blog.edit.label.addFrontImage')}</Form.Label>
             <Form.Control ref={addFrontImageRef} type='file' name='frontPicture' onChange={(e) => handleChange(e)} />
             <div className='d-flex my-3'>
-              {formData.frontPicture && <AddedEventImage isFrontPicture picture={formData.frontPicture} index={0} handleDeleteImage={handleDeleteFrontPicture} imageRefs={frontImageRefs} iconRefs={frontIconRefs} />}
+              {formData.frontPicture && <AddedImage isFrontPicture picture={formData.frontPicture} index={0} handleDeleteImage={handleDeleteFrontPicture} imageRefs={frontImageRefs} iconRefs={frontIconRefs} />}
             </div>
           </Form.Group>
 
           <Form.Group className='mb-3' controlId='formFileMultiple'>
-            <Form.Label>{t('events.edit.label.addImages')}</Form.Label>
+            <Form.Label>{t('blog.edit.label.addImages')}</Form.Label>
             <Form.Control ref={addImagesRef} type='file' name='pictures' multiple onChange={(e) => handleChange(e)} />
             <div className='row g-3 row-cols-6 justify-content-start align-items-center my-3'>
               {formData.pictures &&
     formData.pictures.map((picture, index) => (
-      <AddedEventImage key={index} picture={picture} index={index} handleDeleteImage={handleDeleteImage} imageRefs={imageRefs} iconRefs={iconRefs} />
+      <AddedImage key={index} picture={picture} index={index} handleDeleteImage={handleDeleteImage} imageRefs={imageRefs} iconRefs={iconRefs} />
     ))}
             </div>
           </Form.Group>
+          <Alert className='my-3' variant='success'>
+            <Alert.Heading>{t('blog.edit.alertHeader')}</Alert.Heading>
+            <p>
+              {t('blog.edit.alertDescription')}
+            </p>
+            <hr />
+            <p className='mb-0'>
+              <Trans i18nKey='blog.edit.alertFooter' />
+            </p>
+          </Alert>
           <div className='mt-3 d-flex justify-content-end'>
-            <Button onClick={() => handleSubmit()}>{t('events.edit.submit')}</Button>
+            <Button onClick={() => handleSubmit(formData)}>{t('blog.edit.submit')}</Button>
           </div>
         </Form>
       </Modal.Body>
