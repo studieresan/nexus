@@ -19,7 +19,7 @@ export default function Login ({ appData, setAppData }) {
   }
 
   return (
-    <div className='d-flex justify-content-center align-items-center w-100 vh-100'>
+    <div className='d-flex justify-content-center bg-light align-items-center w-100 vh-100'>
       <div className=' w-25 bg-dark rounded text-light p-5'>
         <h1 className='fw-light'>{t('login.title')}</h1>
         <Form className='w-100 mt-5'>

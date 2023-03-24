@@ -52,17 +52,23 @@ export default function Homepage ({ appData }) {
 
   function projectPrimaryButton () {
     navigateTo('/about')
-    document.body.scrollTop = document.documentElement.scrollTop = 0
+    setTimeout(() => {
+      document.body.scrollTop = document.documentElement.scrollTop = 0
+    }, 100)
   }
 
   function projectSecondaryButton () {
     navigateTo('/blog')
-    document.body.scrollTop = document.documentElement.scrollTop = 0
+    setTimeout(() => {
+      document.body.scrollTop = document.documentElement.scrollTop = 0
+    }, 100)
   }
 
   function eventsPrimaryButton () {
     navigateTo('/events')
-    document.body.scrollTop = document.documentElement.scrollTop = 0
+    setTimeout(() => {
+      document.body.scrollTop = document.documentElement.scrollTop = 0
+    }, 100)
   }
 
   return (

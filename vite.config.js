@@ -16,16 +16,28 @@ export default defineConfig({
   publicDir: 'src/public/',
   server: {
     proxy: {
+      // '/graphql': {
+      //   target: 'https://api.studs.se/',
+      //   changeOrigin: true
+      // },
+      // '/signed-upload': {
+      //   target: 'https://devapi.studs.se/',
+      //   changeOrigin: true
+      // },
+      // '/login': {
+      //   target: 'https://devapi.studs.se/',
+      //   changeOrigin: true
+      // },
       '/graphql': {
-        target: 'https://devapi.studs.se/',
+        target: 'http://localhost:5040/',
         changeOrigin: true
       },
       '/signed-upload': {
-        target: 'https://devapi.studs.se/',
+        target: 'http://localhost:5040/',
         changeOrigin: true
       },
       '/login': {
-        target: 'https://devapi.studs.se/',
+        target: 'http://localhost:5040/',
         changeOrigin: true
       },
       '/uploads': {
