@@ -4,36 +4,57 @@ import { Button, Spinner } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 import { BsPinMap } from 'react-icons/bs'
 import { IoPersonSharp } from 'react-icons/io5'
-import ElementGroup from '../../components/ElementGroup.jsx'
-import generateGroupsInfo from './utils/generateGroupsInfo.jsx'
-export default function Events ({ appData, handleModals }) {
+import ElementGroup from '../../components/ElementGroup'
+import generateGroupsInfo from '@/utils/generateGroupsInfo'
+import { AppData } from '@/models/AppData'
+import { ModalData, ModalManager } from '@/models/Modal'
+import { GroupInfo } from '@/models/GroupInfo'
+import { assertDefined } from '@/utils/assertDefined'
+import { Event } from '@/models/Event'
+
+interface EventsProps {
+  appData: AppData
+  handleModals: ModalManager
+}
+
+export default function Events ({ appData, handleModals }: EventsProps): JSX.Element {
   const { t, i18n } = useTranslation()
-  const [groupsInfo, setGroupsInfo] = useState(null)
+  const [groupsInfo, setGroupsInfo] = useState<GroupInfo[]>([])
   const handleInstructions = useContext(HandleInstructionsContext)
 
   useEffect(() => {
     if (appData.events) {
-      const groupsInfo = generateGroupsInfo(appData)
+      const groupsInfo = generateGroupsInfo(appData, 'event')
       console.log('groupsInfo', groupsInfo)
       setGroupsInfo(groupsInfo)
     }
   }, [appData, i18n.language])
 
-  function handleClickCard (id) {
+  function handleClickCard (id: string) {
+    assertDefined(appData.events, 'handleClickCard appData.events undefined', 'appData.events')
+    const event = (appData.events || []).find((e) => e.id === id)
+    if (!event) {
+      throw new Error('handleClickCard event undefined')
+    }
     handleModals.on({
       name: 'PostModal',
       id: 'PostModal-View',
-      post: appData.events.find((e) => e.id === id),
+      post: event,
       mode: 'view',
       type: 'Event'
     })
   }
 
-  function handleClickEdit (id) {
+  function handleClickEdit (id: string) {
+    assertDefined(appData.events, 'handleClickEdit appData.events undefined', 'appData.events')
+    const event = (appData.events || []).find((e) => e.id === id)
+    if (!event) {
+      throw new Error('handleClickCard event undefined')
+    }
     handleModals.on({
       name: 'PostModal',
       id: 'PostModal-Edit',
-      post: appData.events.find((e) => e.id === id),
+      post: event,
       mode: 'edit',
       type: 'Event'
     })
@@ -48,20 +69,24 @@ export default function Events ({ appData, handleModals }) {
       type: 'Event'
     })
   }
-  async function handleConfirmDelete ({ modal, data }) {
-    await handleInstructions('deleteEvent', { toDeleteId: data.post.id })
+  async function handleConfirmDelete (modal: ModalData, data: Event) {
+    await handleInstructions('deleteEvent', { toDeleteId: data.id })
     modal.off(modal)
   }
 
-  async function handleClickDelete (id) {
-    const post = appData.blogPosts.find((e) => e.id === id)
+  async function handleClickDelete (id: string) {
+    assertDefined(appData.events, 'handleClickEdit appData.events undefined', 'appData.events')
+    const event = (appData.events || []).find((e) => e.id === id)
+    if (!event) {
+      throw new Error('handleClickCard event undefined')
+    }
     handleModals.on({
       name: 'ConfirmModal',
       id: 'EventModal-Delete',
       title: t('post.deletePostTitle'),
-      children: <div><span className='fw-light'>{t('post.deleteDescription')}{': '}</span><span className='fw-bold'>{post.title}</span></div>,
+      children: <div><span className='fw-light'>{t('post.deleteDescription')}{': '}</span><span className='fw-bold'>{event.title}</span></div>,
       mode: 'delete',
-      post: appData.events.find((e) => e.id === id),
+      post: event,
       handleConfirm: handleConfirmDelete
     })
   }
@@ -87,7 +112,7 @@ export default function Events ({ appData, handleModals }) {
               {groupsInfo && appData.events && groupsInfo.map((group, groupIndex) => {
                 return (
                   <div key={`group-${groupIndex}`} className='mb-2'>
-                    <ElementGroup expandStart={groupIndex === 0} type='cards' showTools={showTools} appData={appData} group={group} idx={groupIndex} groupTitle={group.title} elements={group.elements} handleClickCard={handleClickCard} handleClickEdit={handleClickEdit} handleClickDelete={handleClickDelete} />
+                    <ElementGroup expandStart={groupIndex === 0} type='cards' showTools={showTools} appData={appData} idx={groupIndex} groupTitle={group.title} elements={group.elements} handleClickCard={handleClickCard} handleClickEdit={handleClickEdit} handleClickDelete={handleClickDelete} />
                   </div>
                 )
               })}

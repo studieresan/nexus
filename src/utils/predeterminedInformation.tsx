@@ -1,3 +1,4 @@
+import { GroupIcons, GroupMasters } from '@/models/Group'
 import { AiFillSchedule, AiOutlineFundProjectionScreen } from 'react-icons/ai'
 import { BsBuilding } from 'react-icons/bs'
 import { FiSend } from 'react-icons/fi'
@@ -6,7 +7,7 @@ import { GoPencil } from 'react-icons/go'
 import { MdTravelExplore } from 'react-icons/md'
 import { RiTeamFill } from 'react-icons/ri'
 
-export const groupsPredeterminedInfo = {
+export const groupMasters: GroupMasters = {
   economy: {
     masterId: '6318c75168f1c00016841e2d',
     masterFirstName: 'William',
@@ -46,10 +47,7 @@ export const groupsPredeterminedInfo = {
   }
 }
 
-interface GroupIcons {
-  name: "project" | "events" | "contact"
-  icon: JSX.Element
-}
+
 
 export const groupIcons:GroupIcons[] = [
   { name: 'project', icon: <AiOutlineFundProjectionScreen size={45} className='text-white rounded' /> },

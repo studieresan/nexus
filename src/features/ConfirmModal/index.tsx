@@ -1,22 +1,35 @@
+import { ModalManager } from '@/models/Modal'
 import { useEffect, useRef } from 'react'
 import { Button, Modal } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 
-function ConfirmModal ({ modal, data }) {
-  const cancelButtonRef = useRef()
+interface ConfirmModalProps {
+  modal: ModalManager,
+  data: {
+    title: string,
+    name: string,
+    id: string,
+    children: JSX.Element,
+    handleConfirm: (props: ConfirmModalProps) => void,
+    disabled?: boolean
+  }
+}
+
+function ConfirmModal ({ modal, data }: ConfirmModalProps): JSX.Element {
+  const cancelButtonRef = useRef<HTMLButtonElement>(null)
 
   const { t } = useTranslation()
 
   function handleModalClose () {
-    modal.off(modal)
+    modal.off(data.name, data.id)
   }
 
   useEffect(() => {
-    cancelButtonRef.current.focus()
+    cancelButtonRef?.current && cancelButtonRef.current.focus()
   }, [])
 
   return (
-    <Modal show={modal.show} onHide={handleModalClose}>
+    <Modal show={modal.isModalVisible(data.name, data.id)} onHide={handleModalClose}>
       <Modal.Header closeButton={!data.disabled}>
         <Modal.Title>{data.title}</Modal.Title>
       </Modal.Header>

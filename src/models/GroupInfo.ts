@@ -1,15 +1,8 @@
-export interface GroupElement {
-  id: string
-  cardTitle: string
-  cornerImg: JSX.Element
-  cornerText: string
-  dateText: string
-  bgImg: string
-  danger?: string
-}
+import { ContactElement } from "./Contact"
+import { CardElement } from "./DynamicCard"
 
 export interface GroupInfo {
   year: number
   title: string
-  elements: GroupElement[]
+  elements: CardElement[] | ContactElement[]
 } 

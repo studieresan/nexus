@@ -1,7 +1,7 @@
 import { addToast } from '@/features/Toasts/index.jsx'
 import { useEffect, useState } from 'react'
-import { ModalData, ModalManager } from './models/Modal';
-import { ToastData } from './models/Toast';
+import { ModalData, ModalManager } from '../models/Modal';
+import { ToastData } from '@/models/Toast';
 
 
 
@@ -22,7 +22,7 @@ export function useModalManager(): ModalManager {
      * Hide and eventually remove a modal.
      * @param {{ name: string, id: string }}
      */
-  function hideModal({ name, id }: Pick<ModalData, 'name' | 'id'>): void {
+  function hideModal(name: string, id: string): void {
     setModalsToShow((currentArr) => {
       const existsIndex = currentArr.findIndex(modal => id ? modal.id === id : modal.name === name)
       if (existsIndex > -1) {
@@ -83,7 +83,7 @@ export function useModalManager(): ModalManager {
      * Hide and eventually remove a toast.
      * @param {{ id: string }}
      */
-  function hideToast({ id }: Pick<ToastData, 'id'>): void {
+  function hideToast(id: string): void {
     setToastArray((currentArr) => {
       const existsIndex = currentArr.findIndex(toast => toast.id === id)
       if (existsIndex > -1) {
@@ -99,6 +99,9 @@ export function useModalManager(): ModalManager {
     data: modalsToShow,
     on: appendToModals,
     off: hideModal,
+    isModalVisible: (name: string, id: string) => {
+      return modalsToShow.some((modal) => modal.name === name && modal.id === id);
+    },
     toasts: {
       data: toastArray,
       setData: setToastArray,

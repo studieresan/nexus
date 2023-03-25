@@ -15,6 +15,8 @@ import instructionSwitchboard from './utils/instructionSwitchboard.js'
 import Footer from './features/Footer/index.jsx'
 import Divider from './components/Divider.jsx'
 import { AppData } from '@/models/AppData'
+import { InstructionArgs, InstructionData } from './models/Instruction'
+
 function App () {
   const [appData, setAppData] = useState<AppData>({
     users: null,
@@ -28,14 +30,17 @@ function App () {
     console.log('appData: ', appData)
   }, [appData])
   const navigateTo = useNavigate()
-  const args = useRef()
-  args.current = { appData, setAppData, navigateTo }
+  const args = useRef<InstructionArgs>({
+    appData,
+    setAppData,
+    navigateTo,
+  });
   const handleModals = useModalManager()
   useFetchCollections(appData, setAppData)
 
   
 
-  async function handleInstructions (instruction: string, data:  = {}) {
+  async function handleInstructions (instruction: string, data: InstructionData = {}) {
     return await instructionSwitchboard(args.current, instruction, data)
   }
 

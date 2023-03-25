@@ -1,4 +1,4 @@
-import { InstructionSwitchboardArgs } from '@/models/Args'
+import { InstructionArgs } from '@/models/InstructionArgs'
 import { InstructionData } from '@/models/InstructionData'
 import { createBlogPost, deleteBlogpost, loginUser, updateEvent, createEvent, updateBlogPost } from '@/requests/api'
 import { setLoggedIn, setLoggedOut } from '@/requests/auth'
@@ -8,7 +8,7 @@ import { LoginResponse } from '@/models/Login';
 import { assertDefined } from './assertDefined';
 
 
-export default async function instructionSwitchboard (args: InstructionSwitchboardArgs, instruction: string, data: InstructionData): Promise<void> {
+export default async function instructionSwitchboard (args: InstructionArgs, instruction: string, data: InstructionData): Promise<void> {
   switch (instruction) {
     case 'updateBlogPost': {
       const blogPost = assertDefined(data.blogPost, instruction, 'data.blogPost');

@@ -2,18 +2,24 @@ import Contact from '@/components/Contact.jsx'
 import ElementGroup from '@/components/ElementGroup.jsx'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { groupsPredeterminedInfo, projectMasters } from '@/utils/predeterminedInformation.jsx'
+import { groupMasters, projectMasters } from '@/utils/predeterminedInformation.jsx'
 import { BiReplyAll } from 'react-icons/bi'
 import { Button, Spinner } from 'react-bootstrap'
+import { AppData } from '@/models/AppData'
+import { GroupInfo } from '@/models/GroupInfo'
 
-export default function About ({ appData }) {
+interface AboutProps {
+  appData: AppData
+}
+
+export default function About ({ appData }: AboutProps): JSX.Element {
   const { t, i18n } = useTranslation()
   const [groupsInfo, setGroupsInfo] = useState(null)
   useEffect(() => {
     if (!appData.users) return
     // event groups divided based on year
     const years = [...new Set(appData.users.map((e) => e.studsYear))].sort((a, b) => b - a)
-    const newGroupsInfo = years.map((year) => ({ year, title: t('about.groupTitle') + ' ' + year }))
+    const newGroupsInfo: GroupInfo[] = years.map((year) => ({ year, title: t('about.groupTitle') + ' ' + year, elements: [] }))
 
     for (let i = 0; i < newGroupsInfo.length; i++) {
       const matchedUsers = appData.users.filter((e) => e.studsYear === newGroupsInfo[i].year)
@@ -25,10 +31,10 @@ export default function About ({ appData }) {
           lg: true,
           vertical: true
         }
-        const keys = Object.keys(groupsPredeterminedInfo)
+        const keys = Object.keys(groupMasters)
         for (let i = 0; i < keys.length; i++) {
           const key = keys[i]
-          if (groupsPredeterminedInfo[key].masterId === e.id) {
+          if (groupMasters[key].masterId === e.id) {
             console.log(t(key + 'Leader'))
             element.role = t(key + 'Leader')
             break

@@ -3,8 +3,29 @@ import { Collapse, Spinner } from 'react-bootstrap'
 import { BiChevronDown, BiChevronUp } from 'react-icons/bi'
 import Contact from './Contact.jsx'
 import DynamicCard from './DynamicCard.jsx'
+import { AppData } from '@/models/AppData.js'
+import { CardElement } from '@/models/DynamicCard.js'
+import { ContactElement } from '@/models/Contact.js'
 
-export default function ElementGroup ({ appData, showTools, type, expandStart, idx, groupTitle, elements, handleClickCard, handleClickEdit, handleClickDelete }) {
+
+function isCardElement(element: CardElement | ContactElement): element is CardElement {
+  return 'cardTitle' in element; // Replace 'cardTitle' with a unique property of CardElement
+}
+interface ElementGroupProps {
+  appData: AppData
+  showTools: boolean
+  type: string
+  expandStart: boolean
+  idx: number
+  groupTitle: string
+  elements: CardElement[] | ContactElement[]
+  handleClickCard: (id: string) => void
+  handleClickEdit: (id: string) => void
+  handleClickDelete: (id: string) => void
+}
+
+
+export default function ElementGroup ({ appData, showTools, type, expandStart, idx, groupTitle, elements, handleClickCard, handleClickEdit, handleClickDelete }: ElementGroupProps) {
   const [showGroup, setShowGroup] = useState(expandStart || false)
   let styling = ''
   if (type === 'cards') styling += 'row align-items-stretch row-cols-1 row-cols-xxl-2 g-4 py-3'
@@ -22,42 +43,28 @@ export default function ElementGroup ({ appData, showTools, type, expandStart, i
       </div>
       <Collapse in={showGroup}>
         <div className={styling}>
-          {elements && elements.map((element, elemIdx) => {
-            switch (type) {
-              case 'cards':
-                return (
-                  <DynamicCard
-                    key={`group-${idx}-card-${elemIdx}`}
-                    id={element.id}
-                    cardTitle={element.cardTitle}
-                    cornerImg={element.cornerImg}
-                    cornerText={element.cornerText}
-                    dateText={element.dateText}
-                    bgImg={element.bgImg}
-                    handleClickCard={handleClickCard}
-                    handleClickEdit={handleClickEdit}
-                    handleClickDelete={handleClickDelete}
-                    showTools={showTools}
-                    danger={element.danger}
-                  />
-                )
-              case 'contacts':
-                return (
-                  <Contact
-                    key={`group-${idx}-contact-${elemIdx}`}
-                    picture={element.picture}
-                    name={element.name}
-                    phone={element.phone}
-                    email={element.email}
-                    role={element.role}
-                    vertical={element.vertical}
-                    lg={element.lg}
-                  />
-                )
-              default:
-                return (
-                  <div />
-                )
+        {elements &&
+          elements.map((element, elemIdx) => {
+            if (isCardElement(element) && type === 'cards') {
+              return (
+                <DynamicCard
+                  key={`group-${idx}-card-${elemIdx}`}
+                  element={element}
+                  handleClickCard={handleClickCard}
+                  handleClickEdit={handleClickEdit}
+                  handleClickDelete={handleClickDelete}
+                  showTools={showTools}
+                />
+              );
+            } else if (!isCardElement(element) && type === 'contacts') {
+              return (
+                <Contact
+                  key={`group-${idx}-contact-${elemIdx}`}
+                  element={element}
+                />
+              );
+            } else {
+              return <div />;
             }
           })}
         </div>

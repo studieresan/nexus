@@ -2,42 +2,53 @@ import { HandleInstructionsContext } from '@/context'
 import { useContext, useEffect, useState } from 'react'
 import { Button, Spinner } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
-import ElementGroup from '../../components/ElementGroup.tsx'
-import generateGroupsInfo from './utils/generateGroupsInfo.jsx'
+import ElementGroup from '../../components/ElementGroup'
+import generateGroupsInfo from '@/utils/generateGroupsInfo'
 import { GroupInfo } from '@/models/GroupInfo.js'
 import { AppData } from '@/models/AppData.js'
+import { ModalData, ModalManager } from '@/models/Modal.js'
+import { Blog } from '@/models/Blog.js'
 
 interface BlogProps {
-  appData: AppData,
+  appData: AppData
+  handleModals: ModalManager
 }
 
 
-export default function Blog ({ appData, handleModals }) {
+export default function Blog ({ appData, handleModals }: BlogProps): JSX.Element {
   const { t, i18n } = useTranslation()
   const [groupsInfo, setGroupsInfo] = useState<GroupInfo[]>([])
   const handleInstructions = useContext(HandleInstructionsContext)
 
   useEffect(() => {
     if (appData.blogPosts) {
-      setGroupsInfo(generateGroupsInfo(appData))
+      setGroupsInfo(generateGroupsInfo(appData, 'blog'))
     }
   }, [appData.blogPosts, i18n.language])
 
-  function handleClickCard (id) {
+  function handleClickCard (id: string) {
+    const post = (appData.blogPosts || []).find((e) => e.id === id)
+    if (!post) {
+      throw new Error('handleClickEdit post undefined')
+    }
     handleModals.on({
       name: 'PostModal',
       id: 'PostModal-View',
-      post: appData.blogPosts.find((e) => e.id === id),
+      post: post,
       mode: 'view',
       type: 'BlogPost'
     })
   }
 
-  function handleClickEdit (id) {
+  function handleClickEdit (id: string) {
+    const post = (appData.blogPosts || []).find((e) => e.id === id)
+    if (!post) {
+      throw new Error('handleClickEdit post undefined')
+    }
     handleModals.on({
       name: 'PostModal',
       id: 'PostModal-Edit',
-      post: appData.blogPosts.find((e) => e.id === id),
+      post: post,
       mode: 'edit',
       type: 'BlogPost'
     })
@@ -53,20 +64,23 @@ export default function Blog ({ appData, handleModals }) {
     })
   }
 
-  async function handleConfirmDelete ({ modal, data }) {
-    await handleInstructions('deleteBlogPost', { toDeleteId: data.post.id })
+  async function handleConfirmDelete (modal: ModalData, data: Blog) {
+    await handleInstructions('deleteBlogPost', { toDeleteId: data.id })
     modal.off(modal)
   }
 
-  async function handleClickDelete (id) {
-    const post = appData.blogPosts.find((e) => e.id === id)
+  async function handleClickDelete (id: string) {
+    const post = (appData.blogPosts || []).find((e) => e.id === id)
+    if (!post) {
+      throw new Error('handleClickDelete post undefined')
+    }
     handleModals.on({
       name: 'ConfirmModal',
       id: 'BlogPostModal-Delete',
       title: t('blog.deletePostTitle'),
       children: <div><span className='fw-light'>{t('blog.deletePostDescription')}{': '}</span><span className='fw-bold'>{post.title}</span></div>,
       mode: 'delete',
-      post: appData.blogPosts.find((e) => e.id === id),
+      post: (appData.blogPosts || []).find((e) => e.id === id),
       handleConfirm: handleConfirmDelete
     })
   }
@@ -90,7 +104,7 @@ export default function Blog ({ appData, handleModals }) {
             {groupsInfo && appData.blogPosts && groupsInfo.map((group, groupIndex) => {
               return (
                 <div key={`group-${groupIndex}`} className='mb-2'>
-                  <ElementGroup expandStart type='cards' showTools={showTools} appData={appData} group={group} idx={groupIndex} groupTitle={group.title} elements={group.elements} handleClickCard={handleClickCard} handleClickEdit={handleClickEdit} handleClickDelete={handleClickDelete} />
+                  <ElementGroup expandStart type='cards' showTools={showTools} appData={appData} idx={groupIndex} groupTitle={group.title} elements={group.elements} handleClickCard={handleClickCard} handleClickEdit={handleClickEdit} handleClickDelete={handleClickDelete} />
                 </div>
               )
             })}

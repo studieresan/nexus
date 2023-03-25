@@ -9,11 +9,12 @@ export interface ModalData {
 export interface ModalManager {
   data: ModalData[];
   on: (modal: ModalData) => void;
-  off: (modal: Pick<ModalData, 'name' | 'id'>) => void;
+  off: (name: string, id: string) => void;
+  isModalVisible: (name: string, id: string) => boolean;
   toasts: {
     data: ToastData[];
     setData: (toastArray: ToastData[]) => void;
     on: (toast: ToastData) => void;
-    off: (toast: Pick<ToastData, 'id'>) => void;
+    off: (id: string) => void;
   };
 }
