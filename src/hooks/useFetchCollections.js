@@ -4,18 +4,23 @@ import { useEffect } from 'react'
 export default function useFetchCollections (appData, setAppData) {
   useEffect(() => {
     async function fetchData () {
-      const fetchUsersPromise = appData.users === null ? fetchUsers() : Promise.resolve(appData.users)
-      const fetchBlogPostsPromise = appData.blogPosts === null ? getBlogPosts() : Promise.resolve(appData.blogPosts)
-      const fetchEventsPromise = appData.events === null ? fetchEvents() : Promise.resolve(appData.events)
-
-      Promise.all([fetchUsersPromise, fetchBlogPostsPromise, fetchEventsPromise]).then(([users, blogPosts, events]) => {
-        setAppData({
-          ...appData,
-          users: appData.users === null ? users : appData.users,
-          blogPosts: appData.blogPosts === null ? blogPosts : appData.blogPosts,
-          events: appData.events === null ? events : appData.events
-        })
+      const promises = []
+      appData.users === null && promises.push(fetchUsers())
+      appData.blogPosts === null && promises.push(getBlogPosts())
+      appData.events === null && promises.push(fetchEvents())
+      const result = await Promise.all(promises)
+      console.log('result', result)
+      const toUpdate = {}
+      result.forEach((r, i) => {
+        i === 0 && (toUpdate.users = r)
+        i === 1 && (toUpdate.blogPosts = r)
+        i === 2 && (toUpdate.events = r)
       })
+
+      if (Object.keys(toUpdate).length > 0) {
+        console.log('new appData', { ...appData, ...toUpdate })
+        setAppData({ ...appData, ...toUpdate })
+      }
     }
 
     fetchData()

@@ -1,5 +1,5 @@
 // Hero divider with inline css
-export default function Divider () {
+export default function Divider (): JSX.Element {
   return (
     <div
       style={{

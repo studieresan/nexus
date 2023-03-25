@@ -1,31 +1,41 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { Trans, useTranslation } from 'react-i18next'
-import { homepagePredeterminedOverlayGroups, groupsPredeterminedInfo, salesMaster } from '@/utils/predeterminedInformation.jsx'
-import { IntroSection } from './components/IntroSection.jsx'
+import { groupIcons, salesMaster } from '@/utils/predeterminedInformation'
+import { IntroSection } from './components/IntroSection'
 import bgContact from '@/assets/images/DSC00833.jpg'
 import bgEvents from '@/assets/images/b48.jpg'
 import bgProject from '@/assets/images/b28.jpg'
 
 import DynamicHero from '@/components/DynamicHero.jsx'
 import Divider from '@/components/Divider.jsx'
-import { IoPersonSharp } from 'react-icons/io5'
 import Contact from '@/components/Contact.jsx'
 import { useNavigate } from 'react-router-dom'
-export default function Homepage ({ appData }) {
+import { AppData } from '@/models/AppData'
+import { OverlayGroup } from './models/OverlayGroup'
+import { ImagesLoaded } from './models/ImagesLoaded'
+import { SalesInfo } from './models/SalesInfo'
+
+export default function Homepage ({ appData }: { appData: AppData }): JSX.Element {
   const { t, i18n } = useTranslation()
   const navigateTo = useNavigate()
-  const [overlayGroups, setOverlayGroups] = useState(null)
-  const [imagesLoaded, setImageLoaded] = useState({
+  const [overlayGroups, setOverlayGroups] = useState<OverlayGroup[]>([])
+  const [imagesLoaded, setImageLoaded] = useState<ImagesLoaded>({
     intro: false,
     hero: false
   })
   const projectRef = useRef(null)
   const eventsRef = useRef(null)
   const contactRef = useRef(null)
-  const [salesInfo, setSalesInfo] = useState(null)
+  const [salesInfo, setSalesInfo] = useState<SalesInfo>({bottomElement: null, description: null})
 
-  const refs = { project: projectRef, events: eventsRef, contact: contactRef }
+  interface Refs {
+    project: React.RefObject<HTMLElement>;
+    events: React.RefObject<HTMLElement>;
+    contact: React.RefObject<HTMLElement>;
+  }
+
+  const refs: Refs = { project: projectRef, events: eventsRef, contact: contactRef }
 
   useEffect(() => {
     const salesMasterUser = appData.users ? appData.users.find(user => user.firstName === salesMaster.firstName && user.lastName === salesMaster.lastName) : null
@@ -36,17 +46,18 @@ export default function Homepage ({ appData }) {
   }, [appData.users, i18n.language])
 
   useEffect(() => {
-    setOverlayGroups((homepagePredeterminedOverlayGroups).map((group, index) => ({
+    setOverlayGroups((groupIcons).map((group, index) => (
+    {
       icon: group.icon,
       title: t(`homepage.${group.name}.short.title`),
       description: t(`homepage.${group.name}.short.description`),
       button: t(`homepage.${group.name}.short.button`),
       key: index,
       ref: refs[group.name]
-    })))
+    } as OverlayGroup)))
   }, [i18n.language])
 
-  function handleImageLoaded (section) {
+  function handleImageLoaded (section: string) {
     setImageLoaded({ ...imagesLoaded, [section]: true })
   }
 

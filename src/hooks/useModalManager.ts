@@ -1,16 +1,16 @@
 import { addToast } from '@/features/Toasts/index.jsx'
 import { useEffect, useState } from 'react'
+import { ModalData, ModalManager } from './models/Modal';
+import { ToastData } from './models/Toast';
+
+
 
 // This hook is reused from a TellusTalk AB React project with permission. // William Bigert 2023-01-31
-export function useModalManager () {
-  const [modalsToShow, setModalsToShow] = useState([])
-  const [toastArray, setToastArray] = useState([])
+export function useModalManager(): ModalManager {
+  const [modalsToShow, setModalsToShow] = useState<ModalData[]>([]);
+  const [toastArray, setToastArray] = useState<ToastData[]>([]);
 
-  /**
-     * Upsert a new modal.
-     * @param {{ name: string, id: string, [string]: any }}
-     */
-  function appendToModals ({ name, id, ...modalData }) {
+  function appendToModals({ name, id, ...modalData }: ModalData): void {
     setModalsToShow((currentArr) => {
       const existsIndex = currentArr.findIndex(modal => id ? modal.id === id : modal.name === name)
       if (existsIndex > -1) currentArr.splice(existsIndex, 1)
@@ -22,7 +22,7 @@ export function useModalManager () {
      * Hide and eventually remove a modal.
      * @param {{ name: string, id: string }}
      */
-  function hideModal ({ name, id }) {
+  function hideModal({ name, id }: Pick<ModalData, 'name' | 'id'>): void {
     setModalsToShow((currentArr) => {
       const existsIndex = currentArr.findIndex(modal => id ? modal.id === id : modal.name === name)
       if (existsIndex > -1) {
@@ -70,7 +70,7 @@ export function useModalManager () {
      * Upsert a new toast.
      * @param {{ id: string, [string]: any }}
      */
-  function appendToToasts ({ id, ...toastData }) {
+  function appendToToasts({ id, ...toastData }: ToastData): void {
     setToastArray((currentArr) => {
       const existsIndex = currentArr.findIndex(toast => toast.id === id)
       if (existsIndex > -1) currentArr.splice(existsIndex, 1)
@@ -83,7 +83,7 @@ export function useModalManager () {
      * Hide and eventually remove a toast.
      * @param {{ id: string }}
      */
-  function hideToast ({ id }) {
+  function hideToast({ id }: Pick<ToastData, 'id'>): void {
     setToastArray((currentArr) => {
       const existsIndex = currentArr.findIndex(toast => toast.id === id)
       if (existsIndex > -1) {

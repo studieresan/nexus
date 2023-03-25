@@ -1,7 +1,17 @@
 import { useTranslation } from 'react-i18next'
 import { IoPersonSharp } from 'react-icons/io5'
 
-export default function Contact ({ lg, vertical, picture, name, phone, email, role }) {
+interface ContactProps {
+  lg?: boolean;
+  vertical?: boolean;
+  picture?: string;
+  name: string;
+  phone?: string;
+  email?: string;
+  role?: string;
+}
+
+export default function Contact ({ lg, vertical, picture, name, phone, email, role } : ContactProps) : JSX.Element {
   const { t } = useTranslation()
   if (vertical) {
     return (

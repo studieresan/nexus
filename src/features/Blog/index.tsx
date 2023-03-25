@@ -1,12 +1,20 @@
-import { HandleInstructionsContext } from '@/context.js'
+import { HandleInstructionsContext } from '@/context'
 import { useContext, useEffect, useState } from 'react'
 import { Button, Spinner } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
-import ElementGroup from '../../components/ElementGroup.jsx'
+import ElementGroup from '../../components/ElementGroup.tsx'
 import generateGroupsInfo from './utils/generateGroupsInfo.jsx'
+import { GroupInfo } from '@/models/GroupInfo.js'
+import { AppData } from '@/models/AppData.js'
+
+interface BlogProps {
+  appData: AppData,
+}
+
+
 export default function Blog ({ appData, handleModals }) {
   const { t, i18n } = useTranslation()
-  const [groupsInfo, setGroupsInfo] = useState(null)
+  const [groupsInfo, setGroupsInfo] = useState<GroupInfo[]>([])
   const handleInstructions = useContext(HandleInstructionsContext)
 
   useEffect(() => {

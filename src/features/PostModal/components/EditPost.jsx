@@ -17,11 +17,11 @@ export default function EditPost ({ modal, appData, post, handleSubmit }) {
   useEffect(() => {
     if (post) {
       const newFormData = {
-        title: post.title || post?.company?.name || '',
-        description: post.description || post.publicDescription || '',
+        title: post.title || '',
+        description: post.description || '',
         frontPicture: post.frontPicture || '',
         pictures: post.pictures || [],
-        author: post?.author?.id || post?.responsible?.id || appData.users[0].id,
+        author: post?.author?.id || appData.users[0].id,
         date: post.date || null,
         published: post.published || false
       }

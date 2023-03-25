@@ -46,7 +46,12 @@ export const groupsPredeterminedInfo = {
   }
 }
 
-export const homepagePredeterminedOverlayGroups = [
+interface GroupIcons {
+  name: "project" | "events" | "contact"
+  icon: JSX.Element
+}
+
+export const groupIcons:GroupIcons[] = [
   { name: 'project', icon: <AiOutlineFundProjectionScreen size={45} className='text-white rounded' /> },
   { name: 'events', icon: <RiTeamFill size={45} className='text-white rounded' /> },
   { name: 'contact', icon: <FiSend size={45} className='text-white rounded' /> }

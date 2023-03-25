@@ -1,4 +1,4 @@
-import { ModifiedButton } from '@/components/ModifiedButton.jsx'
+import { ModifiedButton } from '@/components/ModifiedButton'
 import { Nav, Navbar } from 'react-bootstrap'
 import { BiLogIn, BiLogOut } from 'react-icons/bi'
 import { useNavigate } from 'react-router-dom'
@@ -6,9 +6,14 @@ import LanguageDropDown from '../LanguageDropdown/index.jsx'
 import studsLogo from '@/assets/images/Logo_ROUND.png'
 import { useTranslation } from 'react-i18next'
 import { useContext } from 'react'
-import { HandleInstructionsContext } from '@/context.js'
+import { HandleInstructionsContext } from '@/context'
+import { AppData } from '@/models/AppData'
 
-export default function Header ({ appData, setAppData }) {
+interface HeaderProps {
+  appData: AppData;
+  setAppData: (appData: AppData) => void;
+}
+export default function Header({ appData, setAppData }: HeaderProps): JSX.Element {
   const { t, i18n } = useTranslation()
   const navigateTo = useNavigate()
   const handleInstructions = useContext(HandleInstructionsContext)

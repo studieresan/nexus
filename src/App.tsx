@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
 import { Routes, Route, useNavigate } from 'react-router-dom'
 import { AppDataContext, HandleInstructionsContext } from '@/context'
-import Header from './features/Header/index.jsx'
-import Homepage from './features/Homepage/index.jsx'
+import Header from './features/Header/index'
+import Homepage from './features/Homepage/index'
 import About from './features/About/index.jsx'
 import Events from './features/Events/index.jsx'
 import Groups from './features/Groups/index.jsx'
@@ -14,8 +14,9 @@ import Modals from './features/Modals/index.jsx'
 import instructionSwitchboard from './utils/instructionSwitchboard.js'
 import Footer from './features/Footer/index.jsx'
 import Divider from './components/Divider.jsx'
+import { AppData } from '@/models/AppData'
 function App () {
-  const [appData, setAppData] = useState({
+  const [appData, setAppData] = useState<AppData>({
     users: null,
     blogPosts: null,
     events: null,
@@ -32,7 +33,9 @@ function App () {
   const handleModals = useModalManager()
   useFetchCollections(appData, setAppData)
 
-  async function handleInstructions (instruction, data = {}) {
+  
+
+  async function handleInstructions (instruction: string, data:  = {}) {
     return await instructionSwitchboard(args.current, instruction, data)
   }
 

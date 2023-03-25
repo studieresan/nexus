@@ -1,9 +1,19 @@
+import { ToastData } from '@/hooks/models/Toast'
 import { useRef, Children } from 'react'
 import { ToastContainer, Toast, Button } from 'react-bootstrap'
 import { BsCheckCircleFill, BsFillExclamationCircleFill, BsXLg } from 'react-icons/bs'
 
 // This component is reused from a TellusTalk AB React project with permission. // William Bigert 2023-01-31
-function Toasts ({ toasts }) {
+interface ToastsProps {
+  toasts: {
+    data: ToastData[],
+    setData: (data: ToastData[]) => void,
+    on: (toast: ToastData) => void,
+    off: (toast: ToastData) => void,
+  }
+}
+
+function Toasts ({ toasts }: ToastsProps) {
   const toastRef = useRef([])
 
   // Max 7 toasts.
@@ -20,7 +30,7 @@ function Toasts ({ toasts }) {
     <>
       {toastsPositions.map(position => (
         <ToastContainer key={position} className='p-3 position-fixed' position={position}>
-          {toasts.data.filter(toast => toast.position === position).map((toast) => {
+          {toasts.data.filter(toast => toast.position === position).map((toast: ToastData) => {
             const disableClose = toast.disableClose
 
             return (
@@ -64,12 +74,22 @@ function Toasts ({ toasts }) {
 
 export default Toasts
 
-export function addToast (id, { title, children, delay, disableClose, color, position, allowClose }) {
+interface ToastProps {
+  title?: string
+  children: React.ReactNode
+  delay?: number
+  disableClose?: boolean
+  color?: 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'light' | 'dark'
+  position?: 'top-start' | 'top-center' | 'top-end' | 'center-start' | 'center-center' | 'center-end' | 'bottom-start' | 'bottom-center' | 'bottom-end'
+  allowClose?: boolean
+}
+
+export function addToast (id: string, { title, children, delay, disableClose, color, position, allowClose }: ToastProps) {
   const newToast = {
     children,
     title,
-    id: id ?? Date.now(),
-    delay: delay * 1000 ?? 10000,
+    id: id ?? Date.now().toLocaleString(),
+    delay: (delay ?? 10) * 1000,
     disableClose,
     allowClose: allowClose ?? false,
     color: color ?? 'light',

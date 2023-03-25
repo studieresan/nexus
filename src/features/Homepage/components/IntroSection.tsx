@@ -2,8 +2,17 @@ import introBg from '@/assets/images/b39crop.jpg'
 import { useState } from 'react'
 import { Button, Spinner } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
+import { AppData } from '@/models/AppData'
+import { OverlayGroup } from '../models/OverlayGroup'
+import { ImagesLoaded } from '../models/ImagesLoaded'
+interface IntroSectionProps {
+  appData: AppData,
+  overlayGroups: OverlayGroup[],
+  imagesLoaded: ImagesLoaded,
+  handleImageLoaded: (section: string) => void
+}
 
-export function IntroSection ({ appData, overlayGroups, imagesLoaded, handleImageLoaded }) {
+export function IntroSection ({ appData, overlayGroups, imagesLoaded, handleImageLoaded }: IntroSectionProps): JSX.Element {
   const { t, i18n } = useTranslation()
 
   return (
@@ -33,9 +42,10 @@ export function IntroSection ({ appData, overlayGroups, imagesLoaded, handleImag
                           <p>{group.description}</p>
                         </div>
                         <Button onClick={() => {
-                          group.ref.current.scrollIntoView({ behavior: 'smooth', block: 'center' })
-                        }}
-                        >
+                          if (group.ref && group.ref.current) {
+                            group.ref.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                          }
+                        }}>
                           {group.button}
                         </Button>
                       </div>

@@ -4,10 +4,27 @@ import { useTranslation } from 'react-i18next'
 import { BsCalendarDate, BsPencil, BsTrash } from 'react-icons/bs'
 import { IoPersonSharp } from 'react-icons/io5'
 
-export default function BlogCard ({ id, cardTitle, cornerImg, cornerText, dateText, bgImg, handleClickCard, handleClickEdit, handleClickDelete, showTools, danger, success }) {
+
+interface Props {
+  id: string
+  cardTitle: string
+  cornerImg: JSX.Element
+  cornerText: string
+  dateText: string
+  bgImg: string
+  handleClickCard: (id: string) => void
+  handleClickEdit: (id: string) => void
+  handleClickDelete: (id: string) => void
+  showTools: boolean
+  danger?: string
+  success?: string
+}
+
+
+export default function BlogCard ({ id, cardTitle, cornerImg, cornerText, dateText, bgImg, handleClickCard, handleClickEdit, handleClickDelete, showTools, danger, success }: Props) {
   const { t, i18n } = useTranslation()
-  const imageRef = useRef(null)
-  const optionsRef = useRef(null)
+  const imageRef = useRef<HTMLDivElement>(null)
+  const optionsRef = useRef<HTMLDivElement>(null)
   return (
     <div className='col'>
       <div
@@ -17,16 +34,20 @@ export default function BlogCard ({ id, cardTitle, cornerImg, cornerText, dateTe
           handleClickCard(id)
         }}
         onMouseEnter={(e) => {
-          imageRef.current.style.filter = 'brightness(60%)'
+          if (imageRef.current) {
+            imageRef.current.style.filter = 'brightness(60%)'
+          }
           e.currentTarget.style.boxShadow = '0 0 10px rgba(0,0,0,0.6)'
-          if (showTools) {
+          if (showTools && optionsRef.current) {
             optionsRef.current.style.opacity = '1'
           }
         }}
         onMouseLeave={(e) => {
+          if (imageRef.current) {
+            imageRef.current.style.filter = 'brightness(80%)'
+          }
           e.currentTarget.style.boxShadow = 'none'
-          imageRef.current.style.filter = 'brightness(80%)'
-          if (showTools) {
+          if (showTools && optionsRef.current) {
             optionsRef.current.style.opacity = '0'
           }
         }}

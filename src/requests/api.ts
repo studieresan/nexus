@@ -1,3 +1,6 @@
+import { Event } from '@/models/Event'
+import { User } from '@/models/User'
+import { Blog } from '@/models/Blog'
 import { pickBy } from 'lodash'
 
 // This file was copied and reused from the old frontend repository
@@ -10,7 +13,7 @@ const PASSWORD_FORGOT = '/forgot'
 const PASSWORD_RESET = '/reset'
 const STATUS_OK = 200
 
-function checkStatus (response) {
+function checkStatus (response: Response) {
   if (response.status >= STATUS_OK && response.status < 300) {
     return Promise.resolve(response)
   } else {
@@ -18,14 +21,12 @@ function checkStatus (response) {
   }
 }
 
-function parseJSON (response) {
+function parseJSON (response: Response): Promise<any> {
   return response.json()
 }
 
-function credentials () {
-  return {
-    credentials: 'include'
-  }
+function credentials (): RequestCredentials {
+  return 'include'
 }
 
 function jsonHeader () {
@@ -47,24 +48,24 @@ function graphQLHeader () {
   }
 }
 
-function ftch (...args) {
-  return fetch(...args)
+function ftch (input: RequestInfo, init?: RequestInit): Promise<any> {
+  return fetch(input, init)
     .then(checkStatus)
     .then(parseJSON)
     .catch(console.error)
 }
 
-function executeGraphQL (query) {
-  const url = `${BASE_URL}${GRAPHQL}`
+function executeGraphQL(query: string): Promise<any> {
+  const url = `${BASE_URL}${GRAPHQL}`;
   return ftch(url, {
     method: 'POST',
-    ...credentials(),
+    credentials: credentials(),
     headers: {
       ...authorizationHeader(),
-      ...graphQLHeader()
+      ...graphQLHeader(),
     },
-    body: query
-  })
+    body: query,
+  });
 }
 
 const USER_PROFILE_FIELDS = `
@@ -104,17 +105,17 @@ export function fetchUser () {
   })
 }
 
-function toGraphQLFields (str) {
+function toGraphQLFields (str: string): string {
   // This will remove any key which has a 'null' value
   const withoutNulls = pickBy(str, a => a !== null && a !== undefined)
   return JSON.stringify(withoutNulls).replace(/"([^"]*)":/g, '$1:')
 }
 
-const wrapInQuotes = stringValue => {
-  return '"' + stringValue.replace(/"/g, '\\"') + '"'
+function wrapInQuotes (str: string): string {
+  return '"' + str.replace(/"/g, '\\"') + '"'
 }
 
-export function updateUser (newFields) {
+export function updateUser (newFields: string) {
   const mutation = `mutation {
     userUpdate(id: null, info: ${toGraphQLFields(newFields)}) {
       ${USER_PROFILE_FIELDS}
@@ -125,7 +126,7 @@ export function updateUser (newFields) {
   })
 }
 
-export function createUser (userInfo) {
+export function createUser (userInfo: User) {
   const body = JSON.stringify({
     ...userInfo,
     token: process.env.SIGNUP_TOKEN || 'asdf'
@@ -140,14 +141,14 @@ export function createUser (userInfo) {
   })
 }
 
-export function loginUser (email, password) {
+export function loginUser (email: string, password: string) {
   const data = {
     email,
     password
   }
   const post = {
     method: 'POST',
-    ...credentials(),
+    credentials: credentials(),
     headers: {
       ...jsonHeader()
     },
@@ -156,8 +157,8 @@ export function loginUser (email, password) {
   return ftch(BASE_URL + LOGIN, post)
 }
 
-export function updateUserPassword ({ password, confirmPassword }) {
-  const post = {
+export function updateUserPassword (password: string, confirmPassword: string) {
+  const post: RequestInit = {
     method: 'PUT',
     credentials: 'include',
     headers: {
@@ -191,7 +192,7 @@ export function fetchUsers () {
   return executeGraphQL(query).then(res => res.data.users)
 }
 
-export function requestPasswordReset (email) {
+export function requestPasswordReset (email: string) {
   const url = `${BASE_URL}${PASSWORD_FORGOT}`
   return ftch(url, {
     method: 'POST',
@@ -204,7 +205,7 @@ export function requestPasswordReset (email) {
   })
 }
 
-export function resetPassword (password, confirmPassword, token) {
+export function resetPassword (password: string, confirmPassword: string, token: string) {
   const url = `${BASE_URL}${PASSWORD_RESET}/${token}`
   return ftch(url, {
     method: 'POST',
@@ -245,44 +246,38 @@ export function fetchEvents () {
   return executeGraphQL(query)
     .then(res => res.data.events)
     .then(events =>
-      events.map(e => ({
+      events.map((e: Event) => ({
         ...e,
         date: new Date(e.date)
       }))
     )
 }
 
-export function saveEvent ({ id, ...event }) {
-  event.companyId = event.company.id
-  delete event.company
-  event.responsibleUserId = event.responsible ? event.responsible.id : null
-  delete event.responsible
-
-  if (id) {
-    delete event.companyId
-    const mutation = `mutation {
-      eventUpdate(id: "${id}", fields: ${toGraphQLFields(event)}) {
-        ${EVENT_FIELDS}
-      }
+export function createEvent (event: Event) {
+  const mutation = `mutation {
+    eventCreate(fields: ${toGraphQLFields(JSON.stringify(event))}) {
+      ${EVENT_FIELDS}
     }
-    `
-    return executeGraphQL(mutation)
-      .then(res => res.data.eventUpdate)
-      .then(event => ({ ...event, date: new Date(event.date) }))
-  } else {
-    const mutation = `mutation {
-      eventCreate(fields: ${toGraphQLFields(event)}) {
-        ${EVENT_FIELDS}
-      }
-    }
-    `
-    return executeGraphQL(mutation)
-      .then(res => res.data.eventCreate)
-      .then(event => ({ ...event, date: new Date(event.date) }))
   }
+  `
+  return executeGraphQL(mutation)
+    .then(res => res.data.eventCreate)
+    .then(event => ({ ...event, date: new Date(event.date) }))
 }
 
-export function removeEventWithId (id) {
+export function updateEvent (event: Event) {
+  const mutation = `mutation {
+    eventUpdate(id: "${event.id}", fields: ${toGraphQLFields(JSON.stringify(event))}) {
+      ${EVENT_FIELDS}
+    }
+  }
+  `
+  return executeGraphQL(mutation)
+    .then(res => res.data.eventUpdate)
+    .then(event => ({ ...event, date: new Date(event.date) }))
+}
+
+export function removeEventWithId (id: string) {
   if (id) {
     const mutation = `mutation {
       eventDelete(id: "${id}")
@@ -301,14 +296,14 @@ export function removeEventWithId (id) {
 //   return ftch(`${BASE_URL}${EVENTS}/${eventId}/notify_after`, header())
 // }
 
-export const uploadImage = file => {
+export function uploadImage (file: File) {
   const signedUrlEndpoint = `${BASE_URL}/signed-upload?file-name=${
     file.name
   }&file-type=${file.type}`
 
   const options = {
     method: 'GET',
-    ...credentials(),
+    credentials: credentials(),
     headers: {
       ...authorizationHeader()
     }
@@ -322,7 +317,7 @@ export const uploadImage = file => {
   )
 }
 
-const uploadFile = (file, signedRequest, url) => {
+const uploadFile = (file: File, signedRequest: string, url: string) => {
   const uploadData = {
     method: 'PUT',
     body: file
@@ -340,7 +335,7 @@ export const fetchUserRoles = () => {
   return executeGraphQL(query).then(res => res.data.userRoles)
 }
 
-export const getPDFURL = file => {
+export function getPDFURL(file: string) {
   return `${BASE_URL}${file}`
 }
 
@@ -362,15 +357,15 @@ author {
 date
 `
 
-export const createBlogPost = post => {
+export function createBlogPost (blogPost: Blog) {
   // post.date = moment(new Date()).format('YYYY-MM-DD')
   const mutation = `mutation {
-    blogCreate(fields: ${toGraphQLFields(post)}) {
+    blogCreate(fields: ${toGraphQLFields(JSON.stringify(blogPost))}) {
       ${BLOG_FIELDS}
     }
   }
   `
-  return executeGraphQL(mutation).then(res => res.data)
+  return executeGraphQL(mutation).then(res => res.data.blogCreate)
 }
 
 export function getBlogPosts () {
@@ -384,9 +379,9 @@ export function getBlogPosts () {
   })
 }
 
-export const updateBlogPost = (id, post) => {
+export function updateBlogPost(blogPost: Blog) {
   const query = `mutation {
-    blogPostUpdate(id: "${id}", fields: ${toGraphQLFields(post)}) {
+    blogPostUpdate(id: "${blogPost.id}", fields: ${toGraphQLFields(JSON.stringify(blogPost))}) {
       ${BLOG_FIELDS}
     }
   }
@@ -394,7 +389,7 @@ export const updateBlogPost = (id, post) => {
   return executeGraphQL(query).then(res => res.data.blogPostUpdate)
 }
 
-export const deleteBlogpost = id => {
+export function deleteBlogpost(id:string) {
   const query = `mutation {
     blogPostDelete(id: "${id}")
   }`
