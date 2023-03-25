@@ -9,10 +9,10 @@ import { ContactElement } from '@/models/Contact';
 import { groupMasters } from './predeterminedInformation';
 import { GroupMasters } from '@/models/Group';
 
-export default function generateGroupsInfo(appData: AppData, contentSourceType: 'blog' | 'event' | 'contact'): GroupInfo[] {
+export default function getElementGroupsInfo(appData: AppData, contentSourceType: 'blog' | 'event' | 'contact'): GroupInfo[] {
 
   if (contentSourceType === 'contact') {
-    return generateContactGroupsInfo(appData);
+    return getContactElementGroupsInfo(appData);
   }
 
   const loggedIn = assertDefined(appData.loggedIn, 'appData.loggedIn is not defined', 'appData.loggedIn');
@@ -39,7 +39,7 @@ export default function generateGroupsInfo(appData: AppData, contentSourceType: 
   return newGroupsInfo;
 }
 
-function generateContactGroupsInfo(appData: AppData): GroupInfo[] {
+function getContactElementGroupsInfo(appData: AppData): GroupInfo[] {
   if (!appData.users) return [];
 
   const years = [

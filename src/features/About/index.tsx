@@ -7,6 +7,7 @@ import { BiReplyAll } from 'react-icons/bi'
 import { Button, Spinner } from 'react-bootstrap'
 import { AppData } from '@/models/AppData'
 import { GroupInfo } from '@/models/GroupInfo'
+import generateGroupsInfo from '@/utils/getElementGroupsInfo'
 
 interface AboutProps {
   appData: AppData
@@ -14,39 +15,11 @@ interface AboutProps {
 
 export default function About ({ appData }: AboutProps): JSX.Element {
   const { t, i18n } = useTranslation()
-  const [groupsInfo, setGroupsInfo] = useState(null)
+  const [groupsInfo, setGroupsInfo] = useState<GroupInfo[]>([])
   useEffect(() => {
     if (!appData.users) return
     // event groups divided based on year
-    const years = [...new Set(appData.users.map((e) => e.studsYear))].sort((a, b) => b - a)
-    const newGroupsInfo: GroupInfo[] = years.map((year) => ({ year, title: t('about.groupTitle') + ' ' + year, elements: [] }))
-
-    for (let i = 0; i < newGroupsInfo.length; i++) {
-      const matchedUsers = appData.users.filter((e) => e.studsYear === newGroupsInfo[i].year)
-      const elements = matchedUsers.map((e) => {
-        const element = {
-          picture: e.info.picture,
-          name: `${e.firstName} ${e.lastName}`,
-          role: t(e.info.role),
-          lg: true,
-          vertical: true
-        }
-        const keys = Object.keys(groupMasters)
-        for (let i = 0; i < keys.length; i++) {
-          const key = keys[i]
-          if (groupMasters[key].masterId === e.id) {
-            console.log(t(key + 'Leader'))
-            element.role = t(key + 'Leader')
-            break
-          }
-        }
-
-        return element
-      })
-      newGroupsInfo[i].elements = elements
-    }
-
-    setGroupsInfo(newGroupsInfo)
+    setGroupsInfo(generateGroupsInfo(appData, 'contact'))
   }, [appData, i18n.language])
 
   function handleCreateClick () {
@@ -70,8 +43,8 @@ export default function About ({ appData }: AboutProps): JSX.Element {
           </div>
           <div className='container-fluid col-9'>
             <div className='row'>
-              {groupsInfo && groupsInfo.map((group, groupIndex) => (
-                <ElementGroup key={'userGroup' + groupIndex} expandStart={groupIndex === 0} type='contacts' appData={appData} group={group} idx={groupIndex} groupTitle={group.title} elements={group.elements} />
+              {groupsInfo.map((group, groupIndex) => (
+                <ElementGroup key={'userGroup' + groupIndex} expandStart={groupIndex === 0} type='contacts' appData={appData} idx={groupIndex} groupTitle={group.title} elements={group.elements} showTools={showTools}/>
               ))}
             </div>
           </div>

@@ -5,9 +5,16 @@ import { useTranslation } from 'react-i18next'
 import { BiChevronDown, BiChevronUp } from 'react-icons/bi'
 import { IoPersonSharp } from 'react-icons/io5'
 
-export default function Group ({ handleClick, showGroup, group, groupIndex }) {
+interface GroupProps {
+  handleClick: (index: number) => void
+  showGroup: boolean[]
+  group: any
+  groupIndex: number
+}
+
+export default function Group ({ handleClick, showGroup, group, groupIndex }: GroupProps) {
   const { t, i18n } = useTranslation()
-  const containerRef = useRef(null)
+  const containerRef = useRef<HTMLDivElement>(null)
 
   return (
     <div
@@ -23,12 +30,14 @@ export default function Group ({ handleClick, showGroup, group, groupIndex }) {
             className='d-flex' onClick={() => {
               handleClick(groupIndex)
               setTimeout(() => {
-                const viewportHeight = window.innerHeight
-                const currentScroll = window.pageYOffset || document.documentElement.scrollTop
-                const containerBottom = containerRef.current.offsetTop + containerRef.current.offsetHeight
-
-                if (containerBottom > currentScroll + viewportHeight) {
-                  containerRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' })
+                if (containerRef.current) {
+                  const viewportHeight = window.innerHeight
+                  const currentScroll = window.pageYOffset || document.documentElement.scrollTop
+                  const containerBottom = containerRef.current.offsetTop + containerRef.current.offsetHeight
+  
+                  if (containerBottom > currentScroll + viewportHeight) {
+                    containerRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' })
+                  }
                 }
               }, 300)
             }}

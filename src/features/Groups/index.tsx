@@ -2,7 +2,8 @@ import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Button, Spinner } from 'react-bootstrap'
 import Group from './components/Group.jsx'
-import { groupsPredeterminedInfo } from '@/utils/predeterminedInformation.jsx'
+import { groupMasters } from '@/utils/predeterminedInformation.tsx'
+import { GroupInfo } from '@/models/GroupInfo.js'
 
 export default function Groups ({ appData }) {
   const { t, i18n } = useTranslation()
@@ -11,10 +12,10 @@ export default function Groups ({ appData }) {
   // Go through each group and find the master from appData.users and store it in groupsInfo
   useEffect(() => {
     if (appData.users) {
-      const groupsInfo = []
-      Object.keys(groupsPredeterminedInfo).forEach(group => {
-        const master = appData.users.find(user => user.firstName === groupsPredeterminedInfo[group].masterFirstName && user.lastName === groupsPredeterminedInfo[group].masterLastName)
-        groupsInfo.push({ master, name: group, title: t(`groups.${group}.title`), description: t(`groups.${group}.description`), icon: groupsPredeterminedInfo[group].icon })
+      const groupsInfo: GroupInfo = []
+      Object.keys(groupMasters).forEach(group: => {
+        const master = appData.users.find(user => user.firstName === groupMasters[group].masterFirstName && user.lastName === groupMasters[group].masterLastName)
+        groupsInfo.push({ master, name: group, title: t(`groups.${group}.title`), description: t(`groups.${group}.description`), icon: groupMasters[group].icon })
       })
       console.log('groupsInfo', groupsInfo)
       setGroupsInfo(groupsInfo)

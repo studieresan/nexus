@@ -19,9 +19,9 @@ interface ElementGroupProps {
   idx: number
   groupTitle: string
   elements: CardElement[] | ContactElement[]
-  handleClickCard: (id: string) => void
-  handleClickEdit: (id: string) => void
-  handleClickDelete: (id: string) => void
+  handleClickCard?: (id: string) => void
+  handleClickEdit?: (id: string) => void
+  handleClickDelete?: (id: string) => Promise<void> | undefined;
 }
 
 
@@ -43,7 +43,7 @@ export default function ElementGroup ({ appData, showTools, type, expandStart, i
       </div>
       <Collapse in={showGroup}>
         <div className={styling}>
-        {elements &&
+        {elements && handleClickCard && handleClickEdit && handleClickDelete &&
           elements.map((element, elemIdx) => {
             if (isCardElement(element) && type === 'cards') {
               return (
