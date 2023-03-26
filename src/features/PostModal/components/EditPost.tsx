@@ -4,89 +4,144 @@ import { useContext, useEffect, useRef, useState } from 'react'
 import { Alert, Button, FloatingLabel, Form, FormControl, Modal } from 'react-bootstrap'
 import { Trans, useTranslation } from 'react-i18next'
 import { AddedImage } from './AddedImage.jsx'
-export default function EditPost ({ modal, appData, post, handleSubmit }) {
-  const [formData, setFormData] = useState(null)
+import { Blog, CreateBlog } from '@/models/Blog.js'
+import { CreateEvent, Event } from '@/models/Event.js'
+import { AppData } from '@/models/AppData.js'
+import { ModalManager } from '@/models/Modal.js'
+import { Permission, UserRole } from '@/models/User.js'
+
+interface EditPostProps {
+  modal: ModalManager,
+  data: {
+    mode: 'view' | 'edit',
+    post: Blog | Event,
+    name: string,
+    id: string,
+    type: 'Blog' | 'Event'
+  }
+  appData: AppData,
+  handleSubmit: (formData: CreateEvent | CreateBlog ) => void
+}
+
+export default function EditPost ({ modal, data, appData, handleSubmit }: EditPostProps): JSX.Element {
+  const [formData, setFormData] = useState<CreateEvent | CreateBlog >({
+    id: '',
+    title: '',
+    description: '',
+    frontPicture: '',
+    pictures: [],
+    author_id: '',
+    date: new Date(),
+    published: false,
+    studsYear: 0
+  })
   const { t, i18n } = useTranslation()
-  const addImagesRef = useRef(null)
-  const addFrontImageRef = useRef(null)
+  const addImagesRef = useRef<HTMLInputElement>(null)
+  const addFrontImageRef = useRef<HTMLInputElement>(null)
   const imageRefs = useRef([])
   const iconRefs = useRef([])
   const frontImageRefs = useRef([])
   const frontIconRefs = useRef([])
 
   useEffect(() => {
-    if (post) {
-      const newFormData = {
+    const post = data.post
+    if (post && appData.users) {
+      const newFormData: CreateEvent | CreateBlog = {
+        id: post.id || '',
         title: post.title || '',
         description: post.description || '',
         frontPicture: post.frontPicture || '',
         pictures: post.pictures || [],
-        author: post?.author?.id || appData.users[0].id,
+        author_id: post?.author?.id || appData.users[0].id,
+        studsYear: post?.author?.studsYear || appData.users[0].studsYear,
         date: post.date || null,
         published: post.published || false
       }
-      if (post.id) newFormData.id = post.id
       setFormData(newFormData)
     }
-  }, [post])
+  }, [data.post])
 
   function handleDeleteFrontPicture () {
     setFormData({ ...formData, frontPicture: '' })
   }
 
-  function handleDeleteImage (index) {
+  function handleDeleteImage (index: number) {
     const newPictures = [...formData.pictures]
     newPictures.splice(index, 1)
     setFormData({ ...formData, pictures: newPictures })
   }
 
-  async function handleChange (e) {
-    switch (e.target.name) {
-      case 'pictures': {
-        const urls = []
-        for (let i = 0; i < e.target.files.length; i++) {
-          const file = e.target.files[i]
-          await uploadImage(file).then(url => {
-            console.log('url: ', url)
-            urls.push(url)
-          })
+  async function handleChange (e: React.ChangeEvent<HTMLElement>) {
+    if (e.target instanceof HTMLInputElement) {
+      switch (e.target.name) {
+        case 'pictures': {
+          if (e.target.files !== null) {
+            const urls: string[] = []
+            for (let i = 0; i < e.target.files.length; i++) {
+              const file = e.target.files[i]
+              await uploadImage(file).then(url => {
+                console.log('url: ', url)
+                urls.push(url)
+              })
+            }
+            console.log('urls: ', urls)
+            setFormData({ ...formData, pictures: [...formData.pictures, ...urls] })
+            if (addImagesRef.current) {
+              addImagesRef.current.value = ''
+            }
+          } 
+          break
         }
-        console.log('urls: ', urls)
-        setFormData({ ...formData, pictures: [...formData.pictures, ...urls] })
-        addImagesRef.current.value = ''
-        break
+        case 'frontPicture':
+          if (e.target.files !== null && e.target.files.length > 0) {
+            await uploadImage(e.target.files[0]).then(url => {
+              setFormData({ ...formData, frontPicture: url })
+            })
+            if (addFrontImageRef.current) {
+              addFrontImageRef.current.value = ''
+            }
+          }
+          break
+        case 'title':
+          setFormData({ ...formData, title: e.target.value })
+          break
+        case 'description':
+          setFormData({ ...formData, description: e.target.value })
+          break
+        case 'author':
+          setFormData({ ...formData, author_id: e.target.value })
+          break
+        case 'published':
+          setFormData({ ...formData, published: e.target.checked })
+          break
+        default:
+          console.log('Unknown handleChange')
+          break
       }
-      case 'frontPicture':
-        if (e.target.files.length === 0) return
-        await uploadImage(e.target.files[0]).then(url => {
-          setFormData({ ...formData, frontPicture: url })
-        })
-
-        addFrontImageRef.current.value = ''
-        break
-      case 'title':
-        setFormData({ ...formData, title: e.target.value })
-        break
-      case 'description':
-        setFormData({ ...formData, description: e.target.value })
-        break
-      case 'author':
-        setFormData({ ...formData, author: e.target.value })
-        break
-      case 'published':
-        setFormData({ ...formData, published: e.target.checked })
-        break
-      default:
-        console.log('Unknown handleChange')
-        break
+    } else if (e.target instanceof HTMLTextAreaElement) {
+      switch (e.target.name) {
+        case 'description':
+          setFormData({ ...formData, description: e.target.value });
+          break;
+        default:
+          console.log('Unknown handleChange');
+          break;
+      }
+    } else if (e.target instanceof HTMLSelectElement) {
+      switch (e.target.name) {
+        case 'author':
+          setFormData({ ...formData, author_id: e.target.value });
+          break;
+        default:
+          console.log('Unknown handleChange');
+          break;
+      }
     }
   }
 
-  // appData.users contain all users
-
   if (!formData) {
     return (
-      <Modal show={modal.show} onHide={() => modal.off(modal)} size='xl'>
+      <Modal show={modal.isModalVisible(data.name, data.id)} onHide={() => modal.off(data.name, data.id)} size='xl'>
         <Modal.Header closeButton className='py-2 text-gray-700'>
           <Modal.Title>Loading...</Modal.Title>
         </Modal.Header>
@@ -95,11 +150,11 @@ export default function EditPost ({ modal, appData, post, handleSubmit }) {
   }
 
   return (
-    <Modal show={modal.show} onHide={() => modal.off(modal)} size='xl' backdrop='static'>
+    <Modal show={modal.isModalVisible(data.name, data.id)} onHide={() => modal.off(data.name, data.id)} size='xl' backdrop='static'>
       <Modal.Header closeButton className='py-2 text-gray-700'>
-        {post.title
+        {data.post.title
           ? (
-            <Modal.Title>{t('blog.edit.label.editing')}{': '}{post.title}</Modal.Title>
+            <Modal.Title>{t('blog.edit.label.editing')}{': '}{data.post.title}</Modal.Title>
             )
           : (
             <Modal.Title>{t('blog.edit.label.creating')}</Modal.Title>
@@ -112,8 +167,8 @@ export default function EditPost ({ modal, appData, post, handleSubmit }) {
           </Form.Group>
           <Form.Group className='mb-3' controlId='formBasicEmail'>
             <FloatingLabel controlId='floatingSelect' label={t('blog.edit.label.author')}>
-              <Form.Control as='select' name='author' defaultValue={formData.author} onChange={(e) => handleChange(e)}>
-                {appData.users.map((user, index) => (
+              <Form.Control as='select' name='author' defaultValue={formData.author_id} onChange={(e) => handleChange(e)}>
+                {(appData.users || []).map((user, index) => (
                   <option key={index} value={user.id}>{user.firstName}{' '}{user.lastName}</option>
                 ))}
               </Form.Control>

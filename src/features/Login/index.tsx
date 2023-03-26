@@ -1,16 +1,28 @@
 import { HandleInstructionsContext } from '@/context'
+import { AppData } from '@/models/AppData'
 import { useContext, useState } from 'react'
 import { Button, Form } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
-export default function Login ({ appData, setAppData }) {
+
+interface LoginProps {
+  appData: AppData,
+  setAppData: React.Dispatch<React.SetStateAction<AppData>>
+}
+
+interface LoginFormData {
+  email: string,
+  password: string
+}
+
+export default function Login ({ appData, setAppData }: LoginProps) {
   const { t, i18n } = useTranslation()
-  const [formData, setFormData] = useState({ email: '', password: '' })
+  const [formData, setFormData] = useState<LoginFormData>({ email: '', password: '' })
   const handleInstructions = useContext(HandleInstructionsContext)
 
   async function login () {
     await handleInstructions('loginUser', { email: formData.email, password: formData.password })
   }
-  function handleChange (e) {
+  function handleChange (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
@@ -25,11 +37,11 @@ export default function Login ({ appData, setAppData }) {
         <Form className='w-100 mt-5'>
           <Form.Group className='mb-3' controlId='formBlogTitle'>
             <Form.Label>{t('login.label.email')}</Form.Label>
-            <Form.Control type='email' placeholder={t('login.label.email')} name='email' defaultValue={formData.title} onChange={(e) => handleChange(e)} />
+            <Form.Control type='email' placeholder={t('login.label.email')} name='email' defaultValue={formData.email} onChange={(e) => handleChange(e)} />
           </Form.Group>
           <Form.Group className='mb-3' controlId='formBlogTitle'>
             <Form.Label>{t('login.label.password')}</Form.Label>
-            <Form.Control type='password' placeholder={t('login.label.password')} name='password' defaultValue={formData.title} onChange={(e) => handleChange(e)} />
+            <Form.Control type='password' placeholder={t('login.label.password')} name='password' defaultValue={formData.password} onChange={(e) => handleChange(e)} />
           </Form.Group>
         </Form>
         <div className='d-flex gap-2 mt-5 justify-content-between'>

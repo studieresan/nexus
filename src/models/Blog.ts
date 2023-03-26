@@ -12,7 +12,7 @@ export interface BlogFields {
 }
 
 export interface Blog extends BlogFields {
-    author: User
+    author: User 
 }
 
 export interface CreateBlog extends BlogFields {

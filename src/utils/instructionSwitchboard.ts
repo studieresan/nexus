@@ -1,5 +1,4 @@
-import { InstructionArgs } from '@/models/InstructionArgs'
-import { InstructionData } from '@/models/InstructionData'
+import { InstructionArgs, InstructionData } from '@/models/Instruction'
 import { createBlogPost, deleteBlogpost, loginUser, updateEvent, createEvent, updateBlogPost } from '@/requests/api'
 import { setLoggedIn, setLoggedOut } from '@/requests/auth'
 import { Blog } from '@/models/Blog';

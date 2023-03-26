@@ -3,7 +3,7 @@ import { useEffect, useRef } from 'react'
 import { Button, Modal } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 
-interface ConfirmModalProps {
+export interface ConfirmModalProps {
   modal: ModalManager,
   data: {
     title: string,

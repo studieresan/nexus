@@ -6,19 +6,57 @@ import scania from '@/assets/images/scania.png'
 import storykit from '@/assets/images/storykit.png'
 import fra from '@/assets/images/fra.png'
 import { useTranslation } from 'react-i18next'
-import { projectMasters } from '@/utils/predeterminedInformation.jsx'
-import { useEffect, useState } from 'react'
-import { IoPersonSharp } from 'react-icons/io5'
+import { projectMasters } from '@/utils/predeterminedInformation'
+import { CSSProperties, useEffect, useState } from 'react'
 import Contact from '@/components/Contact.jsx'
-export default function Footer ({ appData }) {
+import { AppData } from '@/models/AppData'
+import { ContactElement } from '@/models/Contact'
+
+interface FooterProps {
+  appData: AppData
+}
+
+export default function Footer ({ appData }: FooterProps): JSX.Element {
   const { t, i18n } = useTranslation()
-  const [pictures, setPictures] = useState(null)
+  const [pictures, setPictures] = useState<string[] | null>(null)
   useEffect(() => {
-    const pictures = appData.users ? appData.users.filter(user => projectMasters.find(master => master.firstName === user.firstName && master.lastName === user.lastName)).map(user => user.info.picture) : null
-    setPictures(pictures)
+    if (appData.users) {
+      const pictures: string[] = appData.users
+        .filter(user => projectMasters
+        .find(master => master.firstName === user.firstName && master.lastName === user.lastName))
+        .map(user => user.info.picture)
+        .filter((picture): picture is string => picture !== undefined)
+      setPictures(pictures)
+    }
   }, [appData.users])
 
-  const imgStyle = { objectFit: 'contain', width: '200px' }
+  const imgStyle: CSSProperties  = { objectFit: 'contain', width: '200px' }
+
+  const ContactComponents = () => {
+    const contacts: ContactElement[] = [
+      {
+        picture: pictures ? pictures[0] : undefined,
+        name: `${projectMasters[0].firstName} ${projectMasters[0].lastName}`,
+        email: projectMasters[0].email,
+        role: t('projectLeader'),
+      },
+      {
+        picture: pictures ? pictures[1] : undefined,
+        name: `${projectMasters[1].firstName} ${projectMasters[1].lastName}`,
+        email: projectMasters[1].email,
+        role: t('projectLeader'),
+      },
+    ];
+
+    return (
+      <div className="d-flex flex-wrap justify-content-center">
+        {contacts.map((element, index) => (
+          <Contact key={index} element={element} />
+        ))}
+      </div>
+    );
+  };
+
 
   return (
     <div className='container-fluid p-4'>
@@ -27,8 +65,7 @@ export default function Footer ({ appData }) {
           {t('footer.questions')}
         </div>
         <div className='d-flex flex-wrap justify-content-center'>
-          <Contact role={t('projectLeader')} picture={pictures ? pictures[0] : null} name={projectMasters[0].firstName + ' ' + projectMasters[0].lastName} phone={projectMasters[0].phone} email={projectMasters[0].email} />
-          <Contact role={t('projectLeader')} picture={pictures ? pictures[1] : null} name={projectMasters[1].firstName + ' ' + projectMasters[1].lastName} phone={projectMasters[1].phone} email={projectMasters[1].email} />
+          {ContactComponents()}
         </div>
       </div>
       <div className='text-center fw-bold fs-3'>

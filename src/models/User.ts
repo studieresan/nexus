@@ -2,6 +2,7 @@ export enum Permission {
   Admin = 'admin_permission',
   Events = 'events_permission',
   Blog = 'blog_permission',
+  None = 'none_permission',
 }
 
 export type UserInfo = StudsInfo
@@ -19,6 +20,7 @@ export interface StudsInfo {
 }
 
 export enum UserRole {
+  None = 'none',
   ProjectManager = 'project_manager',
   ItGroup = 'it_group',
   ItGroupManager = 'it_group_manager',
@@ -39,5 +41,5 @@ export interface User {
   lastName: string
   studsYear: number
   info: UserInfo
-  tokens: string[]
+  tokens?: string[]
 }
