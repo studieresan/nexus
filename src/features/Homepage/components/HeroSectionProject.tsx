@@ -1,6 +1,10 @@
 import projectBg from '@/assets/images/b48.jpg'
 
-export function HeroSectionProject ({ handleImageLoaded }) {
+interface HeroSectionProjectProps {
+  handleImageLoaded: (image: string) => void
+}
+
+export function HeroSectionProject ({ handleImageLoaded }: HeroSectionProjectProps) {
   return (
     <div className='container col-xxl-8 px-4 py-5'>
       <div className='row flex-lg-row-reverse align-items-center g-5 py-5'>

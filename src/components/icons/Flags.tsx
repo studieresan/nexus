@@ -1,4 +1,11 @@
-export function SwedishFlag ({ size = '1.5em', className, fill, style }) {
+interface FlagProps {
+  size?: string
+  className?: string
+  fill?: string
+  style?: React.CSSProperties
+}
+
+export function SwedishFlag ({ size = '1.5em', className, fill, style }: FlagProps) {
   return (
     <svg
       className={className} style={{ ...style }} viewBox='0 0 36 36' width={size} height={size}
@@ -8,7 +15,7 @@ export function SwedishFlag ({ size = '1.5em', className, fill, style }) {
   )
 }
 
-export function NorwegianFlag ({ size = '1.5em', className, fill, style }) {
+export function NorwegianFlag ({ size = '1.5em', className, fill, style }: FlagProps) {
   return (
     <svg
       className={className} style={{ ...style }} viewBox='0 0 36 36' width={size} height={size}
@@ -18,7 +25,7 @@ export function NorwegianFlag ({ size = '1.5em', className, fill, style }) {
   )
 }
 
-export function FinnishFlag ({ size = '1.5em', className, fill, style }) {
+export function FinnishFlag ({ size = '1.5em', className, fill, style }: FlagProps) {
   return (
     <svg xmlns='http://www.w3.org/2000/svg' style={{ ...style }} className={className} viewBox='0 0 36 36' width={size} height={size}>
       <path fill='#EDECEC' d='M32 5H18v10h18V9c0-2.209-1.791-4-4-4z' /><path fill='#EEE' d='M11 5H4C1.791 5 0 6.791 0 9v6h11V5z' /><path fill='#EDECEC' d='M32 31H18V21h18v6c0 2.209-1.791 4-4 4zm-21 0H4c-2.209 0-4-1.791-4-4v-6h11v10z' /><path fill='#003580' d='M18 5h-7v10H0v6h11v10h7V21h18v-6H18z' />
@@ -26,7 +33,7 @@ export function FinnishFlag ({ size = '1.5em', className, fill, style }) {
   )
 }
 
-export function AmericanFlag ({ size = '1.5em', className, fill, style }) {
+export function AmericanFlag ({ size = '1.5em', className, fill, style }: FlagProps) {
   return (
     <svg
       className={className} style={{ ...style }} viewBox='0 0 36 36' width={size} height={size}
@@ -36,7 +43,7 @@ export function AmericanFlag ({ size = '1.5em', className, fill, style }) {
   )
 }
 
-export function GreatBritainFlag ({ size = '1.5em', className, fill, style }) {
+export function GreatBritainFlag ({ size = '1.5em', className, fill, style }: FlagProps) {
   return (
     <svg
       className={className + ' rounded'} style={{ ...style }} viewBox='0 0 640 480' width={size} height={size}

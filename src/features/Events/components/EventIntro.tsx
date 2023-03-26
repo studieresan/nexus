@@ -1,7 +1,13 @@
 import { Button } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 
-export default function EventIntro ({ handleModals }) {
+import { ModalManager } from '@/models/Modal'
+
+interface EventIntroProps {
+  handleModals: ModalManager
+}
+
+export default function EventIntro ({ handleModals }: EventIntroProps): JSX.Element {
   const { t, i18n } = useTranslation()
 
   return (

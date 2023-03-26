@@ -15,6 +15,7 @@ import { AppData } from '@/models/AppData'
 import { OverlayGroup } from './models/OverlayGroup'
 import { ImagesLoaded } from './models/ImagesLoaded'
 import { SalesInfo } from './models/SalesInfo'
+import { ContactElement } from '@/models/Contact'
 
 export default function Homepage ({ appData }: { appData: AppData }): JSX.Element {
   const { t, i18n } = useTranslation()
@@ -39,8 +40,14 @@ export default function Homepage ({ appData }: { appData: AppData }): JSX.Elemen
 
   useEffect(() => {
     const salesMasterUser = appData.users ? appData.users.find(user => user.firstName === salesMaster.firstName && user.lastName === salesMaster.lastName) : null
+    const masterContact: ContactElement = {
+      picture: salesMasterUser?.info?.picture,
+      name: `${salesMaster.firstName} ${salesMaster.lastName}`,
+      email: salesMaster.email,
+      role: t('salesLeader')
+    }
     setSalesInfo({
-      bottomElement: <Contact role={t('salesLeader')} picture={salesMasterUser?.info?.picture} name={`${salesMaster.firstName} ${salesMaster.lastName}`} phone={salesMaster.phone} email={salesMaster.email} />,
+      bottomElement: <Contact element={masterContact} />,
       description: <Trans i18nKey='homepage.contact.description'>{{ name: `${salesMaster.firstName} ${salesMaster.lastName}` }}</Trans>
     })
   }, [appData.users, i18n.language])
