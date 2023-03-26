@@ -6,8 +6,8 @@ import { groupMasters, projectMasters } from '@/utils/predeterminedInformation.j
 import { BiReplyAll } from 'react-icons/bi'
 import { Button, Spinner } from 'react-bootstrap'
 import { AppData } from '@/models/AppData'
-import { GroupInfo } from '@/models/GroupInfo'
-import generateGroupsInfo from '@/utils/getElementGroupsInfo'
+import { DynamicYearGroup } from '@/models/DynamicYearGroup'
+import generateGroupsInfo from '@/utils/getDynamicYearGroupsInfo'
 
 interface AboutProps {
   appData: AppData
@@ -15,7 +15,7 @@ interface AboutProps {
 
 export default function About ({ appData }: AboutProps): JSX.Element {
   const { t, i18n } = useTranslation()
-  const [groupsInfo, setGroupsInfo] = useState<GroupInfo[]>([])
+  const [groupsInfo, setGroupsInfo] = useState<DynamicYearGroup[]>([])
   useEffect(() => {
     if (!appData.users) return
     // event groups divided based on year

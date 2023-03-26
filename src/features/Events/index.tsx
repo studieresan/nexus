@@ -5,10 +5,10 @@ import { useTranslation } from 'react-i18next'
 import { BsPinMap } from 'react-icons/bs'
 import { IoPersonSharp } from 'react-icons/io5'
 import ElementGroup from '../../components/ElementGroup'
-import generateGroupsInfo from '@/utils/getElementGroupsInfo'
+import generateGroupsInfo from '@/utils/getDynamicYearGroupsInfo'
 import { AppData } from '@/models/AppData'
 import { ModalData, ModalManager } from '@/models/Modal'
-import { GroupInfo } from '@/models/GroupInfo'
+import { DynamicYearGroup } from '@/models/DynamicYearGroup'
 import { assertDefined } from '@/utils/assertDefined'
 import { Event } from '@/models/Event'
 
@@ -19,7 +19,7 @@ interface EventsProps {
 
 export default function Events ({ appData, handleModals }: EventsProps): JSX.Element {
   const { t, i18n } = useTranslation()
-  const [groupsInfo, setGroupsInfo] = useState<GroupInfo[]>([])
+  const [groupsInfo, setGroupsInfo] = useState<DynamicYearGroup[]>([])
   const handleInstructions = useContext(HandleInstructionsContext)
 
   useEffect(() => {

@@ -1,4 +1,6 @@
 import Contact from '@/components/Contact.jsx'
+import { ContactElement } from '@/models/Contact'
+import { StudsGroup } from '@/models/StudsGroup'
 import { useRef } from 'react'
 import { Collapse } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
@@ -8,7 +10,7 @@ import { IoPersonSharp } from 'react-icons/io5'
 interface GroupProps {
   handleClick: (index: number) => void
   showGroup: boolean[]
-  group: any
+  group: StudsGroup
   groupIndex: number
 }
 
@@ -52,7 +54,17 @@ export default function Group ({ handleClick, showGroup, group, groupIndex }: Gr
           <Collapse in={showGroup[groupIndex]}>
             <div>
               <p className='lead text-muted'> {group.description}</p>
-              <Contact role={t(`${group.name}Leader`)} picture={group.master.info.picture} name={`${group.master.firstName} ${group.master.lastName}`} email={group.master.info.email} />
+              {
+                (() => {
+                  const contact: ContactElement = {
+                    role: t(`${group.name}Leader`),
+                    picture: group.master.info.picture,
+                    name: `${group.master.firstName} ${group.master.lastName}`,
+                    email: group.master.info.email,
+                  };
+                  return <Contact element={contact} />;
+                })()
+              }
             </div>
           </Collapse>
           <hr className='w-100 opacity-25' style={{ height: 1, opacity: 1 }} />

@@ -1,4 +1,3 @@
-
 export interface CardElement {
   id: string;
   cardTitle: string;

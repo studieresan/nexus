@@ -1,4 +1,4 @@
-import { CardElement } from '@/models/DynamicCard'
+import { CardElement } from '@/models/CardElement'
 import { useRef } from 'react'
 import { Button, Dropdown } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'

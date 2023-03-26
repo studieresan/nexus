@@ -3,8 +3,8 @@ import { useContext, useEffect, useState } from 'react'
 import { Button, Spinner } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 import ElementGroup from '../../components/ElementGroup'
-import generateGroupsInfo from '@/utils/getElementGroupsInfo'
-import { GroupInfo } from '@/models/GroupInfo.js'
+import generateGroupsInfo from '@/utils/getDynamicYearGroupsInfo'
+import { DynamicYearGroup } from '@/models/DynamicYearGroup.js'
 import { AppData } from '@/models/AppData.js'
 import { ModalData, ModalManager } from '@/models/Modal.js'
 import { Blog } from '@/models/Blog.js'
@@ -17,7 +17,7 @@ interface BlogProps {
 
 export default function Blog ({ appData, handleModals }: BlogProps): JSX.Element {
   const { t, i18n } = useTranslation()
-  const [groupsInfo, setGroupsInfo] = useState<GroupInfo[]>([])
+  const [groupsInfo, setGroupsInfo] = useState<DynamicYearGroup[]>([])
   const handleInstructions = useContext(HandleInstructionsContext)
 
   useEffect(() => {

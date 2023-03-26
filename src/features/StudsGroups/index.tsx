@@ -2,20 +2,26 @@ import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Button, Spinner } from 'react-bootstrap'
 import Group from './components/Group.jsx'
-import { groupMasters } from '@/utils/predeterminedInformation.tsx'
-import { GroupInfo } from '@/models/GroupInfo.js'
+import { groupMasters } from '@/utils/predeterminedInformation'
+import { AppData } from '@/models/AppData.js'
+import { GroupMasters } from '@/models/Group.js'
+import { StudsGroup } from '@/models/StudsGroup.js'
 
-export default function Groups ({ appData }) {
+interface GroupsProps {
+  appData: AppData
+}
+
+export default function StudsGroups ({ appData }: GroupsProps): JSX.Element {
   const { t, i18n } = useTranslation()
-  const [groupsInfo, setGroupsInfo] = useState(null)
-  const [showGroup, setShowGroup] = useState(null)
+  const [groupsInfo, setGroupsInfo] = useState<StudsGroup[]>([])
+  const [showGroup, setShowGroup] = useState<boolean[]>([])
   // Go through each group and find the master from appData.users and store it in groupsInfo
   useEffect(() => {
     if (appData.users) {
-      const groupsInfo: GroupInfo = []
-      Object.keys(groupMasters).forEach(group: => {
-        const master = appData.users.find(user => user.firstName === groupMasters[group].masterFirstName && user.lastName === groupMasters[group].masterLastName)
-        groupsInfo.push({ master, name: group, title: t(`groups.${group}.title`), description: t(`groups.${group}.description`), icon: groupMasters[group].icon })
+      (Object.keys(groupMasters) as Array<keyof GroupMasters>).forEach((key) => {
+        const newGroupsInfo = []
+        const master = (appData.users || []).find(user => user.firstName === groupMasters[key].masterFirstName && user.lastName === groupMasters[key].masterLastName)
+        newGroupsInfo.push({ master, name: key, title: t(`groups.${key}.title`), description: t(`groups.${key}.description`), icon: groupMasters[key].icon })
       })
       console.log('groupsInfo', groupsInfo)
       setGroupsInfo(groupsInfo)
@@ -23,7 +29,7 @@ export default function Groups ({ appData }) {
     }
   }, [appData.users, i18n.language])
 
-  function handleClick (index) {
+  function handleClick (index: number) {
     const newShowGroupMasterInfo = [...showGroup]
     newShowGroupMasterInfo[index] = !newShowGroupMasterInfo[index]
     setShowGroup(newShowGroupMasterInfo)

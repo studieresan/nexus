@@ -4,7 +4,7 @@ import { BiChevronDown, BiChevronUp } from 'react-icons/bi'
 import Contact from './Contact.jsx'
 import DynamicCard from './DynamicCard.jsx'
 import { AppData } from '@/models/AppData.js'
-import { CardElement } from '@/models/DynamicCard.js'
+import { CardElement } from '@/models/CardElement.js'
 import { ContactElement } from '@/models/Contact.js'
 
 

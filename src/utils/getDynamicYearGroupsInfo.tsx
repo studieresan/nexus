@@ -4,12 +4,12 @@ import i18next from 'i18next';
 import { AppData } from '@/models/AppData';
 import { assertDefined } from '@/utils/assertDefined';
 import { Blog } from '@/models/Blog';
-import { GroupInfo } from '@/models/GroupInfo';
+import { DynamicYearGroup } from '@/models/DynamicYearGroup';
 import { ContactElement } from '@/models/Contact';
 import { groupMasters } from './predeterminedInformation';
 import { GroupMasters } from '@/models/Group';
 
-export default function getElementGroupsInfo(appData: AppData, contentSourceType: 'blog' | 'event' | 'contact'): GroupInfo[] {
+export default function getDynamicYearGroupsInfo(appData: AppData, contentSourceType: 'blog' | 'event' | 'contact'): DynamicYearGroup[] {
 
   if (contentSourceType === 'contact') {
     return getContactElementGroupsInfo(appData);
@@ -22,7 +22,7 @@ export default function getElementGroupsInfo(appData: AppData, contentSourceType
   const contentData = assertDefined(sourceData, `appData.${contentSourceType}Posts is not defined`, `appData.${contentSourceType}Posts`);
   const includeUnpublished = loggedIn && (userDetails?.permissions?.includes(permissionKey) || userDetails?.permissions?.includes('admin_permission')); const includedContent = (contentData || []).filter((e) => e.published || includeUnpublished);
   const years = [...new Set(includedContent.map((e: Blog) => parseInt(e.date.toLocaleString().slice(0, 4))))].sort((a, b) => b - a);
-  const newGroupsInfo: GroupInfo[] = years.map((year) => ({year,title: i18next.t(`${contentSourceType}.groupTitle`) + ' ' + year,elements: [],}));
+  const newGroupsInfo: DynamicYearGroup[] = years.map((year) => ({year,title: i18next.t(`${contentSourceType}.groupTitle`) + ' ' + year,elements: [],}));
 
   for (let i = 0; i < newGroupsInfo.length; i++) {
     const matchedContent = includedContent.filter((e) => parseInt(e.date.toLocaleString().slice(0, 4)) === newGroupsInfo[i].year);
@@ -39,22 +39,14 @@ export default function getElementGroupsInfo(appData: AppData, contentSourceType
   return newGroupsInfo;
 }
 
-function getContactElementGroupsInfo(appData: AppData): GroupInfo[] {
+function getContactElementGroupsInfo(appData: AppData): DynamicYearGroup[] {
   if (!appData.users) return [];
 
-  const years = [
-    ...new Set(appData.users.map((e) => e.studsYear)),
-  ].sort((a, b) => b - a);
-  const newGroupsInfo: GroupInfo[] = years.map((year) => ({
-    year,
-    title: i18next.t('about.groupTitle') + ' ' + year,
-    elements: [],
-  }));
+  const years = [...new Set(appData.users.map((e) => e.studsYear)),].sort((a, b) => b - a);
+  const newGroupsInfo: DynamicYearGroup[] = years.map((year) => ({year,title: i18next.t('about.groupTitle') + ' ' + year,elements: [],}));
 
   for (let i = 0; i < newGroupsInfo.length; i++) {
-    const matchedUsers = appData.users.filter(
-      (e) => e.studsYear === newGroupsInfo[i].year
-    );
+    const matchedUsers = appData.users.filter((e) => e.studsYear === newGroupsInfo[i].year);
     newGroupsInfo[i].elements = matchedUsers.map((e) => {
       const element: ContactElement = {
         picture: e.info.picture,
