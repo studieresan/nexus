@@ -15,7 +15,7 @@ interface BlogProps {
 }
 
 
-export default function Blog ({ appData, handleModals }: BlogProps): JSX.Element {
+export default function BlogPosts ({ appData, handleModals }: BlogProps): JSX.Element {
   const { t, i18n } = useTranslation()
   const [groupsInfo, setGroupsInfo] = useState<DynamicYearGroup[]>([])
   const handleInstructions = useContext(HandleInstructionsContext)
