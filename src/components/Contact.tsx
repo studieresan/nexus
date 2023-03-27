@@ -8,6 +8,7 @@ interface ContactProps {
 
 export default function Contact ({ element } : ContactProps) : JSX.Element {
   const { t } = useTranslation()
+  
   if (element.vertical) {
     return (
       <div className='col'>

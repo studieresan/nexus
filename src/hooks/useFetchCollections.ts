@@ -1,6 +1,6 @@
 import { AppData } from '@/models/AppData'
-import { Blog } from '@/models/Blog'
-import { Event } from '@/models/Event'
+import { Blog } from '@/models/BlogPost'
+import { Event } from '@/models/EventPost'
 import { User } from '@/models/User'
 import { fetchEvents, fetchUsers, getBlogPosts } from '@/requests/api'
 import { useEffect } from 'react'

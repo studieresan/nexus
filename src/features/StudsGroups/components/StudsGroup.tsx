@@ -1,22 +1,41 @@
 import Contact from '@/components/Contact.jsx'
 import { ContactElement } from '@/models/Contact'
-import { StudsGroup } from '@/models/StudsGroup'
+import { StudsGroupInfo } from '@/models/StudsGroupInfo'
 import { useRef } from 'react'
 import { Collapse } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 import { BiChevronDown, BiChevronUp } from 'react-icons/bi'
-import { IoPersonSharp } from 'react-icons/io5'
 
 interface GroupProps {
   handleClick: (index: number) => void
   showGroup: boolean[]
-  group: StudsGroup
+  group: StudsGroupInfo
   groupIndex: number
 }
 
-export default function Group ({ handleClick, showGroup, group, groupIndex }: GroupProps) {
+export default function StudsGroup ({ handleClick, showGroup, group, groupIndex }: GroupProps) {
   const { t, i18n } = useTranslation()
   const containerRef = useRef<HTMLDivElement>(null)
+  
+  const masterContact = () => {
+    if (group.master === undefined) {
+      const contact: ContactElement = {
+        role: t(`${group.name}Leader`),
+        picture: '',
+        name: t('notFound'),
+        email: '',
+      }
+      return <Contact element={contact} />;
+    } else {
+      const contact: ContactElement = {
+        role: t(`${group.name}Leader`),
+        picture: group.master.info.picture,
+        name: `${group.master.firstName} ${group.master.lastName}`,
+        email: group.master.info.email,
+      }
+      return <Contact element={contact} />;
+    }
+  }
 
   return (
     <div
@@ -54,17 +73,7 @@ export default function Group ({ handleClick, showGroup, group, groupIndex }: Gr
           <Collapse in={showGroup[groupIndex]}>
             <div>
               <p className='lead text-muted'> {group.description}</p>
-              {
-                (() => {
-                  const contact: ContactElement = {
-                    role: t(`${group.name}Leader`),
-                    picture: group.master.info.picture,
-                    name: `${group.master.firstName} ${group.master.lastName}`,
-                    email: group.master.info.email,
-                  };
-                  return <Contact element={contact} />;
-                })()
-              }
+              {masterContact()}
             </div>
           </Collapse>
           <hr className='w-100 opacity-25' style={{ height: 1, opacity: 1 }} />

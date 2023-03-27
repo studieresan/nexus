@@ -10,7 +10,7 @@ import { AppData } from '@/models/AppData'
 import { ModalData, ModalManager } from '@/models/Modal'
 import { DynamicYearGroup } from '@/models/DynamicYearGroup'
 import { assertDefined } from '@/utils/assertDefined'
-import { Event } from '@/models/Event'
+import { EventPost } from '@/models/EventPost'
 
 interface EventsProps {
   appData: AppData
@@ -24,7 +24,7 @@ export default function Events ({ appData, handleModals }: EventsProps): JSX.Ele
 
   useEffect(() => {
     if (appData.events) {
-      const groupsInfo = generateGroupsInfo(appData, 'event')
+      const groupsInfo = generateGroupsInfo(appData, 'events')
       console.log('groupsInfo', groupsInfo)
       setGroupsInfo(groupsInfo)
     }
@@ -69,7 +69,7 @@ export default function Events ({ appData, handleModals }: EventsProps): JSX.Ele
       type: 'Event'
     })
   }
-  async function handleConfirmDelete (modal: ModalData, data: Event) {
+  async function handleConfirmDelete (modal: ModalData, data: EventPost) {
     await handleInstructions('deleteEvent', { toDeleteId: data.id })
     modal.off(modal)
   }

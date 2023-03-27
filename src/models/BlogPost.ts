@@ -11,10 +11,10 @@ export interface BlogFields {
     published: boolean
 }
 
-export interface Blog extends BlogFields {
+export interface BlogPost extends BlogFields {
     author: User 
 }
 
-export interface CreateBlog extends BlogFields {
+export interface CreateBlogPost extends BlogFields {
     author_id: string
 }

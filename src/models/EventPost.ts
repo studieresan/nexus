@@ -11,10 +11,10 @@ interface EventFields {
   published: boolean
 }
 
-export interface Event extends EventFields {
-  author: User
+export interface EventPost extends EventFields {
+  author: User | null
 }
 
-export interface CreateEvent extends EventFields {
+export interface CreateEventPost extends EventFields {
   author_id: string
 }

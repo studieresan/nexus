@@ -1,19 +1,34 @@
+import { BlogPost } from '@/models/BlogPost'
+import { EventPost } from '@/models/EventPost'
+import { ModalManager } from '@/models/Modal'
+import { PostModalData } from '@/models/PostModal'
 import { useEffect, useState } from 'react'
 import { Carousel, Modal } from 'react-bootstrap'
 
-export default function ViewPost ({ post, modal }) {
-  const [inputBlocks, setInputBlocks] = useState(null)
+interface ViewPostProps {
+  post: BlogPost | EventPost
+  data: PostModalData
+  modal: ModalManager
+}
+
+interface InputBlock {
+  text: string
+  images: string[]
+}
+
+export default function ViewPost ({ post, data, modal }: ViewPostProps) {
+  const [inputBlocks, setInputBlocks] = useState<InputBlock[] | null>(null)
   console.log('post 222: ', post)
   useEffect(() => {
-    if (post.description || post.publicDescription) {
-      setInputBlocks(parseInputBlocks(post.description || post.publicDescription))
+    if (post.description) {
+      setInputBlocks(parseInputBlocks(post.description))
     }
   }, [post])
 
-  function parseInputBlocks (input) {
+  function parseInputBlocks (input: string) {
     const lines = input.split('\n')
     console.log(lines)
-    const blocks = [{
+    const blocks: InputBlock[] = [{
       text: '',
       images: []
     }]
@@ -22,7 +37,7 @@ export default function ViewPost ({ post, modal }) {
     for (let i = 0; i < lines.length; i++) {
       if (lines[i].startsWith('\\image-')) {
         encounteredImg = true
-        const imgIndex = lines[i].split('-')[1].trim()
+        const imgIndex = parseInt(lines[i].split('-')[1].trim())
         blocks[currentBlockIdx].images.push(post.pictures[imgIndex])
       } else {
         if (encounteredImg) {
@@ -40,7 +55,7 @@ export default function ViewPost ({ post, modal }) {
   }
 
   return (
-    <Modal show={modal.show} onHide={() => modal.off(modal)} size='xl' fullscreen='xxl-down' keyboard={false}>
+    <Modal show={modal.isModalVisible(data.name, data.id)} onHide={() => modal.off(data.name, data.id)} size='xl' fullscreen='xxl-down' keyboard={false}>
       <Modal.Header closeButton className='py-2 text-gray-700'>
         {/* <Modal.Title>{title}</Modal.Title> */}
         <Modal.Title>&nbsp;</Modal.Title>

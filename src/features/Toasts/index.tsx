@@ -1,4 +1,4 @@
-import { ToastData } from '@/hooks/models/Toast'
+import { ToastData } from '@/models/Toast'
 import { useRef, Children } from 'react'
 import { ToastContainer, Toast, Button } from 'react-bootstrap'
 import { BsCheckCircleFill, BsFillExclamationCircleFill, BsXLg } from 'react-icons/bs'
@@ -14,17 +14,8 @@ interface ToastsProps {
 }
 
 function Toasts ({ toasts }: ToastsProps) {
-  const toastRef = useRef([])
+  const toastRef = useRef<Record<string, React.RefObject<HTMLDivElement>>>({})
 
-  // Max 7 toasts.
-  // useEffect(() => {
-  //   toasts.setData((currentState) => {
-  //     if (toasts.data.length > 7) {
-  //       currentState.splice(0, 1)
-  //       return [...currentState]
-  //     } else return currentState
-  //   })
-  // }, [toasts.data.length])
   const toastsPositions = [...new Set(toasts.data.map(toast => toast.position))]
   return (
     <>
@@ -41,8 +32,8 @@ function Toasts ({ toasts }: ToastsProps) {
                 onClose={() => toasts.off(toast)}
                 delay={toast.delay > 0 ? toast.delay : undefined}
                 autohide={!!toast.delay}
-                ref={(ref) => (toastRef.current[toast.id] = ref)}
-                className={!toast.title && `text-bg-${toast.color}`}
+                ref={(ref: HTMLDivElement | null) => (toastRef.current[toast.id] = { current: ref })}
+                className={!toast.title ? `text-bg-${toast.color}` : ''}
               >
                 {toast.title && (
                   <Toast.Header

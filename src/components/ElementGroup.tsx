@@ -30,6 +30,7 @@ export default function ElementGroup ({ appData, showTools, type, expandStart, i
   let styling = ''
   if (type === 'cards') styling += 'row align-items-stretch row-cols-1 row-cols-xxl-2 g-4 py-3'
   if (type === 'contacts') styling += 'row row-cols-lg-2 row-cols-xl-3 row-cols-xxl-4 g-4 py-3'
+  
   return (
     <div
       key={idx}
@@ -43,9 +44,9 @@ export default function ElementGroup ({ appData, showTools, type, expandStart, i
       </div>
       <Collapse in={showGroup}>
         <div className={styling}>
-        {elements && handleClickCard && handleClickEdit && handleClickDelete &&
+        {elements &&
           elements.map((element, elemIdx) => {
-            if (isCardElement(element) && type === 'cards') {
+            if (isCardElement(element) && type === 'cards' && handleClickCard && handleClickEdit && handleClickDelete) {
               return (
                 <DynamicCard
                   key={`group-${idx}-card-${elemIdx}`}

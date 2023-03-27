@@ -27,7 +27,7 @@ function App () {
   })
 
   useEffect(() => {
-    console.log('appData: ', appData)
+    console.log('appData', appData);
   }, [appData])
   const navigateTo = useNavigate()
   const args = useRef<InstructionArgs>({
@@ -37,8 +37,6 @@ function App () {
   });
   const handleModals = useModalManager()
   useFetchCollections(appData, setAppData)
-
-  
 
   async function handleInstructions (instruction: string, data: InstructionData = {}) {
     return await instructionSwitchboard(args.current, instruction, data)

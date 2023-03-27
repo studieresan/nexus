@@ -1,10 +1,10 @@
-import { Event } from '@/models/Event'
+import { EventPost } from '@/models/EventPost'
 import { User } from '@/models/User'
-import { Blog } from '@/models/Blog'
+import { BlogPost } from '@/models/BlogPost'
 import { pickBy } from 'lodash'
 
 // This file was copied and reused from the old frontend repository
-const BASE_URL = 'http://localhost:5040' // process.env.API_BASE_URL ||
+const BASE_URL = '' // http://localhost:5040' // process.env.API_BASE_URL ||
 const GRAPHQL = '/graphql'
 const SIGNUP = '/signup'
 const LOGIN = '/login'
@@ -246,14 +246,14 @@ export function fetchEvents () {
   return executeGraphQL(query)
     .then(res => res.data.events)
     .then(events =>
-      events.map((e: Event) => ({
+      events.map((e: EventPost) => ({
         ...e,
         date: new Date(e.date)
       }))
     )
 }
 
-export function createEvent (event: Event) {
+export function createEvent (event: EventPost) {
   const mutation = `mutation {
     eventCreate(fields: ${toGraphQLFields(JSON.stringify(event))}) {
       ${EVENT_FIELDS}
@@ -265,7 +265,7 @@ export function createEvent (event: Event) {
     .then(event => ({ ...event, date: new Date(event.date) }))
 }
 
-export function updateEvent (event: Event) {
+export function updateEvent (event: EventPost) {
   const mutation = `mutation {
     eventUpdate(id: "${event.id}", fields: ${toGraphQLFields(JSON.stringify(event))}) {
       ${EVENT_FIELDS}
@@ -357,7 +357,7 @@ author {
 date
 `
 
-export function createBlogPost (blogPost: Blog) {
+export function createBlogPost (blogPost: BlogPost) {
   // post.date = moment(new Date()).format('YYYY-MM-DD')
   const mutation = `mutation {
     blogCreate(fields: ${toGraphQLFields(JSON.stringify(blogPost))}) {
@@ -379,7 +379,7 @@ export function getBlogPosts () {
   })
 }
 
-export function updateBlogPost(blogPost: Blog) {
+export function updateBlogPost(blogPost: BlogPost) {
   const query = `mutation {
     blogPostUpdate(id: "${blogPost.id}", fields: ${toGraphQLFields(JSON.stringify(blogPost))}) {
       ${BLOG_FIELDS}

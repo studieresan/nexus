@@ -3,13 +3,14 @@ import { IoPersonSharp } from 'react-icons/io5';
 import i18next from 'i18next';
 import { AppData } from '@/models/AppData';
 import { assertDefined } from '@/utils/assertDefined';
-import { Blog } from '@/models/Blog';
+import { BlogPost } from '@/models/BlogPost';
 import { DynamicYearGroup } from '@/models/DynamicYearGroup';
 import { ContactElement } from '@/models/Contact';
 import { groupMasters } from './predeterminedInformation';
 import { GroupMasters } from '@/models/Group';
+import { EventPost } from '@/models/EventPost';
 
-export default function getDynamicYearGroupsInfo(appData: AppData, contentSourceType: 'blog' | 'event' | 'contact'): DynamicYearGroup[] {
+export default function getDynamicYearGroupsInfo(appData: AppData, contentSourceType: 'blog' | 'events' | 'contact'): DynamicYearGroup[] {
 
   if (contentSourceType === 'contact') {
     return getContactElementGroupsInfo(appData);
@@ -20,17 +21,19 @@ export default function getDynamicYearGroupsInfo(appData: AppData, contentSource
   const sourceData = contentSourceType === 'blog' ? appData.blogPosts : appData.events;
   const permissionKey = contentSourceType === 'blog' ? 'blog_permission' : 'event_permission';
   const contentData = assertDefined(sourceData, `appData.${contentSourceType}Posts is not defined`, `appData.${contentSourceType}Posts`);
-  const includeUnpublished = loggedIn && (userDetails?.permissions?.includes(permissionKey) || userDetails?.permissions?.includes('admin_permission')); const includedContent = (contentData || []).filter((e) => e.published || includeUnpublished);
-  const years = [...new Set(includedContent.map((e: Blog) => parseInt(e.date.toLocaleString().slice(0, 4))))].sort((a, b) => b - a);
-  const newGroupsInfo: DynamicYearGroup[] = years.map((year) => ({year,title: i18next.t(`${contentSourceType}.groupTitle`) + ' ' + year,elements: [],}));
+  const includeUnpublished = loggedIn && (userDetails?.permissions?.includes(permissionKey) || userDetails?.permissions?.includes('admin_permission')); 
+  const includedContent = (contentData || []).filter((e) => e.published || includeUnpublished);
+  const years = [...new Set(includedContent.map((e: BlogPost | EventPost) => e.date.getFullYear()))].sort((a, b) => b - a);
+  
+  const newGroupsInfo: DynamicYearGroup[] = years.map((year) => ({ year, title: i18next.t(`${contentSourceType}.groupTitle`) + ' ' + year,elements: []}));
 
   for (let i = 0; i < newGroupsInfo.length; i++) {
-    const matchedContent = includedContent.filter((e) => parseInt(e.date.toLocaleString().slice(0, 4)) === newGroupsInfo[i].year);
+    const matchedContent = includedContent.filter((e) => e.date.getFullYear() === newGroupsInfo[i].year);
     newGroupsInfo[i].elements = matchedContent.map((e) => ({
       id: e.id,
       cardTitle: e.title,
       cornerImg: getCornerImg(e.author?.info?.picture),
-      cornerText: `${e.author.firstName} ${e.author.lastName}`,
+      cornerText: e.author ? `${e.author.firstName} ${e.author.lastName}` : null,
       dateText: e.date.toLocaleString().slice(0, 10),
       bgImg: e.frontPicture || e.pictures[0],
       danger: e.published ? null : i18next.t(`${contentSourceType}.notPublished`),

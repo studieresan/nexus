@@ -22,6 +22,11 @@ export default function About ({ appData }: AboutProps): JSX.Element {
     setGroupsInfo(generateGroupsInfo(appData, 'contact'))
   }, [appData, i18n.language])
 
+  useEffect(() => {
+    console.log('groupsInfo', groupsInfo);
+  }, [groupsInfo])
+    
+
   function handleCreateClick () {
     console.log('handleCreate')
   }

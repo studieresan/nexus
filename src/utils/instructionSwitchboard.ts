@@ -1,8 +1,8 @@
 import { InstructionArgs, InstructionData } from '@/models/Instruction'
 import { createBlogPost, deleteBlogpost, loginUser, updateEvent, createEvent, updateBlogPost } from '@/requests/api'
 import { setLoggedIn, setLoggedOut } from '@/requests/auth'
-import { Blog } from '@/models/Blog';
-import { Event } from '@/models/Event';
+import { Blog } from '@/models/BlogPost';
+import { Event } from '@/models/EventPost';
 import { LoginResponse } from '@/models/Login';
 import { assertDefined } from './assertDefined';
 

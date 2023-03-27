@@ -4,8 +4,8 @@ import { useContext, useEffect, useRef, useState } from 'react'
 import { Alert, Button, FloatingLabel, Form, FormControl, Modal } from 'react-bootstrap'
 import { Trans, useTranslation } from 'react-i18next'
 import { AddedImage } from './AddedImage.jsx'
-import { Blog, CreateBlog } from '@/models/Blog.js'
-import { CreateEvent, Event } from '@/models/Event.js'
+import { BlogPost, CreateBlogPost } from '@/models/BlogPost.js'
+import { CreateEventPost, EventPost } from '@/models/EventPost.js'
 import { AppData } from '@/models/AppData.js'
 import { ModalManager } from '@/models/Modal.js'
 import { Permission, UserRole } from '@/models/User.js'
@@ -14,17 +14,17 @@ interface EditPostProps {
   modal: ModalManager,
   data: {
     mode: 'view' | 'edit',
-    post: Blog | Event,
+    post: BlogPost | EventPost,
     name: string,
     id: string,
     type: 'Blog' | 'Event'
   }
   appData: AppData,
-  handleSubmit: (formData: CreateEvent | CreateBlog ) => void
+  handleSubmit: (formData: CreateEventPost | CreateBlogPost ) => void
 }
 
 export default function EditPost ({ modal, data, appData, handleSubmit }: EditPostProps): JSX.Element {
-  const [formData, setFormData] = useState<CreateEvent | CreateBlog >({
+  const [formData, setFormData] = useState<CreateEventPost | CreateBlogPost >({
     id: '',
     title: '',
     description: '',
@@ -46,7 +46,7 @@ export default function EditPost ({ modal, data, appData, handleSubmit }: EditPo
   useEffect(() => {
     const post = data.post
     if (post && appData.users) {
-      const newFormData: CreateEvent | CreateBlog = {
+      const newFormData: CreateEventPost | CreateBlogPost = {
         id: post.id || '',
         title: post.title || '',
         description: post.description || '',

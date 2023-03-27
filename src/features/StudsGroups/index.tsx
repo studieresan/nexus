@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Button, Spinner } from 'react-bootstrap'
-import Group from './components/Group.jsx'
+import StudsGroup from './components/StudsGroup.jsx'
 import { groupMasters } from '@/utils/predeterminedInformation'
 import { AppData } from '@/models/AppData.js'
 import { GroupMasters } from '@/models/Group.js'
-import { StudsGroup } from '@/models/StudsGroup.js'
+import { StudsGroupInfo } from '@/models/StudsGroupInfo.js'
 
 interface GroupsProps {
   appData: AppData
@@ -13,21 +13,32 @@ interface GroupsProps {
 
 export default function StudsGroups ({ appData }: GroupsProps): JSX.Element {
   const { t, i18n } = useTranslation()
-  const [groupsInfo, setGroupsInfo] = useState<StudsGroup[]>([])
+  const [groupsInfo, setGroupsInfo] = useState<StudsGroupInfo[]>([])
   const [showGroup, setShowGroup] = useState<boolean[]>([])
   // Go through each group and find the master from appData.users and store it in groupsInfo
   useEffect(() => {
     if (appData.users) {
-      (Object.keys(groupMasters) as Array<keyof GroupMasters>).forEach((key) => {
-        const newGroupsInfo = []
-        const master = (appData.users || []).find(user => user.firstName === groupMasters[key].masterFirstName && user.lastName === groupMasters[key].masterLastName)
-        newGroupsInfo.push({ master, name: key, title: t(`groups.${key}.title`), description: t(`groups.${key}.description`), icon: groupMasters[key].icon })
-      })
-      console.log('groupsInfo', groupsInfo)
-      setGroupsInfo(groupsInfo)
-      setShowGroup(showGroup ? [...showGroup] : Array(groupsInfo.length).fill(false))
+      const newGroupsInfo: StudsGroupInfo[] = (Object.keys(groupMasters) as Array<keyof GroupMasters>).map((key) => {
+        const master = (appData.users || []).find(
+          (user) =>
+            user.firstName === groupMasters[key].masterFirstName &&
+            user.lastName === groupMasters[key].masterLastName
+        );
+
+        return {
+          master,
+          name: key,
+          title: t(`groups.${key}.title`),
+          description: t(`groups.${key}.description`),
+          icon: groupMasters[key].icon,
+        };
+      });
+
+      console.log('groupsInfo', newGroupsInfo);
+      setGroupsInfo(newGroupsInfo);
+      setShowGroup(showGroup ? [...showGroup] : Array(newGroupsInfo.length).fill(false));
     }
-  }, [appData.users, i18n.language])
+  }, [appData.users, i18n.language]);
 
   function handleClick (index: number) {
     const newShowGroupMasterInfo = [...showGroup]
@@ -64,7 +75,7 @@ export default function StudsGroups ({ appData }: GroupsProps): JSX.Element {
           <div className='row'>
             {groupsInfo.map((group, index) => (
               <div key={index} className='col-12'>
-                <Group handleClick={handleClick} group={group} groupIndex={index} showGroup={showGroup} />
+                <StudsGroup handleClick={handleClick} group={group} groupIndex={index} showGroup={showGroup} />
               </div>
             ))}
           </div>

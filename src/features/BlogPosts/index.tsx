@@ -7,7 +7,7 @@ import generateGroupsInfo from '@/utils/getDynamicYearGroupsInfo'
 import { DynamicYearGroup } from '@/models/DynamicYearGroup.js'
 import { AppData } from '@/models/AppData.js'
 import { ModalData, ModalManager } from '@/models/Modal.js'
-import { Blog } from '@/models/Blog.js'
+import { Blog } from '@/models/BlogPost.js'
 
 interface BlogProps {
   appData: AppData

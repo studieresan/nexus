@@ -1,6 +1,6 @@
 import { AppData } from "./AppData";
-import { Blog } from "./Blog"
-import { Event } from "./Event"
+import { BlogPost } from "./BlogPost"
+import { EventPost } from "./EventPost"
 
 export interface InstructionArgs {
   appData: AppData, 
@@ -9,8 +9,8 @@ export interface InstructionArgs {
 }
 
 export interface InstructionData {
-  blogPost?: Blog
-  event?: Event
+  blogPost?: BlogPost
+  event?: EventPost
   toDeleteId?: string
   email?: string
   password?: string
