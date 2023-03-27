@@ -368,15 +368,20 @@ export function createBlogPost (blogPost: BlogPost) {
   return executeGraphQL(mutation).then(res => res.data.blogCreate)
 }
 
-export function getBlogPosts () {
+export function fetchBlogPosts () {
   const query = `query {
     blogPosts {
       ${BLOG_FIELDS}
     }
   }`
-  return executeGraphQL(query).then(res => {
-    return res.data.blogPosts
-  })
+  return executeGraphQL(query)
+    .then(res => res.data.blogPosts)
+    .then(events =>
+      events.map((e: BlogPost) => ({
+        ...e,
+        date: new Date(e.date)
+      }))
+    )
 }
 
 export function updateBlogPost(blogPost: BlogPost) {

@@ -10,6 +10,14 @@ import { groupMasters } from './predeterminedInformation';
 import { GroupMasters } from '@/models/Group';
 import { EventPost } from '@/models/EventPost';
 
+function formatDate(date: Date) {
+  const day = String(date.getDate()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed, so we add 1
+  const year = date.getFullYear();
+
+  return `${day}/${month}/${year}`;
+}
+
 export default function getDynamicYearGroupsInfo(appData: AppData, contentSourceType: 'blog' | 'events' | 'contact'): DynamicYearGroup[] {
 
   if (contentSourceType === 'contact') {
@@ -29,15 +37,18 @@ export default function getDynamicYearGroupsInfo(appData: AppData, contentSource
 
   for (let i = 0; i < newGroupsInfo.length; i++) {
     const matchedContent = includedContent.filter((e) => e.date.getFullYear() === newGroupsInfo[i].year);
-    newGroupsInfo[i].elements = matchedContent.map((e) => ({
-      id: e.id,
-      cardTitle: e.title,
-      cornerImg: getCornerImg(e.author?.info?.picture),
-      cornerText: e.author ? `${e.author.firstName} ${e.author.lastName}` : null,
-      dateText: e.date.toLocaleString().slice(0, 10),
-      bgImg: e.frontPicture || e.pictures[0],
-      danger: e.published ? null : i18next.t(`${contentSourceType}.notPublished`),
-    }));
+    newGroupsInfo[i].elements = matchedContent.map((e) => {
+      return {
+        id: e.id,
+        cardTitle: e.title,
+        cornerImg: getCornerImg(e.author?.info?.picture),
+        cornerText: e.author ? `${e.author.firstName} ${e.author.lastName}` : null,
+        dateText: formatDate(e.date),
+        bgImg: e.frontPicture || e.pictures[0],
+        danger: e.published ? null : i18next.t(`${contentSourceType}.notPublished`),
+    }
+      
+    });
   }
   return newGroupsInfo;
 }
@@ -80,7 +91,7 @@ function getContactElementGroupsInfo(appData: AppData): DynamicYearGroup[] {
 function getCornerImg(picture: string | undefined) {
   return picture ? (
     <div
-      className='me-2 ratio ratio-1x1 rounded-circle overflow-hidden'
+      className='me-2 ratio ratio-1x1 bg-white rounded-circle overflow-hidden'
       style={{ width: 50, height: 50 }}
     >
       <img

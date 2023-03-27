@@ -1,8 +1,8 @@
 import { AppData } from '@/models/AppData'
-import { Blog } from '@/models/BlogPost'
-import { Event } from '@/models/EventPost'
+import { BlogPost } from '@/models/BlogPost'
+import { EventPost } from '@/models/EventPost'
 import { User } from '@/models/User'
-import { fetchEvents, fetchUsers, getBlogPosts } from '@/requests/api'
+import { fetchEvents, fetchUsers, fetchBlogPosts } from '@/requests/api'
 import { useEffect } from 'react'
 
 export default function useFetchCollections (appData: AppData, setAppData: (appData: AppData) => void) {
@@ -10,11 +10,10 @@ export default function useFetchCollections (appData: AppData, setAppData: (appD
     async function fetchData () {
       const promises = []
       appData.users === null && promises.push(fetchUsers())
-      appData.blogPosts === null && promises.push(getBlogPosts())
+      appData.blogPosts === null && promises.push(fetchBlogPosts())
       appData.events === null && promises.push(fetchEvents())
       const result = await Promise.all(promises)
-      console.log('result', result)
-      const toUpdate: {users?: User[], blogPosts?: Blog[], events?: Event[] } = {}
+      const toUpdate: {users?: User[], blogPosts?: BlogPost[], events?: EventPost[] } = {}
       result.forEach((r, i) => {
         i === 0 && (toUpdate.users = r)
         i === 1 && (toUpdate.blogPosts = r)
