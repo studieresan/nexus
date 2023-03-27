@@ -11,8 +11,6 @@ The project uses the **react-icons** library for all usage of icons.
 
 The project follows [this](https://github.com/alan2207/bulletproof-react) React convention to a certain extent.
 
-The project uses **ESLint** configured to standard-jsx to ensure that tabs, spacing, naming, importing and much more is automatically corrected acoording to a consistent standard. The ESLint extention needs to be installed in VSCode.
-
 For translations, **i18n** is used.
 
 ## How to run
