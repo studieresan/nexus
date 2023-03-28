@@ -68,3 +68,11 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+/* .btn.btn-primary {
+  background-image: url('assets/images/buttonPrimary.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  border-color: black;
+} */

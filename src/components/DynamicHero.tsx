@@ -33,7 +33,7 @@ export default function DynamicHero ({ insertRef, bgImg, bottomElement, title, d
   if (align === 'left') elements.reverse()
 
   return (
-    <div ref={insertRef} className='container col-xxl-8 px-4 py-5'>
+    <div ref={insertRef} className='container col-xxl-8 px-4 py-0'>
       <div className='row flex-lg-row-reverse align-items-center g-5 py-5'>
         {elements}
       </div>

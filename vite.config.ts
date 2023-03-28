@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import path from 'path'
-
+// Add alias: '~bootstrap': path.resolve(__dirname, 'node_modules/bootstrap')
 export default defineConfig({
   plugins: [react()],
   esbuild: {
@@ -9,7 +9,8 @@ export default defineConfig({
   },
   resolve: {
     alias: [
-      { find: '@', replacement: path.resolve(__dirname, 'src') }
+      { find: '@', replacement: path.resolve(__dirname, 'src') },
+      { find: '~bootstrap', replacement: path.resolve(__dirname, 'node_modules/bootstrap') }
     ]
   },
   root: './',
