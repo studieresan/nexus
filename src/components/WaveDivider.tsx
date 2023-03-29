@@ -8,7 +8,7 @@ interface WaveDividerProps {
 const WaveDivider: React.FC<WaveDividerProps> = ({ direction, fillColor = 'white' }) => {
   if (direction === 'down') {
     return (
-      <div className='bg-dark'>
+      <div className='bg-dark pt-3'>
         <svg viewBox="0 0 1440 99" preserveAspectRatio="none">
           <path
             fill={fillColor}

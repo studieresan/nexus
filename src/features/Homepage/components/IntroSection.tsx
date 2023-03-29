@@ -9,29 +9,13 @@ import { ImagesLoaded } from '../models/ImagesLoaded';
 import { AiOutlineFundProjectionScreen } from 'react-icons/ai';
 import { RiTeamFill } from 'react-icons/ri';
 import { FiSend } from 'react-icons/fi';
+import { useWindowWidth } from '@/hooks/useWindowWidth';
 
 const groupIcons = {
   project: AiOutlineFundProjectionScreen,
   events: RiTeamFill,
   contact: FiSend,
 };
-
-function useWindowWidth() {
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-    };
-
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
-
-  return windowWidth;
-}
 
 const IconWrapper = ({ icon, iconSize }: { icon: typeof AiOutlineFundProjectionScreen | typeof RiTeamFill | typeof FiSend, iconSize: number }) => (
   <div className='mb-1' style={{ width: 'auto', height: 'auto' }}>
@@ -63,8 +47,6 @@ const overlayText = (
 
 
 function OverlayGroupList({ overlayGroups, windowWidth }: { overlayGroups: OverlayGroup[], windowWidth: number }) {
-  console.log('windowWidth', windowWidth);
-  
   const iconSize = windowWidth < 1400 ? 50 : 60;
   const fontSize1 = windowWidth < 1400 ? 'fs-2' : 'fs-1';
   const fontSize2 = windowWidth < 1400 ? 'fs-5' : 'fs-4';
@@ -74,14 +56,14 @@ function OverlayGroupList({ overlayGroups, windowWidth }: { overlayGroups: Overl
       {overlayGroups.map((group, index) => (
         <div key={index} className="col">
           <div className={` ${index == 0 ? 'me-auto' : (index == overlayGroups.length - 1 ? 'ms-auto' : 'mx-auto')}`} style={{width: '90%'}}>
-            <div className={`d-flex gap-2 ${fontSize1}`} style={{ }}>
+            <div className={`d-flex align-items-center gap-2 ${fontSize1}`} style={{ }}>
               <IconWrapper icon={groupIcons[group.name]} iconSize={iconSize} />
               {group.title}
             </div>
             <div className={`mb-3 ${fontSize2} fw-light`}>
               {group.description}
             </div>
-            <Button
+            <Button className='studs-bg'
             size = 'lg'
               onClick={() => {
                 if (group.ref && group.ref.current) {
@@ -143,7 +125,7 @@ export function IntroSection({ appData, overlayGroups, imagesLoaded, handleImage
           <div className="text-container col-11 col-xxl-8 position-absolute start-50 translate-middle-x" style={{top:'10%'}}>
             {imagesLoaded.intro && (
               <div className="col-12 row row-cols-lg-1 text-center text-lg-start justify-content-center" >
-                <div className='d-block d-lg-none' style={{fontWeight: 200}}>
+                <div className='d-block d-lg-none p-2' style={{fontWeight: 200}}>
                   <img src={logo2023} style={{width: '300px'}}/>
                 </div>
                 <div className='d-flex col-10 text-white' style={{fontWeight: 600, fontSize: titleSize }}>

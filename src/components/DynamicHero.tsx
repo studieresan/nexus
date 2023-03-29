@@ -1,3 +1,5 @@
+import { Button } from "react-bootstrap";
+
 interface DynamicHeroProps {
   insertRef: React.RefObject<HTMLDivElement>;
   bgImg: string;
@@ -40,22 +42,14 @@ export default function DynamicHero({
           <p className="lead">{description}</p>
           <div className="gap-2 d-flex justify-content-center justify-content-lg-start">
             {primaryButtonText && handleClickPrimary && (
-              <button
-                type="button"
-                className="btn btn-primary btn-lg px-4"
-                onClick={() => handleClickPrimary()}
-              >
+              <Button variant = "primary" size="lg" className="px-4 studs-bg" onClick={() => handleClickPrimary()}>
                 {primaryButtonText}
-              </button>
+              </Button>
             )}
             {secondaryButtonText && handleClickSecondary && (
-              <button
-                type="button"
-                className="btn btn-outline-secondary btn-lg px-4"
-                onClick={() => handleClickSecondary()}
-              >
+              <Button variant = "outline-secondary" size="lg" className="px-4" onClick={() => handleClickSecondary()}>
                 {secondaryButtonText}
-              </button>
+              </Button>
             )}
           </div>
           <div className="d-flex justify-content-center justify-content-lg-start">

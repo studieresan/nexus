@@ -8,6 +8,7 @@ import { Button, Spinner } from 'react-bootstrap'
 import { AppData } from '@/models/AppData'
 import { DynamicYearGroup } from '@/models/DynamicYearGroup'
 import generateGroupsInfo from '@/utils/getDynamicYearGroupsInfo'
+import WaveDivider from '@/components/WaveDivider'
 
 interface AboutProps {
   appData: AppData

@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react'
 import { Dropdown } from 'react-bootstrap'
 import i18n from '@/i18n'
 
+
+
 export default function LanguageDropDown () {
   const [lang, setLang] = useState(i18n.languages[0])
   const [drop, setDrop] = useState('down')
@@ -20,7 +22,7 @@ export default function LanguageDropDown () {
     window.addEventListener('resize', handleWindowResize)
     return () => window.removeEventListener('resize', handleWindowResize)
   }, [])
-  function handleLanguageChange (language) {
+  function handleLanguageChange (language: string) {
     setLang(language)
     i18n.changeLanguage(flagAndCountry[language].code)
   }

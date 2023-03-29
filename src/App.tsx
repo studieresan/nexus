@@ -16,6 +16,7 @@ import Footer from './features/Footer/index.jsx'
 import Divider from './components/Divider.jsx'
 import { AppData } from '@/models/AppData'
 import { InstructionArgs, InstructionData } from './models/Instruction'
+import WaveDivider from './components/WaveDivider'
 
 function App () {
   const [appData, setAppData] = useState<AppData>({
@@ -47,14 +48,21 @@ function App () {
       <AppDataContext.Provider value={appData}>
         <Modals modal={handleModals} appData={{ ...appData }} />
         <Header appData={appData} setAppData={setAppData} />
+        
         <Routes>
           <Route path='/' element={<Homepage appData={appData} />} />
-          <Route path='/about' element={<About appData={appData} />} />
+          <Route path='/about' element={
+            <div>
+              <WaveDivider direction='down' />
+              <About appData={appData} /> 
+            </div>
+          } />
           <Route path='/events' element={<Events appData={appData} handleModals={handleModals} />} />
           <Route path='/groups' element={<Groups appData={appData} />} />
           <Route path='/blog' element={<Blog appData={appData} handleModals={handleModals} />} />
           <Route path='/login' element={<Login appData={appData} setAppData={setAppData} />} />
         </Routes>
+        <WaveDivider direction='up' />
         <Footer appData={appData} />
       </AppDataContext.Provider>
     </HandleInstructionsContext.Provider>

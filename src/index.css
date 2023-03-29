@@ -15,64 +15,62 @@
   -webkit-text-size-adjust: 100%;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-}
-
-/* .btn.btn-primary {
+.btn.btn-primary.studs-bg {
+  position: relative;
   background-image: url('assets/images/buttonPrimary.png');
+  background-color: transparent; /* changed from none to transparent */
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  border-color: black;
-} */
+  --bs-btn-bg: transparent;
+  --bs-btn-hover-color: white;
+  border: none;
+  overflow: hidden;
+}
+
+.btn.btn-primary.studs-bg:hover {
+  background-color: transparent; /* added this line to override the Bootstrap hover background color */
+}
+
+.btn.btn-primary.studs-bg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0);
+  transition: background-color 0.25s;
+}
+
+.btn.btn-primary.studs-bg:hover::before {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.btn.btn-primary.studs-navbar {
+  font-size: 1.25rem;
+  font-weight: 300;
+  position: relative;
+  background-color: transparent; /* changed from none to transparent */
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  --bs-btn-bg: transparent;
+  --bs-btn-hover-color: white;
+  border: none;
+  overflow: hidden;
+  transition: opacity 0.25s;
+}
+
+.btn.btn-primary.studs-navbar:hover {
+  opacity: 0.8;
+}
+
+.btn.btn-primary.studs-navbar:active,
+.btn.btn-primary.studs-navbar:focus,
+.btn.btn-primary.studs-navbar:active:focus {
+  background-color: transparent;
+  border-color: transparent;
+  box-shadow: none;
+  --bs-btn-box-shadow: none;
+}
