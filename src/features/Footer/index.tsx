@@ -5,6 +5,7 @@ import karma from '@/assets/images/karma.png'
 import scania from '@/assets/images/scania.png'
 import storykit from '@/assets/images/storykit.png'
 import fra from '@/assets/images/fra.png'
+import visma from '@/assets/images/visma.png'
 import { useTranslation } from 'react-i18next'
 import { projectMasters } from '@/utils/predeterminedInformation'
 import { CSSProperties, useEffect, useState } from 'react'
@@ -48,6 +49,14 @@ export default function Footer ({ appData }: FooterProps): JSX.Element {
     },
   ];
 
+  const companyCircle = (img: string) => {
+    return (
+      <div className='rounded-circle overflow-hidden bg-white d-flex align-items-center justify-content-center' style={{ width: 120, height: 120 }}>
+        <img src={img} className='card-img-top img-cover p-3' style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'center' }} alt='alt' />
+      </div>
+    )
+  }
+
   return (
     <div className='container-fluid p-4 bg-dark text-white'>
       <div className='row row-cols-2'>
@@ -68,19 +77,29 @@ export default function Footer ({ appData }: FooterProps): JSX.Element {
             </div>
           </div>
         </div>
-        <div className='col-12 col-md-6'>
-  <div className='row g-0' style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-    <div style={{ marginRight: '1rem', transform: 'rotate(90deg)', transformOrigin: 'top left' }}>
-      Test
-    </div>
-    <div className='text-left'>
-      Test 2
-    </div>
-  </div>
-</div>
- 
+        <div className='col-12 col-lg-6 d-flex justify-content-center justify-content-lg-start'>
+          <div className='d-flex row row-cols-1 row-cols-lg-2'>
+            <div className='d-flex d-lg-none justify-content-center mb-3'>
+              <span className='fs-3 fw-light'>Collaborations: </span>
+            </div>
+            <div className='d-none d-lg-flex align-items-left justify-content-center' style={{width: '50px', height: '200px', border: '1px solid #000'}}>
+              <span className='fs-3 fw-light' style={{writingMode: 'vertical-rl', textOrientation: 'mixed'}}>Collaborations: </span>
+            </div>
+            <div className='d-flex d-lg-block flex-wrap flex-lg-nowrap justify-content-center mb-3'>
+              <div className='d-flex justify-content-center justify-content-lg-start flex-row mb-2 gap-3' style={{width:500}}>
+                      {companyCircle(goldman_sachs)}
+                      {companyCircle(karma)}
+                      {companyCircle(scania)}
+              </div>
+              <div className='d-flex justify-content-center justify-content-lg-start flex-row gap-3' style={{width:500}}>
+                      {companyCircle(fra)}
+                      {companyCircle( storykit)}
+                      {companyCircle( visma)}
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-
       <div className='row row-cols-1 col-12 justify-content-center'>
         <hr className='col-9 opacity-25' style={{ height: 1, opacity: 1 }} />
       </div>
