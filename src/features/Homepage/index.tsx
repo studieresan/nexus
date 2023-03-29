@@ -96,12 +96,13 @@ export default function Homepage ({ appData }: { appData: AppData }): JSX.Elemen
     <div className='container-fluid g-0'>
       <div className='row row-cols-1 justify-content-center'>
         <IntroSection appData={appData} overlayGroups={overlayGroups} imagesLoaded={imagesLoaded} handleImageLoaded={handleImageLoaded} />
-        <WaveDivider />
+        <WaveDivider direction='down'/>
+        <div className='row row-cols-1 my-5'>
         {imagesLoaded.intro && <DynamicHero insertRef={projectRef} align='left' title={t('homepage.project.title')} description={t('homepage.project.description')} bgImg={bgProject} primaryButtonText={t('homepage.project.buttonPrimary')} secondaryButtonText={t('homepage.project.buttonSecondary')} handleClickPrimary={projectPrimaryButton} handleClickSecondary={projectSecondaryButton} />}
-        <Divider />
         {imagesLoaded.intro && <DynamicHero insertRef={eventsRef} align='right' title={t('homepage.events.title')} description={t('homepage.events.description')} bgImg={bgEvents} primaryButtonText={t('homepage.events.buttonPrimary')} handleClickPrimary={eventsPrimaryButton} />}
-        <Divider />
         {imagesLoaded.intro && <DynamicHero insertRef={contactRef} align='left' title={t('homepage.contact.title')} description={salesInfo.description} bgImg={bgContact} bottomElement={salesInfo.bottomElement} />}
+        </div>
+        <WaveDivider direction='up' />
       </div>
     </div>
   )

@@ -55,7 +55,6 @@ function App () {
           <Route path='/blog' element={<Blog appData={appData} handleModals={handleModals} />} />
           <Route path='/login' element={<Login appData={appData} setAppData={setAppData} />} />
         </Routes>
-        <Divider />
         <Footer appData={appData} />
       </AppDataContext.Provider>
     </HandleInstructionsContext.Provider>

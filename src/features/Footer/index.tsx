@@ -59,7 +59,7 @@ export default function Footer ({ appData }: FooterProps): JSX.Element {
 
 
   return (
-    <div className='container-fluid p-4'>
+    <div className='container-fluid p-4 bg-dark text-white'>
       <div className='mb-4'>
         <div className='text-center fw-bold fs-3 mb-4'>
           {t('footer.questions')}
