@@ -1,5 +1,5 @@
 export interface OverlayGroup {
-  icon: JSX.Element;
+  name: 'project' | 'events' | 'contact';
   title: string;
   description: string;
   button: string;

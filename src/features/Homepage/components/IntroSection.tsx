@@ -1,15 +1,44 @@
 import introBg from '@/assets/images/BigSizeBg.png';
 import logo2023 from '@/assets/images/logo2023.png';
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Spinner } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { AppData } from '@/models/AppData';
 import { OverlayGroup } from '../models/OverlayGroup';
 import { ImagesLoaded } from '../models/ImagesLoaded';
+import { AiOutlineFundProjectionScreen } from 'react-icons/ai';
+import { RiTeamFill } from 'react-icons/ri';
+import { FiSend } from 'react-icons/fi';
 
-const IconWrapper = ({ icon }: {icon: JSX.Element}) => (
-  <div className='mb-1' style={{ width: 'auto', height: 'auto' }}>{icon}</div>
+const groupIcons = {
+  project: AiOutlineFundProjectionScreen,
+  events: RiTeamFill,
+  contact: FiSend,
+};
+
+function useWindowWidth() {
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  return windowWidth;
+}
+
+const IconWrapper = ({ icon, iconSize }: { icon: typeof AiOutlineFundProjectionScreen | typeof RiTeamFill | typeof FiSend, iconSize: number }) => (
+  <div className='mb-1' style={{ width: 'auto', height: 'auto' }}>
+    {React.createElement(icon, { size: iconSize, className: "text-white rounded" })}
+  </div>
 );
+
 
 const loadingSpinner = (
   <div className="d-flex justify-content-center align-items-center vh-100">
@@ -31,33 +60,45 @@ const overlayText = (
   </div>
 );
 
-function OverlayGroupList({ overlayGroups }: { overlayGroups: OverlayGroup[] }) {
-  return overlayGroups.map((group, index) => (
-    <div key={index} className="col">
-      <div className={` ${index == 0 ? 'me-auto' : (index == overlayGroups.length - 1 ? 'ms-auto' : 'mx-auto')}`} style={{width: '90%'}}>
-        <div className="d-flex gap-2 fs-1" style={{ }}>
-          <IconWrapper icon={group.icon} />
-          {group.title}
+
+
+function OverlayGroupList({ overlayGroups, windowWidth }: { overlayGroups: OverlayGroup[], windowWidth: number }) {
+  console.log('windowWidth', windowWidth);
+  
+  const iconSize = windowWidth < 1400 ? 50 : 60;
+  const fontSize1 = windowWidth < 1400 ? 'fs-2' : 'fs-1';
+  const fontSize2 = windowWidth < 1400 ? 'fs-5' : 'fs-4';
+
+  return (
+    <>
+      {overlayGroups.map((group, index) => (
+        <div key={index} className="col">
+          <div className={` ${index == 0 ? 'me-auto' : (index == overlayGroups.length - 1 ? 'ms-auto' : 'mx-auto')}`} style={{width: '90%'}}>
+            <div className={`d-flex gap-2 ${fontSize1}`} style={{ }}>
+              <IconWrapper icon={groupIcons[group.name]} iconSize={iconSize} />
+              {group.title}
+            </div>
+            <div className={`mb-3 ${fontSize2} fw-light`}>
+              {group.description}
+            </div>
+            <Button
+            size = 'lg'
+              onClick={() => {
+                if (group.ref && group.ref.current) {
+                  group.ref.current.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'center',
+                  });
+                }
+              }}
+            >
+              {group.button}
+            </Button>
+          </div>
         </div>
-        <div className='mb-3 fs-4 fw-light'>
-          {group.description}
-        </div>
-        <Button
-        size = 'lg'
-          onClick={() => {
-            if (group.ref && group.ref.current) {
-              group.ref.current.scrollIntoView({
-                behavior: 'smooth',
-                block: 'center',
-              });
-            }
-          }}
-        >
-          {group.button}
-        </Button>
-      </div>
-    </div>
-  ));
+      ))}
+    </>
+  );
 }
 interface IntroSectionProps {
   appData: AppData,
@@ -68,7 +109,19 @@ interface IntroSectionProps {
 
 export function IntroSection({ appData, overlayGroups, imagesLoaded, handleImageLoaded }: IntroSectionProps): JSX.Element {
   const { t, i18n } = useTranslation();
-
+  const windowWidth = useWindowWidth();
+  
+  let titleSize = 0;
+  if (windowWidth < 768) {
+    titleSize = 30
+  } else if (windowWidth < 992) {
+    titleSize = 40
+  } else if (windowWidth < 1400) {
+    titleSize = 55
+  } else {
+    titleSize = 65
+  }
+  
   return (
       <div className="row row-cols-1 w-100 justify-content-center g-0 bg-dark pb-5" style={{ position: 'relative' }}>
         <div className="col-12 w-100 position-relative" style={{minHeight: '200px'}}>
@@ -78,7 +131,7 @@ export function IntroSection({ appData, overlayGroups, imagesLoaded, handleImage
               style={{
                 top: 0,
                 right: 0,
-                width: '70%',
+                width: '60%',
                 height: '100%',
                 objectFit: 'cover',
                 filter: '',
@@ -89,18 +142,14 @@ export function IntroSection({ appData, overlayGroups, imagesLoaded, handleImage
           </div>
           <div className="text-container col-11 col-xxl-8 position-absolute start-50 translate-middle-x" style={{top:'10%'}}>
             {imagesLoaded.intro && (
-              <div className="col-12 text-center text-lg-start" >
+              <div className="col-12 row row-cols-lg-1 text-center text-lg-start justify-content-center" >
                 <div className='d-block d-lg-none' style={{fontWeight: 200}}>
                   <img src={logo2023} style={{width: '300px'}}/>
                 </div>
-                <div className='d-none d-xxl-flex col-10 text-white' style={{fontWeight: 600, fontSize: 70 }}>
-                  {t('homepage.intro')}
-                </div>
-                <div className='d-flex d-xxl-none col-10 text-white' style={{fontWeight: 600, fontSize: 70 }}>
+                <div className='d-flex col-10 text-white' style={{fontWeight: 600, fontSize: titleSize }}>
                   {t('homepage.intro')}
                 </div>
               </div>
-              
             )}
           </div>
         </div>
@@ -109,7 +158,7 @@ export function IntroSection({ appData, overlayGroups, imagesLoaded, handleImage
         </div>
         <div className="col-11 col-xxl-8 d-none d-lg-block text-white mx-auto">
           <div className="row row-cols-3">
-            {overlayGroups && OverlayGroupList({ overlayGroups })}
+            {overlayGroups && <OverlayGroupList overlayGroups={overlayGroups} windowWidth={windowWidth} />}
           </div>
         </div>
       </div>

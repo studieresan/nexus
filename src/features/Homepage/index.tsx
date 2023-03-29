@@ -58,7 +58,7 @@ export default function Homepage ({ appData }: { appData: AppData }): JSX.Elemen
   useEffect(() => {
     setOverlayGroups((groupIcons).map((group, index) => (
     {
-      icon: group.icon,
+      name: group.name,
       title: t(`homepage.${group.name}.short.title`),
       description: t(`homepage.${group.name}.short.description`),
       button: t(`homepage.${group.name}.short.button`),
