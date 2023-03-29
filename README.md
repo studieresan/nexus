@@ -1,9 +1,10 @@
 # nexus
-Recreation of the Studs-website using modern libraries.
+Will be the new Studs-website as of 2023. Built using modern libraries.
+
 ## Info
 This is a **React 18.2** project built with **Vite 3.0**. Vite is a much faster alternative to Create-React-App built by the developers of Vue. 
 
-The project uses TypeScript, which may increase development time somewhat. But the main benefit of TypeScript and why it has turned into an industry standard is that it becomes easier for new members (of for example STUDS) to understand the project and begin contributing to it. I hope that this will be the case for this project.
+The project is written in TypeScript. The main benefit of TypeScript is that it becomes easier for new members (of for example STUDS) to understand the project and begin contributing to it. I hope that this will be the case for this project.
 
 The project uses **Bootstrap 5.2**, meaning no CSS files. To style the components, use bootstrap classnames or if necessary inline CSS. The purpose of this is once again for the project to be easy to delve into. Everything you see on the website will be contained withing each component's TypeScript file.
 
