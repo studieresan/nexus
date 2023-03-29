@@ -11,9 +11,8 @@ export default function Contact ({ element } : ContactProps) : JSX.Element {
   
   if (element.vertical) {
     return (
-      <div className='col'>
-        <div className='d-flex row justify-content-center' style={{ width: element.lg ? 287 : 120 }}>
-          <div className='d-flex ratio ratio-1x1 rounded-circle overflow-hidden flex-shrink-0' style={{ width: element.lg ? 287 : 120, height: element.lg ? 287 : 120 }}>
+        <div className='d-flex flex-column align-items-center'>
+          <div className='d-flex ratio ratio-1x1 rounded-circle bg-white overflow-hidden flex-shrink-0' style={{ width: element.lg ? 287 : 120, height: element.lg ? 287 : 120 }}>
             {element.picture ? <img src={element.picture} className='card-img-top img-cover' alt='alt' /> : <IoPersonSharp className='bg-white' />}
           </div>
           <div className='row gap-0 d-flex justify-content-center text-center mt-1'>
@@ -23,7 +22,6 @@ export default function Contact ({ element } : ContactProps) : JSX.Element {
             {element.email && <div>{element.email}</div>}
           </div>
         </div>
-      </div>
     )
   } else {
     return (

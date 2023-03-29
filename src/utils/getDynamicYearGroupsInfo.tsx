@@ -65,7 +65,7 @@ function getContactElementGroupsInfo(appData: AppData): DynamicYearGroup[] {
       const element: ContactElement = {
         picture: e.info.picture,
         name: `${e.firstName} ${e.lastName}`,
-        phone: e.info.phone,
+        // phone: e.info.phone,
         email: e.info.email,
         role: i18next.t(e.info.role),
         vertical: true,

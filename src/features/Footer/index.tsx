@@ -1,5 +1,5 @@
 import { BsFacebook, BsInstagram, BsLinkedin } from 'react-icons/bs'
-import studsLogo from '@/assets/images/Logo_ROUND.png'
+import studsLogo from '@/assets/images/logo2023.png'
 import goldman_sachs from '@/assets/images/goldman_sachs.png'
 import karma from '@/assets/images/karma.png'
 import scania from '@/assets/images/scania.png'
@@ -31,80 +31,63 @@ export default function Footer ({ appData }: FooterProps): JSX.Element {
   }, [appData.users])
 
   const imgStyle: CSSProperties  = { objectFit: 'contain', width: '200px' }
-
-  const ContactComponents = () => {
-    const contacts: ContactElement[] = [
-      {
-        picture: pictures ? pictures[0] : undefined,
-        name: `${projectMasters[0].firstName} ${projectMasters[0].lastName}`,
-        email: projectMasters[0].email,
-        role: t('projectLeader'),
-      },
-      {
-        picture: pictures ? pictures[1] : undefined,
-        name: `${projectMasters[1].firstName} ${projectMasters[1].lastName}`,
-        email: projectMasters[1].email,
-        role: t('projectLeader'),
-      },
-    ];
-
-    return (
-      <div className="d-flex flex-wrap justify-content-center">
-        {contacts.map((element, index) => (
-          <Contact key={index} element={element} />
-        ))}
-      </div>
-    );
-  };
-
+  const contacts: ContactElement[] = [
+    {
+      picture: pictures ? pictures[0] : undefined,
+      name: `${projectMasters[0].firstName} ${projectMasters[0].lastName}`,
+      email: projectMasters[0].email,
+      role: t('projectLeader'),
+      vertical: true,
+    },
+    {
+      picture: pictures ? pictures[1] : undefined,
+      name: `${projectMasters[1].firstName} ${projectMasters[1].lastName}`,
+      email: projectMasters[1].email,
+      role: t('projectLeader'),
+      vertical: true,
+    },
+  ];
 
   return (
     <div className='container-fluid p-4 bg-dark text-white'>
-      <div className='mb-4'>
-        <div className='text-center fw-bold fs-3 mb-4'>
-          {t('footer.questions')}
+      <div className='row row-cols-2'>
+        <div className='col-12 col-md-6 d-flex justify-content-end'>
+          <div className='col-6 me-5'>
+            <div className='row row-cols-1'>
+                <div className='col-6 text-center'>
+                  <img src={studsLogo} style={imgStyle} alt='Studs Logo' />
+                </div>
+            </div>
+            <div className='row row-cols-2 justify-content-center my-5'>
+                <div className='col-12 col-md-6 text-center'>
+                  <Contact element={contacts[0]} />
+                </div>
+                <div className='col-12 col-md-6 text-center'>
+                  <Contact element={contacts[1]} />
+                </div>
+            </div>
+          </div>
         </div>
-        <div className='d-flex flex-wrap justify-content-center'>
-          {ContactComponents()}
-        </div>
-      </div>
-      <div className='text-center fw-bold fs-3'>
-        {t('footer.collaborations')}
-      </div>
-
-      <div className='row row-cols-2 my-4'>
-        <div className='col-12 d-flex flex-wrap justify-content-center gap-3 mb-4'>
-          <img src={goldman_sachs} alt='Goldman Sachs' style={imgStyle} />
-          <img src={karma} alt='Karma' style={imgStyle} />
-          <img src={scania} alt='Scania' style={imgStyle} />
-        </div>
-        <div className='col-12 d-flex flex-wrap justify-content-center gap-3'>
-          <img src={storykit} alt='Storykit' style={imgStyle} />
-          <img src={fra} alt='FRA' style={imgStyle} />
-        </div>
+        <div className='col-12 col-md-6'>
+  <div className='row g-0' style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+    <div style={{ marginRight: '1rem', transform: 'rotate(90deg)', transformOrigin: 'top left' }}>
+      Test
+    </div>
+    <div className='text-left'>
+      Test 2
+    </div>
+  </div>
+</div>
+ 
       </div>
 
       <div className='row row-cols-1 col-12 justify-content-center'>
         <hr className='col-9 opacity-25' style={{ height: 1, opacity: 1 }} />
       </div>
-      <div className='row row-cols-2 col-12 justify-content-between'>
-        <div className='col d-flex justify-content-center align-items-center'>
-          <div className='mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1'>
-            <img
-              alt=''
-              src={studsLogo}
-              width='30'
-              height='30'
-              className='d-inline-block'
-            />
-          </div>
-          <span className='mb-3 mb-md-0 text-muted'>&copy; 2021-2023 Studs</span>
-        </div>
-        <div className='col d-flex justify-content-center'>
-          <a className='text-muted mx-1' href='https://www.facebook.com/StudsKTH/'><BsFacebook size={22} /></a>
-          <a className='text-muted mx-1' href='https://www.linkedin.com/company/studs/'><BsLinkedin size={22} /></a>
-          <a className='text-muted mx-1' href='https://www.instagram.com/studskth/'><BsInstagram size={22} /></a>
-        </div>
+      <div className='col d-flex justify-content-center'>
+        <a className='text-muted mx-1' href='https://www.facebook.com/StudsKTH/'><BsFacebook size={22} /></a>
+        <a className='text-muted mx-1' href='https://www.linkedin.com/company/studs/'><BsLinkedin size={22} /></a>
+        <a className='text-muted mx-1' href='https://www.instagram.com/studskth/'><BsInstagram size={22} /></a>
       </div>
     </div>
   )

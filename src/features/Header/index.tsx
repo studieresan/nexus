@@ -60,7 +60,7 @@ export default function Header({ appData, setAppData }: HeaderProps): JSX.Elemen
               <Button className='studs-navbar' onClick={() => navigateTo('/groups')}>{t('groups.name')}</Button>
             </Nav>
           </div>
-          <div className='d-none d-md-flex justify-content-center w-100 p-2'>
+          <div className='d-none d-lg-flex justify-content-center w-100 p-2'>
             <Button className='studs-navbar'  onClick= {() => navigateTo('/')}>
               <img alt='' src={studsLogo} width='200px' height='100%' className='d-inline-block align-top'/>
             </Button>
