@@ -51,16 +51,11 @@ function App () {
         
         <Routes>
           <Route path='/' element={<Homepage appData={appData} />} />
-          <Route path='/about' element={
-            <div>
-              <WaveDivider direction='down' />
-              <About appData={appData} /> 
-            </div>
-          } />
-          <Route path='/events' element={<Events appData={appData} handleModals={handleModals} />} />
-          <Route path='/groups' element={<Groups appData={appData} />} />
-          <Route path='/blog' element={<Blog appData={appData} handleModals={handleModals} />} />
-          <Route path='/login' element={<Login appData={appData} setAppData={setAppData} />} />
+          <Route path='/about' element={<div><WaveDivider direction='down'/><About appData={appData} /> </div>} />
+          <Route path='/events' element={<div><WaveDivider direction='down' /><Events appData={appData} handleModals={handleModals} /></div>} />
+          <Route path='/groups' element={<div><WaveDivider direction='down' /><Groups appData={appData} /></div>} />
+          <Route path='/blog' element={<div><WaveDivider direction='down' /><Blog appData={appData} handleModals={handleModals} /></div>} />
+          <Route path='/login' element={<div><WaveDivider direction='down' /><Login appData={appData} setAppData={setAppData} /></div>} />
         </Routes>
         <WaveDivider direction='up' />
         <Footer appData={appData} />

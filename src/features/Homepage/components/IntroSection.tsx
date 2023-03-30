@@ -108,28 +108,19 @@ export function IntroSection({ appData, overlayGroups, imagesLoaded, handleImage
       <div className="row row-cols-1 w-100 justify-content-center g-0 bg-dark pb-5" style={{ position: 'relative' }}>
         <div className="col-12 w-100 position-relative" style={{minHeight: '200px'}}>
           <div className="image-container d-none d-lg-flex justify-content-end">
-            <img
-              src={introBg}
-              style={{
-                top: 0,
-                right: 0,
-                width: '60%',
-                height: '100%',
-                objectFit: 'cover',
-                filter: '',
-              }}
-              onLoad={() => handleImageLoaded('intro')}
-            />
+            <img src={introBg} style={{ top: 0, right: 0, width: '60%', height: '100%', objectFit: 'cover', filter: ''}} onLoad={() => handleImageLoaded('intro')}/>
             {!imagesLoaded.intro && loadingSpinner}
           </div>
           <div className="text-container col-11 col-xxl-8 position-absolute start-50 translate-middle-x" style={{top:'10%'}}>
             {imagesLoaded.intro && (
-              <div className="col-12 row row-cols-lg-1 text-center text-lg-start justify-content-center" >
-                <div className='d-block d-lg-none p-2' style={{fontWeight: 200}}>
-                  <img src={logo2023} style={{width: '300px'}}/>
-                </div>
-                <div className='d-flex col-10 text-white' style={{fontWeight: 600, fontSize: titleSize }}>
-                  {t('homepage.intro')}
+              <div className="col-12">
+                <div className="row row-cols-lg-1 text-center text-lg-start justify-content-center" >
+                  <div className='d-block d-lg-none p-2' style={{fontWeight: 200}}>
+                    <img src={logo2023} style={{width: '300px'}} alt='Studs 2023 Logo' />
+                  </div>
+                  <div className='d-flex col-10 text-white' style={{fontWeight: 600, fontSize: titleSize }}>
+                    {t('homepage.intro')}
+                  </div>
                 </div>
               </div>
             )}

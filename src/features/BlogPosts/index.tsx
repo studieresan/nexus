@@ -91,7 +91,7 @@ export default function BlogPosts ({ appData, handleModals }: BlogProps): JSX.El
     return (
       <div className='container-fluid mb-5' id='hanging-icons'>
         <div className='row row-cols-1 justify-content-center'>
-          <div className='mt-5 mb-5 col-9'>
+          <div className='mb-5 mt-3 col-9'>
             <h1 className='fw-light'>{t('blog.title')}</h1>
             <p className='lead text-muted'>{t('blog.intro')}</p>
             {showTools && (

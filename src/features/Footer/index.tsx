@@ -74,13 +74,9 @@ export default function Footer ({ appData }: FooterProps): JSX.Element {
                 <img src={studsLogo} style={imgStyle} alt='Studs Logo' />
             </div>
             <div className='col d-flex justify-content-center'>
-              <div className='d-flex justify-content-center' style={{width: '500px'}}>
-                  <div className='d-flex justify-content-center justify-content-lg-start'  >
+              <div className='d-flex justify-content-center gap-5' style={{width: '200px'}}>
                     <Contact element={contacts[0]} />
-                  </div>
-                  <div className='d-flex justify-content-center justify-content-lg-start'  >
                     <Contact element={contacts[1]} />
-                  </div>
               </div>
             </div>
           </div>
@@ -109,7 +105,7 @@ export default function Footer ({ appData }: FooterProps): JSX.Element {
         </div>
       </div>
       <div className='row row-cols-1 col-12 justify-content-center'>
-        <hr className='col-9 opacity-25' style={{ height: 1, opacity: 1 }} />
+        <hr className='col-9 opacity-25' style={{ height: 1 }} />
       </div>
       <div className='col d-flex justify-content-center'>
         <a className='text-muted mx-1' href='https://www.facebook.com/StudsKTH/'><BsFacebook size={22} /></a>

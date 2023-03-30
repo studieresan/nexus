@@ -61,7 +61,7 @@ export default function StudsGroups ({ appData }: GroupsProps): JSX.Element {
   return (
     <div className='container-fluid mb-5' id='hanging-icons'>
       <div className='row row-cols-1 justify-content-center'>
-        <div className='my-5 col-9'>
+        <div className='mb-5 mt-3 col-9'>
           <div>
             <h1 className='fw-light'>{t('groups.title')}</h1>
             <p className='lead text-muted'>{t('groups.intro')}</p>

@@ -6,36 +6,60 @@ interface ContactProps {
   element: ContactElement
 }
 
-export default function Contact ({ element } : ContactProps) : JSX.Element {
-  const { t } = useTranslation()
-  
+export default function Contact({ element }: ContactProps): JSX.Element {
+  const { t } = useTranslation();
+
   if (element.vertical) {
     return (
-        <div className='d-flex flex-column align-items-center'>
-          <div className='d-flex ratio ratio-1x1 rounded-circle bg-white overflow-hidden flex-shrink-0' style={{ width: element.lg ? 287 : 120, height: element.lg ? 287 : 120 }}>
-            {element.picture ? <img src={element.picture} className='card-img-top img-cover' alt='alt' /> : <IoPersonSharp className='bg-white' />}
-          </div>
-          <div className='row gap-0 d-flex justify-content-center text-center mt-1'>
-            <div className='lead fs-4'>{element.name}</div>
-            {element.role && <div>{element.role}</div>}
-            {element.phone && <div>{element.phone}</div>}
-            {element.email && <div>{element.email}</div>}
-          </div>
+      <div className="d-flex flex-column align-items-center">
+        <div
+          className="d-flex ratio ratio-1x1 rounded-circle bg-white overflow-hidden flex-shrink-0"
+          style={{ width: element.lg ? 287 : 120, height: element.lg ? 287 : 120 }}
+        >
+          {element.picture ? (
+            <img src={element.picture} className="card-img-top img-cover" alt="alt" />
+          ) : (
+            <IoPersonSharp className="bg-white" />
+          )}
         </div>
-    )
-  } else {
-    return (
-      <div className='d-flex'>
-        <div className='d-flex ratio ratio-1x1 rounded-circle overflow-hidden' style={{ width: 120, height: 120 }}>
-          {element.picture ? <img src={element.picture} className='card-img-top img-cover' alt='alt' /> : <IoPersonSharp className='bg-white' />}
-        </div>
-        <div className='d-flex d-flex flex-column justify-content-center'>
-          <div className='lead fs-4'>{element.name}</div>
-          {element.role && <div>{element.role}</div>}
-          {element.phone && <div><a href={`tel:${element.phone}`}>{element.phone}</a></div>}
-          {element.email && <div><a href={`mailto:${element.email}`}>{element.email}</a></div>}
+        <div className="row gap-0 d-flex justify-content-center text-center mt-1">
+          <div className="lead fs-4" style={{ whiteSpace: 'nowrap' }}>{element.name}</div>
+          {element.role && <div style={{ whiteSpace: 'nowrap' }}>{element.role}</div>}
+          {element.phone && <div style={{ whiteSpace: 'nowrap' }}>{element.phone}</div>}
+          {element.email && <div style={{ whiteSpace: 'nowrap' }}>{element.email}</div>}
         </div>
       </div>
-    )
+    );
+  } else {
+    return (
+      <div className="d-flex flex-nowrap">
+        <div
+          className="d-flex ratio ratio-1x1 rounded-circle overflow-hidden"
+          style={{ width: 120, height: 120 }}
+        >
+          {element.picture ? (
+            <img src={element.picture} className="card-img-top img-cover" alt="alt" />
+          ) : (
+            <IoPersonSharp className="bg-white" />
+          )}
+        </div>
+        <div className="d-flex flex-column justify-content-center">
+          <div className="lead fs-4" style={{ whiteSpace: 'nowrap' }}>{element.name}</div>
+          {element.role && <div style={{ whiteSpace: 'nowrap' }}>{element.role}</div>}
+          {element.phone && (
+            <div style={{ whiteSpace: 'nowrap' }}>
+              <a href={`tel:${element.phone}`}>{element.phone}</a>
+            </div>
+          )}
+          {element.email && (
+            <div style={{ whiteSpace: 'nowrap' }}>
+              <a href={`mailto:${element.email}`}>{element.email}</a>
+            </div>
+          )}
+        </div>
+      </div>
+    );
   }
 }
+
+
