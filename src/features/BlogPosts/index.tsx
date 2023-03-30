@@ -7,7 +7,7 @@ import generateGroupsInfo from '@/utils/getDynamicYearGroupsInfo'
 import { DynamicYearGroup } from '@/models/DynamicYearGroup.js'
 import { AppData } from '@/models/AppData.js'
 import { ModalData, ModalManager } from '@/models/Modal.js'
-import { Blog } from '@/models/BlogPost.js'
+import { BlogPost } from '@/models/BlogPost.js'
 
 interface BlogProps {
   appData: AppData
@@ -64,7 +64,7 @@ export default function BlogPosts ({ appData, handleModals }: BlogProps): JSX.El
     })
   }
 
-  async function handleConfirmDelete (modal: ModalData, data: Blog) {
+  async function handleConfirmDelete (modal: ModalData, data: BlogPost) {
     await handleInstructions('deleteBlogPost', { toDeleteId: data.id })
     modal.off(modal)
   }
