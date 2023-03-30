@@ -12,6 +12,7 @@ import { CSSProperties, useEffect, useState } from 'react'
 import Contact from '@/components/Contact.jsx'
 import { AppData } from '@/models/AppData'
 import { ContactElement } from '@/models/Contact'
+import { useWindowWidth } from '@/hooks/useWindowWidth'
 
 interface FooterProps {
   appData: AppData
@@ -20,6 +21,13 @@ interface FooterProps {
 export default function Footer ({ appData }: FooterProps): JSX.Element {
   const { t, i18n } = useTranslation()
   const [pictures, setPictures] = useState<string[] | null>(null)
+  const windowWidth = useWindowWidth();
+  
+  let textPos = 'text-start';
+  if (windowWidth < 992) {
+    textPos = 'text-center';
+  }
+
   useEffect(() => {
     if (appData.users) {
       const pictures: string[] = appData.users
@@ -59,27 +67,27 @@ export default function Footer ({ appData }: FooterProps): JSX.Element {
 
   return (
     <div className='container-fluid p-4 bg-dark text-white'>
-      <div className='row row-cols-2'>
-        <div className='col-12 col-md-6 d-flex justify-content-end'>
-          <div className='col-6 me-5'>
-            <div className='row row-cols-1'>
-                <div className='col-6 text-center'>
-                  <img src={studsLogo} style={imgStyle} alt='Studs Logo' />
-                </div>
+      <div className='row row-cols-2 mb-5'>
+        <div className='col-12 col-lg-6 d-flex justify-content-center justify-content-lg-end'>
+          <div className='d-flex row row-cols-1 justify-content-center'>
+            <div className='col d-flex justify-content-center mb-3 gap-5'>
+                <img src={studsLogo} style={imgStyle} alt='Studs Logo' />
             </div>
-            <div className='row row-cols-2 justify-content-center my-5'>
-                <div className='col-12 col-md-6 text-center'>
-                  <Contact element={contacts[0]} />
-                </div>
-                <div className='col-12 col-md-6 text-center'>
-                  <Contact element={contacts[1]} />
-                </div>
+            <div className='col d-flex justify-content-center'>
+              <div className='d-flex justify-content-center' style={{width: '500px'}}>
+                  <div className='d-flex justify-content-center justify-content-lg-start'  >
+                    <Contact element={contacts[0]} />
+                  </div>
+                  <div className='d-flex justify-content-center justify-content-lg-start'  >
+                    <Contact element={contacts[1]} />
+                  </div>
+              </div>
             </div>
           </div>
         </div>
         <div className='col-12 col-lg-6 d-flex justify-content-center justify-content-lg-start'>
           <div className='d-flex row row-cols-1 row-cols-lg-2'>
-            <div className='d-flex d-lg-none justify-content-center mb-3'>
+            <div className='d-flex d-lg-none justify-content-center my-3'>
               <span className='fs-3 fw-light'>Collaborations: </span>
             </div>
             <div className='d-none d-lg-flex align-items-left justify-content-center' style={{width: '50px', height: '200px', border: '1px solid #000'}}>
