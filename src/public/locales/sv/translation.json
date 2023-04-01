@@ -63,6 +63,7 @@
   "blogPost.edit.label.studsYear": "Studs år",
   "blogPost.edit.label.editing": "Redigerar",
   "blogPost.edit.label.creating": "Skapar nytt blogginlägg",
+  "blogPost.edit.label.published": "Publicerad",
   "blogPost.edit.label.author": "Skribent",
   "blogPost.edit.label.title": "Titel",
   "blogPost.edit.label.description": "Beskrivning",
@@ -133,7 +134,18 @@
   "login.label.password": "Lösenord",
   "login.primaryButton": "Logga in",
   "login.secondaryButton": "Glömt lösenordet?",
-
   "footer.collaborations": "Samarbeten",
-  "footer.questions": "Frågor?"
+  
+
+  "forgotPassword.title": "Glömt lösenord",
+  "forgotPassword.label.email": "E-post",
+  "forgotPassword.primaryButton": "Skicka",
+  "checkEmail.title": "Kontrollera din e-post",
+  "checkEmail.text": "Vi har skickat ett e-postmeddelande med en länk för att återställa ditt lösenord. Om du inte får ett e-postmeddelande inom några minuter, kontrollera din skräppostmapp.",
+  "resetPassword.title": "Ange dina nya uppgifter",
+  "resetPassword.label.password": "Lösenord",
+  "resetPassword.label.confirmPassword": "Bekräfta lösenord",
+  "resetPassword.primaryButton": "Återställ lösenord",
+  "changeSuccess.title": "Lösenord ändrat",
+  "changeSuccess.text": "Ditt lösenord har ändrats framgångsrikt. Du kan nu logga in med ditt nya lösenord."
   }

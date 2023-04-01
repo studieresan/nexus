@@ -1,5 +1,5 @@
 import { InstructionArgs, InstructionData } from '@/models/Instruction'
-import { createBlogPost, deleteBlogpost, loginUser, updateEvent, createEvent, updateBlogPost } from '@/requests/api'
+import { createBlogPost, deleteBlogpost, loginUser, updateEvent, createEvent, updateBlogPost, requestPasswordReset, resetPassword } from '@/requests/api'
 import { setLoggedIn, setLoggedOut } from '@/requests/auth'
 import { BlogPost } from '@/models/BlogPost';
 import { EventPost } from '@/models/EventPost';
@@ -73,6 +73,18 @@ export default async function instructionSwitchboard (args: InstructionArgs, ins
       setLoggedOut()
       args.setAppData({ ...args.appData, loggedIn: false, userDetails: null })
       args.navigateTo('/')
+      break
+    }
+    case 'startPasswordReset': {
+      const email = assertDefined(data.email, instruction, 'data.email');
+      await requestPasswordReset(email)
+      break
+    }
+    case 'resetPassword': {
+      const password = assertDefined(data.password, instruction, 'data.password');
+      const confirmPassword = assertDefined(data.confirmPassword, instruction, 'data.confirmPassword');
+      const resetToken = assertDefined(data.resetToken, instruction, 'data.resetToken');
+      await resetPassword(password, confirmPassword, resetToken)
       break
     }
     default:

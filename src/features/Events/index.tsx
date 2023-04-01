@@ -25,7 +25,6 @@ export default function Events ({ appData, handleModals }: EventsProps): JSX.Ele
   useEffect(() => {
     if (appData.events) {
       const groupsInfo = generateGroupsInfo(appData, 'events')
-      console.log('groupsInfo', groupsInfo)
       setGroupsInfo(groupsInfo)
     }
   }, [appData, i18n.language])

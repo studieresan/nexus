@@ -8,7 +8,6 @@ import bgEvents from '@/assets/images/b48.jpg'
 import bgProject from '@/assets/images/b28.jpg'
 
 import DynamicHero from '@/components/DynamicHero.jsx'
-import Divider from '@/components/Divider.jsx'
 import Contact from '@/components/Contact.jsx'
 import { useNavigate } from 'react-router-dom'
 import { AppData } from '@/models/AppData'
@@ -47,6 +46,7 @@ export default function Homepage ({ appData }: { appData: AppData }): JSX.Elemen
       picture: salesMasterUser?.info?.picture,
       name: `${salesMaster.firstName} ${salesMaster.lastName}`,
       email: salesMaster.email,
+      phone: salesMaster.phone,
       role: t('salesLeader')
     }
     setSalesInfo({
@@ -97,7 +97,7 @@ export default function Homepage ({ appData }: { appData: AppData }): JSX.Elemen
       <div className='row row-cols-1 justify-content-center g-0'>
         <IntroSection appData={appData} overlayGroups={overlayGroups} imagesLoaded={imagesLoaded} handleImageLoaded={handleImageLoaded} />
         <WaveDivider direction='down'/>
-        <div className='row row-cols-1 my-5'>
+        <div className='row row-cols-1 my-5 g-0'>
           {imagesLoaded.intro && <DynamicHero insertRef={projectRef} align='left' title={t('homepage.project.title')} description={t('homepage.project.description')} bgImg={bgProject} primaryButtonText={t('homepage.project.buttonPrimary')} secondaryButtonText={t('homepage.project.buttonSecondary')} handleClickPrimary={projectPrimaryButton} handleClickSecondary={projectSecondaryButton} />}
           {imagesLoaded.intro && <DynamicHero insertRef={eventsRef} align='right' title={t('homepage.events.title')} description={t('homepage.events.description')} bgImg={bgEvents} primaryButtonText={t('homepage.events.buttonPrimary')} handleClickPrimary={eventsPrimaryButton} />}
           {imagesLoaded.intro && <DynamicHero insertRef={contactRef} align='left' title={t('homepage.contact.title')} description={salesInfo.description} bgImg={bgContact} bottomElement={salesInfo.bottomElement} />}

@@ -6,15 +6,15 @@ import './index.css';
 // Import our custom CSS
 import './scss/styles.scss'
 import './index.css'
-import { HashRouter } from 'react-router-dom';
+import { BrowserRouter, HashRouter } from 'react-router-dom';
 
 const rootElement = document.getElementById('root');
 
 if (rootElement) {
   ReactDOM.createRoot(rootElement).render(
-    <HashRouter>
+    <BrowserRouter>
       <App />
-    </HashRouter>,
+    </BrowserRouter>,
   );
 } else {
   console.error("Could not find the 'root' element.");

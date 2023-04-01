@@ -62,6 +62,7 @@
   "blogPost.edit.label.studsYear": "Studs-vuosi",
   "blogPost.edit.label.editing": "Muokataan",
   "blogPost.edit.label.creating": "Luodaan uutta blogikirjoitusta",
+  "blogPost.edit.label.published": "Julkaistu",
   "blogPost.edit.label.author": "Tekijä",
   "blogPost.edit.label.title": "Otsikko",
   "blogPost.edit.label.description": "Kuvaus",
@@ -132,6 +133,18 @@
 "login.label.password": "Salasana",
 "login.primaryButton": "Kirjaudu sisään",
 "login.secondaryButton": "Unohditko salasanasi?",
+"footer.collaborations": "Yhteistyöt",
 
-"footer.collaborations": "Yhteistyöt"
+
+"forgotPassword.title": "Unohditko salasanan",
+"forgotPassword.label.email": "Sähköposti",
+"forgotPassword.primaryButton": "Lähetä",
+"checkEmail.title": "Tarkista sähköpostisi",
+"checkEmail.text": "Olemme lähettäneet sinulle sähköpostiviestin, jossa on linkki salasanan palauttamiseksi. Jos et saa sähköpostia muutaman minuutin kuluessa, tarkista roskapostikansiosi.",
+"resetPassword.title": "Syötä uudet tunnistetietosi",
+"resetPassword.label.password": "Salasana",
+"resetPassword.label.confirmPassword": "Vahvista salasana",
+"resetPassword.primaryButton": "Nollaa salasana",
+"changeSuccess.title": "Salasana vaihdettu",
+"changeSuccess.text": "Salasanasi on vaihdettu onnistuneesti. Voit nyt kirjautua sisään uudella salasanallasi."
 }

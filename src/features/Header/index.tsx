@@ -28,7 +28,7 @@ const loginOrOut = (loggedIn: boolean, t: any, navigateTo: any, logout: any) => 
     )
   } else {
     return (
-      <Button className='studs-navbar' onClick={() => navigateTo('/login')}>
+      <Button className='studs-navbar' onClick={() => navigateTo('/auth/login')}>
         <div className='d-flex gap-1'>
           {t('login')}
           <div className='d-flex align-items-center'>

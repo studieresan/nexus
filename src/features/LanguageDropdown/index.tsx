@@ -2,12 +2,12 @@ import { flagAndCountry } from '@/components/icons/Flags.jsx'
 import { useEffect, useState } from 'react'
 import { Dropdown } from 'react-bootstrap'
 import i18n from '@/i18n'
-
+import { LanguageCode } from '@/models/Lang'
 
 
 export default function LanguageDropDown () {
-  const [lang, setLang] = useState(i18n.languages[0])
-  const [drop, setDrop] = useState('down')
+  const [lang, setLang] = useState<LanguageCode>(i18n.language as LanguageCode)
+  const [drop, setDrop] = useState<'up' | 'down'>('down')
 
   useEffect(() => {
     const handleWindowResize = () => {
@@ -22,7 +22,7 @@ export default function LanguageDropDown () {
     window.addEventListener('resize', handleWindowResize)
     return () => window.removeEventListener('resize', handleWindowResize)
   }, [])
-  function handleLanguageChange (language: string) {
+  function handleLanguageChange (language: LanguageCode) {
     setLang(language)
     i18n.changeLanguage(flagAndCountry[language].code)
   }
@@ -36,13 +36,12 @@ export default function LanguageDropDown () {
       </Dropdown.Toggle>
 
       <Dropdown.Menu
-        align={{ lg: 'center' }}
         style={{ position: 'absolute', top: 'auto', bottom: drop === 'down' ? 'auto' : '100%', left: 0, right: 0, zIndex: 1000 }}
       >
-        {Object.entries(flagAndCountry).map(([language, value]) => (
+        {Object.entries(flagAndCountry).map(([language, value ]) => (
           <Dropdown.Item
             key={language}
-            onClick={() => handleLanguageChange(language)}
+            onClick={() => handleLanguageChange(language as LanguageCode)}
           >
             {value?.icon} {value?.text}
           </Dropdown.Item>

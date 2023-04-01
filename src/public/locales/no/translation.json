@@ -132,6 +132,18 @@
   "login.label.password": "Passord",
   "login.primaryButton": "Logg inn",
   "login.secondaryButton": "Glemt passord?",
+  "footer.collaborations": "Samarbeid",
 
-  "footer.collaborations": "Samarbeid"
+  
+  "forgotPassword.title": "Glemt passord",
+  "forgotPassword.label.email": "E-post",
+  "forgotPassword.primaryButton": "Send",
+  "checkEmail.title": "Sjekk e-posten din",
+  "checkEmail.text": "Vi har sendt deg en e-post med en lenke for å tilbakestille passordet ditt. Hvis du ikke mottar en e-post innen noen minutter, vennligst sjekk søppelpostmappen din.",
+  "resetPassword.title": "Skriv inn dine nye legitimasjonsopplysninger",
+  "resetPassword.label.password": "Passord",
+  "resetPassword.label.confirmPassword": "Bekreft passord",
+  "resetPassword.primaryButton": "Tilbakestill passord",
+  "changeSuccess.title": "Passord endret",
+  "changeSuccess.text": "Passordet ditt har blitt endret. Du kan nå logge inn med det nye passordet ditt."
 }

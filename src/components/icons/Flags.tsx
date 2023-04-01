@@ -1,3 +1,5 @@
+import { Country, LanguageCode } from "@/models/Lang"
+
 interface FlagProps {
   size?: string
   className?: string
@@ -59,7 +61,7 @@ export function GreatBritainFlag ({ size = '1.5em', className, fill, style }: Fl
 }
 
 // For more languages, add more objects here
-export const flagAndCountry = {
+export const flagAndCountry: Record<LanguageCode, Country> = {
   sv: { icon: <SwedishFlag />, code: 'sv', text: 'Svenska' },
   no: { icon: <NorwegianFlag />, code: 'no', text: 'Norsk' },
   fi: { icon: <FinnishFlag />, code: 'fi', text: 'Suomalainen' },

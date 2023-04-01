@@ -62,6 +62,7 @@
   "blogPost.edit.label.studsYear": "Studs year",
   "blogPost.edit.label.editing": "Editing",
   "blogPost.edit.label.creating": "Creating new blog post",
+  "blogPost.edit.label.published": "Published",
   "blogPost.edit.label.author": "Author",
   "blogPost.edit.label.title": "Title",
   "blogPost.edit.label.description": "Description",
@@ -132,6 +133,19 @@
   "login.label.password": "Password",
   "login.primaryButton": "Login",
   "login.secondaryButton": "Forgot password?",
+  "footer.collaborations": "Collaborations",
 
-  "footer.collaborations": "Collaborations"
+  
+  "forgotPassword.title": "Forgot password",
+  "forgotPassword.label.email": "Email",
+  "forgotPassword.primaryButton": "Send",
+  "checkEmail.title": "Check your email",
+  "checkEmail.text": "We have sent you an email with a link to reset your password. If you do not receive an email within a few minutes, please check your spam folder.",
+  "resetPassword.title": "Enter your new credentials",
+  "resetPassword.label.password": "Password",
+  "resetPassword.label.confirmPassword": "Confirm password",
+  "resetPassword.primaryButton": "Reset password",
+  "changeSuccess.title": "Password changed",
+  "changeSuccess.text": "Your password has been changed successfully. You can now log in with your new password."
+
 }

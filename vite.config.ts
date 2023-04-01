@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import path from 'path'
+
 // Add alias: '~bootstrap': path.resolve(__dirname, 'node_modules/bootstrap')
 export default defineConfig({
   plugins: [react()],
@@ -38,6 +39,18 @@ export default defineConfig({
         changeOrigin: true
       },
       '/login': {
+        target: 'http://localhost:5040/',
+        changeOrigin: true
+      },
+      '/forgot': {
+        target: 'http://localhost:5040/',
+        changeOrigin: true
+      },
+      '/reset': {
+        target: 'http://localhost:5040/',
+        changeOrigin: true
+      },
+      '/account/password': {
         target: 'http://localhost:5040/',
         changeOrigin: true
       },

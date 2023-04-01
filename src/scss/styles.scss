@@ -1,5 +1,25 @@
+// Custom Variables
 $dark: #000000;
+
+// Import Bootstrap functions, variables, and mixins
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+
+// Define the new breakpoint for 'xxxl'
+$grid-breakpoints: map-merge(
+  $grid-breakpoints,
+  (
+    'xxxl': 1900px,
+  )
+);
+
+$container-max-widths: map-merge(
+  $container-max-widths,
+  (
+    'xxxl': 1840px,
+  )
+);
 
 // Import all of Bootstrap's CSS
 @import "~bootstrap/scss/bootstrap";
-

@@ -14,4 +14,6 @@ export interface InstructionData {
   toDeleteId?: string
   email?: string
   password?: string
+  confirmPassword?: string
+  resetToken?: string
 }
