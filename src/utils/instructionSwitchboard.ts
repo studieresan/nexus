@@ -1,49 +1,60 @@
 import { InstructionArgs, InstructionData } from '@/models/Instruction'
 import { createBlogPost, deleteBlogpost, loginUser, updateEvent, createEvent, updateBlogPost } from '@/requests/api'
 import { setLoggedIn, setLoggedOut } from '@/requests/auth'
-import { Blog } from '@/models/BlogPost';
-import { Event } from '@/models/EventPost';
+import { BlogPost } from '@/models/BlogPost';
+import { EventPost } from '@/models/EventPost';
 import { LoginResponse } from '@/models/Login';
 import { assertDefined } from './assertDefined';
 
 
 export default async function instructionSwitchboard (args: InstructionArgs, instruction: string, data: InstructionData): Promise<void> {
+  console.log('instructionSwitchboard: ', instruction, data);
+  
   switch (instruction) {
     case 'updateBlogPost': {
       const blogPost = assertDefined(data.blogPost, instruction, 'data.blogPost');
-      const response: Blog = await updateBlogPost(blogPost);
-      const newBlogPosts: Blog[] = (args.appData.blogPosts || []).map((post: Blog) => post.id === blogPost.id ? response : post)
+      const response: BlogPost = await updateBlogPost(blogPost);
+      response.date = new Date(response.date)
+      console.log('new post response: ', response)
+      const newBlogPosts: BlogPost[] = (args.appData.blogPosts || []).map((post: BlogPost) => post.id === blogPost.id ? response : post)
       args.setAppData({ ...args.appData, blogPosts: newBlogPosts })
       break
     }
     case 'createBlogPost': {
       const blogPost = assertDefined(data.blogPost, instruction, 'data.blogPost');
-      const response: Blog = await createBlogPost(blogPost)
+      const response: BlogPost = await createBlogPost(blogPost)
+      response.date = new Date(response.date)
       console.log('new post response: ', response)
-      const newBlogPosts: Blog[] = [...(args.appData.blogPosts || []), response]
+      const newBlogPosts: BlogPost[] = [...(args.appData.blogPosts || []), response]
       args.setAppData({ ...args.appData, blogPosts: newBlogPosts })
       break
     }
     case 'deleteBlogPost': {
       const toDeleteId = assertDefined(data.toDeleteId, instruction, 'data.toDeleteId');
       await deleteBlogpost(toDeleteId)
-      args.setAppData({ ...args.appData, blogPosts: (args.appData.blogPosts || []).filter(post => post.id !== data.toDeleteId) })
+      const newAppData = { ...args.appData, blogPosts: (args.appData.blogPosts || []).filter(post => post.id !== data.toDeleteId) }
+      console.log("New appData after delete:", newAppData);
+      
+      args.setAppData(newAppData)
       break
     }
-    case 'updateEvent': {
-      const eventToUpdate = assertDefined(data.event, instruction, 'data.event');
-      const response = await updateEvent(eventToUpdate)
-      args.setAppData({ ...args.appData, events: (args.appData.events || []).map((event: Event) => event.id === eventToUpdate.id ? response : event) })
+    case 'updateEventPost': {
+      const eventToUpdate = assertDefined(data.eventPost, instruction, 'data.eventPost');
+      const response: EventPost = await updateEvent(eventToUpdate)
+      response.date = new Date(response.date)
+      console.log('new events response: ', response)
+      args.setAppData({ ...args.appData, events: (args.appData.events || []).map((event: EventPost) => event.id === eventToUpdate.id ? response : event) })
       break
     }
-    case 'createEvent': {
-      const eventToCreate = assertDefined(data.event, instruction, 'data.event');
-      const response = await createEvent(eventToCreate)
+    case 'createEventPost': {
+      const eventToCreate = assertDefined(data.eventPost, instruction, 'data.eventPost');
+      const response: EventPost = await createEvent(eventToCreate)
+      response.date = new Date(response.date)
       console.log('new events response: ', response)
       args.setAppData({ ...args.appData, events: [...(args.appData.events || []), response] })
       break
     }
-    case 'deleteEvent': {
+    case 'deleteEventPost': {
       const toDeleteId = assertDefined(data.toDeleteId, instruction, 'data.toDeleteId');
       await deleteBlogpost(toDeleteId)
       args.setAppData({ ...args.appData, events: (args.appData.events || []).filter(post => post.id !== data.toDeleteId) })

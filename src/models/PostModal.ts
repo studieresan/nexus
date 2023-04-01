@@ -6,5 +6,5 @@ export interface PostModalData {
   post: BlogPost | EventPost,
   name: string,
   id: string,
-  type: 'Blog' | 'Event'
+  type: 'blogPost' | 'eventPost'
 }

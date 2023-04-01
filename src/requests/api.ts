@@ -48,11 +48,10 @@ function graphQLHeader () {
   }
 }
 
-function ftch (input: RequestInfo, init?: RequestInit): Promise<any> {
+function ftch (input: any, init: any): Promise<any> {
   return fetch(input, init)
     .then(checkStatus)
     .then(parseJSON)
-    .catch(console.error)
 }
 
 function executeGraphQL(query: string): Promise<any> {
@@ -105,9 +104,9 @@ export function fetchUser () {
   })
 }
 
-function toGraphQLFields (str: string): string {
+function toGraphQLFields (obj: any): string {
   // This will remove any key which has a 'null' value
-  const withoutNulls = pickBy(str, a => a !== null && a !== undefined)
+  const withoutNulls = pickBy(obj, a => a !== null && a !== undefined)
   return JSON.stringify(withoutNulls).replace(/"([^"]*)":/g, '$1:')
 }
 
@@ -225,6 +224,7 @@ const EVENT_FIELDS = `
   title
   description
   pictures
+  studsYear
   frontPicture
   author {
     id
@@ -255,7 +255,7 @@ export function fetchEvents () {
 
 export function createEvent (event: EventPost) {
   const mutation = `mutation {
-    eventCreate(fields: ${toGraphQLFields(JSON.stringify(event))}) {
+    eventCreate(fields: ${toGraphQLFields(event)}) {
       ${EVENT_FIELDS}
     }
   }
@@ -267,7 +267,7 @@ export function createEvent (event: EventPost) {
 
 export function updateEvent (event: EventPost) {
   const mutation = `mutation {
-    eventUpdate(id: "${event.id}", fields: ${toGraphQLFields(JSON.stringify(event))}) {
+    eventUpdate(id: "${event.id}", fields: ${toGraphQLFields(event)}) {
       ${EVENT_FIELDS}
     }
   }
@@ -317,7 +317,7 @@ export function uploadImage (file: File) {
   )
 }
 
-const uploadFile = (file: File, signedRequest: string, url: string) => {
+const uploadFile = (file: any, signedRequest: any, url: any) => {
   const uploadData = {
     method: 'PUT',
     body: file
@@ -345,6 +345,7 @@ published
 title
 description
 pictures
+studsYear
 frontPicture
 author {
   id
@@ -360,7 +361,7 @@ date
 export function createBlogPost (blogPost: BlogPost) {
   // post.date = moment(new Date()).format('YYYY-MM-DD')
   const mutation = `mutation {
-    blogCreate(fields: ${toGraphQLFields(JSON.stringify(blogPost))}) {
+    blogCreate(fields: ${toGraphQLFields(blogPost)}) {
       ${BLOG_FIELDS}
     }
   }
@@ -386,7 +387,7 @@ export function fetchBlogPosts () {
 
 export function updateBlogPost(blogPost: BlogPost) {
   const query = `mutation {
-    blogPostUpdate(id: "${blogPost.id}", fields: ${toGraphQLFields(JSON.stringify(blogPost))}) {
+    blogPostUpdate(id: "${blogPost.id}", fields: ${toGraphQLFields(blogPost)}) {
       ${BLOG_FIELDS}
     }
   }

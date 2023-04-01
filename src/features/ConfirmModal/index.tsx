@@ -1,3 +1,5 @@
+import { BlogPost } from '@/models/BlogPost'
+import { EventPost } from '@/models/EventPost'
 import { ModalManager } from '@/models/Modal'
 import { useEffect, useRef } from 'react'
 import { Button, Modal } from 'react-bootstrap'
@@ -9,8 +11,9 @@ export interface ConfirmModalProps {
     title: string,
     name: string,
     id: string,
+    post: BlogPost | EventPost,
     children: JSX.Element,
-    handleConfirm: (props: ConfirmModalProps) => void,
+    handleConfirm: (name: string, id: string, post: BlogPost | EventPost) => void,
     disabled?: boolean
   }
 }
@@ -38,7 +41,7 @@ function ConfirmModal ({ modal, data }: ConfirmModalProps): JSX.Element {
         <Button ref={cancelButtonRef} disabled={data.disabled} variant='secondary' onClick={handleModalClose}>
           {t('cancel')}
         </Button>
-        <Button disabled={data.disabled} variant='primary' onClick={() => data.handleConfirm({ modal, data })}>
+        <Button disabled={data.disabled} variant='primary' onClick={() => data.handleConfirm(data.name, data.id, data.post)}>
           {t('confirm')}
         </Button>
       </Modal.Footer>

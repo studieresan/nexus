@@ -1,6 +1,5 @@
-import { HandleInstructionsContext } from '@/context.js'
-import { createBlogPost, updateBlogPost, uploadImage } from '@/requests/api'
-import { useContext, useEffect, useRef, useState } from 'react'
+import { uploadImage } from '@/requests/api'
+import { useEffect, useRef, useState } from 'react'
 import { Alert, Button, FloatingLabel, Form, FormControl, Modal } from 'react-bootstrap'
 import { Trans, useTranslation } from 'react-i18next'
 import { AddedImage } from './AddedImage.jsx'
@@ -8,7 +7,6 @@ import { BlogPost, CreateBlogPost } from '@/models/BlogPost.js'
 import { CreateEventPost, EventPost } from '@/models/EventPost.js'
 import { AppData } from '@/models/AppData.js'
 import { ModalManager } from '@/models/Modal.js'
-import { Permission, UserRole } from '@/models/User.js'
 
 interface EditPostProps {
   modal: ModalManager,
@@ -17,7 +15,7 @@ interface EditPostProps {
     post: BlogPost | EventPost,
     name: string,
     id: string,
-    type: 'Blog' | 'Event'
+    type: 'blogPost' | 'eventPost'
   }
   appData: AppData,
   handleSubmit: (formData: CreateEventPost | CreateBlogPost ) => void
@@ -30,7 +28,7 @@ export default function EditPost ({ modal, data, appData, handleSubmit }: EditPo
     description: '',
     frontPicture: '',
     pictures: [],
-    author_id: '',
+    author: '',
     date: new Date(),
     published: false,
     studsYear: 0
@@ -42,24 +40,26 @@ export default function EditPost ({ modal, data, appData, handleSubmit }: EditPo
   const iconRefs = useRef([])
   const frontImageRefs = useRef([])
   const frontIconRefs = useRef([])
-
+  console.log(formData)
   useEffect(() => {
-    const post = data.post
+    const post = data.post;
     if (post && appData.users) {
+      const defaultAuthor = appData.users.find(user => user.studsYear === 2023) || appData.users[0];
+  
       const newFormData: CreateEventPost | CreateBlogPost = {
         id: post.id || '',
         title: post.title || '',
         description: post.description || '',
         frontPicture: post.frontPicture || '',
         pictures: post.pictures || [],
-        author_id: post?.author?.id || appData.users[0].id,
-        studsYear: post?.author?.studsYear || appData.users[0].studsYear,
+        author: post?.author?.id || defaultAuthor.id,
+        studsYear: post.studsYear || defaultAuthor.studsYear,
         date: post.date || null,
-        published: post.published || false
-      }
-      setFormData(newFormData)
+        published: post.published || false,
+      };
+      setFormData(newFormData);
     }
-  }, [data.post])
+  }, [data.post]);
 
   function handleDeleteFrontPicture () {
     setFormData({ ...formData, frontPicture: '' })
@@ -105,12 +105,6 @@ export default function EditPost ({ modal, data, appData, handleSubmit }: EditPo
         case 'title':
           setFormData({ ...formData, title: e.target.value })
           break
-        case 'description':
-          setFormData({ ...formData, description: e.target.value })
-          break
-        case 'author':
-          setFormData({ ...formData, author_id: e.target.value })
-          break
         case 'published':
           setFormData({ ...formData, published: e.target.checked })
           break
@@ -128,9 +122,13 @@ export default function EditPost ({ modal, data, appData, handleSubmit }: EditPo
           break;
       }
     } else if (e.target instanceof HTMLSelectElement) {
-      switch (e.target.name) {
+      const target = e.target as HTMLSelectElement
+      switch (target.name) {
         case 'author':
-          setFormData({ ...formData, author_id: e.target.value });
+          setFormData({ ...formData, author: target.value, studsYear: appData.users?.find(user => user.id === target.value)?.studsYear || 0 });
+          break;
+        case 'studsYear':
+          setFormData({ ...formData, studsYear: parseInt(target.value, 10) });
           break;
         default:
           console.log('Unknown handleChange');
@@ -149,43 +147,56 @@ export default function EditPost ({ modal, data, appData, handleSubmit }: EditPo
     )
   }
 
+  const years = (appData.users || []).map(user => user.studsYear).filter((value, index, self) => self.indexOf(value) === index).sort((a, b) => b - a)
+
   return (
     <Modal show={modal.isModalVisible(data.name, data.id)} onHide={() => modal.off(data.name, data.id)} size='xl' backdrop='static'>
       <Modal.Header closeButton className='py-2 text-gray-700'>
-        {data.post.title
-          ? (
-            <Modal.Title>{t('blog.edit.label.editing')}{': '}{data.post.title}</Modal.Title>
-            )
-          : (
-            <Modal.Title>{t('blog.edit.label.creating')}</Modal.Title>
-            )}
+         <Modal.Title>{data.post.title ? t(`${data.type}.edit.label.editing`) + ': ' + data.post.title : t(`${data.type}.edit.label.creating`)}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form>
           <Form.Group className='mb-3' controlId='formPublished'>
-            <Form.Check type='switch' label={t('events.edit.label.published')} name='published' checked={formData.published} onChange={(e) => setFormData({ ...formData, published: e.target.checked })} />
+            <Form.Check type='switch' label={t(`${data.type}.edit.label.published`)} name='published' checked={formData.published} onChange={(e) => setFormData({ ...formData, published: e.target.checked })} />
           </Form.Group>
           <Form.Group className='mb-3' controlId='formBasicEmail'>
-            <FloatingLabel controlId='floatingSelect' label={t('blog.edit.label.author')}>
-              <Form.Control as='select' name='author' defaultValue={formData.author_id} onChange={(e) => handleChange(e)}>
-                {(appData.users || []).map((user, index) => (
-                  <option key={index} value={user.id}>{user.firstName}{' '}{user.lastName}</option>
+          <FloatingLabel controlId='floatingSelect' label={t(`${data.type}.edit.label.author`)}>
+            <Form.Control as='select' name='author' value={formData.author} onChange={(e) => handleChange(e)}>
+              {([...new Set((appData.users || []).map(user => user.studsYear))].sort((a, b) => b - a)).map((studsYear, index) => (
+                <optgroup key={index} label={`Studs Year: ${studsYear}`} style={{fontStyle: 'normal', fontWeight: 'bold'}}>
+                  {(appData.users || [])
+                    .filter(user => user.studsYear === studsYear)
+                    .map((user, index) => (
+                      <option key={index} value={user.id}>
+                        {user.firstName}{' '}{user.lastName}
+                      </option>
+                    ))}
+                </optgroup>
+              ))}
+            </Form.Control>
+          </FloatingLabel>
+        </Form.Group>
+          <Form.Group className='mb-3' controlId='formStudsYear'>
+            <FloatingLabel controlId='floatingStudsYearSelect' label={t(`${data.type}.edit.label.studsYear`)}>
+              <Form.Control as='select' name='studsYear' value={formData.studsYear} onChange={(e) => handleChange(e)}>
+                {years && years.map((year, index) => (
+                  <option key={index} value={year}>{year}</option>
                 ))}
               </Form.Control>
             </FloatingLabel>
           </Form.Group>
           <Form.Group className='mb-3' controlId='formPostTitle'>
-            <FloatingLabel label={t('blog.edit.label.title')}>
-              <Form.Control type='text' placeholder={t('blog.edit.label.title')} name='title' defaultValue={formData.title} onChange={(e) => handleChange(e)} />
+            <FloatingLabel label={t(`${data.type}.edit.label.title`)}>
+              <Form.Control type='text' placeholder={t(`${data.type}.edit.label.title`)} name='title' value={formData.title} onChange={(e) => handleChange(e)} />
             </FloatingLabel>
           </Form.Group>
           <Form.Group className='mb-3' controlId='formPostDescription'>
-            <FloatingLabel label={t('blog.edit.label.description')}>
-              <Form.Control as='textarea' type='text' name='description' defaultValue={formData.description} onChange={(e) => handleChange(e)} style={{ height: '150px' }} />
+            <FloatingLabel label={t(`${data.type}.edit.label.description`)}>
+              <Form.Control as='textarea' type='text' name='description' value={formData.description} onChange={(e) => handleChange(e)} style={{ height: '150px' }} />
             </FloatingLabel>
           </Form.Group>
           <Form.Group className='mb-3' controlId='formFileMultiple'>
-            <Form.Label>{t('blog.edit.label.addFrontImage')}</Form.Label>
+            <Form.Label>{t(`${data.type}.edit.label.addFrontImage`)}</Form.Label>
             <Form.Control ref={addFrontImageRef} type='file' name='frontPicture' onChange={(e) => handleChange(e)} />
             <div className='d-flex my-3'>
               {formData.frontPicture && <AddedImage isFrontPicture picture={formData.frontPicture} index={0} handleDeleteImage={handleDeleteFrontPicture} imageRefs={frontImageRefs} iconRefs={frontIconRefs} />}
@@ -193,27 +204,27 @@ export default function EditPost ({ modal, data, appData, handleSubmit }: EditPo
           </Form.Group>
 
           <Form.Group className='mb-3' controlId='formFileMultiple'>
-            <Form.Label>{t('blog.edit.label.addImages')}</Form.Label>
+            <Form.Label>{t(`${data.type}.edit.label.addImages`)}</Form.Label>
             <Form.Control ref={addImagesRef} type='file' name='pictures' multiple onChange={(e) => handleChange(e)} />
             <div className='row g-3 row-cols-6 justify-content-start align-items-center my-3'>
               {formData.pictures &&
-    formData.pictures.map((picture, index) => (
-      <AddedImage key={index} picture={picture} index={index} handleDeleteImage={handleDeleteImage} imageRefs={imageRefs} iconRefs={iconRefs} />
-    ))}
+                formData.pictures.map((picture, index) => (
+                  <AddedImage key={index} picture={picture} index={index} handleDeleteImage={handleDeleteImage} imageRefs={imageRefs} iconRefs={iconRefs} />
+                ))}
             </div>
           </Form.Group>
           <Alert className='my-3' variant='success'>
-            <Alert.Heading>{t('blog.edit.alertHeader')}</Alert.Heading>
+            <Alert.Heading>{t(`${data.type}.edit.alertHeader`)}</Alert.Heading>
             <p>
-              {t('blog.edit.alertDescription')}
+              {t(`${data.type}.edit.alertDescription`)}
             </p>
             <hr />
             <p className='mb-0'>
-              <Trans i18nKey='blog.edit.alertFooter' />
+              <Trans i18nKey={`${data.type}.edit.alertFooter`} />
             </p>
           </Alert>
           <div className='mt-3 d-flex justify-content-end'>
-            <Button onClick={() => handleSubmit(formData)}>{t('blog.edit.submit')}</Button>
+            <Button onClick={() => handleSubmit(formData)}>{t(`${data.type}.edit.submit`)}</Button>
           </div>
         </Form>
       </Modal.Body>

@@ -31,12 +31,12 @@ export default function getDynamicYearGroupsInfo(appData: AppData, contentSource
   const contentData = assertDefined(sourceData, `appData.${contentSourceType}Posts is not defined`, `appData.${contentSourceType}Posts`);
   const includeUnpublished = loggedIn && (userDetails?.permissions?.includes(permissionKey) || userDetails?.permissions?.includes('admin_permission')); 
   const includedContent = (contentData || []).filter((e) => e.published || includeUnpublished);
-  const years = [...new Set(includedContent.map((e: BlogPost | EventPost) => e.date.getFullYear()))].sort((a, b) => b - a);
+  const years = [...new Set(includedContent.map((e: BlogPost | EventPost) => e.studsYear))].sort((a, b) => b - a);
   
   const newGroupsInfo: DynamicYearGroup[] = years.map((year) => ({ year, title: i18next.t(`${contentSourceType}.groupTitle`) + ' ' + year,elements: []}));
 
   for (let i = 0; i < newGroupsInfo.length; i++) {
-    const matchedContent = includedContent.filter((e) => e.date.getFullYear() === newGroupsInfo[i].year);
+    const matchedContent = includedContent.filter((e) => e.studsYear === newGroupsInfo[i].year);
     newGroupsInfo[i].elements = matchedContent.map((e) => {
       return {
         id: e.id,

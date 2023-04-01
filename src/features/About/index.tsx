@@ -42,7 +42,7 @@ export default function About ({ appData }: AboutProps): JSX.Element {
               <p className='lead text-muted'>{t('about.intro')}</p>
               {showTools && (
                 <div className='d-flex gap-2'>
-                  <Button onClick={() => handleCreateClick()}>{t('about.primaryButton')}</Button>
+                  <Button className='studs-bg' size='lg' onClick={() => handleCreateClick()}>{t('about.primaryButton')}</Button>
                 </div>
               )}
             </div>

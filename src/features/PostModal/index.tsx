@@ -22,13 +22,13 @@ export default function PostModal ({ modal, data, appData }: PostModalProps) {
 
   async function handleSubmit (formData: CreateBlogPost | CreateEventPost) {
     const payload = { ...formData, date: formData.date || new Date().toISOString() }
-    console.log('payload: ', { ...payload })
     
-    const key = data.type === 'Blog' ? 'blogPost' : 'event'
     if (payload.id) {
-      await handleInstructions(`update${data.type}`, { [key]: payload })
+      const instruction = `update` + (data.type === 'blogPost' ? 'BlogPost' : 'EventPost')
+      await handleInstructions(instruction, { [data.type]: payload })
     } else {
-      await handleInstructions(`create${data.type}`, { [key]: payload })
+      const instruction = `create` + (data.type === 'blogPost' ? 'BlogPost' : 'EventPost')
+      await handleInstructions(instruction, { [data.type]: payload })
     }
     modal.off(data.name, data.id)
   }

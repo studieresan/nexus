@@ -10,7 +10,7 @@ export interface InstructionArgs {
 
 export interface InstructionData {
   blogPost?: BlogPost
-  event?: EventPost
+  eventPost?: EventPost
   toDeleteId?: string
   email?: string
   password?: string

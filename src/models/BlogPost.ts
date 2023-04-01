@@ -16,5 +16,5 @@ export interface BlogPost extends BlogFields {
 }
 
 export interface CreateBlogPost extends BlogFields {
-    author_id: string
+    author: string
 }

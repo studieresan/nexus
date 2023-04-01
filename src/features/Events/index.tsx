@@ -41,7 +41,7 @@ export default function Events ({ appData, handleModals }: EventsProps): JSX.Ele
       id: 'PostModal-View',
       post: event,
       mode: 'view',
-      type: 'Event'
+      type: 'eventPost'
     })
   }
 
@@ -56,7 +56,7 @@ export default function Events ({ appData, handleModals }: EventsProps): JSX.Ele
       id: 'PostModal-Edit',
       post: event,
       mode: 'edit',
-      type: 'Event'
+      type: 'eventPost'
     })
   }
 
@@ -66,12 +66,12 @@ export default function Events ({ appData, handleModals }: EventsProps): JSX.Ele
       id: 'PostModal-View',
       post: {},
       mode: 'edit',
-      type: 'Event'
+      type: 'eventPost'
     })
   }
-  async function handleConfirmDelete (modal: ModalData, data: EventPost) {
-    await handleInstructions('deleteEvent', { toDeleteId: data.id })
-    modal.off(modal)
+  async function handleConfirmDelete (name: string, id: string, post: EventPost) {
+    await handleInstructions('deleteEventPost', { toDeleteId: post.id })
+    handleModals.off(name, id)
   }
 
   async function handleClickDelete (id: string) {
@@ -83,7 +83,7 @@ export default function Events ({ appData, handleModals }: EventsProps): JSX.Ele
     handleModals.on({
       name: 'ConfirmModal',
       id: 'EventModal-Delete',
-      title: t('post.deletePostTitle'),
+      title: t('eventPost.deletePostTitle'),
       children: <div><span className='fw-light'>{t('post.deleteDescription')}{': '}</span><span className='fw-bold'>{event.title}</span></div>,
       mode: 'delete',
       post: event,
@@ -102,7 +102,7 @@ export default function Events ({ appData, handleModals }: EventsProps): JSX.Ele
               <p className='lead text-muted'>{t('events.intro')}</p>
               {showTools && (
                 <div className='d-flex gap-2'>
-                  <Button onClick={() => handleCreateClick()}>{t('events.primaryButton')}</Button>
+                  <Button className='studs-bg' size='lg' onClick={() => handleCreateClick()}>{t('events.primaryButton')}</Button>
                 </div>
               )}
             </div>

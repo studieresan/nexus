@@ -36,6 +36,7 @@ function App () {
     setAppData,
     navigateTo,
   });
+  args.current = { appData, setAppData, navigateTo }
   const handleModals = useModalManager()
   useFetchCollections(appData, setAppData)
 

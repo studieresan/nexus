@@ -84,10 +84,10 @@ export default function Footer ({ appData }: FooterProps): JSX.Element {
         <div className='col-12 col-lg-6 d-flex justify-content-center justify-content-lg-start'>
           <div className='d-flex row row-cols-1 row-cols-lg-2'>
             <div className='d-flex d-lg-none justify-content-center my-3'>
-              <span className='fs-3 fw-light'>Collaborations: </span>
+              <span className='fs-3 fw-light'>{t('footer.collaborations')}:</span>
             </div>
             <div className='d-none d-lg-flex align-items-left justify-content-center' style={{width: '50px', height: '200px', border: '1px solid #000'}}>
-              <span className='fs-3 fw-light' style={{writingMode: 'vertical-rl', textOrientation: 'mixed'}}>Collaborations: </span>
+              <span className='fs-3 fw-light' style={{writingMode: 'vertical-rl', textOrientation: 'mixed'}}>{t('footer.collaborations')}:</span>
             </div>
             <div className='d-flex d-lg-block flex-wrap flex-lg-nowrap justify-content-center mb-3'>
               <div className='d-flex justify-content-center justify-content-lg-start flex-row mb-2 gap-3' style={{width:500}}>

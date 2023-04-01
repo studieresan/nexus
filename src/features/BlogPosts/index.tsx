@@ -36,7 +36,7 @@ export default function BlogPosts ({ appData, handleModals }: BlogProps): JSX.El
       id: 'PostModal-View',
       post: post,
       mode: 'view',
-      type: 'BlogPost'
+      type: 'blogPost'
     })
   }
 
@@ -50,7 +50,7 @@ export default function BlogPosts ({ appData, handleModals }: BlogProps): JSX.El
       id: 'PostModal-Edit',
       post: post,
       mode: 'edit',
-      type: 'BlogPost'
+      type: 'blogPost'
     })
   }
 
@@ -60,13 +60,13 @@ export default function BlogPosts ({ appData, handleModals }: BlogProps): JSX.El
       id: 'PostModal-View',
       post: {},
       mode: 'edit',
-      type: 'BlogPost'
+      type: 'blogPost'
     })
   }
 
-  async function handleConfirmDelete (modal: ModalData, data: BlogPost) {
-    await handleInstructions('deleteBlogPost', { toDeleteId: data.id })
-    modal.off(modal)
+  async function handleConfirmDelete (name: string, id: string, post: BlogPost) {
+    await handleInstructions('deleteBlogPost', { toDeleteId: post.id })
+    handleModals.off(name, id)
   }
 
   async function handleClickDelete (id: string) {
@@ -77,7 +77,7 @@ export default function BlogPosts ({ appData, handleModals }: BlogProps): JSX.El
     handleModals.on({
       name: 'ConfirmModal',
       id: 'BlogPostModal-Delete',
-      title: t('blog.deletePostTitle'),
+      title: t('blogPost.deletePostTitle'),
       children: <div><span className='fw-light'>{t('blog.deletePostDescription')}{': '}</span><span className='fw-bold'>{post.title}</span></div>,
       mode: 'delete',
       post: (appData.blogPosts || []).find((e) => e.id === id),
@@ -96,7 +96,7 @@ export default function BlogPosts ({ appData, handleModals }: BlogProps): JSX.El
             <p className='lead text-muted'>{t('blog.intro')}</p>
             {showTools && (
               <div className='d-flex gap-2'>
-                <Button onClick={() => handleCreateClick()}>{t('blog.primaryButton')}</Button>
+                <Button className='studs-bg' size='lg' onClick={() => handleCreateClick()}>{t('blog.primaryButton')}</Button>
               </div>
             )}
           </div>

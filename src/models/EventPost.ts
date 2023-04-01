@@ -16,5 +16,5 @@ export interface EventPost extends EventFields {
 }
 
 export interface CreateEventPost extends EventFields {
-  author_id: string
+  author: string
 }
