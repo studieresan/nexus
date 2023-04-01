@@ -1,5 +1,5 @@
 # nexus
-Will be the new Studs-website as of 2023. Built using modern libraries.
+The upcoming Studs website of 2023. Built using modern libraries.
 
 ## Info
 This is a **React 18.2** project built with **Vite 3.0**. Vite is a much faster alternative to Create-React-App built by the developers of Vue. 
