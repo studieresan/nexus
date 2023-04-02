@@ -28,6 +28,6 @@ export default function UserModal ({ modal, data, appData }: UserModalProps) {
     }
     modal.off(data.name, data.id)
   }
-  if (data.mode === 'view') return <ViewUser modal={modal} data={data} />
+  if (data.mode === 'view') return <ViewUser modal={modal} data={data} appData={appData} />
   else return <EditUser modal={modal} data={data} appData={appData} handleSubmit={handleSubmit} />
 }

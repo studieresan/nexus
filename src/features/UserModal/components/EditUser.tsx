@@ -30,6 +30,7 @@ export default function EditUser ({ modal, data, appData, handleSubmit }: EditUs
     info: {
       role: UserRole.None,
       email: '',
+      biography: '',
       linkedIn: '',
       github: '',
       phone: '',
@@ -53,6 +54,7 @@ export default function EditUser ({ modal, data, appData, handleSubmit }: EditUs
         info: {
           role: info.role,
           email: info.email,
+          biography: info.biography || '',
           linkedIn: info.linkedIn || '',
           github: info.github || '',
           phone: info.phone || '',
@@ -82,15 +84,49 @@ export default function EditUser ({ modal, data, appData, handleSubmit }: EditUs
         }
       } else {
         const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
+        if (Object.keys(formData.info).includes(name)) {
+          setFormData({ ...formData, info: { ...formData.info, [name]: value } });
+        } else {
+          setFormData({ ...formData, [name]: value });
+        }
       }
     } else if (e.target instanceof HTMLTextAreaElement) {
       const { name, value } = e.target;
-      setFormData({ ...formData, [name]: value });
+      if (Object.keys(formData.info).includes(name)) {
+        setFormData({ ...formData, info: { ...formData.info, [name]: value } });
+      } else {
+        setFormData({ ...formData, [name]: value });
+      }
     } else if (e.target instanceof HTMLSelectElement) {
       const { name, value } = e.target;
-      setFormData({ ...formData, [name]: parseInt(value, 10) });
+      if (name === 'role') {
+        setFormData({ ...formData, info: { ...formData.info, role: value as UserRole } });
+      } else {
+        setFormData({ ...formData, [name]: parseInt(value, 10) });
+      }
     }
+  }
+
+  function handleCheckboxChange(e: React.ChangeEvent<HTMLInputElement>) {
+    if (e.target.name === 'permissions') {
+      const { value, checked } = e.target;
+      const newPermissions = [...formData.info.permissions];
+  
+      if (checked) {
+        newPermissions.push(value as Permission);
+      } else {
+        const index = newPermissions.indexOf(value as Permission);
+        if (index > -1) {
+          newPermissions.splice(index, 1);
+        }
+      }
+      setFormData({ ...formData, info: { ...formData.info, permissions: newPermissions } });
+    }
+  }
+
+  function isAdmin(): boolean {
+    if (!appData.userDetails) return false;
+    return appData.userDetails.permissions.includes(Permission.Admin);
   }
   
   if (!formData) {
@@ -107,18 +143,18 @@ export default function EditUser ({ modal, data, appData, handleSubmit }: EditUs
 
   return (
     <Modal show={modal.isModalVisible(data.name, data.id)} onHide={() => modal.off(data.name, data.id)} size='xl' backdrop='static'>
-      <Modal.Header closeButton className='py-2 text-gray-700'>
+      <Modal.Header closeButton className='py-2'>
         <Modal.Title>{user ? t('editUser.label.editing') + ': ' + user.firstName + ' ' + user.lastName : t('editUser.label.creating')}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
       <Form>
-      <Form.Group className='mb-3' controlId='formFileMultiple'>
-            <Form.Label>{t(`user.edit.label.changePicture`)}</Form.Label>
-            <Form.Control ref={addFrontImageRef} type='file' name='picture' onChange={(e) => handleChange(e)} />
-            <div className='d-flex my-3'>
-              {formData.info.picture && <AddedImage isFrontPicture picture={formData.info.picture} index={0} handleDeleteImage={handleDeleteFrontPicture} imageRefs={frontImageRefs} iconRefs={frontIconRefs} />}
-            </div>
-          </Form.Group>
+      <Form.Group className='mb-3 fs-4 fw-light' controlId='formFileMultiple'>
+          <Form.Label>{t(`user.edit.label.changePicture`)}</Form.Label>
+          <Form.Control ref={addFrontImageRef} type='file' name='picture' onChange={(e) => handleChange(e)} />
+          <div className='d-flex my-3 justify-content-center'>
+            {formData.info.picture && <AddedImage isFrontPicture picture={formData.info.picture} index={0} handleDeleteImage={handleDeleteFrontPicture} imageRefs={frontImageRefs} iconRefs={frontIconRefs} />}
+          </div>
+        </Form.Group>
         <Form.Group className='mb-3' controlId='formFirstName'>
           <FloatingLabel label={t('editUser.label.firstName')}>
             <Form.Control type='text' placeholder={t('editUser.label.firstName')} name='firstName' value={formData.firstName} onChange={(e) => handleChange(e)} />
@@ -130,12 +166,15 @@ export default function EditUser ({ modal, data, appData, handleSubmit }: EditUs
           </FloatingLabel>
         </Form.Group>
         <Form.Group className='mb-3' controlId='formStudsYear'>
-          <FloatingLabel controlId='floatingStudsYearSelect' label={t('editUser.label.studsYear')}>
-            <Form.Control as='select' name='studsYear' value={formData.studsYear} onChange={(e) => handleChange(e)}>
-              {years && years.map((year, index) => (
-                <option key={index} value={year}>{year}</option>
-              ))}
-            </Form.Control>
+          <FloatingLabel controlId='floatingStudsYearInput' label={t('editUser.label.studsYear')}>
+            <Form.Control
+              type='number'
+              name='studsYear'
+              value={formData.studsYear}
+              onChange={(e) => handleChange(e)}
+              min={new Date().getFullYear() - 70}
+              max={new Date().getFullYear() + 1}
+            />
           </FloatingLabel>
         </Form.Group>
         <Form.Group className='mb-3' controlId='formEmail'>
@@ -146,6 +185,11 @@ export default function EditUser ({ modal, data, appData, handleSubmit }: EditUs
         <Form.Group className='mb-3' controlId='formPhone'>
           <FloatingLabel label={t('editUser.label.phone')}>
             <Form.Control type='text' placeholder={t('editUser.label.phone')} name='phone' value={formData.info.phone} onChange={(e) => handleChange(e)} />
+          </FloatingLabel>
+        </Form.Group>
+        <Form.Group className='mb-3' controlId='formBiography'>
+          <FloatingLabel label={t('editUser.label.biography')}>
+            <Form.Control as='textarea' type='text' name='biography' value={formData.info.biography} onChange={(e) => handleChange(e)} style={{ height: '100px' }} />
           </FloatingLabel>
         </Form.Group>
         <Form.Group className='mb-3' controlId='formLinkedIn'>
@@ -168,6 +212,36 @@ export default function EditUser ({ modal, data, appData, handleSubmit }: EditUs
             <Form.Control type='text' placeholder={t('editUser.label.master')} name='master' value={formData.info.master} onChange={(e) => handleChange(e)} />
           </FloatingLabel>
         </Form.Group>
+        {isAdmin() && (
+          <div>
+            <div className='fs-4 fw-light'>
+              <span className='fs-4 fw-light'>{t('editUser.label.admin')}</span>
+            </div>
+            <Form.Group className='mb-3' controlId='formRole'>
+              <FloatingLabel controlId='floatingRoleSelect' label={t('editUser.label.role')}>
+                <Form.Control as='select' name='role' value={formData.info.role} onChange={(e) => handleChange(e)}>
+                  {Object.entries(UserRole).map(([key, value]) => (
+                    <option key={key} value={value}>{t(`user.role.${key}`)}</option>
+                  ))}
+                </Form.Control>
+              </FloatingLabel>
+            </Form.Group>
+            <Form.Group className='mb-3' controlId='formPermissions'>
+              <Form.Label>{t('editUser.label.permissions')}</Form.Label>
+              {Object.entries(Permission).map(([key, value]) => (
+                <Form.Check
+                  key={key}
+                  type='checkbox'
+                  name='permissions'
+                  value={value}
+                  label={t(`user.permission.${key}`)}
+                  checked={formData.info.permissions.includes(value)}
+                  onChange={(e) => handleCheckboxChange(e)}
+                />
+              ))}
+            </Form.Group>
+          </div>
+        )}
         <div className='mt-3 d-flex justify-content-end'>
           <Button onClick={() => handleSubmit(formData)}>{t(`user.edit.submit`)}</Button>
         </div>

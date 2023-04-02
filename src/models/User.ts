@@ -2,7 +2,6 @@ export enum Permission {
   Admin = 'admin_permission',
   Events = 'events_permission',
   Blog = 'blog_permission',
-  None = 'none_permission',
 }
 
 export type UserInfo = StudsInfo
@@ -10,6 +9,7 @@ export type UserInfo = StudsInfo
 export interface StudsInfo {
   readonly role: UserRole
   readonly email: string
+  readonly biography?: string
   readonly linkedIn?: string
   readonly github?: string
   readonly phone?: string

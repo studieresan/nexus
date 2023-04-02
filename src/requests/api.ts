@@ -71,6 +71,7 @@ const USER_PROFILE_FIELDS = `
   email
   phone
   linkedIn
+  biography
   github
   master
   allergies  
