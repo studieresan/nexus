@@ -20,6 +20,7 @@ export default function StudsGroup ({ handleClick, showGroup, group, groupIndex 
   const masterContact = () => {
     if (group.master === undefined) {
       const contact: ContactElement = {
+        id: '',
         role: t(`${group.name}Leader`),
         picture: '',
         name: t('notFound'),
@@ -28,6 +29,7 @@ export default function StudsGroup ({ handleClick, showGroup, group, groupIndex 
       return <Contact element={contact} />;
     } else {
       const contact: ContactElement = {
+        id: group.master.id,
         role: t(`${group.name}Leader`),
         picture: group.master.info.picture,
         name: `${group.master.firstName} ${group.master.lastName}`,

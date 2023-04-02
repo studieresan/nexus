@@ -1,4 +1,5 @@
 export interface ContactElement {
+  id: string
   picture?: string
   name: string
   phone?: string

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { Routes, Route, useNavigate } from 'react-router-dom'
-import { AppDataContext, HandleInstructionsContext } from '@/context'
+import { AppDataContext, HandleInstructionsContext, HandleModalsContext } from '@/context'
 import Header from './features/Header/index'
 import Homepage from './features/Homepage/index'
 import About from './features/About/index'
@@ -45,20 +45,22 @@ function App () {
 
   return (
     <HandleInstructionsContext.Provider value={handleInstructions}>
-      <AppDataContext.Provider value={appData}>
-        <Modals modal={handleModals} appData={{ ...appData }} />
-        <Header appData={appData} setAppData={setAppData} />
-        <Routes>
-          <Route path='/' element={<Homepage appData={appData} />} />
-          <Route path='/about' element={waveDividedElement(<About appData={appData} />)} />
-          <Route path='/events' element={waveDividedElement(<Events appData={appData} handleModals={handleModals} />)} />
-          <Route path='/groups' element={waveDividedElement(<Groups appData={appData} />)} />
-          <Route path='/blog' element={waveDividedElement(<Blog appData={appData} handleModals={handleModals} />)}/>
-          <Route path='/auth/:mode/:token?' element={waveDividedElement(<Login appData={appData} setAppData={setAppData} />)} />
-        </Routes>
-        <WaveDivider direction='up' />
-        <Footer appData={appData} />
-      </AppDataContext.Provider>
+      <HandleModalsContext.Provider value={handleModals}>
+        <AppDataContext.Provider value={appData}>
+          <Modals modal={handleModals} appData={{ ...appData }} />
+          <Header appData={appData} setAppData={setAppData} />
+          <Routes>
+            <Route path='/' element={<Homepage appData={appData} />} />
+            <Route path='/about' element={waveDividedElement(<About appData={appData} />)} />
+            <Route path='/events' element={waveDividedElement(<Events appData={appData} handleModals={handleModals} />)} />
+            <Route path='/groups' element={waveDividedElement(<Groups appData={appData} />)} />
+            <Route path='/blog' element={waveDividedElement(<Blog appData={appData} handleModals={handleModals} />)}/>
+            <Route path='/auth/:mode/:token?' element={waveDividedElement(<Login appData={appData} setAppData={setAppData} />)} />
+          </Routes>
+          <WaveDivider direction='up' />
+          <Footer appData={appData} />
+        </AppDataContext.Provider>
+      </HandleModalsContext.Provider>
     </HandleInstructionsContext.Provider>
   )
 }

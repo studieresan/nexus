@@ -181,9 +181,10 @@ export function fetchUsers () {
       lastName
       studsYear
       info { 
-        role
         ${USER_PROFILE_FIELDS}
+        role
         picture
+        permissions
       }
     }
   }
@@ -230,8 +231,12 @@ const EVENT_FIELDS = `
     id
     firstName
     lastName
+    studsYear
     info {
+      ${USER_PROFILE_FIELDS}
+      role
       picture
+      permissions
     }
   }
   date
@@ -351,8 +356,12 @@ author {
   id
   firstName
   lastName
+  studsYear
   info {
+    ${USER_PROFILE_FIELDS}
+    role
     picture
+    permissions
   }
 }
 date

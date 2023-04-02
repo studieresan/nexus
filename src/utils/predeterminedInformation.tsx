@@ -56,6 +56,7 @@ export const groupIcons:GroupIcons[] = [
 ]
 
 export const salesMaster = {
+  id: '6318c8d868f1c00016841e31',
   firstName: 'Tobias',
   lastName: 'Vinsa',
   email: 'tobias-v@studs.se',
@@ -70,7 +71,7 @@ export const projectMasters = [
     email: 'marcus@studs.se'
   },
   {
-    id: '6318b20977039b0016c4259e',
+    id: '6318b20977039b0016c4259e', 
     firstName: 'Daniel',
     lastName: 'Grünler',
     email: 'daniel-g@studs.se'

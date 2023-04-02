@@ -63,6 +63,7 @@ function getContactElementGroupsInfo(appData: AppData): DynamicYearGroup[] {
     const matchedUsers = appData.users.filter((e) => e.studsYear === newGroupsInfo[i].year);
     newGroupsInfo[i].elements = matchedUsers.map((e) => {
       const element: ContactElement = {
+        id: e.id,
         picture: e.info.picture,
         name: `${e.firstName} ${e.lastName}`,
         // phone: e.info.phone,

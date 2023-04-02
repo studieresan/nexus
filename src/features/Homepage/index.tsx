@@ -43,6 +43,7 @@ export default function Homepage ({ appData }: { appData: AppData }): JSX.Elemen
   useEffect(() => {
     const salesMasterUser = appData.users ? appData.users.find(user => user.firstName === salesMaster.firstName && user.lastName === salesMaster.lastName) : null
     const masterContact: ContactElement = {
+      id: salesMaster.id,
       picture: salesMasterUser?.info?.picture,
       name: `${salesMaster.firstName} ${salesMaster.lastName}`,
       email: salesMaster.email,

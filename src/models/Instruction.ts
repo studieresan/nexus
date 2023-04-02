@@ -1,6 +1,7 @@
 import { AppData } from "./AppData";
 import { BlogPost } from "./BlogPost"
 import { EventPost } from "./EventPost"
+import { User } from "./User";
 
 export interface InstructionArgs {
   appData: AppData, 
@@ -16,4 +17,5 @@ export interface InstructionData {
   password?: string
   confirmPassword?: string
   resetToken?: string
+  user?: User
 }

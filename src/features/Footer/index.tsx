@@ -30,18 +30,16 @@ export default function Footer ({ appData }: FooterProps): JSX.Element {
 
   useEffect(() => {
     if (appData.users) {
-      const pictures: string[] = appData.users
-        .filter(user => projectMasters
-        .find(master => master.firstName === user.firstName && master.lastName === user.lastName))
-        .map(user => user.info.picture)
-        .filter((picture): picture is string => picture !== undefined)
-      setPictures(pictures)
+      const picture1: string = (appData.users || []).find((e) => e.id === projectMasters[0].id)?.info.picture || ''
+      const picture2: string = (appData.users || []).find((e) => e.id === projectMasters[1].id)?.info.picture || ''
+      setPictures([picture1, picture2])
     }
   }, [appData.users])
 
   const imgStyle: CSSProperties  = { objectFit: 'contain', width: '200px' }
   const contacts: ContactElement[] = [
     {
+      id: projectMasters[0].id,
       picture: pictures ? pictures[0] : undefined,
       name: `${projectMasters[0].firstName} ${projectMasters[0].lastName}`,
       email: projectMasters[0].email,
@@ -49,6 +47,7 @@ export default function Footer ({ appData }: FooterProps): JSX.Element {
       vertical: true,
     },
     {
+      id: projectMasters[1].id,
       picture: pictures ? pictures[1] : undefined,
       name: `${projectMasters[1].firstName} ${projectMasters[1].lastName}`,
       email: projectMasters[1].email,
