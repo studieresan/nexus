@@ -40,11 +40,8 @@ export default function Contact({ element }: ContactProps): JSX.Element {
 
   if (element.vertical) {
     return (
-      <div className="d-flex flex-column align-items-center" onClick = {() => handleClickEdit(element.id)}>
-        <div
-          className="d-flex ratio ratio-1x1 rounded-circle bg-white overflow-hidden flex-shrink-0"
-          style={{ width: element.lg ? 287 : 120, height: element.lg ? 287 : 120 }}
-        >
+      <div className="d-flex flex-column align-items-center contact-hover" onClick={() => handleClickEdit(element.id)}>
+        <div className="d-flex ratio ratio-1x1 rounded-circle bg-white overflow-hidden flex-shrink-0" style={{ width: element.lg ? 287 : 120, height: element.lg ? 287 : 120 }}>
           {element.picture ? (
             <img src={element.picture} className="card-img-top img-cover" alt="alt" />
           ) : (
@@ -61,11 +58,8 @@ export default function Contact({ element }: ContactProps): JSX.Element {
     );
   } else {
     return (
-      <div className="d-flex flex-nowrap" onClick = {() => handleClickEdit(element.id)}>
-        <div
-          className="d-flex ratio ratio-1x1 rounded-circle overflow-hidden"
-          style={{ width: 120, height: 120 }}
-        >
+      <div className="d-flex flex-nowrap contact-hover" onClick={() => handleClickEdit(element.id)}>
+        <div className="d-flex ratio ratio-1x1 rounded-circle bg-white overflow-hidden" style={{ width: 120, height: 120 }}>
           {element.picture ? (
             <img src={element.picture} className="card-img-top img-cover" alt="alt" />
           ) : (

@@ -75,3 +75,17 @@
   box-shadow: none;
   --bs-btn-box-shadow: none;
 }
+
+.contact-hover {
+  position: relative;
+  padding: 20px; /* Apply padding to the entire contact component */
+  border-radius: 15px; /* Add rounded corners to the contact component */
+  transition: box-shadow 0.2s ease, transform 0.2s ease, filter 0.2s ease;
+}
+
+.contact-hover:hover {
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.3); /* Add a stronger shadow effect around the div on hover */
+  transform: translateY(-2px); /* Slight lift effect on hover */
+  filter: brightness(0.9); /* Reduce brightness on hover */
+  cursor: pointer;
+}

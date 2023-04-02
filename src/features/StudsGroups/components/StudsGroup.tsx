@@ -75,7 +75,9 @@ export default function StudsGroup ({ handleClick, showGroup, group, groupIndex 
           <Collapse in={showGroup[groupIndex]}>
             <div>
               <p className='lead text-muted'> {group.description}</p>
-              {masterContact()}
+              <div className='d-flex'>
+                {masterContact()}
+              </div>
             </div>
           </Collapse>
           <hr className='w-100 opacity-25' style={{ height: 1, opacity: 1 }} />
