@@ -105,22 +105,25 @@
   "groups.contact": "Har du noen spørsmål? Kontakt ",
   "groups.primaryButton": "Søk nå",
   "groups.secondaryButton": "Lær mer",
-  "groups.economy.title": "Økonomigruppen",
-  "groups.economy.description": "Økonomigruppen er en liten gruppe som jobber tett sammen med prosjektlederne for å lage prosjektets budsjett og sørge for at det følges. Gruppen er også ansvarlig for å møte de økonomiske behovene til de andre gruppene. Nytt for i år er at gruppen ikke trenger å håndtere regnskap, da dette vil bli håndtert eksternt. Kontinuerlig arbeidsmengde gjennom året, men mest arbeid om høsten og under turen.",
-  "groups.event.title": "Arrangementsgruppen",
-  "groups.event.description": "Arrangementsgruppen er ansvarlig for å planlegge og gjennomføre alle bedriftsarrangementer og samarbeide med selskapene for å skape arrangementer som er relevante, interessante og morsomme for både prosjektmedlemmene og selskapene. Gruppen hjelper selskapene med å tilpasse arrangementene etter deres ønsker og å arrangere arrangementer av høyeste standard. Arbeidet er svært kreativt og løsningsorientert ettersom ulike selskaper har ulike behov. Som medlem av arrangementsgruppen kan du forvente en jevn arbeidsmengde gjennom både vår- og høstsemesteret.",
+  "groups.manager_not_found": "Ingen gruppeleder funnet",
+  
+  "groups.finance_group_manager.title": "Økonomigruppen",
+  "groups.finance_group_manager.description": "Økonomigruppen er en liten gruppe som jobber tett sammen med prosjektlederne for å lage prosjektets budsjett og sørge for at det følges. Gruppen er også ansvarlig for å møte de økonomiske behovene til de andre gruppene. Nytt for i år er at gruppen ikke trenger å håndtere regnskap, da dette vil bli håndtert eksternt. Kontinuerlig arbeidsmengde gjennom året, men mest arbeid om høsten og under turen.",
+  
+  "groups.event_group_manager.title": "Arrangementsgruppen",
+  "groups.event_group_manager.description": "Arrangementsgruppen er ansvarlig for å planlegge og gjennomføre alle bedriftsarrangementer og samarbeide med selskapene for å skape arrangementer som er relevante, interessante og morsomme for både prosjektmedlemmene og selskapene. Gruppen hjelper selskapene med å tilpasse arrangementene etter deres ønsker og å arrangere arrangementer av høyeste standard. Arbeidet er svært kreativt og løsningsorientert ettersom ulike selskaper har ulike behov. Som medlem av arrangementsgruppen kan du forvente en jevn arbeidsmengde gjennom både vår- og høstsemesteret.",
 
-  "groups.info.title": "Info-gruppen",
-  "groups.info.description": "Info-gruppen er ansvarlig for å lage alt innholdet, den grafiske profilen som vil vises i våre ulike kanaler og rapporten. Teamet består av to fotografer, to redaktører og to art directors. Fotografene tar portretter av prosjektteamet og fotograferer alle arrangementer og turen. Redaktørene produserer all teksten på sosiale medier og i rapporten. Art director'ene lager den grafiske profilen og er ansvarlige for web, app og UX-design. De er også ansvarlige for layouten i rapporten. Kontinuerlig arbeidsmengde i løpet av høsten og våren.",
+  "groups.info_group_manager.title": "Info-gruppen",
+  "groups.info_group_manager.description": "Info-gruppen er ansvarlig for å lage alt innholdet, den grafiske profilen som vil vises i våre ulike kanaler og rapporten. Teamet består av to fotografer, to redaktører og to art directors. Fotografene tar portretter av prosjektteamet og fotograferer alle arrangementer og turen. Redaktørene produserer all teksten på sosiale medier og i rapporten. Art director'ene lager den grafiske profilen og er ansvarlige for web, app og UX-design. De er også ansvarlige for layouten i rapporten. Kontinuerlig arbeidsmengde i løpet av høsten og våren.",
 
-  "groups.it.title": "IT-gruppen",
-  "groups.it.description": "IT-gruppen er en liten gruppe ansvarlig for Studs' nettside, backend og appene som finnes for både Android og iOS. Du bør ha interesse for programmering og/eller webdesign, i tillegg til viljen til å lære nye ting. Det er en bonus hvis du har tidligere erfaring, men det er ikke et krav. Arbeidsmengden er jevnt fordelt gjennom høsten og våren.",
+  "groups.it_group_manager.title": "IT-gruppen",
+  "groups.it_group_manager.description": "IT-gruppen er en liten gruppe ansvarlig for Studs' nettside, backend og appene som finnes for både Android og iOS. Du bør ha interesse for programmering og/eller webdesign, i tillegg til viljen til å lære nye ting. Det er en bonus hvis du har tidligere erfaring, men det er ikke et krav. Arbeidsmengden er jevnt fordelt gjennom høsten og våren.",
 
-  "groups.travel.title": "Reisegruppen",
-  "groups.travel.description": "Reisegruppen er ansvarlig for alt som er relatert til turen ved slutten av prosjektet, fra planlegging av reiseruten og bestilling av flyreiser til koordinering av aktiviteter. Bortsett fra planlegging og logistikk, finner vi også inspirasjon og destinasjoner å foreslå for prosjektgruppen. Som en del av reisegruppen vil du lede prosjektgruppen under turen, sørge for at alle har det bra, og håndtere uforutsette situasjoner. Kontinuerlig arbeidsmengde i løpet av året, men mest intens under høsten og turen.",
+  "groups.travel_group_manager.title": "Reisegruppen",
+  "groups.travel_group_manager.description": "Reisegruppen er ansvarlig for alt som er relatert til turen ved slutten av prosjektet, fra planlegging av reiseruten og bestilling av flyreiser til koordinering av aktiviteter. Bortsett fra planlegging og logistikk, finner vi også inspirasjon og destinasjoner å foreslå for prosjektgruppen. Som en del av reisegruppen vil du lede prosjektgruppen under turen, sørge for at alle har det bra, og håndtere uforutsette situasjoner. Kontinuerlig arbeidsmengde i løpet av året, men mest intens under høsten og turen.",
 
-  "groups.sales.title": "Salgsgruppen",
-  "groups.sales.description": "Salgsgruppen er det første kontaktpunktet mellom Studs og selskaper. Dette er der vi som salgsteam imponerer og rekrutterer selskaper til arrangementer. Som et medlem av salgsteamet bør du være veldig sosial og utadvendt, ikke redd for å knytte nye kontakter og ikke gi opp etter et avslag. Salgsteamet er den største gruppen i Studs, så du har et flott team som hjelper deg, og selvfølgelig vil jeg som salgsteamleder hjelpe deg med å føle deg komfortabel. Vi i salgsteamet jobber også tett med arrangementsgruppen, siden de overtar etter at arrangementet er booket! Høy arbeidsmengde i løpet av høstperiodene P1, P2.",
+  "groups.sales_group_manager.title": "Salgsgruppen",
+  "groups.sales_group_manager.description": "Salgsgruppen er det første kontaktpunktet mellom Studs og selskaper. Dette er der vi som salgsteam imponerer og rekrutterer selskaper til arrangementer. Som et medlem av salgsteamet bør du være veldig sosial og utadvendt, ikke redd for å knytte nye kontakter og ikke gi opp etter et avslag. Salgsteamet er den største gruppen i Studs, så du har et flott team som hjelper deg, og selvfølgelig vil jeg som salgsteamleder hjelpe deg med å føle deg komfortabel. Vi i salgsteamet jobber også tett med arrangementsgruppen, siden de overtar etter at arrangementet er booket! Høy arbeidsmengde i løpet av høstperiodene P1, P2.",
 
   "login.intro": "Her vil innloggingssiden være.",
   "about.name": "Om",

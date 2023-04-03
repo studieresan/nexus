@@ -6,6 +6,12 @@ import { groupMasters } from '@/utils/predeterminedInformation'
 import { AppData } from '@/models/AppData.js'
 import { GroupMasters } from '@/models/Group.js'
 import { StudsGroupInfo } from '@/models/StudsGroupInfo.js'
+import { UserRole } from '@/models/User.js'
+import { AiFillSchedule } from 'react-icons/ai'
+import { GiProcessor, GiReceiveMoney } from 'react-icons/gi'
+import { GoPencil } from 'react-icons/go'
+import { MdTravelExplore } from 'react-icons/md'
+import { BsBuilding } from 'react-icons/bs'
 
 interface GroupsProps {
   appData: AppData
@@ -18,19 +24,27 @@ export default function StudsGroups ({ appData }: GroupsProps): JSX.Element {
   // Go through each group and find the master from appData.users and store it in groupsInfo
   useEffect(() => {
     if (appData.users) {
-      const newGroupsInfo: StudsGroupInfo[] = (Object.keys(groupMasters) as Array<keyof GroupMasters>).map((key) => {
-        const master = (appData.users || []).find(
-          (user) =>
-            user.firstName === groupMasters[key].masterFirstName &&
-            user.lastName === groupMasters[key].masterLastName
-        );
+      const managerTypes = [UserRole.EventGroupManager, UserRole.FinanceGroupManager, UserRole.InfoGroupManager, UserRole.ItGroupManager, UserRole.TravelGroupManager]
+      const icons: { [key: string]: JSX.Element } = {
+        [UserRole.EventGroupManager]: <AiFillSchedule style={{ backgroundColor: 'white' }} />,
+        [UserRole.FinanceGroupManager]: <GiReceiveMoney style={{ backgroundColor: 'white' }} />,
+        [UserRole.InfoGroupManager]: <GoPencil style={{ backgroundColor: 'white' }} />,
+        [UserRole.ItGroupManager]: <GiProcessor style={{ backgroundColor: 'white' }} />,
+        [UserRole.TravelGroupManager]: <MdTravelExplore style={{ backgroundColor: 'white' }} />,
+        [UserRole.SalesGroupManager]: <BsBuilding style={{ backgroundColor: 'white' }} />
+      }
+      const highestStudsYear = Math.max(...appData.users.map((user) => user.studsYear))
+      const managers = appData.users.filter((user) => managerTypes.includes(user.info.role) && user.studsYear === highestStudsYear)
 
+      const newGroupsInfo: StudsGroupInfo[] = managerTypes.map((managerType) => {
+        const manager = managers.find((manager) => manager.info.role === managerType)
+        
         return {
-          master,
-          name: key,
-          title: t(`groups.${key}.title`),
-          description: t(`groups.${key}.description`),
-          icon: groupMasters[key].icon,
+          manager,
+          name: managerType,
+          title: t(`groups.${managerType}.title`),
+          description: t(`groups.${managerType}.description`),
+          icon: icons[managerType]
         };
       });
 

@@ -11,6 +11,7 @@ import { ModalData, ModalManager } from '@/models/Modal'
 import { DynamicYearGroup } from '@/models/DynamicYearGroup'
 import { assertDefined } from '@/utils/assertDefined'
 import { EventPost } from '@/models/EventPost'
+import { Permission } from '@/models/User'
 
 interface EventsProps {
   appData: AppData
@@ -40,7 +41,9 @@ export default function Events ({ appData, handleModals }: EventsProps): JSX.Ele
       id: 'PostModal-View',
       post: event,
       mode: 'view',
-      type: 'eventPost'
+      type: 'eventPost',
+      handleClickEdit: handleClickEdit,
+      handleClickDelete: handleClickDelete
     })
   }
 
@@ -90,7 +93,7 @@ export default function Events ({ appData, handleModals }: EventsProps): JSX.Ele
     })
   }
 
-  const showTools = (appData?.userDetails?.permissions || []).includes('event_permission') || (appData?.userDetails?.permissions || []).includes('admin_permission')
+  const showTools = (appData?.userDetails?.permissions || []).includes(Permission.Events) || (appData?.userDetails?.permissions || []).includes(Permission.Admin)
   if (groupsInfo) {
     return (
       <div className='container-fluid mb-5' id='hanging-icons'>

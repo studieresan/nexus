@@ -8,6 +8,9 @@ import { useTranslation } from 'react-i18next'
 import { useContext } from 'react'
 import { HandleInstructionsContext } from '@/context'
 import { AppData } from '@/models/AppData'
+import Contact from '@/components/Contact.jsx'
+import { ContactElement } from '@/models/Contact.js'
+import { User } from '@/models/User.js'
 
 interface HeaderProps {
   appData: AppData;
@@ -48,6 +51,29 @@ export default function Header({ appData, setAppData }: HeaderProps): JSX.Elemen
     await handleInstructions('logoutUser')
   }
 
+  function userProfile() {
+    const user = (appData.users || []).find(user => user.id === appData.userDetails?.id)
+    if (!user) {
+      return null;
+    }
+    const element: ContactElement = {
+      id: user.id,
+      picture: user.info.picture,
+      name: `${user.firstName} ${user.lastName}`,
+      // phone: e.info.phone,
+      email: user.info.email,
+      role: t(user.info.role),
+      navbar: true,
+      lg: true,
+    }; 
+
+    return (
+      <div className='p-2'>
+        <Contact element={element}/>
+      </div>
+    )
+  }
+
   return (
     <Navbar bg='dark' variant='dark' className='px-3' expand='md'>
       <Navbar.Toggle aria-controls='basic-navbar-nav' />
@@ -70,6 +96,7 @@ export default function Header({ appData, setAppData }: HeaderProps): JSX.Elemen
               <LanguageDropDown />
               <Button className='studs-navbar' onClick={() => navigateTo('/blog')}>{t('blog.name')}</Button>
               {loginOrOut(appData.loggedIn, t, navigateTo, logout)}
+              {userProfile()}
             </Nav>
           </div>
         </div>

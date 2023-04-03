@@ -1,8 +1,9 @@
-import { AppDataContext, HandleModalsContext } from '@/context'
+import { AppDataContext, HandleInstructionsContext, HandleModalsContext } from '@/context'
 import { ContactElement } from '@/models/Contact'
 import { useTranslation } from 'react-i18next'
 import { IoPersonSharp } from 'react-icons/io5'
 import { useContext } from 'react'
+import { User } from '@/models/User'
 interface ContactProps {
   element: ContactElement
 }
@@ -10,6 +11,7 @@ interface ContactProps {
 export default function Contact({ element }: ContactProps): JSX.Element {
   const handleModals = useContext(HandleModalsContext)
   const appData = useContext(AppDataContext)
+  const handleInstructions = useContext(HandleInstructionsContext)
   const { t } = useTranslation();
 
   function handleClickContact (id: string) {
@@ -22,6 +24,8 @@ export default function Contact({ element }: ContactProps): JSX.Element {
       id: 'UserModal-View',
       user: user,
       mode: 'view',
+      handleClickEdit: handleClickEdit,
+      handleClickDelete: handleClickDelete,
     })
   }
 
@@ -38,10 +42,45 @@ export default function Contact({ element }: ContactProps): JSX.Element {
     })
   }
 
-  if (element.vertical) {
+  async function handleConfirmDelete (name: string, id: string, user: User) {
+    await handleInstructions('deleteUser', { toDeleteId: user.id })
+    handleModals.off(name, id)
+  }
+
+  async function handleClickDelete (id: string) {
+    const user = (appData.users || []).find((e) => e.id === id)
+    if (!user) {
+      throw new Error('handleClickDelete post undefined')
+    }
+    handleModals.on({
+      name: 'ConfirmModal',
+      id: 'ContactModal-Delete',
+      title: t('contact.deleteUser'),
+      children: <div><span className='fw-light'>{t('contact.deleteUserDescription')}{': '}</span><span className='fw-bold'>{user.firstName}{' '}{user.lastName}</span></div>,
+      mode: 'delete',
+      user: user,
+      handleConfirm: handleConfirmDelete
+    })
+  }
+
+  if (element.navbar) {
     return (
       <div className="d-flex flex-column align-items-center contact-hover" onClick={() => handleClickContact(element.id)}>
-        <div className="d-flex ratio ratio-1x1 rounded-circle bg-white overflow-hidden flex-shrink-0" style={{ width: element.lg ? 287 : 120, height: element.lg ? 287 : 120 }}>
+        <div className="d-flex ratio ratio-1x1 rounded-circle bg-light overflow-hidden flex-shrink-0" style={{ width: 50, height: 50 }}>
+          {element.picture ? (
+            <img src={element.picture} className="card-img-top img-cover" alt="alt" />
+          ) : (
+            <IoPersonSharp className="bg-white" />
+          )}
+        </div>
+      </div>
+    )
+  }
+
+  if (element.vertical) {
+    return (
+      <div className="d-flex flex-column align-items-center contact-hover p-3" onClick={() => handleClickContact(element.id)}>
+        <div className="d-flex ratio ratio-1x1 rounded-circle bg-light overflow-hidden flex-shrink-0" style={{ width: element.lg ? 287 : 120, height: element.lg ? 287 : 120 }}>
           {element.picture ? (
             <img src={element.picture} className="card-img-top img-cover" alt="alt" />
           ) : (
@@ -58,8 +97,8 @@ export default function Contact({ element }: ContactProps): JSX.Element {
     );
   } else {
     return (
-      <div className="d-flex flex-nowrap contact-hover" onClick={() => handleClickContact(element.id)}>
-        <div className="d-flex ratio ratio-1x1 rounded-circle bg-white overflow-hidden" style={{ width: 120, height: 120 }}>
+      <div className="d-flex flex-nowrap contact-hover p-3" onClick={() => handleClickContact(element.id)}>
+        <div className="d-flex me-1 ratio ratio-1x1 rounded-circle bg-white overflow-hidden" style={{ width: 120, height: 120 }}>
           {element.picture ? (
             <img src={element.picture} className="card-img-top img-cover" alt="alt" />
           ) : (

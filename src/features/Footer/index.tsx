@@ -13,6 +13,7 @@ import Contact from '@/components/Contact.jsx'
 import { AppData } from '@/models/AppData'
 import { ContactElement } from '@/models/Contact'
 import { useWindowWidth } from '@/hooks/useWindowWidth'
+import { User, UserRole } from '@/models/User'
 
 interface FooterProps {
   appData: AppData
@@ -20,7 +21,7 @@ interface FooterProps {
 
 export default function Footer ({ appData }: FooterProps): JSX.Element {
   const { t, i18n } = useTranslation()
-  const [pictures, setPictures] = useState<string[] | null>(null)
+  const [projectManagers, setProjectManagers] = useState<User[] | null>(null)
   const windowWidth = useWindowWidth();
   
   let textPos = 'text-start';
@@ -30,31 +31,24 @@ export default function Footer ({ appData }: FooterProps): JSX.Element {
 
   useEffect(() => {
     if (appData.users) {
-      const picture1: string = (appData.users || []).find((e) => e.id === projectMasters[0].id)?.info.picture || ''
-      const picture2: string = (appData.users || []).find((e) => e.id === projectMasters[1].id)?.info.picture || ''
-      setPictures([picture1, picture2])
+      const highestStudsYear = Math.max(...(appData.users || []).map((e) => e.studsYear))
+      const projectManagers = (appData.users || []).filter((e) => e.studsYear === highestStudsYear && e.info.role === UserRole.ProjectManager)
+      setProjectManagers(projectManagers)
     }
   }, [appData.users])
 
   const imgStyle: CSSProperties  = { objectFit: 'contain', width: '200px' }
-  const contacts: ContactElement[] = [
-    {
-      id: projectMasters[0].id,
-      picture: pictures ? pictures[0] : undefined,
-      name: `${projectMasters[0].firstName} ${projectMasters[0].lastName}`,
-      email: projectMasters[0].email,
-      role: t('projectLeader'),
+
+  const contacts: ContactElement[] = projectManagers?.map((e) => {
+    return {
+      id: e.id,
+      picture: e.info.picture,
+      name: `${e.firstName} ${e.lastName}`,
+      email: e.info.email,
+      role: t(e.info.role),
       vertical: true,
-    },
-    {
-      id: projectMasters[1].id,
-      picture: pictures ? pictures[1] : undefined,
-      name: `${projectMasters[1].firstName} ${projectMasters[1].lastName}`,
-      email: projectMasters[1].email,
-      role: t('projectLeader'),
-      vertical: true,
-    },
-  ];
+    }
+  }) || []
 
   const companyCircle = (img: string) => {
     return (
@@ -74,8 +68,9 @@ export default function Footer ({ appData }: FooterProps): JSX.Element {
             </div>
             <div className='col d-flex justify-content-center'>
               <div className='d-flex justify-content-center gap-5' style={{width: '200px'}}>
-                    <Contact element={contacts[0]} />
-                    <Contact element={contacts[1]} />
+                    {contacts.map((e) => (
+                      <Contact key={e.id} element={e} />
+                    ))}
               </div>
             </div>
           </div>

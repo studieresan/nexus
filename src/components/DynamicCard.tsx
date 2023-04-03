@@ -4,6 +4,7 @@ import { Button, Dropdown } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 import { BsCalendarDate, BsPencil, BsTrash } from 'react-icons/bs'
 import { IoPersonSharp } from 'react-icons/io5'
+import { Tools } from './Tools'
 interface BlogCardProps {
   element: CardElement,
   handleClickCard: (id: string) => void
@@ -65,31 +66,7 @@ export default function DynamicCard ({ element, handleClickCard, handleClickEdit
               <small>{element.dateText}</small>
             </div>
           </div>
-          {showTools && (
-            <div
-              ref={optionsRef}
-              style={{ position: 'absolute', top: 10, right: 10, zIndex: 100, opacity: 0 }}
-              className='d-flex gap-2'
-            >
-              <Button
-                className='p-2' variant='danger' size='lg' onClick={(e) => {
-                  e.stopPropagation()
-                  handleClickDelete(element.id)
-                }}
-              >
-                <BsTrash className='d-block' size={17} />
-              </Button>
-              <Button
-                className='p-2' variant='light' size='lg'
-                onClick={(e) => {
-                  e.stopPropagation()
-                  handleClickEdit(element.id)
-                }}
-              >
-                <BsPencil className='d-block' size={17} />
-              </Button>
-            </div>
-          )}
+          {showTools && <Tools id={element.id} handleClickDelete={handleClickDelete} handleClickEdit={handleClickEdit} optionsRef={optionsRef} opacity={0}/>}
         </div>
 
       </div>

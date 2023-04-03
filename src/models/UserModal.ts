@@ -5,4 +5,6 @@ export interface UserModalData {
   user: User,
   name: string,
   id: string,
+  handleClickEdit: (id: string) => void,
+  handleClickDelete: (id: string) => void,
 }

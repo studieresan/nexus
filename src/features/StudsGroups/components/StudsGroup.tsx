@@ -21,16 +21,17 @@ export default function StudsGroup ({ handleClick, showGroup, group, groupIndex 
     if (group.master === undefined) {
       const contact: ContactElement = {
         id: '',
-        role: t(`${group.name}Leader`),
+        role: '',
         picture: '',
-        name: t('notFound'),
+        name: t('groups.manager_not_found'),
         email: '',
+        disabled: true
       }
-      return <Contact element={contact} />;
+      return <Contact element={contact}/>;
     } else {
       const contact: ContactElement = {
         id: group.master.id,
-        role: t(`${group.name}Leader`),
+        role: t(`${group.master.info.role}`),
         picture: group.master.info.picture,
         name: `${group.master.firstName} ${group.master.lastName}`,
         email: group.master.info.email,

@@ -1,3 +1,4 @@
+import { Tools } from '@/components/Tools'
 import { AppData } from '@/models/AppData'
 import { ModalManager } from '@/models/Modal'
 import { Permission, User } from '@/models/User'
@@ -28,6 +29,23 @@ export default function ViewUser({ data, modal, appData }: ViewUserProps) {
     return appData.userDetails.permissions.includes(Permission.Admin);
   }
 
+  let showTools = false
+  if (data.user.id === appData.userDetails?.id) {
+    showTools = true
+  } else if (appData.userDetails?.permissions.includes(Permission.Admin)) {
+    showTools = true
+  }
+    
+  function handleClickEditAndClose() {
+    data.handleClickEdit(data.user.id)
+    modal.off(data.name, data.id)
+  }
+
+  function handleClickDeleteAndClose() {
+    data.handleClickDelete(data.user.id)
+    modal.off(data.name, data.id)
+  }
+
   return (
     <Modal
       show={modal.isModalVisible(data.name, data.id)}
@@ -36,8 +54,8 @@ export default function ViewUser({ data, modal, appData }: ViewUserProps) {
       fullscreen="xxl-down"
       keyboard={false}
     >
-      <Modal.Header closeButton className="py-2 text-gray-700">
-        <Modal.Title>{`${user.firstName} ${user.lastName}${t('viewUser.profile')}`}</Modal.Title>
+      <Modal.Header closeButton className="py-3 text-gray-700">
+        <Modal.Title className=''>{showTools && <Tools id={data.id} handleClickEdit={handleClickEditAndClose} handleClickDelete={handleClickDeleteAndClose} inline={true} opacity={1} />}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <div className="container">
@@ -74,32 +92,32 @@ export default function ViewUser({ data, modal, appData }: ViewUserProps) {
           </div>
         </div>
           <div className="row d-flex justify-content-center my-3">
-            <div className="col-10 border rounded fw-light px-4 py-2">
+            <div className="col border rounded fw-light px-4 py-2">
               {user.info.biography ? (
                 <div className="fs-5 mb-1">{t('viewUser.biography')}: {user.info.biography}</div>
               ) : (
-                <div className="fs-5 mb-1">{t('viewUser.noBiography')}</div>
+                <div className="fs-5 mb-1">{t('viewUser.biography')}: {t('viewUser.noBiography')}</div>
               )}
               <div className="fs-5 mb-1">{t('viewUser.studsYear')}: {user.studsYear}</div>
               <div className="fs-5 mb-1">
                 {user.info.master ? (
                   <div>{t('viewUser.master')}: {user.info.master}</div>
                 ) : (
-                  <div>{t('viewUser.noMaster')}</div>
+                  <div>{t('viewUser.master')}: {t('viewUser.noMaster')}</div>
                 )}
               </div>
               <div className="fs-5 mb-1">
                 {user.info.role ? (
-                  <div>{t('viewUser.role')}: {user.info.role}</div>
+                  <div>{t('viewUser.role')}: {t(user.info.role)}</div>
                 ) : (
-                  <div>{t('viewUser.noRole')}</div>
+                  <div>{t('viewUser.role')}: {t('viewUser.noRole')}</div>
                 )}
               </div>
               <div className="fs-5 mb-1">
                 {user.info.allergies ? (
                   <div>{t('viewUser.allergies')}: {user.info.allergies}</div>
                 ) : (
-                  <div>{t('viewUser.noAllergies')}</div>
+                  <div>{t('viewUser.allergies')}: {t('viewUser.noAllergies')}</div>
                 )}
               </div>
               {isAdmin() && (
@@ -107,13 +125,15 @@ export default function ViewUser({ data, modal, appData }: ViewUserProps) {
                   <br />
                   <div className="fs-4 mb-1">{t('viewUser.permissions')}: </div>
                   <div className="fs-5 mb-1">
-                    {permissions.length > 0 ? (
-                      permissions.map((permission, index) => (
-                        <div key={index}>{t(`user.permission.${permission}`)}</div>
-                      ))
-                    ) : (
-                      t('viewUser.noPermissions')
-                    )}
+                    <ul>
+                      {permissions.length > 0 ? (
+                        permissions.map((permission, index) => (
+                          <li key={index}>{t(`${permission}`)}</li>
+                          ))
+                          ) : (
+                          <li>{t('viewUser.noPermissions')}</li>
+                      )}
+                    </ul>
                   </div>
                 </div>
               )}

@@ -8,6 +8,7 @@ import { DynamicYearGroup } from '@/models/DynamicYearGroup.js'
 import { AppData } from '@/models/AppData.js'
 import { ModalData, ModalManager } from '@/models/Modal.js'
 import { BlogPost } from '@/models/BlogPost.js'
+import { Permission } from '@/models/User'
 
 interface BlogProps {
   appData: AppData
@@ -36,7 +37,9 @@ export default function BlogPosts ({ appData, handleModals }: BlogProps): JSX.El
       id: 'PostModal-View',
       post: post,
       mode: 'view',
-      type: 'blogPost'
+      type: 'blogPost',
+      handleClickEdit: handleClickEdit,
+      handleClickDelete: handleClickDelete
     })
   }
 
@@ -85,7 +88,7 @@ export default function BlogPosts ({ appData, handleModals }: BlogProps): JSX.El
     })
   }
 
-  const showTools = (appData?.userDetails?.permissions || []).includes('blog_permission') || (appData?.userDetails?.permissions || []).includes('admin_permission')
+  const showTools = (appData?.userDetails?.permissions || []).includes(Permission.Blog) || (appData?.userDetails?.permissions || []).includes(Permission.Admin)
 
   if (groupsInfo) {
     return (

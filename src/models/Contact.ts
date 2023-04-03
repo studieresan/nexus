@@ -6,5 +6,7 @@ export interface ContactElement {
   email?: string
   role?: string
   vertical?: boolean
+  navbar?: boolean
   lg?: boolean
+  disabled?: boolean
 }

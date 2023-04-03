@@ -78,7 +78,6 @@
 
 .contact-hover {
   position: relative;
-  padding: 20px; /* Apply padding to the entire contact component */
   border-radius: 15px; /* Add rounded corners to the contact component */
   transition: box-shadow 0.2s ease, transform 0.2s ease, filter 0.2s ease;
 }

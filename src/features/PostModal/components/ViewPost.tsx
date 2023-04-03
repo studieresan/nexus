@@ -1,7 +1,10 @@
+import { Tools } from '@/components/Tools'
+import { AppData } from '@/models/AppData'
 import { BlogPost } from '@/models/BlogPost'
 import { EventPost } from '@/models/EventPost'
 import { ModalManager } from '@/models/Modal'
 import { PostModalData } from '@/models/PostModal'
+import { Permission } from '@/models/User'
 import { useEffect, useState } from 'react'
 import { Carousel, Modal } from 'react-bootstrap'
 
@@ -9,6 +12,7 @@ interface ViewPostProps {
   post: BlogPost | EventPost
   data: PostModalData
   modal: ModalManager
+  appData: AppData
 }
 
 interface InputBlock {
@@ -16,7 +20,7 @@ interface InputBlock {
   images: string[]
 }
 
-export default function ViewPost ({ post, data, modal }: ViewPostProps) {
+export default function ViewPost ({ post, data, modal, appData }: ViewPostProps) {
   const [inputBlocks, setInputBlocks] = useState<InputBlock[] | null>(null)
   console.log('post 222: ', post)
   useEffect(() => {
@@ -54,40 +58,63 @@ export default function ViewPost ({ post, data, modal }: ViewPostProps) {
     return blocks
   }
 
-  return (
-    <Modal show={modal.isModalVisible(data.name, data.id)} onHide={() => modal.off(data.name, data.id)} size='xl' fullscreen='xxl-down' keyboard={false}>
-      <Modal.Header closeButton className='py-2 text-gray-700'>
-        {/* <Modal.Title>{title}</Modal.Title> */}
-        <Modal.Title>&nbsp;</Modal.Title>
-      </Modal.Header>
-      <div className='d-flex px-4 bg-light'>
-        <Modal.Body>
-          <h1 className='fw-light'>{post.title}</h1>
-          {inputBlocks && inputBlocks.map((block, index) => (
-            <div key={index}>
-              <p className='lead text-muted'>{block.text}</p>
-              <div className='row g-1 row-cols-1 row-cols-xxl-2 justify-content-center mb-5'>
-                {block.images.length === 1
-                  ? (
-                    <div className='w-100'>
-                      <img src={block.images[0]} className='img-fluid' alt='' />
-                    </div>
-                    )
-                  : (
-                    <Carousel className='w-100'>
-                      {block.images.map((image, index) => (
-                        <Carousel.Item key={index}>
-                          <img src={image} className='img-fluid' alt='' />
-                        </Carousel.Item>
-                      ))}
-                    </Carousel>
+  let showTools = false
+  if (data.type === 'blogPost' && appData.userDetails?.permissions.includes(Permission.Blog)) {
+    showTools = true
+  } else if (data.type === 'eventPost' && appData.userDetails?.permissions.includes(Permission.Events)) {
+    showTools = true
+  } else if (appData.userDetails?.permissions.includes(Permission.Admin)) {
+    showTools = true
+  }
+    
+  function handleClickEditAndClose() {
+    data.handleClickEdit(post.id)
+    modal.off(data.name, data.id)
+  }
 
-                    )}
-              </div>
+  function handleClickDeleteAndClose() {
+    data.handleClickDelete(post.id)
+    modal.off(data.name, data.id)
+  }
+
+  return (
+    <Modal 
+      show={modal.isModalVisible(data.name, data.id)} 
+      onHide={() => modal.off(data.name, data.id)} 
+      size='xl' 
+      fullscreen='xxl-down' 
+      keyboard={false}
+    >
+      <Modal.Header closeButton className='py-3 text-gray-700'>
+        {/* <Modal.Title>{title}</Modal.Title> */}
+        <Modal.Title>{showTools && <Tools id={post.id} handleClickEdit={handleClickEditAndClose} handleClickDelete={handleClickDeleteAndClose} inline={true} opacity={1} />}</Modal.Title>
+      </Modal.Header>
+      <Modal.Body className='p-3'>
+        <h1 className='fw-light'>{post.title}</h1>
+        {inputBlocks && inputBlocks.map((block, index) => (
+          <div key={index}>
+            <p className='lead text-muted'>{block.text}</p>
+            <div className='row g-1 row-cols-1 row-cols-xxl-2 justify-content-center mb-5'>
+              {block.images.length === 1
+                ? (
+                  <div className='w-100'>
+                    <img src={block.images[0]} className='img-fluid' alt='' />
+                  </div>
+                  )
+                : (
+                  <Carousel className='w-100'>
+                    {block.images.map((image, index) => (
+                      <Carousel.Item key={index}>
+                        <img src={image} className='img-fluid' alt='' />
+                      </Carousel.Item>
+                    ))}
+                  </Carousel>
+
+                  )}
             </div>
-          ))}
-        </Modal.Body>
-      </div>
+          </div>
+        ))}
+      </Modal.Body>
     </Modal>
   )
 }

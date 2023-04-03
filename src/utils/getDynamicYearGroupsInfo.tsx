@@ -9,6 +9,7 @@ import { ContactElement } from '@/models/Contact';
 import { groupMasters } from './predeterminedInformation';
 import { GroupMasters } from '@/models/Group';
 import { EventPost } from '@/models/EventPost';
+import { Permission } from '@/models/User';
 
 function formatDate(date: Date) {
   const day = String(date.getDate()).padStart(2, '0');
@@ -27,9 +28,9 @@ export default function getDynamicYearGroupsInfo(appData: AppData, contentSource
   const loggedIn = assertDefined(appData.loggedIn, 'appData.loggedIn is not defined', 'appData.loggedIn');
   const userDetails = assertDefined(appData.userDetails,'appData.userDetails is not defined','appData.userDetails');
   const sourceData = contentSourceType === 'blog' ? appData.blogPosts : appData.events;
-  const permissionKey = contentSourceType === 'blog' ? 'blog_permission' : 'event_permission';
+  const permissionKey = contentSourceType === 'blog' ? Permission.Blog : Permission.Events;
   const contentData = assertDefined(sourceData, `appData.${contentSourceType}Posts is not defined`, `appData.${contentSourceType}Posts`);
-  const includeUnpublished = loggedIn && (userDetails?.permissions?.includes(permissionKey) || userDetails?.permissions?.includes('admin_permission')); 
+  const includeUnpublished = loggedIn && (userDetails?.permissions?.includes(permissionKey) || userDetails?.permissions?.includes(Permission.Admin)); 
   const includedContent = (contentData || []).filter((e) => e.published || includeUnpublished);
   const years = [...new Set(includedContent.map((e: BlogPost | EventPost) => e.studsYear))].sort((a, b) => b - a);
   

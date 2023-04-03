@@ -6,5 +6,7 @@ export interface PostModalData {
   post: BlogPost | EventPost,
   name: string,
   id: string,
-  type: 'blogPost' | 'eventPost'
+  type: 'blogPost' | 'eventPost',
+  handleClickEdit: (id: string) => void,
+  handleClickDelete: (id: string) => void,
 }

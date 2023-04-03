@@ -1,4 +1,4 @@
-import { HandleInstructionsContext } from '@/context.js'
+import { AppDataContext, HandleInstructionsContext } from '@/context.js'
 import { useContext } from 'react'
 import EditPost from './components/EditPost'
 import ViewPost from './components/ViewPost'
@@ -11,14 +11,14 @@ import { PostModalData } from '@/models/PostModal'
 
 export interface PostModalProps {
   modal: ModalManager,
-  data: PostModalData,
-  appData: AppData
+  data: PostModalData
 }
 
 
 
-export default function PostModal ({ modal, data, appData }: PostModalProps) {
+export default function PostModal ({ modal, data }: PostModalProps) {
   const handleInstructions = useContext(HandleInstructionsContext)
+  const appData = useContext(AppDataContext)
 
   async function handleSubmit (formData: CreateBlogPost | CreateEventPost) {
     const payload = { ...formData, date: formData.date || new Date().toISOString() }
@@ -32,6 +32,6 @@ export default function PostModal ({ modal, data, appData }: PostModalProps) {
     }
     modal.off(data.name, data.id)
   }
-  if (data.mode === 'view') return <ViewPost modal={modal} data={data} post={data.post} />
+  if (data.mode === 'view') return <ViewPost modal={modal} data={data} appData={appData} post={data.post} />
   else return <EditPost modal={modal} data={data} appData={appData} handleSubmit={handleSubmit} />
 }

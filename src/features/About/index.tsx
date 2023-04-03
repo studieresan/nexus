@@ -9,6 +9,7 @@ import { AppData } from '@/models/AppData'
 import { DynamicYearGroup } from '@/models/DynamicYearGroup'
 import generateGroupsInfo from '@/utils/getDynamicYearGroupsInfo'
 import WaveDivider from '@/components/WaveDivider'
+import { Permission } from '@/models/User'
 
 interface AboutProps {
   appData: AppData
@@ -31,7 +32,7 @@ export default function About ({ appData }: AboutProps): JSX.Element {
   function handleCreateClick () {
     console.log('handleCreate')
   }
-  const showTools = (appData?.userDetails?.permissions || []).includes('users_permission') || (appData?.userDetails?.permissions || []).includes('admin_permission')
+  const showTools = (appData?.userDetails?.permissions || []).includes(Permission.Admin)
   if (groupsInfo) {
     return (
       <div className='container-fluid mb-5' id='hanging-icons'>
