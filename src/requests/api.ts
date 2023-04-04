@@ -4,8 +4,7 @@ import { BlogPost } from '@/models/BlogPost'
 import { pickBy } from 'lodash'
 
 // This file was copied and reused from the old frontend repository
-console.log('API_BASE_URL', process.env.API_BASE_URL);
-const BASE_URL =  process.env.API_BASE_URL || 'http://localhost:5040'
+const BASE_URL =  'https://devapi.studs.se' // 'http://localhost:5040'
 const GRAPHQL = '/graphql'
 const SIGNUP = '/signup'
 const LOGIN = '/login'
@@ -130,7 +129,7 @@ export function updateUser (newFields: string) {
 export function createUser (userInfo: User) {
   const body = JSON.stringify({
     ...userInfo,
-    token: process.env.SIGNUP_TOKEN || 'asdf'
+    token: process.env.REACT_APP_SIGNUP_TOKEN || 'asdf'
   })
 
   return ftch(BASE_URL + SIGNUP, {
