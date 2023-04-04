@@ -12,6 +12,8 @@ import { DynamicYearGroup } from '@/models/DynamicYearGroup'
 import { assertDefined } from '@/utils/assertDefined'
 import { EventPost } from '@/models/EventPost'
 import { Permission } from '@/models/User'
+import { useWindowWidth } from '@/hooks/useWindowWidth'
+import { getDescriptionSize } from '@/utils/fontSizing'
 
 interface EventsProps {
   appData: AppData
@@ -22,10 +24,10 @@ export default function Events ({ appData, handleModals }: EventsProps): JSX.Ele
   const { t, i18n } = useTranslation()
   const [groupsInfo, setGroupsInfo] = useState<DynamicYearGroup[]>([])
   const handleInstructions = useContext(HandleInstructionsContext)
-
+  const windowWidth = useWindowWidth();
   useEffect(() => {
     if (appData.events) {
-      const groupsInfo = generateGroupsInfo(appData, 'events')
+      const groupsInfo = generateGroupsInfo(appData, 'events', windowWidth)
       setGroupsInfo(groupsInfo)
     }
   }, [appData, i18n.language])
@@ -98,10 +100,10 @@ export default function Events ({ appData, handleModals }: EventsProps): JSX.Ele
     return (
       <div className='container-fluid mb-5' id='hanging-icons'>
         <div className='row row-cols-1 justify-content-center'>
-          <div className='mb-5 mt-3 col-9'>
+          <div className='mb-3 mb-md-5 mt-3 col-11 col-lg-9'>
             <div>
-              <h1 className='fw-light'>{t('events.title')}</h1>
-              <p className='lead text-muted'>{t('events.intro')}</p>
+              <div className='fw-bold py-2 fs-1 display-5'>{t('events.title')}</div>
+              <div className={`lead text-muted ${getDescriptionSize(windowWidth)}`}>{t('events.intro')}</div>
               {showTools && (
                 <div className='d-flex gap-2'>
                   <Button className='studs-bg' size='lg' onClick={() => handleCreateClick()}>{t('events.primaryButton')}</Button>
@@ -109,7 +111,7 @@ export default function Events ({ appData, handleModals }: EventsProps): JSX.Ele
               )}
             </div>
           </div>
-          <div className='container-fluid col-9'>
+          <div className='container-fluid col-11 col-lg-9'>
             <div className='row'>
               {groupsInfo && appData.events && groupsInfo.map((group, groupIndex) => {
                 return (

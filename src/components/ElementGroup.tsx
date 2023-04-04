@@ -29,7 +29,7 @@ export default function ElementGroup ({ appData, showTools, type, expandStart, i
   const [showGroup, setShowGroup] = useState(expandStart || false)
   let styling = ''
   if (type === 'cards') styling += 'row align-items-stretch row-cols-1 row-cols-xxl-2 g-4 py-3'
-  if (type === 'contacts') styling += 'row row-cols-md-2 row-cols-xl-3 row-cols-xxxl-4 g-4 py-3'
+  if (type === 'contacts') styling += 'row row-cols-2 row-cols-md-2 row-cols-xl-3 row-cols-xxxl-4 g-4 py-3'
   
   return (
     <div

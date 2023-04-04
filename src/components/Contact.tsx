@@ -88,7 +88,7 @@ export default function Contact({ element }: ContactProps): JSX.Element {
           )}
         </div>
         <div className="row gap-0 d-flex justify-content-center text-center mt-1">
-          <div className="lead fs-4" style={{ whiteSpace: 'nowrap' }}>{element.name}</div>
+          <div className="lead fs-4">{element.name}</div>
           {element.role && <div style={{ whiteSpace: 'nowrap' }}>{element.role}</div>}
           {element.phone && <div style={{ whiteSpace: 'nowrap' }}>{element.phone}</div>}
           {element.email && <div style={{ whiteSpace: 'nowrap' }}>{element.email}</div>}

@@ -16,6 +16,7 @@ import { ImagesLoaded } from './models/ImagesLoaded'
 import { SalesInfo } from './models/SalesInfo'
 import { ContactElement } from '@/models/Contact'
 import WaveDivider from '@/components/WaveDivider'
+import { UserRole } from '@/models/User'
 
 
 
@@ -41,19 +42,29 @@ export default function Homepage ({ appData }: { appData: AppData }): JSX.Elemen
   const refs: Refs = { project: projectRef, events: eventsRef, contact: contactRef }
 
   useEffect(() => {
-    const salesMasterUser = appData.users ? appData.users.find(user => user.firstName === salesMaster.firstName && user.lastName === salesMaster.lastName) : null
-    const masterContact: ContactElement = {
-      id: salesMaster.id,
-      picture: salesMasterUser?.info?.picture,
-      name: `${salesMaster.firstName} ${salesMaster.lastName}`,
-      email: salesMaster.email,
-      phone: salesMaster.phone,
-      role: t('salesLeader')
+    if (appData.users) {
+      const highestStudsYear = Math.max(...(appData.users).map((user) => user.studsYear))
+      const salesManager = appData.users.find(user => user.info.role === UserRole.SalesGroupManager && user.studsYear === highestStudsYear)
+      if (salesManager) {
+        const masterContact: ContactElement = {
+          id: salesManager.id,
+          picture: salesManager?.info?.picture,
+          name: `${salesMaster.firstName} ${salesMaster.lastName}`,
+          email: salesMaster.email,
+          phone: salesMaster.phone,
+          role: t('salesLeader')
+        }
+        setSalesInfo({
+          bottomElement: <Contact element={masterContact} />,
+          description: <Trans i18nKey='homepage.contact.description'>{{ name: `${salesMaster.firstName} ${salesMaster.lastName}` }}</Trans>
+        })
+      } else {
+        setSalesInfo({
+          bottomElement: null,
+          description: <Trans i18nKey='homepage.contact.description'>{{ name: `${salesMaster.firstName} ${salesMaster.lastName}` }}</Trans>
+        })
+      }
     }
-    setSalesInfo({
-      bottomElement: <Contact element={masterContact} />,
-      description: <Trans i18nKey='homepage.contact.description'>{{ name: `${salesMaster.firstName} ${salesMaster.lastName}` }}</Trans>
-    })
   }, [appData.users, i18n.language])
 
   useEffect(() => {
@@ -98,7 +109,7 @@ export default function Homepage ({ appData }: { appData: AppData }): JSX.Elemen
       <div className='row row-cols-1 justify-content-center g-0'>
         <IntroSection appData={appData} overlayGroups={overlayGroups} imagesLoaded={imagesLoaded} handleImageLoaded={handleImageLoaded} />
         <WaveDivider direction='down'/>
-        <div className='row row-cols-1 my-5 g-0'>
+        <div className='row row-cols-1 mt-2 mb-5 mt-lg-5 my- g-0'>
           {imagesLoaded.intro && <DynamicHero insertRef={projectRef} align='left' title={t('homepage.project.title')} description={t('homepage.project.description')} bgImg={bgProject} primaryButtonText={t('homepage.project.buttonPrimary')} secondaryButtonText={t('homepage.project.buttonSecondary')} handleClickPrimary={projectPrimaryButton} handleClickSecondary={projectSecondaryButton} />}
           {imagesLoaded.intro && <DynamicHero insertRef={eventsRef} align='right' title={t('homepage.events.title')} description={t('homepage.events.description')} bgImg={bgEvents} primaryButtonText={t('homepage.events.buttonPrimary')} handleClickPrimary={eventsPrimaryButton} />}
           {imagesLoaded.intro && <DynamicHero insertRef={contactRef} align='left' title={t('homepage.contact.title')} description={salesInfo.description} bgImg={bgContact} bottomElement={salesInfo.bottomElement} />}

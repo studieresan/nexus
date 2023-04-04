@@ -58,6 +58,50 @@ export default function Footer ({ appData }: FooterProps): JSX.Element {
     )
   }
 
+  const getCollaborations = () => {
+    if (windowWidth < 992) {
+      return collaborationsSmall();
+    } else {
+      return collaborationsLarge();
+    }
+  }
+
+  const collaborationsLarge = () => {
+    return (
+      <div className='d-flex d-lg-block flex-wrap flex-lg-nowrap justify-content-center mb-3'>
+        <div className='d-flex justify-content-center justify-content-lg-start flex-row mb-2 gap-3' style={{width:500}}>
+          {companyCircle(goldman_sachs)}
+          {companyCircle(karma)}
+          {companyCircle(scania)}
+        </div>
+        <div className='d-flex justify-content-center justify-content-lg-start flex-row gap-3' style={{width:500}}>
+          {companyCircle(fra)}
+          {companyCircle(storykit)}
+          {companyCircle(visma)}
+        </div>
+      </div>
+    )
+  }
+
+  const collaborationsSmall = () => {
+    return (
+      <div className='d-flex d-lg-block flex-wrap flex-lg-nowrap justify-content-center mb-3'>
+        <div className='d-flex justify-content-center justify-content-lg-start flex-row mb-2 gap-3' style={{width:500}}>
+          {companyCircle(goldman_sachs)}
+          {companyCircle(karma)}
+        </div>
+        <div className='d-flex justify-content-center justify-content-lg-start flex-row mb-2 gap-3' style={{width:500}}>
+          {companyCircle(fra)}
+          {companyCircle(visma)}
+        </div>
+        <div className='d-flex justify-content-center justify-content-lg-start flex-row gap-3' style={{width:500}}>
+          {companyCircle(scania)}
+          {companyCircle(storykit)}
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className='container-fluid p-4 bg-dark text-white'>
       <div className='row row-cols-2 mb-5'>
@@ -67,7 +111,7 @@ export default function Footer ({ appData }: FooterProps): JSX.Element {
                 <img src={studsLogo} style={imgStyle} alt='Studs Logo' />
             </div>
             <div className='col d-flex justify-content-center'>
-              <div className='d-flex justify-content-center gap-5' style={{width: '200px'}}>
+              <div className='d-flex justify-content-center gap-0 gap-sm-5' style={{width: '200px'}}>
                     {contacts.map((e) => (
                       <Contact key={e.id} element={e} />
                     ))}
@@ -83,18 +127,7 @@ export default function Footer ({ appData }: FooterProps): JSX.Element {
             <div className='d-none d-lg-flex align-items-left justify-content-center' style={{width: '50px', height: '200px', border: '1px solid #000'}}>
               <span className='fs-3 fw-light' style={{writingMode: 'vertical-rl', textOrientation: 'mixed'}}>{t('footer.collaborations')}:</span>
             </div>
-            <div className='d-flex d-lg-block flex-wrap flex-lg-nowrap justify-content-center mb-3'>
-              <div className='d-flex justify-content-center justify-content-lg-start flex-row mb-2 gap-3' style={{width:500}}>
-                      {companyCircle(goldman_sachs)}
-                      {companyCircle(karma)}
-                      {companyCircle(scania)}
-              </div>
-              <div className='d-flex justify-content-center justify-content-lg-start flex-row gap-3' style={{width:500}}>
-                      {companyCircle(fra)}
-                      {companyCircle( storykit)}
-                      {companyCircle( visma)}
-              </div>
-            </div>
+            {getCollaborations()}
           </div>
         </div>
       </div>

@@ -5,6 +5,8 @@ import { useTranslation } from 'react-i18next'
 import { BsCalendarDate, BsPencil, BsTrash } from 'react-icons/bs'
 import { IoPersonSharp } from 'react-icons/io5'
 import { Tools } from './Tools'
+import { getDescriptionSize } from '@/utils/fontSizing'
+import { useWindowWidth } from '@/hooks/useWindowWidth'
 interface BlogCardProps {
   element: CardElement,
   handleClickCard: (id: string) => void
@@ -17,6 +19,7 @@ export default function DynamicCard ({ element, handleClickCard, handleClickEdit
   const { t, i18n } = useTranslation()
   const imageRef = useRef<HTMLDivElement>(null)
   const optionsRef = useRef<HTMLDivElement>(null)
+  const windowWidth = useWindowWidth();
   return (
     <div className='col'>
       <div
@@ -45,15 +48,15 @@ export default function DynamicCard ({ element, handleClickCard, handleClickEdit
         }}
       >
         <div ref={imageRef} className='d-flex flex-column bg-dark h-100' style={{ transitionDuration: '0.2s', backgroundImage: `url(${element.bgImg})`, backgroundSize: 'cover', backgroundPosition: 'center', filter: 'brightness(80%)', position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }} />
-        <div className='d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1' style={{ position: 'relative' }}>
+        <div className='d-flex flex-column h-100 p-3 p-lg-5 pb-lg-3 text-white text-shadow-1' style={{ position: 'relative' }}>
           <div className={`pt-5 ${element.danger ? 'mt-3' : 'mt-5'} mb-4`}>
             {element.danger && <small className='lead text-warning'>{element.danger}</small>}
             {element.cardTitle
               ? (
-                <h3 className='display-6 lh-1 fw-bold'>{element.cardTitle}</h3>
+                <div className={`display-6 lh-1 fw-bold px-1`}>{element.cardTitle}</div>
                 )
               : (
-                <h3 className='display-6 lh-1 fw-bold text-warning'>{t('card.noTitle')}</h3>
+                <div className={`display-6 lh-1 fw-bold text-warning ${getDescriptionSize(windowWidth)}`}>{t('card.noTitle')}</div>
                 )}
           </div>
           <div className='d-flex mt-auto'>

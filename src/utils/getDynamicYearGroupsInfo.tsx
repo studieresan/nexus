@@ -19,10 +19,10 @@ function formatDate(date: Date) {
   return `${day}/${month}/${year}`;
 }
 
-export default function getDynamicYearGroupsInfo(appData: AppData, contentSourceType: 'blog' | 'events' | 'contact'): DynamicYearGroup[] {
+export default function getDynamicYearGroupsInfo(appData: AppData, contentSourceType: 'blog' | 'events' | 'contact', windowWidth: number): DynamicYearGroup[] {
 
   if (contentSourceType === 'contact') {
-    return getContactElementGroupsInfo(appData);
+    return getContactElementGroupsInfo(appData, windowWidth);
   }
 
   const loggedIn = assertDefined(appData.loggedIn, 'appData.loggedIn is not defined', 'appData.loggedIn');
@@ -54,7 +54,7 @@ export default function getDynamicYearGroupsInfo(appData: AppData, contentSource
   return newGroupsInfo;
 }
 
-function getContactElementGroupsInfo(appData: AppData): DynamicYearGroup[] {
+function getContactElementGroupsInfo(appData: AppData, windowWidth: number): DynamicYearGroup[] {
   if (!appData.users) return [];
 
   const years = [...new Set(appData.users.map((e) => e.studsYear)),].sort((a, b) => b - a);
@@ -71,7 +71,7 @@ function getContactElementGroupsInfo(appData: AppData): DynamicYearGroup[] {
         email: e.info.email,
         role: i18next.t(e.info.role),
         vertical: true,
-        lg: true,
+        lg: windowWidth >= 768
       };
 
       const keys = (Object.keys(groupMasters) as Array<keyof GroupMasters>);

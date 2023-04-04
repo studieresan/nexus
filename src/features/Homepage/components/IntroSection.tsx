@@ -94,7 +94,9 @@ export function IntroSection({ appData, overlayGroups, imagesLoaded, handleImage
   const windowWidth = useWindowWidth();
   
   let titleSize = 0;
-  if (windowWidth < 768) {
+  if (windowWidth < 576) {
+    titleSize = 25
+  } else if (windowWidth < 768) {
     titleSize = 30
   } else if (windowWidth < 992) {
     titleSize = 40

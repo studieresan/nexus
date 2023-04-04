@@ -9,6 +9,8 @@ import { AppData } from '@/models/AppData.js'
 import { ModalData, ModalManager } from '@/models/Modal.js'
 import { BlogPost } from '@/models/BlogPost.js'
 import { Permission } from '@/models/User'
+import { useWindowWidth } from '@/hooks/useWindowWidth'
+import { getDescriptionSize } from '@/utils/fontSizing'
 
 interface BlogProps {
   appData: AppData
@@ -20,10 +22,10 @@ export default function BlogPosts ({ appData, handleModals }: BlogProps): JSX.El
   const { t, i18n } = useTranslation()
   const [groupsInfo, setGroupsInfo] = useState<DynamicYearGroup[]>([])
   const handleInstructions = useContext(HandleInstructionsContext)
-
+  const windowWidth = useWindowWidth();
   useEffect(() => {
     if (appData.blogPosts) {
-      setGroupsInfo(generateGroupsInfo(appData, 'blog'))
+      setGroupsInfo(generateGroupsInfo(appData, 'blog', windowWidth))
     }
   }, [appData.blogPosts, i18n.language])
 
@@ -94,16 +96,17 @@ export default function BlogPosts ({ appData, handleModals }: BlogProps): JSX.El
     return (
       <div className='container-fluid mb-5' id='hanging-icons'>
         <div className='row row-cols-1 justify-content-center'>
-          <div className='mb-5 mt-3 col-9'>
-            <h1 className='fw-light'>{t('blog.title')}</h1>
-            <p className='lead text-muted'>{t('blog.intro')}</p>
+          <div className='mb-5 mt-3 col-11 col-lg-9'>
+          <div className='fw-bold py-2 fs-1 display-5'>{t('blog.title')}</div>
+          <div className={`lead text-muted ${getDescriptionSize(windowWidth)}`}>{t('blog.intro')}</div>
             {showTools && (
               <div className='d-flex gap-2'>
                 <Button className='studs-bg' size='lg' onClick={() => handleCreateClick()}>{t('blog.primaryButton')}</Button>
               </div>
             )}
           </div>
-          <div className='col w-75'>
+          <div className='container-fluid col-11 col-lg-9'>
+            <div className='row'>
             {groupsInfo && appData.blogPosts && groupsInfo.map((group, groupIndex) => {
               return (
                 <div key={`group-${groupIndex}`} className='mb-2'>
@@ -111,6 +114,7 @@ export default function BlogPosts ({ appData, handleModals }: BlogProps): JSX.El
                 </div>
               )
             })}
+            </div>
           </div>
         </div>
       </div>

@@ -1,4 +1,3 @@
-import { ModifiedButton } from '@/components/ModifiedButton'
 import { Button, Nav, Navbar } from 'react-bootstrap'
 import { BiLogIn, BiLogOut } from 'react-icons/bi'
 import { useNavigate } from 'react-router-dom'
@@ -10,7 +9,7 @@ import { HandleInstructionsContext } from '@/context'
 import { AppData } from '@/models/AppData'
 import Contact from '@/components/Contact.jsx'
 import { ContactElement } from '@/models/Contact.js'
-import { User } from '@/models/User.js'
+import { AiOutlineHome } from 'react-icons/ai'
 
 interface HeaderProps {
   appData: AppData;
@@ -86,9 +85,10 @@ export default function Header({ appData, setAppData }: HeaderProps): JSX.Elemen
               <Button className='studs-navbar' onClick={() => navigateTo('/groups')}>{t('groups.name')}</Button>
             </Nav>
           </div>
-          <div className='d-none d-lg-flex justify-content-center w-100 p-2'>
+          <div className='d-flex justify-content-center w-100 p-2'>
             <Button className='studs-navbar'  onClick= {() => navigateTo('/')}>
-              <img alt='' src={studsLogo} width='200px' height='100%' className='d-inline-block align-top'/>
+              <img alt='' src={studsLogo} width='200px' height='100%' className='d-none d-lg-inline-block align-top'/>
+              <AiOutlineHome size={30} className='d-inline-block d-lg-none'/>
             </Button>
           </div>
           <div className='d-flex flex-column flex-md-row justify-content-center w-100'>

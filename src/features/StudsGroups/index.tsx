@@ -12,6 +12,8 @@ import { GiProcessor, GiReceiveMoney } from 'react-icons/gi'
 import { GoPencil } from 'react-icons/go'
 import { MdTravelExplore } from 'react-icons/md'
 import { BsBuilding } from 'react-icons/bs'
+import { getDescriptionSize } from '@/utils/fontSizing.js'
+import { useWindowWidth } from '@/hooks/useWindowWidth.js'
 
 interface GroupsProps {
   appData: AppData
@@ -21,6 +23,7 @@ export default function StudsGroups ({ appData }: GroupsProps): JSX.Element {
   const { t, i18n } = useTranslation()
   const [groupsInfo, setGroupsInfo] = useState<StudsGroupInfo[]>([])
   const [showGroup, setShowGroup] = useState<boolean[]>([])
+  const windowWidth = useWindowWidth();
   // Go through each group and find the master from appData.users and store it in groupsInfo
   useEffect(() => {
     if (appData.users) {
@@ -77,8 +80,8 @@ export default function StudsGroups ({ appData }: GroupsProps): JSX.Element {
       <div className='row row-cols-1 justify-content-center'>
         <div className='mb-5 mt-3 col-9'>
           <div>
-            <h1 className='fw-light'>{t('groups.title')}</h1>
-            <p className='lead text-muted'>{t('groups.intro')}</p>
+          <div className='fw-bold py-2 fs-1 display-5'>{t('groups.title')}</div>
+          <div className={`lead text-muted ${getDescriptionSize(windowWidth)}`}>{t('groups.intro')}</div>
             {/* <div className='d-flex gap-2'>
               <Button>{t('groups.primaryButton')}</Button>
               <Button variant='secondary'>{t('groups.secondaryButton')}</Button>
