@@ -31,27 +31,27 @@ export default defineConfig({
       //   changeOrigin: true
       // },
       '/graphql': {
-        target: 'http://localhost:5040/',
+        target: 'https://devapi.studs.se/',
         changeOrigin: true
       },
       '/signed-upload': {
-        target: 'http://localhost:5040/',
+        target: 'https://devapi.studs.se/',
         changeOrigin: true
       },
       '/login': {
-        target: 'http://localhost:5040/',
+        target: 'https://devapi.studs.se/',
         changeOrigin: true
       },
       '/forgot': {
-        target: 'http://localhost:5040/',
+        target: 'https://devapi.studs.se/',
         changeOrigin: true
       },
       '/reset': {
-        target: 'http://localhost:5040/',
+        target: 'https://devapi.studs.se/',
         changeOrigin: true
       },
       '/account/password': {
-        target: 'http://localhost:5040/',
+        target: 'https://devapi.studs.se/',
         changeOrigin: true
       },
       '/uploads': {
