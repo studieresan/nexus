@@ -6,7 +6,7 @@ This is a **React 18.2** project built with **Vite 3.0**. Vite is a much faster 
 
 The project is written in TypeScript. The main benefit of TypeScript is that it becomes easier for new members (of for example STUDS) to understand the project and begin contributing to it. I hope that this will be the case for this project.
 
-The project uses **Bootstrap 5.2**, meaning no CSS files. To style the components, use bootstrap classnames or if necessary inline CSS. The purpose of this is once again for the project to be easy to delve into. Everything you see on the website will be contained withing each component's TypeScript file.
+The project uses **Bootstrap 5.2**, meaning no CSS files. To style the components, use bootstrap classnames or if necessary inline CSS, with the exception of hover effects and transitions, in this case I have used CSS files. The purpose of this is once again for the project to be easy to delve into. Everything you see on the website will be contained withing each component's TypeScript file.
 
 The project uses the **react-bootstrap** library which has several prebuilt components. Althought these don't have to be used.
 
