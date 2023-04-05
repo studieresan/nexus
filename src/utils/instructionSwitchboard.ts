@@ -1,5 +1,5 @@
 import { InstructionArgs, InstructionData } from '@/models/Instruction'
-import { createBlogPost, deleteBlogpost, loginUser, updateEvent, createEvent, updateBlogPost, requestPasswordReset, resetPassword, createUser, updateUser } from '@/requests/api'
+import { createBlogPost, deleteBlogpost, loginUser, updateEvent, createEvent, updateBlogPost, requestPasswordReset, resetPassword, createUser, updateUser, removeEventWithId } from '@/requests/api'
 import { setLoggedIn, setLoggedOut } from '@/requests/auth'
 import { BlogPost } from '@/models/BlogPost';
 import { EventPost } from '@/models/EventPost';
@@ -56,7 +56,7 @@ export default async function instructionSwitchboard (args: InstructionArgs, ins
     }
     case 'deleteEventPost': {
       const toDeleteId = assertDefined(data.toDeleteId, instruction, 'data.toDeleteId');
-      await deleteBlogpost(toDeleteId)
+      await removeEventWithId(toDeleteId)
       args.setAppData({ ...args.appData, events: (args.appData.events || []).filter(post => post.id !== data.toDeleteId) })
       break
     }

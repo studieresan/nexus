@@ -51,7 +51,7 @@ function App () {
           <Header appData={appData} setAppData={setAppData} />
           <Routes>
             <Route path='/' element={<Homepage appData={appData} />} />
-            <Route path='/about' element={waveDividedElement(<About appData={appData} />)} />
+            <Route path='/about' element={waveDividedElement(<About appData={appData} handleModals={handleModals} />)} />
             <Route path='/events' element={waveDividedElement(<Events appData={appData} handleModals={handleModals} />)} />
             <Route path='/groups' element={waveDividedElement(<Groups appData={appData} />)} />
             <Route path='/blog' element={waveDividedElement(<Blog appData={appData} handleModals={handleModals} />)}/>

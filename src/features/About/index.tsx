@@ -12,12 +12,14 @@ import WaveDivider from '@/components/WaveDivider'
 import { Permission } from '@/models/User'
 import { useWindowWidth } from '@/hooks/useWindowWidth'
 import { getButtonSize, getDescriptionSize, getTitleSize } from '@/utils/fontSizing'
+import { ModalManager } from '@/models/Modal'
 
 interface AboutProps {
   appData: AppData
+  handleModals: ModalManager
 }
 
-export default function About ({ appData }: AboutProps): JSX.Element {
+export default function About ({ appData, handleModals }: AboutProps): JSX.Element {
   const { t, i18n } = useTranslation()
   const [groupsInfo, setGroupsInfo] = useState<DynamicYearGroup[]>([])
   const windowWidth = useWindowWidth();
@@ -34,7 +36,12 @@ export default function About ({ appData }: AboutProps): JSX.Element {
     
 
   function handleCreateClick () {
-    console.log('handleCreate')
+    handleModals.on({
+      name: 'UserModal',
+      id: 'UserModal-Edit',
+      user: {},
+      mode: 'edit',
+    })
   }
   const showTools = (appData?.userDetails?.permissions || []).includes(Permission.Admin)
   if (groupsInfo) {

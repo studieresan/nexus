@@ -22,11 +22,11 @@ export default function EditUser ({ modal, data, appData, handleSubmit }: EditUs
   const addFrontImageRef = useRef<HTMLInputElement>(null)
   const imageRefs = useRef([])
   const iconRefs = useRef([])
-  const [formData, setFormData] = useState<User>({
+  const startUser = {
     id: '',
     firstName: '',
     lastName: '',
-    studsYear: 0,
+    studsYear: new Date().getFullYear(),
     info: {
       role: UserRole.None,
       email: '',
@@ -40,28 +40,30 @@ export default function EditUser ({ modal, data, appData, handleSubmit }: EditUs
       permissions: []
     },
     tokens: []
-  });
+  }
+
+  const [formData, setFormData] = useState<User>(startUser);
   const user = data.user;
 
   useEffect(() => {
     if (user) {
-      const { info } = user;
+      const info = user.info || startUser.info;
       const newFormData: User = {
         id: user.id,
-        firstName: user.firstName,
-        lastName: user.lastName,
-        studsYear: user.studsYear,
+        firstName: user.firstName || startUser.firstName,
+        lastName: user.lastName || startUser.lastName,
+        studsYear: user.studsYear || startUser.studsYear,
         info: {
-          role: info.role,
-          email: info.email,
-          biography: info.biography || '',
-          linkedIn: info.linkedIn || '',
-          github: info.github || '',
-          phone: info.phone || '',
-          picture: info.picture || '',
-          allergies: info.allergies || '',
-          master: info.master || '',
-          permissions: info.permissions,
+          role: info.role || startUser.info.role,
+          email: info.email || startUser.info.email,
+          biography: info.biography || startUser.info.biography,
+          linkedIn: info.linkedIn || startUser.info.linkedIn,
+          github: info.github || startUser.info.github,
+          phone: info.phone || startUser.info.phone,
+          picture: info.picture || startUser.info.picture,
+          allergies: info.allergies || startUser.info.allergies,
+          master: info.master || startUser.info.master,
+          permissions: info.permissions || startUser.info.permissions,
         },
         tokens: user.tokens || [],
       };
@@ -150,7 +152,7 @@ export default function EditUser ({ modal, data, appData, handleSubmit }: EditUs
       backdrop='static'
     >
       <Modal.Header closeButton className='py-2'>
-        <Modal.Title>{user ? t('editUser.label.editing') + ': ' + user.firstName + ' ' + user.lastName : t('editUser.label.creating')}</Modal.Title>
+        <Modal.Title>{user.id ? t('editUser.label.editing') + ': ' + user.firstName + ' ' + user.lastName : t('editUser.label.creating')}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form>
