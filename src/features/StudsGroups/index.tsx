@@ -11,7 +11,7 @@ import { AiFillSchedule } from 'react-icons/ai'
 import { GiProcessor, GiReceiveMoney } from 'react-icons/gi'
 import { GoPencil } from 'react-icons/go'
 import { MdTravelExplore } from 'react-icons/md'
-import { BsBuilding } from 'react-icons/bs'
+import { BsBuildings } from 'react-icons/bs'
 import { getDescriptionSize } from '@/utils/fontSizing.js'
 import { useWindowWidth } from '@/hooks/useWindowWidth.js'
 
@@ -27,14 +27,14 @@ export default function StudsGroups ({ appData }: GroupsProps): JSX.Element {
   // Go through each group and find the master from appData.users and store it in groupsInfo
   useEffect(() => {
     if (appData.users) {
-      const managerTypes = [UserRole.EventGroupManager, UserRole.FinanceGroupManager, UserRole.InfoGroupManager, UserRole.ItGroupManager, UserRole.TravelGroupManager]
+      const managerTypes = [UserRole.EventGroupManager, UserRole.FinanceGroupManager, UserRole.InfoGroupManager, UserRole.ItGroupManager, UserRole.TravelGroupManager, UserRole.SalesGroupManager]
       const icons: { [key: string]: JSX.Element } = {
         [UserRole.EventGroupManager]: <AiFillSchedule style={{ backgroundColor: 'white' }} />,
         [UserRole.FinanceGroupManager]: <GiReceiveMoney style={{ backgroundColor: 'white' }} />,
         [UserRole.InfoGroupManager]: <GoPencil style={{ backgroundColor: 'white' }} />,
         [UserRole.ItGroupManager]: <GiProcessor style={{ backgroundColor: 'white' }} />,
         [UserRole.TravelGroupManager]: <MdTravelExplore style={{ backgroundColor: 'white' }} />,
-        [UserRole.SalesGroupManager]: <BsBuilding style={{ backgroundColor: 'white' }} />
+        [UserRole.SalesGroupManager]: <BsBuildings style={{ backgroundColor: 'white' }} />
       }
       const highestStudsYear = Math.max(...appData.users.map((user) => user.studsYear))
       const managers = appData.users.filter((user) => managerTypes.includes(user.info.role) && user.studsYear === highestStudsYear)
@@ -81,7 +81,7 @@ export default function StudsGroups ({ appData }: GroupsProps): JSX.Element {
         <div className='mb-5 mt-3 col-9'>
           <div>
           <div className='fw-bold py-2 fs-1 display-5'>{t('groups.title')}</div>
-          <div className={`lead text-muted ${getDescriptionSize(windowWidth)}`}>{t('groups.intro')}</div>
+          <div className={`fw-light ${getDescriptionSize(windowWidth)}`}>{t('groups.intro')}</div>
             {/* <div className='d-flex gap-2'>
               <Button>{t('groups.primaryButton')}</Button>
               <Button variant='secondary'>{t('groups.secondaryButton')}</Button>

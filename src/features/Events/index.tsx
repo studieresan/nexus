@@ -103,9 +103,9 @@ export default function Events ({ appData, handleModals }: EventsProps): JSX.Ele
           <div className='mb-3 mb-md-5 mt-3 col-11 col-lg-9'>
             <div>
               <div className='fw-bold py-2 fs-1 display-5'>{t('events.title')}</div>
-              <div className={`lead text-muted ${getDescriptionSize(windowWidth)}`}>{t('events.intro')}</div>
+              <div className={`fw-light ${getDescriptionSize(windowWidth)}`}>{t('events.intro')}</div>
               {showTools && (
-                <div className='d-flex gap-2'>
+                <div className='d-flex gap-2 mt-3'>
                   <Button className='studs-bg' size='lg' onClick={() => handleCreateClick()}>{t('events.primaryButton')}</Button>
                 </div>
               )}

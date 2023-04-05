@@ -1,7 +1,6 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { Trans, useTranslation } from 'react-i18next'
-import { groupIcons, salesMaster } from '@/utils/predeterminedInformation'
 import { IntroSection } from './components/IntroSection'
 import bgContact from '@/assets/images/DSC00833.jpg'
 import bgEvents from '@/assets/images/b48.jpg'
@@ -17,6 +16,10 @@ import { SalesInfo } from './models/SalesInfo'
 import { ContactElement } from '@/models/Contact'
 import WaveDivider from '@/components/WaveDivider'
 import { UserRole } from '@/models/User'
+import { GroupIcons } from '@/models/Group'
+import { AiOutlineFundProjectionScreen } from 'react-icons/ai'
+import { RiTeamFill } from 'react-icons/ri'
+import { FiSend } from 'react-icons/fi'
 
 
 
@@ -49,23 +52,29 @@ export default function Homepage ({ appData }: { appData: AppData }): JSX.Elemen
         const masterContact: ContactElement = {
           id: salesManager.id,
           picture: salesManager?.info?.picture,
-          name: `${salesMaster.firstName} ${salesMaster.lastName}`,
-          email: salesMaster.email,
-          phone: salesMaster.phone,
-          role: t('salesLeader')
+          name: `${salesManager.firstName} ${salesManager.lastName}`,
+          email: salesManager.info.email,
+          phone: salesManager.info.phone,
+          role: t(salesManager.info.role)
         }
         setSalesInfo({
           bottomElement: <Contact element={masterContact} />,
-          description: <Trans i18nKey='homepage.contact.description'>{{ name: `${salesMaster.firstName} ${salesMaster.lastName}` }}</Trans>
+          description: <Trans i18nKey='homepage.contact.description'>{{ name: `${salesManager.firstName} ${salesManager.lastName}` }}</Trans>
         })
       } else {
         setSalesInfo({
           bottomElement: null,
-          description: <Trans i18nKey='homepage.contact.description'>{{ name: `${salesMaster.firstName} ${salesMaster.lastName}` }}</Trans>
+          description: <Trans i18nKey='homepage.contact.description'>{{ name: t("groups.manager_not_found") }}</Trans>
         })
       }
     }
   }, [appData.users, i18n.language])
+
+  const groupIcons:GroupIcons[] = [
+    { name: 'project', icon: <AiOutlineFundProjectionScreen size={60} className='text-white rounded' /> },
+    { name: 'events', icon: <RiTeamFill size={60} className='text-white rounded' /> },
+    { name: 'contact', icon: <FiSend size={60} className='text-white rounded' /> }
+  ]
 
   useEffect(() => {
     setOverlayGroups((groupIcons).map((group, index) => (

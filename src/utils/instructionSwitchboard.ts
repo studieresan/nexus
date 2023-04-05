@@ -1,5 +1,5 @@
 import { InstructionArgs, InstructionData } from '@/models/Instruction'
-import { createBlogPost, deleteBlogpost, loginUser, updateEvent, createEvent, updateBlogPost, requestPasswordReset, resetPassword } from '@/requests/api'
+import { createBlogPost, deleteBlogpost, loginUser, updateEvent, createEvent, updateBlogPost, requestPasswordReset, resetPassword, createUser, updateUser } from '@/requests/api'
 import { setLoggedIn, setLoggedOut } from '@/requests/auth'
 import { BlogPost } from '@/models/BlogPost';
 import { EventPost } from '@/models/EventPost';
@@ -25,7 +25,7 @@ export default async function instructionSwitchboard (args: InstructionArgs, ins
       const response: BlogPost = await createBlogPost(blogPost)
       response.date = new Date(response.date)
       console.log('new post response: ', response)
-      const newBlogPosts: BlogPost[] = [...(args.appData.blogPosts || []), response]
+      const newBlogPosts: BlogPost[] = [response, ...(args.appData.blogPosts || [])]
       args.setAppData({ ...args.appData, blogPosts: newBlogPosts })
       break
     }
@@ -51,13 +51,25 @@ export default async function instructionSwitchboard (args: InstructionArgs, ins
       const response: EventPost = await createEvent(eventToCreate)
       response.date = new Date(response.date)
       console.log('new events response: ', response)
-      args.setAppData({ ...args.appData, events: [...(args.appData.events || []), response] })
+      args.setAppData({ ...args.appData, events: [response, ...(args.appData.events || [])] })
       break
     }
     case 'deleteEventPost': {
       const toDeleteId = assertDefined(data.toDeleteId, instruction, 'data.toDeleteId');
       await deleteBlogpost(toDeleteId)
       args.setAppData({ ...args.appData, events: (args.appData.events || []).filter(post => post.id !== data.toDeleteId) })
+      break
+    }
+    case 'createUser':  {
+      const user = assertDefined(data.user, instruction, 'data.user');
+      await createUser(user)
+      args.setAppData({ ...args.appData, users: [user, ...(args.appData.users || [])] })
+      break
+    }
+    case 'updateUser': {
+      const user = assertDefined(data.user, instruction, 'data.user');
+      await updateUser(user)
+      args.setAppData({ ...args.appData, users: (args.appData.users || []).map((u: any) => u.id === user.id ? user : u) })
       break
     }
     case 'loginUser': {

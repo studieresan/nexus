@@ -1,6 +1,8 @@
 import Contact from '@/components/Contact.jsx'
+import { useWindowWidth } from '@/hooks/useWindowWidth'
 import { ContactElement } from '@/models/Contact'
 import { StudsGroupInfo } from '@/models/StudsGroupInfo'
+import { getDescriptionSize } from '@/utils/fontSizing'
 import { useRef } from 'react'
 import { Collapse } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
@@ -16,25 +18,27 @@ interface GroupProps {
 export default function StudsGroup ({ handleClick, showGroup, group, groupIndex }: GroupProps) {
   const { t, i18n } = useTranslation()
   const containerRef = useRef<HTMLDivElement>(null)
-  
+  const windowWidth = useWindowWidth();
   const masterContact = () => {
-    if (group.master === undefined) {
+    if (group.manager === undefined) {
       const contact: ContactElement = {
         id: '',
         role: '',
         picture: '',
         name: t('groups.manager_not_found'),
         email: '',
-        disabled: true
+        disabled: true,
+        lg: true
       }
       return <Contact element={contact}/>;
     } else {
       const contact: ContactElement = {
-        id: group.master.id,
-        role: t(`${group.master.info.role}`),
-        picture: group.master.info.picture,
-        name: `${group.master.firstName} ${group.master.lastName}`,
-        email: group.master.info.email,
+        id: group.manager.id,
+        role: t(`${group.manager.info.role}`),
+        picture: group.manager.info.picture,
+        name: `${group.manager.firstName} ${group.manager.lastName}`,
+        email: group.manager.info.email,
+        lg: true
       }
       return <Contact element={contact} />;
     }
@@ -67,7 +71,7 @@ export default function StudsGroup ({ handleClick, showGroup, group, groupIndex 
             }}
             style={{ cursor: 'pointer' }}
           >
-            <h2 className='fw-light'>{group.title}</h2>
+            <h2 className='fw-normal'>{group.title}</h2>
                 &nbsp;
             <div className='d-flex justify-content-center align-items-center'>
               {showGroup[groupIndex] ? <BiChevronUp size={30} /> : <BiChevronDown size={30} />}
@@ -75,7 +79,7 @@ export default function StudsGroup ({ handleClick, showGroup, group, groupIndex 
           </div>
           <Collapse in={showGroup[groupIndex]}>
             <div>
-              <p className='lead text-muted'> {group.description}</p>
+              <div className={`fw-light ${getDescriptionSize(windowWidth)}`}>{group.description}</div>
               <div className='d-flex'>
                 {masterContact()}
               </div>

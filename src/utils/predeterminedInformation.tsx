@@ -47,14 +47,6 @@ export const groupMasters: GroupMasters = {
   }
 }
 
-
-
-export const groupIcons:GroupIcons[] = [
-  { name: 'project', icon: <AiOutlineFundProjectionScreen size={60} className='text-white rounded' /> },
-  { name: 'events', icon: <RiTeamFill size={60} className='text-white rounded' /> },
-  { name: 'contact', icon: <FiSend size={60} className='text-white rounded' /> }
-]
-
 export const salesMaster = {
   id: '6318c8d868f1c00016841e31',
   firstName: 'Tobias',

@@ -1,10 +1,12 @@
 import { Tools } from '@/components/Tools'
+import { useWindowWidth } from '@/hooks/useWindowWidth'
 import { AppData } from '@/models/AppData'
 import { BlogPost } from '@/models/BlogPost'
 import { EventPost } from '@/models/EventPost'
 import { ModalManager } from '@/models/Modal'
 import { PostModalData } from '@/models/PostModal'
 import { Permission } from '@/models/User'
+import { getDescriptionSize } from '@/utils/fontSizing'
 import { useEffect, useState } from 'react'
 import { Carousel, Modal } from 'react-bootstrap'
 
@@ -22,7 +24,7 @@ interface InputBlock {
 
 export default function ViewPost ({ post, data, modal, appData }: ViewPostProps) {
   const [inputBlocks, setInputBlocks] = useState<InputBlock[] | null>(null)
-  console.log('post 222: ', post)
+  const windowWidth = useWindowWidth();
   useEffect(() => {
     if (post.description) {
       setInputBlocks(parseInputBlocks(post.description))
@@ -31,7 +33,6 @@ export default function ViewPost ({ post, data, modal, appData }: ViewPostProps)
 
   function parseInputBlocks (input: string) {
     const lines = input.split('\n')
-    console.log(lines)
     const blocks: InputBlock[] = [{
       text: '',
       images: []
@@ -52,9 +53,12 @@ export default function ViewPost ({ post, data, modal, appData }: ViewPostProps)
             images: []
           })
         }
-        blocks[currentBlockIdx].text += `\n${lines[i]}`.trim()
+        if (lines[i].trim()) {
+          blocks[currentBlockIdx].text += `${lines[i].trim()}\n\n`
+        }
       }
     }
+    console.log(blocks)
     return blocks
   }
 
@@ -89,12 +93,12 @@ export default function ViewPost ({ post, data, modal, appData }: ViewPostProps)
         {/* <Modal.Title>{title}</Modal.Title> */}
         <Modal.Title>{showTools && <Tools id={post.id} handleClickEdit={handleClickEditAndClose} handleClickDelete={handleClickDeleteAndClose} inline={true} opacity={1} />}</Modal.Title>
       </Modal.Header>
-      <Modal.Body className='p-3'>
-        <h1 className='fw-light'>{post.title}</h1>
+      <Modal.Body className='p-4'>
+        <h1 className='fw-bold'>{post.title}</h1>
         {inputBlocks && inputBlocks.map((block, index) => (
           <div key={index}>
-            <p className='lead text-muted'>{block.text}</p>
-            <div className='row g-1 row-cols-1 row-cols-xxl-2 justify-content-center mb-5'>
+            <div className={`fw-light fs-5 text-muted`} style={{whiteSpace: 'pre-line'}}>{block.text}</div>
+            <div className='row g-1 row-cols-1 row-cols-xxl-2 justify-content-center my-4'>
               {block.images.length === 1
                 ? (
                   <div className='w-100'>

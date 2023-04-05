@@ -4,7 +4,7 @@ import { BlogPost } from '@/models/BlogPost'
 import { pickBy } from 'lodash'
 
 // This file was copied and reused from the old frontend repository
-const BASE_URL =  'https://devapi.studs.se' // 'http://localhost:5040'
+const BASE_URL = 'https://devapi.studs.se' // 'http://localhost:5040' 
 const GRAPHQL = '/graphql'
 const SIGNUP = '/signup'
 const LOGIN = '/login'
@@ -115,15 +115,24 @@ function wrapInQuotes (str: string): string {
   return '"' + str.replace(/"/g, '\\"') + '"'
 }
 
-export function updateUser (newFields: string) {
+export function updateUser(user: User) {
+  delete user.tokens
   const mutation = `mutation {
-    userUpdate(id: null, info: ${toGraphQLFields(newFields)}) {
-      ${USER_PROFILE_FIELDS}
+    userUpdate(id: "${user.id}", user: ${toGraphQLFields(user)}) {
+      info {
+        ${USER_PROFILE_FIELDS}
+        role
+        picture
+        permissions
+      }
+      firstName
+      lastName
+      studsYear
     }
-  } `
+  }`;
   return executeGraphQL(mutation).then(res => {
-    return res.data.userUpdate
-  })
+    return res.data.userUpdate;
+  });
 }
 
 export function createUser (userInfo: User) {

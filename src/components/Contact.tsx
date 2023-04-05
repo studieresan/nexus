@@ -9,6 +9,8 @@ interface ContactProps {
 }
 
 export default function Contact({ element }: ContactProps): JSX.Element {
+  console.log('Contact', element);
+  
   const handleModals = useContext(HandleModalsContext)
   const appData = useContext(AppDataContext)
   const handleInstructions = useContext(HandleInstructionsContext)

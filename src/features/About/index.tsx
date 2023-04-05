@@ -44,9 +44,9 @@ export default function About ({ appData }: AboutProps): JSX.Element {
           <div className='mb-5 mt-3 col-11 col-md-9'>
             <div>
               <div className='fw-bold py-2 fs-1 display-5' style={{fontSize: getTitleSize(windowWidth)}}>{t('about.title')}</div>
-              <div className={`lead text-muted ${getDescriptionSize(windowWidth)}`}>{t('about.intro')}</div>
+              <div className={`fw-light ${getDescriptionSize(windowWidth)}`}>{t('about.intro')}</div>
               {showTools && (
-                <div className='d-flex gap-2'>
+                <div className='d-flex gap-2 mt-3'>
                   <Button className='studs-bg' size={getButtonSize(windowWidth)} onClick={() => handleCreateClick()}>{t('about.primaryButton')}</Button>
                 </div>
               )}
