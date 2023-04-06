@@ -19,6 +19,7 @@ export default async function instructionSwitchboard (args: InstructionArgs, ins
       console.log('new post response: ', response)
 
       const newBlogPosts: BlogPost[] = (args.appData.blogPosts || []).map((post: BlogPost) => post.id === blogPost.id ? response : post)
+      const sortedPosts = newBlogPosts.sort((a: BlogPost, b: BlogPost) => a.date > b.date ? 1 : -1)
       args.setAppData({ ...args.appData, blogPosts: newBlogPosts })
       break
     }
@@ -29,7 +30,7 @@ export default async function instructionSwitchboard (args: InstructionArgs, ins
       console.log('new post response: ', response)
 
       const newBlogPosts: BlogPost[] = [response, ...(args.appData.blogPosts || [])]
-      const sortedPosts = newBlogPosts.sort((a: any, b: any) => a.date > b.date ? 1 : -1)
+      const sortedPosts = newBlogPosts.sort((a: BlogPost, b: BlogPost) => a.date > b.date ? 1 : -1)
       args.setAppData({ ...args.appData, blogPosts: sortedPosts })
       break
     }
@@ -47,8 +48,8 @@ export default async function instructionSwitchboard (args: InstructionArgs, ins
       const response: EventPost = await updateEvent(eventToUpdate)
       response.date = new Date(response.date)
       
-      const newPosts = [response, ...(args.appData.events || [])]
-      const sortedPosts = newPosts.sort((a: any, b: any) => a.date > b.date ? 1 : -1)
+      const newPosts = (args.appData.events || []).map((post: EventPost) => post.id === eventToUpdate.id ? response : post)
+      const sortedPosts = newPosts.sort((a: EventPost, b: EventPost) => a.date > b.date ? 1 : -1)
       args.setAppData({ ...args.appData, events: sortedPosts })
       break
     }
@@ -57,7 +58,7 @@ export default async function instructionSwitchboard (args: InstructionArgs, ins
       const response: EventPost = await createEvent(eventToCreate)
       response.date = new Date(response.date)
       const newPosts = [response, ...(args.appData.events || [])]
-      const sortedPosts = newPosts.sort((a: any, b: any) => a.date > b.date ? 1 : -1)
+      const sortedPosts = newPosts.sort((a: EventPost, b: EventPost) => a.date > b.date ? 1 : -1)
       args.setAppData({ ...args.appData, events: sortedPosts })
       break
     }

@@ -58,7 +58,6 @@ export default function ViewPost ({ post, data, modal, appData }: ViewPostProps)
         }
       }
     }
-    console.log(blocks)
     return blocks
   }
 
