@@ -251,7 +251,7 @@ export default function EditUser ({ modal, data, appData, handleSubmit }: EditUs
               </div>
             )}
             <div className='mt-3 d-flex justify-content-end'>
-              <Button className='studs-bg' onClick={() => handleSubmit(formData)}>{t(`editUser.submit`)}</Button>
+              <Button className='studs-bg' onClick={() => handleSubmit(formData)}>{data.user ? t('editUser.edit.submit') : t('editUser.create.submit')}</Button>
             </div>
           </Form>
         </Modal.Body>

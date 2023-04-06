@@ -11,6 +11,7 @@ const LOGIN = '/login'
 const PASSWORD_UPDATE = '/account/password'
 const PASSWORD_FORGOT = '/forgot'
 const PASSWORD_RESET = '/reset'
+const USER_DELETE = '/delete'
 const STATUS_OK = 200
 
 function checkStatus (response: Response) {
@@ -135,15 +136,31 @@ export function updateUser(user: User) {
   });
 }
 
-export function createUser (userInfo: User) {
+export function createUser (user: User) {
   const body = JSON.stringify({
-    ...userInfo,
-    token: process.env.REACT_APP_SIGNUP_TOKEN || 'asdf'
+    ...user,
+    token: 'nuVPZHctR8QYZTeoGoWmNQRHaZQcyCbL'
   })
 
   return ftch(BASE_URL + SIGNUP, {
     method: 'POST',
     headers: {
+      ...jsonHeader()
+    },
+    body
+  })
+}
+
+export function deleteUser (toDeleteId: string) {
+  const body = JSON.stringify({
+    toDeleteId: toDeleteId
+  })
+
+  return ftch(BASE_URL +  USER_DELETE, {
+    method: 'POST',
+    credentials: credentials(),
+    headers: {
+      ...authorizationHeader(),
       ...jsonHeader()
     },
     body

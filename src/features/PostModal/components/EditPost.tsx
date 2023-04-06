@@ -44,7 +44,8 @@ export default function EditPost ({ modal, data, appData, handleSubmit }: EditPo
   useEffect(() => {
     const post = data.post;
     if (post && appData.users) {
-      const defaultAuthor = appData.users.find(user => user.studsYear === 2023) || appData.users[0];
+      const highestStudsYear: number = Math.max(...appData.users.map(user => user.studsYear));
+      const defaultAuthor = appData.users.find(user => user.id === appData.userDetails?.id) || appData.users.find(user => user.studsYear === highestStudsYear) || appData.users[0];
   
       const newFormData: CreateEventPost | CreateBlogPost = {
         id: post.id || '',
@@ -55,7 +56,7 @@ export default function EditPost ({ modal, data, appData, handleSubmit }: EditPo
         author: post?.author?.id || defaultAuthor.id,
         studsYear: post.studsYear || defaultAuthor.studsYear,
         date: post.date || null,
-        published: post.published || false,
+        published: post.published || true,
       };
       setFormData(newFormData);
     }

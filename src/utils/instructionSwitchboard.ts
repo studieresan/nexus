@@ -1,10 +1,11 @@
 import { InstructionArgs, InstructionData } from '@/models/Instruction'
-import { createBlogPost, deleteBlogpost, loginUser, updateEvent, createEvent, updateBlogPost, requestPasswordReset, resetPassword, createUser, updateUser, removeEventWithId } from '@/requests/api'
+import { createBlogPost, deleteBlogpost, loginUser, updateEvent, createEvent, updateBlogPost, requestPasswordReset, resetPassword, createUser, updateUser, removeEventWithId, deleteUser } from '@/requests/api'
 import { setLoggedIn, setLoggedOut } from '@/requests/auth'
 import { BlogPost } from '@/models/BlogPost';
 import { EventPost } from '@/models/EventPost';
 import { LoginResponse } from '@/models/Login';
 import { assertDefined } from './assertDefined';
+import { User } from '@/models/User';
 
 
 export default async function instructionSwitchboard (args: InstructionArgs, instruction: string, data: InstructionData): Promise<void> {
@@ -16,6 +17,7 @@ export default async function instructionSwitchboard (args: InstructionArgs, ins
       const response: BlogPost = await updateBlogPost(blogPost);
       response.date = new Date(response.date)
       console.log('new post response: ', response)
+
       const newBlogPosts: BlogPost[] = (args.appData.blogPosts || []).map((post: BlogPost) => post.id === blogPost.id ? response : post)
       args.setAppData({ ...args.appData, blogPosts: newBlogPosts })
       break
@@ -25,16 +27,18 @@ export default async function instructionSwitchboard (args: InstructionArgs, ins
       const response: BlogPost = await createBlogPost(blogPost)
       response.date = new Date(response.date)
       console.log('new post response: ', response)
+
       const newBlogPosts: BlogPost[] = [response, ...(args.appData.blogPosts || [])]
-      args.setAppData({ ...args.appData, blogPosts: newBlogPosts })
+      const sortedPosts = newBlogPosts.sort((a: any, b: any) => a.date > b.date ? 1 : -1)
+      args.setAppData({ ...args.appData, blogPosts: sortedPosts })
       break
     }
     case 'deleteBlogPost': {
       const toDeleteId = assertDefined(data.toDeleteId, instruction, 'data.toDeleteId');
       await deleteBlogpost(toDeleteId)
+
       const newAppData = { ...args.appData, blogPosts: (args.appData.blogPosts || []).filter(post => post.id !== data.toDeleteId) }
       console.log("New appData after delete:", newAppData);
-      
       args.setAppData(newAppData)
       break
     }
@@ -42,16 +46,19 @@ export default async function instructionSwitchboard (args: InstructionArgs, ins
       const eventToUpdate = assertDefined(data.eventPost, instruction, 'data.eventPost');
       const response: EventPost = await updateEvent(eventToUpdate)
       response.date = new Date(response.date)
-      console.log('new events response: ', response)
-      args.setAppData({ ...args.appData, events: (args.appData.events || []).map((event: EventPost) => event.id === eventToUpdate.id ? response : event) })
+      
+      const newPosts = [response, ...(args.appData.events || [])]
+      const sortedPosts = newPosts.sort((a: any, b: any) => a.date > b.date ? 1 : -1)
+      args.setAppData({ ...args.appData, events: sortedPosts })
       break
     }
     case 'createEventPost': {
       const eventToCreate = assertDefined(data.eventPost, instruction, 'data.eventPost');
       const response: EventPost = await createEvent(eventToCreate)
       response.date = new Date(response.date)
-      console.log('new events response: ', response)
-      args.setAppData({ ...args.appData, events: [response, ...(args.appData.events || [])] })
+      const newPosts = [response, ...(args.appData.events || [])]
+      const sortedPosts = newPosts.sort((a: any, b: any) => a.date > b.date ? 1 : -1)
+      args.setAppData({ ...args.appData, events: sortedPosts })
       break
     }
     case 'deleteEventPost': {
@@ -63,13 +70,23 @@ export default async function instructionSwitchboard (args: InstructionArgs, ins
     case 'createUser':  {
       const user = assertDefined(data.user, instruction, 'data.user');
       await createUser(user)
-      args.setAppData({ ...args.appData, users: [user, ...(args.appData.users || [])] })
+      const newUsers = [user, ...(args.appData.users || [])]
+      const sortedUsers = newUsers.sort((a: User, b: User) => a.firstName > b.firstName ? 1 : -1)
+      args.setAppData({ ...args.appData, users: sortedUsers })
       break
     }
     case 'updateUser': {
       const user = assertDefined(data.user, instruction, 'data.user');
       await updateUser(user)
-      args.setAppData({ ...args.appData, users: (args.appData.users || []).map((u: any) => u.id === user.id ? user : u) })
+      const newUsers = (args.appData.users || []).map((u: any) => u.id === user.id ? user : u)
+      const sortedUsers = newUsers.sort((a: User, b: User) => a.firstName> b.firstName ? 1 : -1)
+      args.setAppData({ ...args.appData, users: sortedUsers })
+      break
+    }
+    case 'deleteUser': {
+      const toDeleteId = assertDefined(data.toDeleteId, instruction, 'data.toDeleteId');
+      await deleteUser(toDeleteId)
+      args.setAppData({ ...args.appData, users: (args.appData.users || []).filter(u => u.id !== data.toDeleteId) })
       break
     }
     case 'loginUser': {

@@ -9,10 +9,13 @@ interface ToolsProps {
   optionsRef?: React.RefObject<HTMLDivElement>
   opacity: number
   inline?: boolean
+  toolsToShow: {
+    edit: boolean
+    delete: boolean
+  }
 }
 
-export function Tools({ id, handleClickDelete, handleClickEdit, optionsRef, opacity, inline }: ToolsProps) {
-
+export function Tools({ id, handleClickDelete, handleClickEdit, optionsRef, opacity, inline, toolsToShow }: ToolsProps) {
   const style: React.CSSProperties = {
     position: 'absolute',
     top: 10,
@@ -29,23 +32,28 @@ export function Tools({ id, handleClickDelete, handleClickEdit, optionsRef, opac
 
   return (
     <div ref={optionsRef} style={inline ? styleInline : style } className='d-flex gap-2' >
-      <Button
-        className='p-2 studs-bg' variant='primary' size='lg'
-        onClick={(e) => {
-          e.stopPropagation()
-          handleClickEdit(id)
-        }}
-      >
-        <BsPencil className='d-block' size={17} />
-      </Button>
-      <Button
-        className='p-2' variant='danger' size='lg' onClick={(e) => {
-          e.stopPropagation()
-          handleClickDelete(id)
-        }}
-      >
-        <BsTrash className='d-block' size={17} />
-      </Button>
+      
+      {toolsToShow.edit && 
+        <Button
+          className='p-2 studs-bg' variant='primary' size='lg'
+          onClick={(e) => {
+            e.stopPropagation()
+            handleClickEdit(id)
+          }}
+        >
+          <BsPencil className='d-block' size={17} />
+        </Button>
+      }
+      {toolsToShow.delete &&
+        <Button
+          className='p-2' variant='danger' size='lg' onClick={(e) => {
+            e.stopPropagation()
+            handleClickDelete(id)
+          }}
+        >
+          <BsTrash className='d-block' size={17} />
+        </Button>
+      }
     </div>
   )
 }

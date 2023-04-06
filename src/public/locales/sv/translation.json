@@ -138,6 +138,7 @@
   "changeSuccess.title": "Lösenord ändrat",
   "changeSuccess.text": "Ditt lösenord har ändrats framgångsrikt. Du kan nu logga in med ditt nya lösenord.",
 
+  "editUser.label.creating": "Skapar profil",
   "editUser.label.editing": "Redigerar profil",
   "editUser.label.changePicture": "Ändra profilbild",
   "editUser.label.firstName": "Förnamn",
@@ -153,7 +154,8 @@
   "editUser.label.admin": "Inställningar Admin",
   "editUser.label.role": "Roll",
   "editUser.label.permissions": "Behörigheter",
-  "editUser.submit": "Spara",
+  "editUser.edit.submit": "Spara",
+  "edituser.create.submit": "Skapa",
 
   "viewUser.biography": "Biografi",
   "viewUser.noBiography": "Ej angett",
@@ -183,6 +185,8 @@
 
   "admin_permission": "Admin",
   "events_permission": "Event",
-  "blog_permission": "Blogg"
+  "blog_permission": "Blogg",
 
+  "contact.deleteUser": "Raderar användare",
+  "contact.deleteUserDescription": "Är du säker på att du vill radera användaren"
   }

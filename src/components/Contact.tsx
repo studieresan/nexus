@@ -59,7 +59,7 @@ export default function Contact({ element }: ContactProps): JSX.Element {
       title: t('contact.deleteUser'),
       children: <div><span className='fw-light'>{t('contact.deleteUserDescription')}{': '}</span><span className='fw-bold'>{user.firstName}{' '}{user.lastName}</span></div>,
       mode: 'delete',
-      user: user,
+      info: user,
       handleConfirm: handleConfirmDelete
     })
   }

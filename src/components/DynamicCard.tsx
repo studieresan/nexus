@@ -12,14 +12,18 @@ interface BlogCardProps {
   handleClickCard: (id: string) => void
   handleClickEdit: (id: string) => void
   handleClickDelete: (id: string) => void
-  showTools: boolean
+  toolsToShow: {
+    edit: boolean
+    delete: boolean
+  }
 }
 
-export default function DynamicCard ({ element, handleClickCard, handleClickEdit, handleClickDelete, showTools }: BlogCardProps) {
+export default function DynamicCard ({ element, handleClickCard, handleClickEdit, handleClickDelete, toolsToShow }: BlogCardProps) {
   const { t, i18n } = useTranslation()
   const imageRef = useRef<HTMLDivElement>(null)
   const optionsRef = useRef<HTMLDivElement>(null)
   const windowWidth = useWindowWidth();
+  
   return (
     <div className='col'>
       <div
@@ -33,7 +37,7 @@ export default function DynamicCard ({ element, handleClickCard, handleClickEdit
             imageRef.current.style.filter = 'brightness(60%)'
           }
           e.currentTarget.style.boxShadow = '0 0 10px rgba(0,0,0,0.6)'
-          if (showTools && optionsRef.current) {
+          if ((toolsToShow.edit || toolsToShow.delete) && optionsRef.current) {
             optionsRef.current.style.opacity = '1'
           }
         }}
@@ -42,7 +46,7 @@ export default function DynamicCard ({ element, handleClickCard, handleClickEdit
             imageRef.current.style.filter = 'brightness(80%)'
           }
           e.currentTarget.style.boxShadow = 'none'
-          if (showTools && optionsRef.current) {
+          if ((toolsToShow.edit || toolsToShow.delete) && optionsRef.current) {
             optionsRef.current.style.opacity = '0'
           }
         }}
@@ -69,7 +73,7 @@ export default function DynamicCard ({ element, handleClickCard, handleClickEdit
               <small>{element.dateText}</small>
             </div>
           </div>
-          {showTools && <Tools id={element.id} handleClickDelete={handleClickDelete} handleClickEdit={handleClickEdit} optionsRef={optionsRef} opacity={0}/>}
+          {(toolsToShow.edit || toolsToShow.delete) && <Tools id={element.id} handleClickDelete={handleClickDelete} handleClickEdit={handleClickEdit} optionsRef={optionsRef} opacity={0} toolsToShow={toolsToShow}/>}
         </div>
 
       </div>

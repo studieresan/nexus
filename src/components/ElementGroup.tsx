@@ -13,7 +13,10 @@ function isCardElement(element: CardElement | ContactElement): element is CardEl
 }
 interface ElementGroupProps {
   appData: AppData
-  showTools: boolean
+  toolsToShow: {
+    edit: boolean
+    delete: boolean
+  }
   type: string
   expandStart: boolean
   idx: number
@@ -25,7 +28,7 @@ interface ElementGroupProps {
 }
 
 
-export default function ElementGroup ({ appData, showTools, type, expandStart, idx, groupTitle, elements, handleClickCard, handleClickEdit, handleClickDelete }: ElementGroupProps) {
+export default function ElementGroup ({ appData, toolsToShow, type, expandStart, idx, groupTitle, elements, handleClickCard, handleClickEdit, handleClickDelete }: ElementGroupProps) {
   const [showGroup, setShowGroup] = useState(expandStart || false)
   let styling = ''
   if (type === 'cards') styling += 'row align-items-stretch row-cols-1 row-cols-xxl-2 g-4 py-3'
@@ -54,7 +57,7 @@ export default function ElementGroup ({ appData, showTools, type, expandStart, i
                   handleClickCard={handleClickCard}
                   handleClickEdit={handleClickEdit}
                   handleClickDelete={handleClickDelete}
-                  showTools={showTools}
+                  toolsToShow={toolsToShow}
                 />
               );
             } else if (!isCardElement(element) && type === 'contacts') {

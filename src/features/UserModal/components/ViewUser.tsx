@@ -29,11 +29,16 @@ export default function ViewUser({ data, modal, appData }: ViewUserProps) {
     return appData.userDetails.permissions.includes(Permission.Admin);
   }
 
-  let showTools = false
+  let toolsToShow = {
+    edit: false,
+    delete: false,
+  }
   if (data.user.id === appData.userDetails?.id) {
-    showTools = true
-  } else if (appData.userDetails?.permissions.includes(Permission.Admin)) {
-    showTools = true
+    toolsToShow.edit = true
+  } 
+  if (appData.userDetails?.permissions.includes(Permission.Admin)) {
+    toolsToShow.delete = true
+    toolsToShow.edit = true
   }
     
   function handleClickEditAndClose() {
@@ -55,7 +60,10 @@ export default function ViewUser({ data, modal, appData }: ViewUserProps) {
       keyboard={false}
     >
       <Modal.Header closeButton className="py-3 text-gray-700">
-        <Modal.Title className=''>{showTools && <Tools id={data.id} handleClickEdit={handleClickEditAndClose} handleClickDelete={handleClickDeleteAndClose} inline={true} opacity={1} />}</Modal.Title>
+        <Modal.Title className=''>
+          {(toolsToShow.edit || toolsToShow.delete) && 
+            <Tools id={data.id} handleClickEdit={handleClickEditAndClose} handleClickDelete={handleClickDeleteAndClose} inline={true} opacity={1} toolsToShow={toolsToShow}/>}
+        </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <div className="container">

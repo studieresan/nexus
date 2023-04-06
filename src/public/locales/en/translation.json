@@ -137,6 +137,7 @@
   "changeSuccess.title": "Password changed",
   "changeSuccess.text": "Your password has been changed successfully. You can now log in with your new password.",
 
+  "editUser.label.creating": "Creating profile",
   "editUser.label.editing": "Editing profile",
   "editUser.label.changePicture": "Change profile picture",
   "editUser.label.firstName": "First name",
@@ -152,7 +153,8 @@
   "editUser.label.admin": "Admin Settings",
   "editUser.label.role": "Role",
   "editUser.label.permissions": "Permissions",
-  "editUser.submit": "Save",
+  "editUser.edit.submit": "Save",
+  "edituser.create.submit": "Create",
 
   "viewUser.biography": "Biography",
   "viewUser.noBiography": "Not specified",
@@ -182,5 +184,8 @@
 
   "admin_permission": "Admin",
   "events_permission": "Event",
-  "blog_permission": "Blog"
+  "blog_permission": "Blog",
+
+  "contact.deleteUser": "Deleting User",
+  "contact.deleteUserDescription": "Are you sure you want to delete user"
 }

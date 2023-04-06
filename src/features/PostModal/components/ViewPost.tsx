@@ -62,13 +62,13 @@ export default function ViewPost ({ post, data, modal, appData }: ViewPostProps)
     return blocks
   }
 
-  let showTools = false
+  let toolsToShow = {edit: false, delete: false}
   if (data.type === 'blogPost' && appData.userDetails?.permissions.includes(Permission.Blog)) {
-    showTools = true
+    toolsToShow = {edit: true, delete: true}
   } else if (data.type === 'eventPost' && appData.userDetails?.permissions.includes(Permission.Events)) {
-    showTools = true
+    toolsToShow = {edit: true, delete: true}
   } else if (appData.userDetails?.permissions.includes(Permission.Admin)) {
-    showTools = true
+    toolsToShow = {edit: true, delete: true}
   }
     
   function handleClickEditAndClose() {
@@ -89,15 +89,15 @@ export default function ViewPost ({ post, data, modal, appData }: ViewPostProps)
       fullscreen='xxl-down' 
       keyboard={false}
     >
-      <Modal.Header closeButton className='py-3 text-gray-700'>
+      <Modal.Header closeButton className='px-4 py-3 text-gray-700'>
         {/* <Modal.Title>{title}</Modal.Title> */}
-        <Modal.Title>{showTools && <Tools id={post.id} handleClickEdit={handleClickEditAndClose} handleClickDelete={handleClickDeleteAndClose} inline={true} opacity={1} />}</Modal.Title>
+        <Modal.Title>{(toolsToShow.edit || toolsToShow.delete) && <Tools id={post.id} handleClickEdit={handleClickEditAndClose} handleClickDelete={handleClickDeleteAndClose} inline={true} opacity={1} toolsToShow={toolsToShow}/>}</Modal.Title>
       </Modal.Header>
       <Modal.Body className='p-4'>
         <h1 className='fw-bold'>{post.title}</h1>
         {inputBlocks && inputBlocks.map((block, index) => (
           <div key={index}>
-            <div className={`fw-light fs-5 text-muted`} style={{whiteSpace: 'pre-line'}}>{block.text}</div>
+            <div className={`fw-light fs-5 text-muted`} style={{whiteSpace: 'pre-line'}}>{block.text.trim()}</div>
             <div className='row g-1 row-cols-1 row-cols-xxl-2 justify-content-center my-4'>
               {block.images.length === 1
                 ? (

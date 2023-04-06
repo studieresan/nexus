@@ -85,13 +85,13 @@ export default function BlogPosts ({ appData, handleModals }: BlogProps): JSX.El
       title: t('blogPost.deletePostTitle'),
       children: <div><span className='fw-light'>{t('blog.deletePostDescription')}{': '}</span><span className='fw-bold'>{post.title}</span></div>,
       mode: 'delete',
-      post: (appData.blogPosts || []).find((e) => e.id === id),
+      info: post,
       handleConfirm: handleConfirmDelete
     })
   }
 
-  const showTools = (appData?.userDetails?.permissions || []).includes(Permission.Blog) || (appData?.userDetails?.permissions || []).includes(Permission.Admin)
-
+  const toolsToShow = (appData?.userDetails?.permissions || []).includes(Permission.Blog) || (appData?.userDetails?.permissions || []).includes(Permission.Admin) ? { edit: true, delete: true } : { edit: false, delete: false }
+  
   if (groupsInfo) {
     return (
       <div className='container-fluid mb-5' id='hanging-icons'>
@@ -99,7 +99,7 @@ export default function BlogPosts ({ appData, handleModals }: BlogProps): JSX.El
           <div className='mb-5 mt-3 col-11 col-lg-9'>
           <div className='fw-bold py-2 fs-1 display-5'>{t('blog.title')}</div>
           <div className={`fw-light ${getDescriptionSize(windowWidth)}`}>{t('blog.intro')}</div>
-            {showTools && (
+            {toolsToShow.edit && (
               <div className='d-flex gap-2 mt-3'>
                 <Button className='studs-bg' size='lg' onClick={() => handleCreateClick()}>{t('blog.primaryButton')}</Button>
               </div>
@@ -110,7 +110,7 @@ export default function BlogPosts ({ appData, handleModals }: BlogProps): JSX.El
             {groupsInfo && appData.blogPosts && groupsInfo.map((group, groupIndex) => {
               return (
                 <div key={`group-${groupIndex}`} className='mb-2'>
-                  <ElementGroup expandStart type='cards' showTools={showTools} appData={appData} idx={groupIndex} groupTitle={group.title} elements={group.elements} handleClickCard={handleClickCard} handleClickEdit={handleClickEdit} handleClickDelete={handleClickDelete} />
+                  <ElementGroup expandStart type='cards' toolsToShow={toolsToShow} appData={appData} idx={groupIndex} groupTitle={group.title} elements={group.elements} handleClickCard={handleClickCard} handleClickEdit={handleClickEdit} handleClickDelete={handleClickDelete} />
                 </div>
               )
             })}

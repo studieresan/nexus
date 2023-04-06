@@ -137,6 +137,7 @@
 "changeSuccess.title": "Salasana vaihdettu",
 "changeSuccess.text": "Salasanasi on vaihdettu onnistuneesti. Voit nyt kirjautua sisään uudella salasanallasi.",
 
+"editUser.label.creating": "Profiilin luominen",
 "editUser.label.editing": "Muokataan profiilia",
 "editUser.label.changePicture": "Vaihda profiilikuva",
 "editUser.label.firstName": "Etunimi",
@@ -152,7 +153,8 @@
 "editUser.label.admin": "Ylläpidon asetukset",
 "editUser.label.role": "Rooli",
 "editUser.label.permissions": "Käyttöoikeudet",
-"editUser.submit": "Tallenna",
+"editUser.edit.submit": "Tallenna",
+"edituser.create.submit": "Luo",
 
 "viewUser.biography": "Elämäkerta",
 "viewUser.noBiography": "Ei määritelty",
@@ -182,5 +184,8 @@
 
 "admin_permission": "Ylläpito",
 "events_permission": "Tapahtuma",
-"blog_permission": "Blogi"
+"blog_permission": "Blogi",
+
+"contact.deleteUser": "Käyttäjän poistaminen",
+"contact.deleteUserDescription": "Haluatko varmasti poistaa käyttäjän"
 }

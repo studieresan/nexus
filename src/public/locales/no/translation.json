@@ -137,6 +137,7 @@
   "changeSuccess.title": "Passord endret",
   "changeSuccess.text": "Passordet ditt har blitt endret. Du kan nå logge inn med det nye passordet ditt.",
 
+  "editUser.label.creating": "Oppretter profil",
   "editUser.label.editing": "Redigerer profil",
   "editUser.label.changePicture": "Endre profilbilde",
   "editUser.label.firstName": "Fornavn",
@@ -152,7 +153,8 @@
   "editUser.label.admin": "Admin Innstillinger",
   "editUser.label.role": "Rolle",
   "editUser.label.permissions": "Tilgang",
-  "editUser.submit": "Lagre",
+  "editUser.edit.submit": "Lagre",
+  "edituser.create.submit": "Opprett",
 
   "viewUser.biography": "Biografi",
   "viewUser.noBiography": "Ikke angitt",
@@ -182,5 +184,8 @@
 
   "admin_permission": "Admin",
   "events_permission": "Arrangement",
-  "blog_permission": "Blogg"
+  "blog_permission": "Blogg",
+
+  "contact.deleteUser": "Sletter bruker",
+  "contact.deleteUserDescription": "Er du sikker på at du vil slette brukeren"
 }

@@ -90,12 +90,12 @@ export default function Events ({ appData, handleModals }: EventsProps): JSX.Ele
       title: t('eventPost.deletePostTitle'),
       children: <div><span className='fw-light'>{t('post.deleteDescription')}{': '}</span><span className='fw-bold'>{event.title}</span></div>,
       mode: 'delete',
-      post: event,
+      info: event,
       handleConfirm: handleConfirmDelete
     })
   }
 
-  const showTools = (appData?.userDetails?.permissions || []).includes(Permission.Events) || (appData?.userDetails?.permissions || []).includes(Permission.Admin)
+  const toolsToShow = (appData?.userDetails?.permissions || []).includes(Permission.Events) || (appData?.userDetails?.permissions || []).includes(Permission.Admin) ? { edit: true, delete: true } : { edit: false, delete: false }
   if (groupsInfo) {
     return (
       <div className='container-fluid mb-5' id='hanging-icons'>
@@ -104,7 +104,7 @@ export default function Events ({ appData, handleModals }: EventsProps): JSX.Ele
             <div>
               <div className='fw-bold py-2 fs-1 display-5'>{t('events.title')}</div>
               <div className={`fw-light ${getDescriptionSize(windowWidth)}`}>{t('events.intro')}</div>
-              {showTools && (
+              {toolsToShow.edit && (
                 <div className='d-flex gap-2 mt-3'>
                   <Button className='studs-bg' size='lg' onClick={() => handleCreateClick()}>{t('events.primaryButton')}</Button>
                 </div>
@@ -116,7 +116,7 @@ export default function Events ({ appData, handleModals }: EventsProps): JSX.Ele
               {groupsInfo && appData.events && groupsInfo.map((group, groupIndex) => {
                 return (
                   <div key={`group-${groupIndex}`} className='mb-2'>
-                    <ElementGroup expandStart={groupIndex === 0} type='cards' showTools={showTools} appData={appData} idx={groupIndex} groupTitle={group.title} elements={group.elements} handleClickCard={handleClickCard} handleClickEdit={handleClickEdit} handleClickDelete={handleClickDelete} />
+                    <ElementGroup expandStart={groupIndex === 0} type='cards' toolsToShow={toolsToShow} appData={appData} idx={groupIndex} groupTitle={group.title} elements={group.elements} handleClickCard={handleClickCard} handleClickEdit={handleClickEdit} handleClickDelete={handleClickDelete} />
                   </div>
                 )
               })}
