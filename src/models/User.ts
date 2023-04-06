@@ -36,7 +36,7 @@ export enum UserRole {
   TravelGroupManager = 'travel_group_manager',
 }
 export interface User {
-  readonly id: string
+  id: string
   firstName: string
   lastName: string
   studsYear: number

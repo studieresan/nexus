@@ -69,7 +69,10 @@ export default async function instructionSwitchboard (args: InstructionArgs, ins
     }
     case 'createUser':  {
       const user = assertDefined(data.user, instruction, 'data.user');
-      await createUser(user)
+      const response = await createUser(user)
+      console.log('createUser response: ', response)
+      user.id = response.id
+      
       const newUsers = [user, ...(args.appData.users || [])]
       const sortedUsers = newUsers.sort((a: User, b: User) => a.firstName > b.firstName ? 1 : -1)
       args.setAppData({ ...args.appData, users: sortedUsers })
