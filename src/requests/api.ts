@@ -4,7 +4,7 @@ import { BlogPost } from '@/models/BlogPost'
 import { pickBy } from 'lodash'
 
 // This file was copied and reused from the old frontend repository
-const BASE_URL = 'https://devapi.studs.se/' // 'http://localhost:5040' 
+const BASE_URL = 'https://devapi.studs.se' // 'http://localhost:5040' 
 const GRAPHQL = '/graphql'
 const SIGNUP = '/signup'
 const LOGIN = '/login'
