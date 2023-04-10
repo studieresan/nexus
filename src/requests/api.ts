@@ -4,7 +4,7 @@ import { BlogPost } from '@/models/BlogPost'
 import { pickBy } from 'lodash'
 
 // This file was copied and reused from the old frontend repository
-const BASE_URL = 'https://devapi.studs.se' // 'http://localhost:5040' 
+const BASE_URL = 'https://wbigert.me' // 'https://devapi.studs.se' // 'http://localhost:5040' 
 const GRAPHQL = '/graphql'
 const SIGNUP = '/signup'
 const LOGIN = '/login'
@@ -14,7 +14,7 @@ const PASSWORD_RESET = '/reset'
 const USER_DELETE = '/delete'
 const STATUS_OK = 200
 
-function checkStatus (response: Response) {
+function checkStatus(response: Response) {
   if (response.status >= STATUS_OK && response.status < 300) {
     return Promise.resolve(response)
   } else {
@@ -22,34 +22,34 @@ function checkStatus (response: Response) {
   }
 }
 
-function parseJSON (response: Response): Promise<any> {
+function parseJSON(response: Response): Promise<any> {
   return response.json()
 }
 
-function credentials (): RequestCredentials {
+function credentials(): RequestCredentials {
   return 'include'
 }
 
-function jsonHeader () {
+function jsonHeader() {
   return {
     'Content-Type': 'application/json'
   }
 }
 
-function authorizationHeader () {
+function authorizationHeader() {
   const jwtToken = localStorage.token
   return {
     Authorization: `Bearer ${jwtToken}`
   }
 }
 
-function graphQLHeader () {
+function graphQLHeader() {
   return {
     'Content-Type': 'application/graphql'
   }
 }
 
-function ftch (input: any, init: any): Promise<any> {
+function ftch(input: any, init: any): Promise<any> {
   return fetch(input, init)
     .then(checkStatus)
     .then(parseJSON)
@@ -78,7 +78,7 @@ const USER_PROFILE_FIELDS = `
   allergies  
 `
 
-export function fetchUser () {
+export function fetchUser() {
   const query = `{
     user {
       id
@@ -106,13 +106,13 @@ export function fetchUser () {
   })
 }
 
-function toGraphQLFields (obj: any): string {
+function toGraphQLFields(obj: any): string {
   // This will remove any key which has a 'null' value
   const withoutNulls = pickBy(obj, a => a !== null && a !== undefined)
   return JSON.stringify(withoutNulls).replace(/"([^"]*)":/g, '$1:')
 }
 
-function wrapInQuotes (str: string): string {
+function wrapInQuotes(str: string): string {
   return '"' + str.replace(/"/g, '\\"') + '"'
 }
 
@@ -136,7 +136,7 @@ export function updateUser(user: User) {
   });
 }
 
-export function createUser (user: User) {
+export function createUser(user: User) {
   const body = JSON.stringify({
     ...user,
     token: 'nuVPZHctR8QYZTeoGoWmNQRHaZQcyCbL'
@@ -151,12 +151,12 @@ export function createUser (user: User) {
   })
 }
 
-export function deleteUser (toDeleteId: string) {
+export function deleteUser(toDeleteId: string) {
   const body = JSON.stringify({
     toDeleteId: toDeleteId
   })
 
-  return ftch(BASE_URL +  USER_DELETE, {
+  return ftch(BASE_URL + USER_DELETE, {
     method: 'POST',
     credentials: credentials(),
     headers: {
@@ -167,7 +167,7 @@ export function deleteUser (toDeleteId: string) {
   })
 }
 
-export function loginUser (email: string, password: string) {
+export function loginUser(email: string, password: string) {
   const data = {
     email,
     password
@@ -183,7 +183,7 @@ export function loginUser (email: string, password: string) {
   return ftch(BASE_URL + LOGIN, post)
 }
 
-export function updateUserPassword (password: string, confirmPassword: string) {
+export function updateUserPassword(password: string, confirmPassword: string) {
   const post: RequestInit = {
     method: 'PUT',
     credentials: 'include',
@@ -199,7 +199,7 @@ export function updateUserPassword (password: string, confirmPassword: string) {
   return ftch(BASE_URL + PASSWORD_UPDATE, post)
 }
 
-export function fetchUsers () {
+export function fetchUsers() {
   // users(userRole: null, studsYear: ${studsYear}) {
   const query = `{
     users(userRole: null) {
@@ -219,7 +219,7 @@ export function fetchUsers () {
   return executeGraphQL(query).then(res => res.data.users)
 }
 
-export function requestPasswordReset (email: string) {
+export function requestPasswordReset(email: string) {
   const url = `${BASE_URL}${PASSWORD_FORGOT}`
   return ftch(url, {
     method: 'POST',
@@ -232,7 +232,7 @@ export function requestPasswordReset (email: string) {
   })
 }
 
-export function resetPassword (password: string, confirmPassword: string, token: string) {
+export function resetPassword(password: string, confirmPassword: string, token: string) {
   const url = `${BASE_URL}${PASSWORD_RESET}/${token}`
   return ftch(url, {
     method: 'POST',
@@ -254,22 +254,11 @@ const EVENT_FIELDS = `
   pictures
   studsYear
   frontPicture
-  author {
-    id
-    firstName
-    lastName
-    studsYear
-    info {
-      ${USER_PROFILE_FIELDS}
-      role
-      picture
-      permissions
-    }
-  }
+  author
   date
 `
 
-export function fetchEvents () {
+export function fetchEvents() {
   const query = `query {
     events {
       ${EVENT_FIELDS}
@@ -285,7 +274,7 @@ export function fetchEvents () {
     )
 }
 
-export function createEvent (event: EventPost) {
+export function createEvent(event: EventPost) {
   const mutation = `mutation {
     eventCreate(fields: ${toGraphQLFields(event)}) {
       ${EVENT_FIELDS}
@@ -297,7 +286,7 @@ export function createEvent (event: EventPost) {
     .then(event => ({ ...event, date: new Date(event.date) }))
 }
 
-export function updateEvent (event: EventPost) {
+export function updateEvent(event: EventPost) {
   const mutation = `mutation {
     eventUpdate(id: "${event.id}", fields: ${toGraphQLFields(event)}) {
       ${EVENT_FIELDS}
@@ -309,7 +298,7 @@ export function updateEvent (event: EventPost) {
     .then(event => ({ ...event, date: new Date(event.date) }))
 }
 
-export function removeEventWithId (id: string) {
+export function removeEventWithId(id: string) {
   if (id) {
     const mutation = `mutation {
       eventDelete(id: "${id}")
@@ -328,10 +317,9 @@ export function removeEventWithId (id: string) {
 //   return ftch(`${BASE_URL}${EVENTS}/${eventId}/notify_after`, header())
 // }
 
-export function uploadImage (file: File) {
-  const signedUrlEndpoint = `${BASE_URL}/signed-upload?file-name=${
-    file.name
-  }&file-type=${file.type}`
+export function uploadImage(file: File) {
+  const signedUrlEndpoint = `${BASE_URL}/signed-upload?file-name=${file.name
+    }&file-type=${file.type}`
 
   const options = {
     method: 'GET',
@@ -379,22 +367,11 @@ description
 pictures
 studsYear
 frontPicture
-author {
-  id
-  firstName
-  lastName
-  studsYear
-  info {
-    ${USER_PROFILE_FIELDS}
-    role
-    picture
-    permissions
-  }
-}
+author
 date
 `
 
-export function createBlogPost (blogPost: BlogPost) {
+export function createBlogPost(blogPost: BlogPost) {
   // post.date = moment(new Date()).format('YYYY-MM-DD')
   const mutation = `mutation {
     blogCreate(fields: ${toGraphQLFields(blogPost)}) {
@@ -405,7 +382,7 @@ export function createBlogPost (blogPost: BlogPost) {
   return executeGraphQL(mutation).then(res => res.data.blogCreate)
 }
 
-export function fetchBlogPosts () {
+export function fetchBlogPosts() {
   const query = `query {
     blogPosts {
       ${BLOG_FIELDS}
@@ -431,7 +408,7 @@ export function updateBlogPost(blogPost: BlogPost) {
   return executeGraphQL(query).then(res => res.data.blogPostUpdate)
 }
 
-export function deleteBlogpost(id:string) {
+export function deleteBlogpost(id: string) {
   const query = `mutation {
     blogPostDelete(id: "${id}")
   }`

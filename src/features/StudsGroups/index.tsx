@@ -19,7 +19,7 @@ interface GroupsProps {
   appData: AppData
 }
 
-export default function StudsGroups ({ appData }: GroupsProps): JSX.Element {
+export default function StudsGroups({ appData }: GroupsProps): JSX.Element {
   const { t, i18n } = useTranslation()
   const [groupsInfo, setGroupsInfo] = useState<StudsGroupInfo[]>([])
   const [showGroup, setShowGroup] = useState<boolean[]>([])
@@ -41,7 +41,7 @@ export default function StudsGroups ({ appData }: GroupsProps): JSX.Element {
 
       const newGroupsInfo: StudsGroupInfo[] = managerTypes.map((managerType) => {
         const manager = managers.find((manager) => manager.info.role === managerType)
-        
+
         return {
           manager,
           name: managerType,
@@ -57,7 +57,7 @@ export default function StudsGroups ({ appData }: GroupsProps): JSX.Element {
     }
   }, [appData.users, i18n.language]);
 
-  function handleClick (index: number) {
+  function handleClick(index: number) {
     const newShowGroupMasterInfo = [...showGroup]
     newShowGroupMasterInfo[index] = !newShowGroupMasterInfo[index]
     setShowGroup(newShowGroupMasterInfo)
@@ -78,17 +78,17 @@ export default function StudsGroups ({ appData }: GroupsProps): JSX.Element {
   return (
     <div className='container-fluid mb-5' id='hanging-icons'>
       <div className='row row-cols-1 justify-content-center'>
-        <div className='mb-5 mt-3 col-9'>
+        <div className='mb-5 mt-3 col-11 col-sm-9'>
           <div>
-          <div className='fw-bold py-2 fs-1 display-5'>{t('groups.title')}</div>
-          <div className={`fw-light ${getDescriptionSize(windowWidth)}`}>{t('groups.intro')}</div>
+            <div className='fw-bold py-2 fs-1 display-5'>{t('groups.title')}</div>
+            <div className={`fw-light ${getDescriptionSize(windowWidth)}`}>{t('groups.intro')}</div>
             {/* <div className='d-flex gap-2'>
               <Button>{t('groups.primaryButton')}</Button>
               <Button variant='secondary'>{t('groups.secondaryButton')}</Button>
             </div> */}
           </div>
         </div>
-        <div className='col-9'>
+        <div className='col-11 col-sm-9'>
           <div className='row'>
             {groupsInfo.map((group, index) => (
               <div key={index} className='col-12'>

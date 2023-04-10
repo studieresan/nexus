@@ -4,18 +4,21 @@ import { useTranslation } from 'react-i18next'
 import { IoPersonSharp } from 'react-icons/io5'
 import { useContext } from 'react'
 import { User } from '@/models/User'
+import { useWindowWidth } from '@/hooks/useWindowWidth'
 interface ContactProps {
   element: ContactElement
 }
 
 export default function Contact({ element }: ContactProps): JSX.Element {
-  
+
   const handleModals = useContext(HandleModalsContext)
   const appData = useContext(AppDataContext)
   const handleInstructions = useContext(HandleInstructionsContext)
+  const windowWidth = useWindowWidth()
+  const hover = windowWidth > 576 ? 'contact-hover' : ''
   const { t } = useTranslation();
 
-  function handleClickContact (id: string) {
+  function handleClickContact(id: string) {
     const user = (appData.users || []).find((e) => e.id === id)
     if (!user) {
       throw new Error('handleClickEdit post undefined')
@@ -30,7 +33,7 @@ export default function Contact({ element }: ContactProps): JSX.Element {
     })
   }
 
-  function handleClickEdit (id: string) {
+  function handleClickEdit(id: string) {
     const user = (appData.users || []).find((e) => e.id === id)
     if (!user) {
       throw new Error('handleClickEdit post undefined')
@@ -43,12 +46,12 @@ export default function Contact({ element }: ContactProps): JSX.Element {
     })
   }
 
-  async function handleConfirmDelete (name: string, id: string, user: User) {
+  async function handleConfirmDelete(name: string, id: string, user: User) {
     await handleInstructions('deleteUser', { toDeleteId: user.id })
     handleModals.off(name, id)
   }
 
-  async function handleClickDelete (id: string) {
+  async function handleClickDelete(id: string) {
     const user = (appData.users || []).find((e) => e.id === id)
     if (!user) {
       throw new Error('handleClickDelete post undefined')
@@ -66,7 +69,7 @@ export default function Contact({ element }: ContactProps): JSX.Element {
 
   if (element.navbar) {
     return (
-      <div className="d-flex flex-column align-items-center contact-hover" onClick={() => handleClickContact(element.id)}>
+      <div className={`d-flex flex-column align-items-center ${hover}`} onClick={() => handleClickContact(element.id)}>
         <div className="d-flex ratio ratio-1x1 rounded-circle bg-light overflow-hidden flex-shrink-0" style={{ width: 50, height: 50 }}>
           {element.picture ? (
             <img src={element.picture} className="card-img-top img-cover" alt="alt" />
@@ -80,7 +83,7 @@ export default function Contact({ element }: ContactProps): JSX.Element {
 
   if (element.vertical) {
     return (
-      <div className="d-flex flex-column align-items-center contact-hover p-3" onClick={() => handleClickContact(element.id)}>
+      <div className={`d-flex flex-column align-items-center ${hover} px-0 px-sm-3 py-3`} onClick={() => handleClickContact(element.id)}>
         <div className="d-flex ratio ratio-1x1 rounded-circle bg-light overflow-hidden flex-shrink-0" style={{ width: element.lg ? 287 : 120, height: element.lg ? 287 : 120 }}>
           {element.picture ? (
             <img src={element.picture} className="card-img-top img-cover" alt="alt" />
@@ -98,7 +101,7 @@ export default function Contact({ element }: ContactProps): JSX.Element {
     );
   } else {
     return (
-      <div className="d-flex flex-nowrap contact-hover p-3" onClick={() => handleClickContact(element.id)}>
+      <div className={`d-flex flex-nowrap ${hover} px-0 px-sm-3 py-3`} onClick={() => handleClickContact(element.id)}>
         <div className="d-flex me-1 ratio ratio-1x1 rounded-circle bg-white overflow-hidden" style={{ width: 120, height: 120 }}>
           {element.picture ? (
             <img src={element.picture} className="card-img-top img-cover" alt="alt" />

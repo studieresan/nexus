@@ -12,9 +12,9 @@ export interface BlogFields {
 }
 
 export interface BlogPost extends BlogFields {
-    author: User 
+    author: User
 }
 
-export interface CreateBlogPost extends BlogFields {
+export interface BlogPostStringifiedAuthor extends BlogFields {
     author: string
 }

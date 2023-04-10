@@ -15,6 +15,6 @@ export interface EventPost extends EventFields {
   author: User | null
 }
 
-export interface CreateEventPost extends EventFields {
+export interface EventPostStringifedAuthor extends EventFields {
   author: string
 }

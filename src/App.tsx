@@ -17,25 +17,26 @@ import { AppData } from '@/models/AppData'
 import { InstructionArgs, InstructionData } from './models/Instruction'
 import WaveDivider from './components/WaveDivider'
 
-function App () {
+function App() {
   const [appData, setAppData] = useState<AppData>({
     users: null,
     blogPosts: null,
     events: null,
     loggedIn: localStorage.loggedIn || false,
-    userDetails: (localStorage.userDetails && JSON.parse(localStorage.userDetails)) || null
+    userDetails: (localStorage.userDetails && JSON.parse(localStorage.userDetails)) || null,
+    didFetchCollections: false
   })
 
   useEffect(() => {
     console.log('appData', appData);
   }, [appData])
   const navigateTo = useNavigate()
-  const args = useRef<InstructionArgs>({appData, setAppData, navigateTo})
+  const args = useRef<InstructionArgs>({ appData, setAppData, navigateTo })
   args.current = { appData, setAppData, navigateTo }
   const handleModals = useModalManager()
   useFetchCollections(appData, setAppData)
 
-  async function handleInstructions (instruction: string, data: InstructionData = {}) {
+  async function handleInstructions(instruction: string, data: InstructionData = {}) {
     return await instructionSwitchboard(args.current, instruction, data)
   }
 
@@ -54,7 +55,7 @@ function App () {
             <Route path='/about' element={waveDividedElement(<About appData={appData} handleModals={handleModals} />)} />
             <Route path='/events' element={waveDividedElement(<Events appData={appData} handleModals={handleModals} />)} />
             <Route path='/groups' element={waveDividedElement(<Groups appData={appData} />)} />
-            <Route path='/blog' element={waveDividedElement(<Blog appData={appData} handleModals={handleModals} />)}/>
+            <Route path='/blog' element={waveDividedElement(<Blog appData={appData} handleModals={handleModals} />)} />
             <Route path='/auth/:mode/:token?' element={waveDividedElement(<Login appData={appData} setAppData={setAppData} />)} />
           </Routes>
           <WaveDivider direction='up' />
