@@ -1,6 +1,6 @@
 import introBg from '@/assets/images/BigSizeBg.png';
 import logo2023 from '@/assets/images/logo2023.png';
-import React, { useState, useEffect, CSSProperties } from 'react';
+import React, { useState, useEffect, CSSProperties, useRef } from 'react';
 import { Button, Spinner } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { AppData } from '@/models/AppData';
@@ -92,7 +92,21 @@ interface IntroSectionProps {
 export function IntroSection({ appData, overlayGroups, imagesLoaded, handleImageLoaded }: IntroSectionProps): JSX.Element {
   const { t, i18n } = useTranslation();
   const windowWidth = useWindowWidth();
+  const bottomRef = useRef<HTMLDivElement>(null);
   
+  useEffect(() => {
+    if (bottomRef.current) {
+      setTimeout(() => {
+        if (bottomRef.current) {
+          bottomRef.current.scrollIntoView({
+            behavior: 'smooth',
+            block: 'end',
+          });
+        }
+      }, 500); // 500ms delay before scrolling
+    }
+  }, [i18n.language]);
+
   let titleSize = 0;
   if (windowWidth < 576) {
     titleSize = 25
@@ -117,7 +131,7 @@ export function IntroSection({ appData, overlayGroups, imagesLoaded, handleImage
   };
   
   return (
-      <div className="row row-cols-1 g-0 bg-dark pb-5" style={{ position: 'relative' }}>
+      <div ref={bottomRef} className="row row-cols-1 g-0 bg-dark pb-5" style={{ position: 'relative' }}>
         <div className="col-12 w-100 position-relative" style={{minHeight: '200px'}}>
           <div className="image-container d-none d-lg-flex justify-content-end" style={{marginRight: -100}}>
             <img src={introBg} style={{ top: 0, right: 0, width: '75%', height: '100%', objectFit: 'cover', filter: ''}} onLoad={() => handleImageLoaded('intro')}/>
