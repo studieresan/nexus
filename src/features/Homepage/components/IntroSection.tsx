@@ -135,21 +135,18 @@ export function IntroSection({ appData, overlayGroups, imagesLoaded, handleImage
         <div className="col-12 w-100 position-relative" style={{minHeight: '200px'}}>
           <div className="image-container d-none d-lg-flex justify-content-end" style={{marginRight: -100}}>
             <img src={introBg} style={{ top: 0, right: 0, width: '75%', height: '100%', objectFit: 'cover', filter: ''}} onLoad={() => handleImageLoaded('intro')}/>
-            {!imagesLoaded.intro && loadingSpinner}
           </div>
           <div className="text-container col-10  position-absolute start-50 translate-middle-x" style={{top:'10%'}}>
-            {imagesLoaded.intro && (
-              <div className="col-12">
-                <div className="row row-cols-lg-1 text-center text-lg-start  d-flex justify-content-center justify-content-xxl-start" >
-                  <div className='d-block d-lg-none p-2' style={{fontWeight: 200}}>
-                    <img src={logo2023} style={{width: '300px'}} alt='Studs 2023 Logo' />
-                  </div>
-                  <div className='d-flex text-white justify-content-center justify-content-lg-start' style={titleStyle}>
-                    {t('homepage.intro')}
-                  </div>
+            <div className="col-12">
+              <div className="row row-cols-lg-1 text-center text-lg-start  d-flex justify-content-center justify-content-xxl-start" >
+                <div className='d-block d-lg-none p-2' style={{fontWeight: 200}}>
+                  <img src={logo2023} style={{width: '300px'}} alt='Studs 2023 Logo' />
+                </div>
+                <div className='d-flex text-white justify-content-center justify-content-lg-start' style={titleStyle}>
+                  {t('homepage.intro')}
                 </div>
               </div>
-            )}
+            </div>
           </div>
         </div>
         <div className="col-12 bg-dark">
