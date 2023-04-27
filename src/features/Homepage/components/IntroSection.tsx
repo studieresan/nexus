@@ -1,6 +1,6 @@
 import introBg from '@/assets/images/BigSizeBg.png';
 import logo2023 from '@/assets/images/logo2023.png';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, CSSProperties } from 'react';
 import { Button, Spinner } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { AppData } from '@/models/AppData';
@@ -47,16 +47,16 @@ const overlayText = (
 
 
 function OverlayGroupList({ overlayGroups, windowWidth }: { overlayGroups: OverlayGroup[], windowWidth: number }) {
-  const iconSize = windowWidth < 1400 ? 50 : 60;
-  const fontSize1 = windowWidth < 1400 ? 'fs-2' : 'fs-1';
-  const fontSize2 = windowWidth < 1400 ? 'fs-5' : 'fs-4';
+  const iconSize = 40;
+  const fontSize1 = 'fs-4'
+  const fontSize2 = 'fs-5'
 
   return (
     <>
       {overlayGroups.map((group, index) => (
         <div key={index} className="col">
           <div className={` ${index == 0 ? 'me-auto' : (index == overlayGroups.length - 1 ? 'ms-auto' : 'mx-auto')}`} style={{width: '90%'}}>
-            <div className={`d-flex align-items-center gap-2 ${fontSize1}`} style={{ }}>
+            <div className={`d-flex align-items-center gap-2 ${fontSize1}`} style={{whiteSpace: 'nowrap'}}>
               <IconWrapper icon={groupIcons[group.name]} iconSize={iconSize} />
               {group.title}
             </div>
@@ -99,28 +99,38 @@ export function IntroSection({ appData, overlayGroups, imagesLoaded, handleImage
   } else if (windowWidth < 768) {
     titleSize = 30
   } else if (windowWidth < 992) {
-    titleSize = 40
+    titleSize = 35
+  } else if (windowWidth < 1200) {
+    titleSize = 45
   } else if (windowWidth < 1400) {
     titleSize = 55
   } else {
     titleSize = 65
   }
+
+  const titleWrap = windowWidth < 992 ? "normal" : "pre-line";
+
+  const titleStyle: CSSProperties = {
+    fontWeight: 600,
+    fontSize: titleSize,
+    whiteSpace: titleWrap,
+  };
   
   return (
       <div className="row row-cols-1 g-0 bg-dark pb-5" style={{ position: 'relative' }}>
         <div className="col-12 w-100 position-relative" style={{minHeight: '200px'}}>
-          <div className="image-container d-none d-lg-flex justify-content-end">
-            <img src={introBg} style={{ top: 0, right: 0, width: '60%', height: '100%', objectFit: 'cover', filter: ''}} onLoad={() => handleImageLoaded('intro')}/>
+          <div className="image-container d-none d-lg-flex justify-content-end" style={{marginRight: -100}}>
+            <img src={introBg} style={{ top: 0, right: 0, width: '75%', height: '100%', objectFit: 'cover', filter: ''}} onLoad={() => handleImageLoaded('intro')}/>
             {!imagesLoaded.intro && loadingSpinner}
           </div>
-          <div className="text-container col-11 col-xxl-8 position-absolute start-50 translate-middle-x" style={{top:'10%'}}>
+          <div className="text-container col-10  position-absolute start-50 translate-middle-x" style={{top:'10%'}}>
             {imagesLoaded.intro && (
               <div className="col-12">
-                <div className="row row-cols-lg-1 text-center text-lg-start justify-content-center" >
+                <div className="row row-cols-lg-1 text-center text-lg-start  d-flex justify-content-center justify-content-xxl-start" >
                   <div className='d-block d-lg-none p-2' style={{fontWeight: 200}}>
                     <img src={logo2023} style={{width: '300px'}} alt='Studs 2023 Logo' />
                   </div>
-                  <div className='d-flex col-10 text-white' style={{fontWeight: 600, fontSize: titleSize }}>
+                  <div className='d-flex text-white justify-content-center justify-content-lg-start' style={titleStyle}>
                     {t('homepage.intro')}
                   </div>
                 </div>
@@ -131,7 +141,7 @@ export function IntroSection({ appData, overlayGroups, imagesLoaded, handleImage
         <div className="col-12 bg-dark">
           &nbsp;
         </div>
-        <div className="col-11 col-xxl-8 d-none d-lg-block text-white mx-auto">
+        <div className="col-10 d-none d-lg-block text-white mx-auto mt-3">
           <div className="row row-cols-3">
             {overlayGroups && <OverlayGroupList overlayGroups={overlayGroups} windowWidth={windowWidth} />}
           </div>

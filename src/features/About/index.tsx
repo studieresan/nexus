@@ -43,16 +43,17 @@ export default function About ({ appData, handleModals }: AboutProps): JSX.Eleme
       mode: 'edit',
     })
   }
-  const showTools = (appData?.userDetails?.permissions || []).includes(Permission.Admin)
+  const toolsToShow = (appData?.userDetails?.permissions || []).includes(Permission.Admin) ? { edit: true, delete: true } : { edit: false, delete: false }
+
   if (groupsInfo) {
     return (
       <div className='container-fluid mb-5' id='hanging-icons'>
         <div className='row row-cols-1 justify-content-center'>
           <div className='mb-5 mt-3 col-11 col-md-9'>
             <div>
-              <div className='fw-bold py-2 fs-1 display-5' style={{fontSize: getTitleSize(windowWidth)}}>{t('about.title')}</div>
+              <div className='fw-bold py-2 fs-2 display-5'>{t('about.title')}</div>
               <div className={`fw-light ${getDescriptionSize(windowWidth)}`}>{t('about.intro')}</div>
-              {showTools && (
+              {toolsToShow.edit && (
                 <div className='d-flex gap-2 mt-3'>
                   <Button className='studs-bg' size={getButtonSize(windowWidth)} onClick={() => handleCreateClick()}>{t('about.primaryButton')}</Button>
                 </div>
@@ -62,7 +63,7 @@ export default function About ({ appData, handleModals }: AboutProps): JSX.Eleme
           <div className='container-fluid col-11 col-md-9'>
             <div className='row'>
               {groupsInfo.map((group, groupIndex) => (
-                <ElementGroup key={'userGroup' + groupIndex} expandStart={groupIndex === 0} type='contacts' appData={appData} idx={groupIndex} groupTitle={group.title} elements={group.elements} showTools={showTools}/>
+                <ElementGroup key={'userGroup' + groupIndex} expandStart={groupIndex === 0} type='contacts' appData={appData} idx={groupIndex} groupTitle={group.title} elements={group.elements} toolsToShow={toolsToShow}/>
               ))}
             </div>
           </div>

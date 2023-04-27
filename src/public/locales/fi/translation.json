@@ -12,7 +12,7 @@
   "homepage.project.short.description": "Studs on KTH:n projekti, jota vetää joukko insinööriopiskelijoita maisteriohjelmissa, jotka liittyvät tietojenkäsittelytieteeseen.",
   "homepage.project.short.button": "Lue lisää",
   "homepage.project.title": "Projekti",
-  "homepage.project.description": "Studs on KTH:n projekti, jota vetää 29 insinööriopiskelijan valikoima maisteriohjelmissa, jotka liittyvät tietojenkäsittelytieteeseen. Järjestämällä tapahtumia yhdessä yritysten kanssa luomme mahdollisuuksia antaa sekä opiskelijoille että heidän potentiaalisille työnantajilleen arvokasta aikaa yhdessä. Kurssin lopussa Studs lähtee opintomatkalle tapaamaan yrityksiä ulkomailla.",
+  "homepage.project.description": "Studs on KTH:n projekti, jota vetää <strong>{{name}}</strong> insinööriopiskelijan valikoima maisteriohjelmissa, jotka liittyvät tietojenkäsittelytieteeseen. Järjestämällä tapahtumia yhdessä yritysten kanssa luomme mahdollisuuksia antaa sekä opiskelijoille että heidän potentiaalisille työnantajilleen arvokasta aikaa yhdessä. Kurssin lopussa Studs lähtee opintomatkalle tapaamaan yrityksiä ulkomailla.",
   "homepage.project.buttonPrimary": "Tietoa meistä",
   "homepage.project.buttonSecondary": "Opintomatka",
   
@@ -25,7 +25,7 @@
 
   "about.groupTitle": "Studs",
   "about.title": "Tämä on Studs",
-  "about.intro": "Studs-projekti on KTH:n vuosittainen voittoa tavoittelematon projekti, jonka tavoitteena on tarjota tietojenkäsittelytieteen maisteriopiskelijoille mahdollisuus verkostoitua IT-yritysten kanssa. Järjestämällä tapahtumia yhdessä yritysten kanssa Studs luo mahdollisuuksia antaa sekä opiskelijoille että heidän potentiaalisille työnantajilleen arvokasta aikaa yhdessä. Näiden tapahtumien aikana opiskelijat saavat syvällisempää tietoa yrityksen työelämästä ja toiminnasta. Studs koostuu vuosittain noin 30 valitusta opiskelijasta. Voit nähdä viime vuosien Studsin jäsenet alla.",
+  "about.intro": "Studs-projekti on KTH:n vuosittainen voittoa tavoittelematon projekti, jonka tavoitteena on tarjota tietojenkäsittelytieteen maisteriopiskelijoille mahdollisuus verkostoitua IT yritysten kanssa. Järjestämällä tapahtumia yhdessä yritysten kanssa Studs luo mahdollisuuksia antaa sekä opiskelijoille että heidän potentiaalisille työnantajilleen arvokasta aikaa yhdessä. Näiden tapahtumien aikana opiskelijat saavat syvällisempää tietoa yrityksen työelämästä ja toiminnasta. Studs koostuu vuosittain noin 30 valitusta opiskelijasta. Voit nähdä viime vuosien Studsin jäsenet alla.",
   "about.primaryButton": "Luo käyttäjä",
 
   "events.title": "Aikaisemmat tapahtumat",
@@ -148,7 +148,6 @@
 "editUser.label.biography": "Elämäkerta",
 "editUser.label.linkedIn": "LinkedIn",
 "editUser.label.github": "GitHub",
-"editUser.label.allergies": "Allergiat",
 "editUser.label.master": "Maisteri",
 "editUser.label.admin": "Ylläpidon asetukset",
 "editUser.label.role": "Rooli",
@@ -162,8 +161,6 @@
 "viewUser.master": "Maisteri",
 "viewUser.noMaster": "Ei määritelty",
 "viewUser.role": "Rooli",
-"viewUser.allergies": "Allergiat",
-"viewUser.noAllergies": "Ei allergioita",
 "viewUser.permissions": "Käyttöoikeudet",
 "viewUser.noPermissions": "Ei käyttöoikeuksia",
 

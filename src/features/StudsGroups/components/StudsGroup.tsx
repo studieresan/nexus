@@ -71,7 +71,7 @@ export default function StudsGroup ({ handleClick, showGroup, group, groupIndex 
             }}
             style={{ cursor: 'pointer' }}
           >
-            <h2 className='fw-normal'>{group.title}</h2>
+            <h2 className='fw-light d-flex'>{group.title}</h2>
                 &nbsp;
             <div className='d-flex justify-content-center align-items-center'>
               {showGroup[groupIndex] ? <BiChevronUp size={30} /> : <BiChevronDown size={30} />}

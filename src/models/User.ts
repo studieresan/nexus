@@ -14,7 +14,6 @@ export interface StudsInfo {
   readonly github?: string
   readonly phone?: string
   readonly picture?: string
-  readonly allergies?: string
   readonly master?: string,
   readonly permissions: Permission[]
 }

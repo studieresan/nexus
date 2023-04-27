@@ -75,7 +75,6 @@ const USER_PROFILE_FIELDS = `
   biography
   github
   master
-  allergies  
 `
 
 export function fetchUser() {

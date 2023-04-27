@@ -134,10 +134,10 @@ export default function Footer({ appData }: FooterProps): JSX.Element {
       <div className='col-12 d-flex justify-content-center'>
         <hr className='col-9 opacity-25' style={{ height: 1 }} />
       </div>
-      <div className='col d-flex justify-content-center'>
-        <a className='text-muted mx-1' href='https://www.facebook.com/StudsKTH/'><BsFacebook size={22} /></a>
-        <a className='text-muted mx-1' href='https://www.linkedin.com/company/studs/'><BsLinkedin size={22} /></a>
-        <a className='text-muted mx-1' href='https://www.instagram.com/studskth/'><BsInstagram size={22} /></a>
+      <div className='col d-flex justify-content-center gap-3 mt-2'>
+        <a className='text-muted mx-1' href='https://www.facebook.com/StudsKTH/'><BsFacebook size={45} /></a>
+        <a className='text-muted mx-1' href='https://www.linkedin.com/company/studs/'><BsLinkedin size={45} /></a>
+        <a className='text-muted mx-1' href='https://www.instagram.com/studskth/'><BsInstagram size={45} /></a>
       </div>
     </div>
   )

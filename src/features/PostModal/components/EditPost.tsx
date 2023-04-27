@@ -3,8 +3,8 @@ import { useEffect, useRef, useState } from 'react'
 import { Alert, Button, FloatingLabel, Form, FormControl, Modal } from 'react-bootstrap'
 import { Trans, useTranslation } from 'react-i18next'
 import { AddedImage } from './AddedImage.jsx'
-import { BlogPost, CreateBlogPost } from '@/models/BlogPost.js'
-import { CreateEventPost, EventPost } from '@/models/EventPost.js'
+import { BlogPost, BlogPostStringifiedAuthor } from '@/models/BlogPost.js'
+import { EventPost, EventPostStringifedAuthor } from '@/models/EventPost.js'
 import { AppData } from '@/models/AppData.js'
 import { ModalManager } from '@/models/Modal.js'
 
@@ -18,11 +18,11 @@ interface EditPostProps {
     type: 'blogPost' | 'eventPost'
   }
   appData: AppData,
-  handleSubmit: (formData: CreateEventPost | CreateBlogPost ) => void
+  handleSubmit: (formData: EventPostStringifedAuthor | BlogPostStringifiedAuthor ) => void
 }
 
 export default function EditPost ({ modal, data, appData, handleSubmit }: EditPostProps): JSX.Element {
-  const [formData, setFormData] = useState<CreateEventPost | CreateBlogPost >({
+  const [formData, setFormData] = useState<EventPostStringifedAuthor | BlogPostStringifiedAuthor >({
     id: '',
     title: '',
     description: '',
@@ -47,7 +47,7 @@ export default function EditPost ({ modal, data, appData, handleSubmit }: EditPo
       const highestStudsYear: number = Math.max(...appData.users.map(user => user.studsYear));
       const defaultAuthor = appData.users.find(user => user.id === appData.userDetails?.id) || appData.users.find(user => user.studsYear === highestStudsYear) || appData.users[0];
   
-      const newFormData: CreateEventPost | CreateBlogPost = {
+      const newFormData: EventPostStringifedAuthor | BlogPostStringifiedAuthor = {
         id: post.id || '',
         title: post.title || '',
         description: post.description || '',

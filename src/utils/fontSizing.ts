@@ -16,15 +16,15 @@ export function getDescriptionSize(windowWidth: number) {
 
 export function getTitleSize(windowWidth: number) {
   if (windowWidth < 576) {
-    return 25;
+    return 15;
   } else if (windowWidth < 768) {
-    return 30;
+    return 20;
   } else if (windowWidth < 992) {
-    return 40;
+    return 25;
   } else if (windowWidth < 1400) {
-    return 55;
+    return 30;
   } else {
-    return 65;
+    return 35;
   }
 }
 

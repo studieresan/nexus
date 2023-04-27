@@ -1,3 +1,4 @@
+
 // Custom Variables
 $dark: #000000;
 
@@ -11,15 +12,16 @@ $grid-breakpoints: map-merge(
   $grid-breakpoints,
   (
     'xxxl': 1900px,
-  )
-);
-
-$container-max-widths: map-merge(
-  $container-max-widths,
-  (
-    'xxxl': 1840px,
-  )
-);
-
+    )
+    );
+    
+    $container-max-widths: map-merge(
+      $container-max-widths,
+      (
+        'xxxl': 1840px,
+        )
+      );
+        
 // Import all of Bootstrap's CSS
 @import "~bootstrap/scss/bootstrap";
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');

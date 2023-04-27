@@ -20,6 +20,7 @@ import { GroupIcons } from '@/models/Group'
 import { AiOutlineFundProjectionScreen } from 'react-icons/ai'
 import { RiTeamFill } from 'react-icons/ri'
 import { FiSend } from 'react-icons/fi'
+import { ProjectInfo } from './models/ProjectInfo'
 
 
 
@@ -35,6 +36,7 @@ export default function Homepage ({ appData }: { appData: AppData }): JSX.Elemen
   const eventsRef = useRef(null)
   const contactRef = useRef(null)
   const [salesInfo, setSalesInfo] = useState<SalesInfo>({bottomElement: null, description: null})
+  const [projectInfo, setProjectInfo] = useState<ProjectInfo>({bottomElement: null, description: null})
 
   interface Refs {
     project: React.RefObject<HTMLElement>;
@@ -48,6 +50,12 @@ export default function Homepage ({ appData }: { appData: AppData }): JSX.Elemen
     if (appData.users) {
       const highestStudsYear = Math.max(...(appData.users).map((user) => user.studsYear))
       const salesManager = appData.users.find(user => user.info.role === UserRole.SalesGroupManager && user.studsYear === highestStudsYear)
+      const numberOfUsers = appData.users.filter((user) => user.studsYear === highestStudsYear).length
+      
+      setProjectInfo({
+        bottomElement: null,
+        description: <Trans i18nKey='homepage.project.description'>{{ name: `${numberOfUsers}` }}</Trans>
+      })
       if (salesManager) {
         const masterContact: ContactElement = {
           id: salesManager.id,
@@ -61,6 +69,7 @@ export default function Homepage ({ appData }: { appData: AppData }): JSX.Elemen
           bottomElement: <Contact element={masterContact} />,
           description: <Trans i18nKey='homepage.contact.description'>{{ name: `${salesManager.firstName} ${salesManager.lastName}` }}</Trans>
         })
+        
       } else {
         setSalesInfo({
           bottomElement: null,
@@ -119,7 +128,7 @@ export default function Homepage ({ appData }: { appData: AppData }): JSX.Elemen
         <IntroSection appData={appData} overlayGroups={overlayGroups} imagesLoaded={imagesLoaded} handleImageLoaded={handleImageLoaded} />
         <WaveDivider direction='down'/>
         <div className='row row-cols-1 mt-2 mb-5 mt-lg-5 my- g-0'>
-          {imagesLoaded.intro && <DynamicHero insertRef={projectRef} align='left' title={t('homepage.project.title')} description={t('homepage.project.description')} bgImg={bgProject} primaryButtonText={t('homepage.project.buttonPrimary')} secondaryButtonText={t('homepage.project.buttonSecondary')} handleClickPrimary={projectPrimaryButton} handleClickSecondary={projectSecondaryButton} />}
+          {imagesLoaded.intro && <DynamicHero insertRef={projectRef} align='left' title={t('homepage.project.title')} description={projectInfo.description} bgImg={bgProject} primaryButtonText={t('homepage.project.buttonPrimary')} secondaryButtonText={t('homepage.project.buttonSecondary')} handleClickPrimary={projectPrimaryButton} handleClickSecondary={projectSecondaryButton} />}
           {imagesLoaded.intro && <DynamicHero insertRef={eventsRef} align='right' title={t('homepage.events.title')} description={t('homepage.events.description')} bgImg={bgEvents} primaryButtonText={t('homepage.events.buttonPrimary')} handleClickPrimary={eventsPrimaryButton} />}
           {imagesLoaded.intro && <DynamicHero insertRef={contactRef} align='left' title={t('homepage.contact.title')} description={salesInfo.description} bgImg={bgContact} bottomElement={salesInfo.bottomElement} />}
         </div>

@@ -12,7 +12,7 @@
   "homepage.project.short.description": "Studs är ett projekt som leds av ingenjörsstudenter i masterprogram som är relevanta för datavetenskap.",
   "homepage.project.short.button": "Läs mer",
   "homepage.project.title": "Projektet",
-  "homepage.project.description": "Studs är ett årligt ideellt projekt från KTH som leds av ett urval av 29 ingenjörsstudenter i masterprogram som är relevanta för datavetenskap. Genom att organisera evenemang tillsammans med företag skapar vi möjligheter att ge både studenter och deras potentiella arbetsgivare värdefull tid tillsammans. I slutet av kursen åker Studs på en studieresa för att träffa företag utomlands.",
+  "homepage.project.description": "Studs är ett årligt ideellt projekt från KTH som leds av ett urval av <strong>{{name}}</strong> ingenjörsstudenter i masterprogram som är relevanta för datavetenskap. Genom att organisera evenemang tillsammans med företag skapar vi möjligheter att ge både studenter och deras potentiella arbetsgivare värdefull tid tillsammans. I slutet av kursen åker Studs på en studieresa för att träffa företag utomlands.",
   "homepage.project.buttonPrimary": "Om oss",
   "homepage.project.buttonSecondary": "Resebloggen",
 
@@ -25,7 +25,7 @@
   
   "about.groupTitle": "Studsare",
   "about.title": "Det här är Studs",
-  "about.intro": "Projektet Studs är ett årligt ideellt projekt från KTH med målet att ge studenter som läser en masterexamen relaterat till datavetenskap en chans att nätverka med IT-företag. Genom att arrangera evenemang tillsammans med företag skapar Studs möjligheter att ge både studenter och deras potentiella arbetsgivare värdefull tid tillsammans. Under dessa evenemang kommer studenterna att få djupare insikter i företagets arbetsliv och om företagets verksamhet. Studs utgörs av ungefär 30 utvalda studenter varje år. Du kan se medlemmarna i Studs för de senaste åren nedan.",
+  "about.intro": "Projektet Studs är ett årligt ideellt projekt från KTH med målet att ge studenter som läser en masterexamen relaterat till datavetenskap en chans att nätverka med IT företag. Genom att arrangera evenemang tillsammans med företag skapar Studs möjligheter att ge både studenter och deras potentiella arbetsgivare värdefull tid tillsammans. Under dessa evenemang kommer studenterna att få djupare insikter i företagets arbetsliv och om företagets verksamhet. Studs utgörs av ungefär 30 utvalda studenter varje år. Du kan se medlemmarna i Studs för de senaste åren nedan.",
   "about.primaryButton": "Skapa användare",
 
   "events.title": "Tidigare evenemang",
@@ -149,7 +149,6 @@
   "editUser.label.biography": "Biografi",
   "editUser.label.linkedIn": "LinkedIn",
   "editUser.label.github": "GitHub",
-  "editUser.label.allergies": "Allergier",
   "editUser.label.master": "Master",
   "editUser.label.admin": "Inställningar Admin",
   "editUser.label.role": "Roll",
@@ -163,8 +162,6 @@
   "viewUser.master": "Master",
   "viewUser.noMaster": "Ej angett",
   "viewUser.role": "Roll",
-  "viewUser.allergies": "Allergier",
-  "viewUser.noAllergies": "Inga allergier",
   "viewUser.permissions": "Behörigheter",
   "viewUser.noPermissions": "Inga behörigheter",
 

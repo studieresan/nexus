@@ -35,6 +35,18 @@ export function FinnishFlag ({ size = '1.5em', className, fill, style }: FlagPro
   )
 }
 
+export function GermanFlag({ size = '1.5em', className, fill, style }: FlagProps) {
+  return (
+    <svg
+      className={className} style={{ ...style }} viewBox="0 0 36 36" width={size} height={size}
+    >
+      <path fill="#FFCD05" d="M0 27a4 4 0 0 0 4 4h28a4 4 0 0 0 4-4v-4H0v4z"></path>
+      <path fill="#ED1F24" d="M0 14h36v9H0z"></path>
+      <path fill="#141414" d="M32 5H4a4 4 0 0 0-4 4v5h36V9a4 4 0 0 0-4-4z"></path>
+    </svg>
+  )
+}
+
 export function AmericanFlag ({ size = '1.5em', className, fill, style }: FlagProps) {
   return (
     <svg
@@ -65,5 +77,6 @@ export const flagAndCountry: Record<LanguageCode, Country> = {
   sv: { icon: <SwedishFlag />, code: 'sv', text: 'Svenska' },
   no: { icon: <NorwegianFlag />, code: 'no', text: 'Norsk' },
   fi: { icon: <FinnishFlag />, code: 'fi', text: 'Suomalainen' },
-  en: { icon: <GreatBritainFlag />, code: 'en', text: 'English' }
+  en: { icon: <GreatBritainFlag />, code: 'en', text: 'English' },
+  de: { icon: <GermanFlag />, code: 'de', text: 'Deutsch' }
 }

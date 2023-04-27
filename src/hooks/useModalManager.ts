@@ -85,6 +85,33 @@ export function useModalManager(): ModalManager {
     })
   }
 
+  function hideAllModals(): void {
+    setModalsToShow((currentArr) => {
+      currentArr.forEach(modal => {
+        modal.hideDate = Date.now() + 500;
+        setModalsToClose((prev) => [...prev, modal]);
+      });
+
+      setTimeout(() => {
+        setModalsToClose([]);
+      }, 1000);
+
+      return [];
+    });
+  }
+
+  useEffect(() => {
+    const handlePopState = () => {
+      hideAllModals();
+    };
+
+    window.addEventListener('popstate', handlePopState);
+
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+    };
+  }, []);
+
   return {
     data: modalsToShow,
     on: appendToModals,
