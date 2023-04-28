@@ -51,6 +51,7 @@ function OverlayGroupList({ overlayGroups, windowWidth }: { overlayGroups: Overl
               {group.description}
             </div>
             <Button className='studs-bg'
+              size='lg'
               onClick={() => {
                 if (group.ref && group.ref.current) {
                   group.ref.current.scrollIntoView({

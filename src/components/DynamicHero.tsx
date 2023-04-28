@@ -24,16 +24,16 @@ export default function DynamicHero({ insertRef, bgImg, bottomElement, title, de
               <img src={bgImg} className="d-block rounded mx-lg-auto img-fluid" width="100%" height="auto" loading="eager" />
             </div>
             <div className={`col-12 col-sm-11 col-lg-6 text-center text-lg-start px-1 px-sm-4  pb-5 pb-lg-1 ${ align === "left" ? "order-lg-2" : "order-lg-1" }`} >
-              <div className="fs-2 fw-bold">{title}</div>
+              <div className="fs-1 fw-bold">{title}</div>
               <div className={`mb-3 fs-5`}>{description}</div>
               <div className="gap-2 d-flex justify-content-center justify-content-lg-start">
                 {primaryButtonText && handleClickPrimary && (
-                  <Button variant = "primary" className="px-4 studs-bg" onClick={() => handleClickPrimary()}>
+                  <Button variant = "primary" size='lg' className="px-4 studs-bg" onClick={() => handleClickPrimary()}>
                     {primaryButtonText}
                   </Button>
                 )}
                 {secondaryButtonText && handleClickSecondary && (
-                  <Button variant = "outline-secondary" className="px-4" onClick={() => handleClickSecondary()}>
+                  <Button variant = "outline-secondary" size='lg' className="px-4" onClick={() => handleClickSecondary()}>
                     {secondaryButtonText}
                   </Button>
                 )}
