@@ -10,6 +10,7 @@ import { AppData } from '@/models/AppData'
 import Contact from '@/components/Contact.jsx'
 import { ContactElement } from '@/models/Contact.js'
 import { AiOutlineHome } from 'react-icons/ai'
+import { useWindowWidth } from '@/hooks/useWindowWidth.js'
 
 interface HeaderProps {
   appData: AppData;
@@ -46,6 +47,8 @@ export default function Header({ appData, setAppData }: HeaderProps): JSX.Elemen
   const { t, i18n } = useTranslation()
   const navigateTo = useNavigate()
   const handleInstructions = useContext(HandleInstructionsContext)
+  const windowWidth = useWindowWidth()
+  const logoDivWidth = '100%'
 
    // Add this state to manage the collapsed state of the navbar
   const [navbarCollapsed, setNavbarCollapsed] = useState(true);
@@ -89,7 +92,7 @@ export default function Header({ appData, setAppData }: HeaderProps): JSX.Elemen
       />
       <Navbar.Collapse id='basic-navbar-nav' in={!navbarCollapsed}>
         <div className='d-flex flex-column flex-md-row w-100'>
-          <div className='d-flex justify-content-center w-100'>
+          <div className='d-flex justify-content-center'>
             <Nav className='align-items-center gap-2'>
               <Button className='studs-navbar' onClick={() => handleNavItemClick('/about')}>
                 {t('about.name')}
@@ -102,13 +105,13 @@ export default function Header({ appData, setAppData }: HeaderProps): JSX.Elemen
               </Button>
             </Nav>
           </div>
-          <div className='d-flex justify-content-center w-100 p-2'>
+          <div className='d-flex justify-content-center p-2 mx-auto'style={{width: logoDivWidth}}>
             <Button className='studs-navbar'  onClick= {() => handleNavItemClick('/')}>
               <img alt='' src={studsLogo} width='200px' height='100%' className='d-none d-lg-inline-block align-top'/>
               <AiOutlineHome size={30} className='d-inline-block d-lg-none'/>
             </Button>
           </div>
-          <div className='d-flex flex-column flex-md-row justify-content-center w-100'>
+          <div className='d-flex flex-column flex-md-row justify-content-center'>
             <Nav className='align-items-center gap-2 p-2 p-md-0'>
               <LanguageDropDown />
               <Button className='studs-navbar' onClick={() => handleNavItemClick('/blog')}>{t('blog.name')}</Button>
