@@ -96,7 +96,7 @@ export default function ViewPost ({ post, data, modal, appData }: ViewPostProps)
         <h1 className='fw-bold'>{post.title}</h1>
         {inputBlocks && inputBlocks.map((block, index) => (
           <div key={index}>
-            <div className={`fw-light fs-5 text-muted`} style={{whiteSpace: 'pre-line'}}>{block.text.trim()}</div>
+            <div className={`fs-5`} style={{whiteSpace: 'pre-line'}}>{block.text.trim()}</div>
             <div className='row g-1 row-cols-1 row-cols-xxl-2 justify-content-center my-4'>
               {block.images.length === 1
                 ? (
