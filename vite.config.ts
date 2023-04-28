@@ -19,7 +19,7 @@ export default defineConfig({
   server: {
     proxy: {
       // '/graphql': {
-      //   target: 'https://api.studs.se/',
+      //   target: 'https://devapi.studs.se/',
       //   changeOrigin: true
       // },
       // '/signed-upload': {
@@ -30,30 +30,18 @@ export default defineConfig({
       //   target: 'https://devapi.studs.se/',
       //   changeOrigin: true
       // },
-      '/graphql': {
-        target: 'https://devapi.studs.se/',
-        changeOrigin: true
-      },
-      '/signed-upload': {
-        target: 'https://devapi.studs.se/',
-        changeOrigin: true
-      },
-      '/login': {
-        target: 'https://devapi.studs.se/',
-        changeOrigin: true
-      },
-      '/forgot': {
-        target: 'https://devapi.studs.se/',
-        changeOrigin: true
-      },
-      '/reset': {
-        target: 'https://devapi.studs.se/',
-        changeOrigin: true
-      },
-      '/account/password': {
-        target: 'https://devapi.studs.se/',
-        changeOrigin: true
-      },
+      // '/forgot': {
+      //   target: 'https://devapi.studs.se/',
+      //   changeOrigin: true
+      // },
+      // '/reset': {
+      //   target: 'https://devapi.studs.se/',
+      //   changeOrigin: true
+      // },
+      // '/account/password': {
+      //   target: 'https://devapi.studs.se/',
+      //   changeOrigin: true
+      // },
       '/uploads': {
         target: 'https://studs23.s3.eu-north-1.amazonaws.com',
         changeOrigin: true

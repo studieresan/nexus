@@ -79,7 +79,7 @@ export default function StudsGroup ({ handleClick, showGroup, group, groupIndex 
           </div>
           <Collapse in={showGroup[groupIndex]}>
             <div>
-              <div className={`fw-light ${getDescriptionSize(windowWidth)}`}>{group.description}</div>
+              <div className={`fs-5`}>{group.description}</div>
               <div className='d-flex'>
                 {masterContact()}
               </div>
