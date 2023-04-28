@@ -43,11 +43,11 @@ function OverlayGroupList({ overlayGroups, windowWidth }: { overlayGroups: Overl
       {overlayGroups.map((group, index) => (
         <div key={index} className="col">
           <div className={` ${index == 0 ? 'me-auto' : (index == overlayGroups.length - 1 ? 'ms-auto' : 'mx-auto')}`} style={{width: '90%'}}>
-            <div className={`d-flex align-items-center gap-2 fs-4`} style={{whiteSpace: 'nowrap'}}>
+            <div className={`d-flex align-items-center gap-2 fw-bold fs-4`} style={{whiteSpace: 'nowrap'}}>
               <IconWrapper icon={groupIcons[group.name]} iconSize={40} />
               {group.title}
             </div>
-            <div className={`mb-3 fw-light fs-5`}>
+            <div className={`mb-3 fs-5`}>
               {group.description}
             </div>
             <Button className='studs-bg'
