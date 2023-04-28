@@ -51,8 +51,8 @@ export default function About ({ appData, handleModals }: AboutProps): JSX.Eleme
         <div className='row row-cols-1 justify-content-center'>
           <div className='mb-5 mt-3 col-11 col-md-9'>
             <div>
-              <div className='fw-bold py-2 fs-2 display-5'>{t('about.title')}</div>
-              <div className={`fw-light ${getDescriptionSize(windowWidth)}`}>{t('about.intro')}</div>
+              <div className='fw-bold pt-2 fs-1'>{t('about.title')}</div>
+              <div className={`fs-5`}>{t('about.intro')}</div>
               {toolsToShow.edit && (
                 <div className='d-flex gap-2 mt-3'>
                   <Button className='studs-bg' size={getButtonSize(windowWidth)} onClick={() => handleCreateClick()}>{t('about.primaryButton')}</Button>

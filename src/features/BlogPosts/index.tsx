@@ -97,8 +97,8 @@ export default function BlogPosts ({ appData, handleModals }: BlogProps): JSX.El
       <div className='container-fluid mb-5' id='hanging-icons'>
         <div className='row row-cols-1 justify-content-center'>
           <div className='mb-5 mt-3 col-11 col-lg-9'>
-          <div className='fw-bold py-2 fs-2 display-5'>{t('blog.title')}</div>
-          <div className={`fw-light ${getDescriptionSize(windowWidth)}`}>{t('blog.intro')}</div>
+          <div className='fw-bold pt-2 fs-1'>{t('blog.title')}</div>
+          <div className={`fs-5`}>{t('blog.intro')}</div>
             {toolsToShow.edit && (
               <div className='d-flex gap-2 mt-3'>
                 <Button className='studs-bg' size='lg' onClick={() => handleCreateClick()}>{t('blog.primaryButton')}</Button>

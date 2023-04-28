@@ -80,8 +80,8 @@ export default function StudsGroups({ appData }: GroupsProps): JSX.Element {
       <div className='row row-cols-1 justify-content-center'>
         <div className='mb-5 mt-3 col-11 col-sm-9'>
           <div>
-            <div className='fw-bold py-2 fs-2 display-5'>{t('groups.title')}</div>
-            <div className={`fw-light ${getDescriptionSize(windowWidth)}`}>{t('groups.intro')}</div>
+            <div className='fw-bold pt-2 fs-1'>{t('groups.title')}</div>
+            <div className={`fs-5`}>{t('groups.intro')}</div>
             {/* <div className='d-flex gap-2'>
               <Button>{t('groups.primaryButton')}</Button>
               <Button variant='secondary'>{t('groups.secondaryButton')}</Button>
