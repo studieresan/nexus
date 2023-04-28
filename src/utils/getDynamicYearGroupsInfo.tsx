@@ -59,7 +59,9 @@ export default function getDynamicYearGroupsInfo(appData: AppData, contentSource
 function getContactElementGroupsInfo(appData: AppData, windowWidth: number): DynamicYearGroup[] {
   if (!appData.users) return [];
 
-  const years = [...new Set(appData.users.map((e) => e.studsYear)),].sort((a, b) => b - a);
+  const years = [...new Set(appData.users.map((e) => e.studsYear))]
+  .filter(year => year !== 1970)
+  .sort((a, b) => b - a);
   const newGroupsInfo: DynamicYearGroup[] = years.map((year) => ({year,title: i18next.t('about.groupTitle') + ' ' + year,elements: [],}));
 
   for (let i = 0; i < newGroupsInfo.length; i++) {
