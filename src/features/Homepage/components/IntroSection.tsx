@@ -37,34 +37,20 @@ const loadingSpinner = (
   </div>
 );
 
-const overlayText = (
-  <div className="d-flex flex-column justify-content-center align-items-center vh-100">
-    <img src={logo2023} className="img-fluid" style={{ width: '50%' }} />
-    <div className="fs-1 fw-bold text-light">2023</div>
-  </div>
-);
-
-
-
 function OverlayGroupList({ overlayGroups, windowWidth }: { overlayGroups: OverlayGroup[], windowWidth: number }) {
-  const iconSize = 40;
-  const fontSize1 = 'fs-4'
-  const fontSize2 = 'fs-5'
-
   return (
     <>
       {overlayGroups.map((group, index) => (
         <div key={index} className="col">
           <div className={` ${index == 0 ? 'me-auto' : (index == overlayGroups.length - 1 ? 'ms-auto' : 'mx-auto')}`} style={{width: '90%'}}>
-            <div className={`d-flex align-items-center gap-2 ${fontSize1}`} style={{whiteSpace: 'nowrap'}}>
-              <IconWrapper icon={groupIcons[group.name]} iconSize={iconSize} />
+            <div className={`d-flex align-items-center gap-2 fs-4`} style={{whiteSpace: 'nowrap'}}>
+              <IconWrapper icon={groupIcons[group.name]} iconSize={40} />
               {group.title}
             </div>
-            <div className={`mb-3 ${fontSize2} fw-light`}>
+            <div className={`mb-3 fw-light fs-5`}>
               {group.description}
             </div>
             <Button className='studs-bg'
-            size = 'lg'
               onClick={() => {
                 if (group.ref && group.ref.current) {
                   group.ref.current.scrollIntoView({
@@ -94,39 +80,24 @@ export function IntroSection({ appData, overlayGroups, imagesLoaded, handleImage
   const windowWidth = useWindowWidth();
   const bottomRef = useRef<HTMLDivElement>(null);
   
-  useEffect(() => {
-    if (bottomRef.current) {
-      setTimeout(() => {
-        if (bottomRef.current) {
-          bottomRef.current.scrollIntoView({
-            behavior: 'smooth',
-            block: 'end',
-          });
-        }
-      }, 500); // 500ms delay before scrolling
-    }
-  }, [i18n.language]);
+  // useEffect(() => {
+  //   if (bottomRef.current) {
+  //     setTimeout(() => {
+  //       if (bottomRef.current) {
+  //         bottomRef.current.scrollIntoView({
+  //           behavior: 'smooth',
+  //           block: 'end',
+  //         });
+  //       }
+  //     }, 500); // 500ms delay before scrolling
+  //   }
+  // }, [i18n.language]);
 
-  let titleSize = 0;
-  if (windowWidth < 576) {
-    titleSize = 25
-  } else if (windowWidth < 768) {
-    titleSize = 30
-  } else if (windowWidth < 992) {
-    titleSize = 35
-  } else if (windowWidth < 1200) {
-    titleSize = 45
-  } else if (windowWidth < 1400) {
-    titleSize = 55
-  } else {
-    titleSize = 65
-  }
 
   const titleWrap = windowWidth < 992 ? "normal" : "pre-line";
 
   const titleStyle: CSSProperties = {
     fontWeight: 600,
-    fontSize: titleSize,
     whiteSpace: titleWrap,
   };
   
@@ -142,7 +113,7 @@ export function IntroSection({ appData, overlayGroups, imagesLoaded, handleImage
                 <div className='d-block d-lg-none p-2' style={{fontWeight: 200}}>
                   <img src={logo2023} style={{width: '300px'}} alt='Studs 2023 Logo' />
                 </div>
-                <div className='d-flex text-white justify-content-center justify-content-lg-start' style={titleStyle}>
+                <div className='d-flex fs-1 text-white justify-content-center justify-content-lg-start' style={titleStyle}>
                   {t('homepage.intro')}
                 </div>
               </div>
