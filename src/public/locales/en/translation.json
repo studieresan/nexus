@@ -1,40 +1,34 @@
 {
   "homepage.intro": "Connecting Stockholm with KTH’s \n top tier tech students",
-
   "homepage.contact.short.title": "Contact",
   "homepage.contact.short.description": "Do not hesitate to contact us if you are interested in having an event or want to learn more.",
   "homepage.contact.short.button": "Learn more",
   "homepage.contact.title": "Work with us",
   "homepage.contact.description": "If you are interested in having an event with us or are curious and want to learn more, do not hesitate to contact <strong>{{name}}</strong>.",
   "homepage.contact.buttonPrimary": "Contact us",
-  
   "homepage.project.short.title": "The Project",
   "homepage.project.short.description": "Studs is a project from KTH run by a selection of engineering students in master programs relevant to computer science.",
   "homepage.project.short.button": "Learn more",
   "homepage.project.title": "The Project",
-  "homepage.project.description": "Studs is a project from KTH run by a selection of <strong>{{name}}</strong> engineering students in master programs relevant to computer science. By organizing events together with companies, we create opportunities to give both students and their potential employers valuable time together. At the end of the course, Studs goes on a study trip to meet companies abroad.", 
+  "homepage.project.description": "Studs is a project from KTH run by a selection of <strong>{{name}}</strong> engineering students in master programs relevant to computer science. By organizing events together with companies, we create opportunities to give both students and their potential employers valuable time together. At the end of the course, Studs goes on a study trip to meet companies abroad.",
   "homepage.project.buttonPrimary": "About us",
   "homepage.project.buttonSecondary": "Study trip",
-
   "homepage.events.short.title": "The Events",
   "homepage.events.short.description": "During the year, Studs members will meet with companies during events, usually arranged at corporate offices.",
   "homepage.events.short.button": "Learn more",
   "homepage.events.title": "The Events",
   "homepage.events.description": "During the year, Studs members will meet with companies during events, usually arranged at corporate offices. For the students, this is an opportunity to get deeper insights into how the company's work life looks like and about the company's business. Studs helps the companies to tailor the events to their needs, which guarantees that each event is as unique as the company that has arranged it.",
   "homepage.events.buttonPrimary": "Previous events",
-  
   "about.groupTitle": "Studs",
   "about.title": "This is Studs",
   "about.intro": "The Studs project is an annual nonprofit project from KTH with a goal to provide students who pursue a master’s degree related to Computer Science a chance to network with IT companies. By organizing events together with companies, Studs creates opportunities to give both students and their potential employers valuable time together. During these events, students will gain deeper insights into the working life of the company and about the company’s operations. Studs consists of around 30 selected students each year. You can see the members of Studs for recent years down below.",
   "about.primaryButton": "Create user",
-
   "events.title": "Previous events",
   "events.intro": "Here is a collection of events that we have arranged together with companies in the past.",
   "events.groupTitle": "Events",
   "events.noLocation": "Not specified",
   "events.primaryButton": "Create event",
   "events": "Event",
-
   "eventPost.notPublished": "This event is not yet published",
   "eventPost.edit.label.studsYear": "Studs year",
   "eventPost.edit.label.title": "Title",
@@ -52,7 +46,6 @@
   "eventPost.edit.label.published": "Published",
   "eventPost.deletePostTitle": "Deleting event",
   "eventPost.deletePostDescription": "Are you sure that you want to delete event",
-
   "blog.title": "Blog posts",
   "blog.intro": "Here is a collection of blog posts made throughout our study trip at the end of the course.",
   "blog.groupTitle": "Study Trip",
@@ -84,33 +77,24 @@
   "email": "Email",
   "phone": "Phone",
   "role": "Role",
-
   "groups.title": "Meet the groups",
   "groups.intro": "Studs consists of six different groups with different focuses and a different leader, where the effort of all groups are equally important for the project to succeed. Much of the work in Studs happens between the groups and it is therefore important that you as a group member is cooperative and understands that we all strive towards a common goal. Studs will not only give you great knowledge with whatever project work implies, but you will also have an amazing year and will create valuable relations with the industry and withing the group.",
   "groups.contact": "Do you have any questions? Contact ",
   "groups.primaryButton": "Apply now",
   "groups.secondaryButton": "Learn more",
   "groups.manager_not_found": "No group manager found",
-  
   "groups.finance_group_manager.title": "Economy Group",
   "groups.finance_group_manager.description": "The Economy Group is a small group that works closely with each other and the project managers to create the project's budget and ensure that it is followed. The group is also responsible for meeting the financial needs of the other groups. New for this year is that the group will not have to handle any bookkeeping because it will be managed externally. Continuous workload during the year but most work in the autumn and during the trip.",
-  
   "groups.event_group_manager.title": "Event Group",
   "groups.event_group_manager.description": "The Event Group is responsible for planning and carrying out all business events and collaborate with the companies to create events that are relevant, interesting and fun for both the project members and the companies. The group assists the companies with customising the events according to their wishes and to host events of the highest standard. The work is very creative and solution-oriented as different companies have different needs. As an event group member you can expect an even workload throughout both spring and autumn semesters.",
-
   "groups.info_group_manager.title": "Info Group",
   "groups.info_group_manager.description": "The Info Group is responsible for creating all the content, the graphic profile that will appear in our various channels and the report. The team consists of two photographers, two editors and two art directors. The photographers take portraits of the project team and photograph all events and the trip. The editors produce all the text on social media and the report. The art directors create the graphic profile and are responsible for the web, app and UX design. They are also responsible for the layout of the report. Continuous workload during autumn and spring.",
-
   "groups.it_group_manager.title": "IT Group",
   "groups.it_group_manager.description": "The IT Group is a small group responsible for Studs' webpage, backend and the apps that exist for both Android and iOS. You should have an interest in programming and/or web design, in addition to the will to learn new stuff. It is a bonus if you have previous experience, but it is not a requirement. The workload is evenly spread during Fall and Spring.",
-
   "groups.travel_group_manager.title": "Travel Group",
   "groups.travel_group_manager.description": "The Travel Group is responsible for everything related to the trip at the end of the project, from planning the itinerary and booking the flights to coordinating the activities. Apart from planning and logistics, we also find inspiration and destinations to propose to the project group. As part of the travel group, you will lead the project group during the trip, making sure everyone is having a good time, and handling unforeseen situations. Continuous workload during the year, but most intense during the fall and the trip.",
-
   "groups.sales_group_manager.title": "Sales Group",
   "groups.sales_group_manager.description": "The Sales Group is the first point of contact between Studs and companies. This is where we as the sales team impress and recruit companies for events. As a sales team member you should be highly social and outwards, not afraid to make new connections and to not give up after a rejection. The sales team is the biggest group in Studs so you have a great team to assist and of course me as the sales team manager will help out to make you feel comfortable. We in the sales team also work closely with the event team since they take over after the event is booked! High workload during the autumn periods P1, P2.",
-
-
   "login.intro": "This is where the login page will be.",
   "about.name": "About",
   "events.name": "Events",
@@ -123,8 +107,6 @@
   "login.primaryButton": "Login",
   "login.secondaryButton": "Forgot password?",
   "footer.collaborations": "Collaborations",
-
-  
   "forgotPassword.title": "Forgot password",
   "forgotPassword.label.email": "Email",
   "forgotPassword.primaryButton": "Send",
@@ -136,7 +118,6 @@
   "resetPassword.primaryButton": "Reset password",
   "changeSuccess.title": "Password changed",
   "changeSuccess.text": "Your password has been changed successfully. You can now log in with your new password.",
-
   "editUser.label.creating": "Creating profile",
   "editUser.label.editing": "Editing profile",
   "editUser.label.changePicture": "Change profile picture",
@@ -154,7 +135,6 @@
   "editUser.label.permissions": "Permissions",
   "editUser.edit.submit": "Save",
   "edituser.create.submit": "Create",
-
   "viewUser.biography": "Biography",
   "viewUser.noBiography": "Not specified",
   "viewUser.studsYear": "Studs year",
@@ -163,7 +143,6 @@
   "viewUser.role": "Role",
   "viewUser.permissions": "Permissions",
   "viewUser.noPermissions": "No permissions",
-
   "none": "None",
   "project_manager": "Project Manager",
   "finance_group": "Finance",
@@ -178,11 +157,9 @@
   "travel_group_manager": "Travel Manager",
   "sales_group": "Sales",
   "sales_group_manager": "Sales Manager",
-
   "admin_permission": "Admin",
   "events_permission": "Event",
   "blog_permission": "Blog",
-
   "contact.deleteUser": "Deleting User",
   "contact.deleteUserDescription": "Are you sure you want to delete user"
 }
