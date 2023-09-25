@@ -1,13 +1,13 @@
 {
   "homepage.intro": "Kobler sammen Stockholm med KTHs fremste teknologistudenter",
-
+  "homepage.callToAction.text": "Interessert i Studs 2024?",
+  "homepage.callToAction.button": "Kontakt salg",
   "homepage.contact.short.title": "Kontakt",
   "homepage.contact.short.description": "Ikke nøl med å kontakte oss hvis du er interessert i å ha et arrangement eller ønsker å lære mer.",
   "homepage.contact.short.button": "Lær mer",
   "homepage.contact.title": "Samarbeid med oss",
   "homepage.contact.description": "Hvis du er interessert i å ha et arrangement med oss eller er nysgjerrig og ønsker å lære mer, ikke nøl med å kontakte <strong>{{name}}</strong>.",
   "homepage.contact.buttonPrimary": "Kontakt oss",
-  
   "homepage.project.short.title": "Prosjektet",
   "homepage.project.short.description": "Studs er et prosjekt fra KTH drevet av et utvalg av ingeniørstudenter i masterprogrammer relevante for datavitenskap.",
   "homepage.project.short.button": "Lær mer",
@@ -15,26 +15,22 @@
   "homepage.project.description": "Studs er et prosjekt fra KTH drevet av et utvalg av <strong>{{name}}</strong> ingeniørstudenter i masterprogrammer relevante for datavitenskap. Ved å organisere arrangementer sammen med bedrifter, skaper vi muligheter for å gi både studenter og deres potensielle arbeidsgivere verdifull tid sammen. På slutten av kurset drar Studs på en studietur for å møte bedrifter i utlandet.",
   "homepage.project.buttonPrimary": "Om oss",
   "homepage.project.buttonSecondary": "Studietur",
-  
   "homepage.events.short.title": "Arrangementene",
   "homepage.events.short.description": "I løpet av året vil Studs-medlemmer møte bedrifter under arrangementer, vanligvis organisert på bedriftens kontorer.",
   "homepage.events.short.button": "Lær mer",
   "homepage.events.title": "Arrangementene",
   "homepage.events.description": "I løpet av året vil Studs-medlemmer møte bedrifter under arrangementer, vanligvis organisert på bedriftens kontorer. For studentene er dette en mulighet til å få dypere innsikt i hvordan bedriftens arbeidsliv ser ut og om bedriftens virksomhet. Studs hjelper bedriftene med å skreddersy arrangementene etter deres behov, noe som garanterer at hvert arrangement er like unikt som bedriften som har arrangert det.",
   "homepage.events.buttonPrimary": "Tidligere arrangementer",
-
   "about.groupTitle": "Studs",
   "about.title": "Dette er Studs",
   "about.intro": "Studs-prosjektet er et årlig nonprofit-prosjekt fra KTH med et mål om å gi studenter som tar en mastergrad relatert til datavitenskap en mulighet til å knytte nettverk med IT selskaper. Ved å organisere arrangementer sammen med selskaper, skaper Studs muligheter for å gi både studenter og deres potensielle arbeidsgivere verdifull tid sammen. Under disse arrangementene vil studentene få dypere innsikt i arbeidslivet i selskapet og om selskapets drift. Studs består av rundt 30 utvalgte studenter hvert år. Du kan se medlemmene av Studs for de siste årene nedenfor.",
   "about.primaryButton": "Opprett bruker",
-
   "events.title": "Tidligere arrangementer",
   "events.intro": "Her er en samling av arrangementer vi har arrangert sammen med selskaper tidligere.",
   "events.groupTitle": "Arrangementer",
   "events.noLocation": "Ikke angitt",
   "events.primaryButton": "Opprett arrangement",
   "events": "Arrangement",
-
   "eventPost.notPublished": "Dette arrangementet er ikke publisert ennå",
   "eventPost.edit.label.studsYear": "Studs år",
   "eventPost.edit.label.author": "Forfatter",
@@ -52,7 +48,6 @@
   "eventPost.edit.label.published": "Publisert",
   "eventPost.deletePostTitle": "Sletter arrangement",
   "eventPost.deletePostDescription": "Er du sikker på at du vil slette arrangement",
-
   "blog.title": "Blogginnlegg",
   "blog.intro": "Her er en samling av blogginnlegg laget gjennom studieturen vår på slutten av kurset.",
   "blog.groupTitle": "Studietur",
@@ -74,7 +69,6 @@
   "blogPost.edit.submit": "Lagre",
   "blogPost.deletePostTitle": "Sletter blogginnlegg",
   "blogPost.deletePostDescription": "Er du sikker på at du vil slette blogginnlegget",
-
   "confirm": "Bekreft",
   "cancel": "Avbryt",
   "leader": "Leder",
@@ -85,32 +79,24 @@
   "email": "E-post",
   "phone": "Telefon",
   "role": "Rolle",
-
   "groups.title": "Møt gruppene",
   "groups.intro": "Studs består av seks forskjellige grupper med forskjellige fokusområder og en forskjellig leder, der innsatsen fra alle gruppene er like viktig for at prosjektet skal lykkes. Mye av arbeidet i Studs skjer mellom gruppene, og det er derfor viktig at du som gruppemedlem er samarbeidsvillig og forstår at vi alle jobber mot et felles mål. Studs vil ikke bare gi deg god kunnskap om hva prosjektarbeid innebærer, men du vil også få et fantastisk år og skape verdifulle relasjoner med industrien og innad i gruppen.",
   "groups.contact": "Har du noen spørsmål? Kontakt ",
   "groups.primaryButton": "Søk nå",
   "groups.secondaryButton": "Lær mer",
   "groups.manager_not_found": "Ingen gruppeleder funnet",
-  
   "groups.finance_group_manager.title": "Økonomigruppen",
   "groups.finance_group_manager.description": "Økonomigruppen er en liten gruppe som jobber tett sammen med prosjektlederne for å lage prosjektets budsjett og sørge for at det følges. Gruppen er også ansvarlig for å møte de økonomiske behovene til de andre gruppene. Nytt for i år er at gruppen ikke trenger å håndtere regnskap, da dette vil bli håndtert eksternt. Kontinuerlig arbeidsmengde gjennom året, men mest arbeid om høsten og under turen.",
-  
   "groups.event_group_manager.title": "Arrangementsgruppen",
   "groups.event_group_manager.description": "Arrangementsgruppen er ansvarlig for å planlegge og gjennomføre alle bedriftsarrangementer og samarbeide med selskapene for å skape arrangementer som er relevante, interessante og morsomme for både prosjektmedlemmene og selskapene. Gruppen hjelper selskapene med å tilpasse arrangementene etter deres ønsker og å arrangere arrangementer av høyeste standard. Arbeidet er svært kreativt og løsningsorientert ettersom ulike selskaper har ulike behov. Som medlem av arrangementsgruppen kan du forvente en jevn arbeidsmengde gjennom både vår- og høstsemesteret.",
-
   "groups.info_group_manager.title": "Info-gruppen",
   "groups.info_group_manager.description": "Info-gruppen er ansvarlig for å lage alt innholdet, den grafiske profilen som vil vises i våre ulike kanaler og rapporten. Teamet består av to fotografer, to redaktører og to art directors. Fotografene tar portretter av prosjektteamet og fotograferer alle arrangementer og turen. Redaktørene produserer all teksten på sosiale medier og i rapporten. Art director'ene lager den grafiske profilen og er ansvarlige for web, app og UX-design. De er også ansvarlige for layouten i rapporten. Kontinuerlig arbeidsmengde i løpet av høsten og våren.",
-
   "groups.it_group_manager.title": "IT-gruppen",
   "groups.it_group_manager.description": "IT-gruppen er en liten gruppe ansvarlig for Studs' nettside, backend og appene som finnes for både Android og iOS. Du bør ha interesse for programmering og/eller webdesign, i tillegg til viljen til å lære nye ting. Det er en bonus hvis du har tidligere erfaring, men det er ikke et krav. Arbeidsmengden er jevnt fordelt gjennom høsten og våren.",
-
   "groups.travel_group_manager.title": "Reisegruppen",
   "groups.travel_group_manager.description": "Reisegruppen er ansvarlig for alt som er relatert til turen ved slutten av prosjektet, fra planlegging av reiseruten og bestilling av flyreiser til koordinering av aktiviteter. Bortsett fra planlegging og logistikk, finner vi også inspirasjon og destinasjoner å foreslå for prosjektgruppen. Som en del av reisegruppen vil du lede prosjektgruppen under turen, sørge for at alle har det bra, og håndtere uforutsette situasjoner. Kontinuerlig arbeidsmengde i løpet av året, men mest intens under høsten og turen.",
-
   "groups.sales_group_manager.title": "Salgsgruppen",
   "groups.sales_group_manager.description": "Salgsgruppen er det første kontaktpunktet mellom Studs og selskaper. Dette er der vi som salgsteam imponerer og rekrutterer selskaper til arrangementer. Som et medlem av salgsteamet bør du være veldig sosial og utadvendt, ikke redd for å knytte nye kontakter og ikke gi opp etter et avslag. Salgsteamet er den største gruppen i Studs, så du har et flott team som hjelper deg, og selvfølgelig vil jeg som salgsteamleder hjelpe deg med å føle deg komfortabel. Vi i salgsteamet jobber også tett med arrangementsgruppen, siden de overtar etter at arrangementet er booket! Høy arbeidsmengde i løpet av høstperiodene P1, P2.",
-
   "login.intro": "Her vil innloggingssiden være.",
   "about.name": "Om",
   "events.name": "Arrangementer",
@@ -123,8 +109,6 @@
   "login.primaryButton": "Logg inn",
   "login.secondaryButton": "Glemt passord?",
   "footer.collaborations": "Samarbeid",
-
-  
   "forgotPassword.title": "Glemt passord",
   "forgotPassword.label.email": "E-post",
   "forgotPassword.primaryButton": "Send",
@@ -136,7 +120,6 @@
   "resetPassword.primaryButton": "Tilbakestill passord",
   "changeSuccess.title": "Passord endret",
   "changeSuccess.text": "Passordet ditt har blitt endret. Du kan nå logge inn med det nye passordet ditt.",
-
   "editUser.label.creating": "Oppretter profil",
   "editUser.label.editing": "Redigerer profil",
   "editUser.label.changePicture": "Endre profilbilde",
@@ -154,7 +137,6 @@
   "editUser.label.permissions": "Tilgang",
   "editUser.edit.submit": "Lagre",
   "edituser.create.submit": "Opprett",
-
   "viewUser.biography": "Biografi",
   "viewUser.noBiography": "Ikke angitt",
   "viewUser.studsYear": "Studs år",
@@ -163,7 +145,6 @@
   "viewUser.role": "Rolle",
   "viewUser.permissions": "Tilgang",
   "viewUser.noPermissions": "Ingen tilgang",
-
   "none": "Ingen",
   "project_manager": "Prosjektleder",
   "finance_group": "Økonomi",
@@ -178,11 +159,9 @@
   "travel_group_manager": "Reiseansvarlig",
   "sales_group": "Salg",
   "sales_group_manager": "Salgsansvarlig",
-
   "admin_permission": "Admin",
   "events_permission": "Arrangement",
   "blog_permission": "Blogg",
-
   "contact.deleteUser": "Sletter bruker",
   "contact.deleteUserDescription": "Er du sikker på at du vil slette brukeren"
 }

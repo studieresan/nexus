@@ -1,13 +1,13 @@
 {
   "homepage.intro": "Ansluter Stockholm med KTH:s toppstudenter inom teknik",
-
+  "homepage.callToAction.text": "Intresserad i Studs 2024?",
+  "homepage.callToAction.button": "Kontakta sälj",
   "homepage.contact.short.title": "Kontakt",
   "homepage.contact.short.description": "Tveka inte på att kontakta oss om ni är intresserade av att ha ett evenemang eller vill veta mer.",
   "homepage.contact.short.button": "Kontakta oss",
   "homepage.contact.title": "Samarbeta med oss",
   "homepage.contact.description": "Vi letar ständigt efter nya samarbeten. Om ni är intresserade av att ha ett evenemang med oss eller är nyfikna och vill veta mer, tveka inte på att kontakta <strong>{{name}}</strong>.",
   "homepage.contact.buttonPrimary": "Kontakta oss",
-  
   "homepage.project.short.title": "Projektet",
   "homepage.project.short.description": "Studs är ett projekt som leds av ingenjörsstudenter i masterprogram som är relevanta för datavetenskap.",
   "homepage.project.short.button": "Läs mer",
@@ -15,26 +15,22 @@
   "homepage.project.description": "Studs är ett årligt ideellt projekt från KTH som leds av ett urval av <strong>{{name}}</strong> ingenjörsstudenter i masterprogram som är relevanta för datavetenskap. Genom att organisera evenemang tillsammans med företag skapar vi möjligheter att ge både studenter och deras potentiella arbetsgivare värdefull tid tillsammans. I slutet av kursen åker Studs på en studieresa för att träffa företag utomlands.",
   "homepage.project.buttonPrimary": "Om oss",
   "homepage.project.buttonSecondary": "Resebloggen",
-
   "homepage.events.short.title": "Evenemangen",
   "homepage.events.short.description": "Under året träffar Studs-medlemmar företag under evenemang, vanligtvis arrangerade på företagskontor.",
   "homepage.events.short.button": "Läs mer",
   "homepage.events.title": "Evenemangen",
   "homepage.events.description": "Under året kommer medlemmarna i Studs att träffa företag under evenemang, vanligtvis arrangerade på företagens kontor. För studenterna är detta en möjlighet att få djupare insikter om hur arbetslivet på företaget ser ut och om företagets verksamhet. Studs hjälper företagen att skräddarsy evenemangen till deras behov, vilket garanterar att varje evenemang är lika unikt som företaget som arrangerat det.",
   "homepage.events.buttonPrimary": "Tidigare evengemang",
-  
   "about.groupTitle": "Studsare",
   "about.title": "Det här är Studs",
   "about.intro": "Projektet Studs är ett årligt ideellt projekt från KTH med målet att ge studenter som läser en masterexamen relaterat till datavetenskap en chans att nätverka med IT företag. Genom att arrangera evenemang tillsammans med företag skapar Studs möjligheter att ge både studenter och deras potentiella arbetsgivare värdefull tid tillsammans. Under dessa evenemang kommer studenterna att få djupare insikter i företagets arbetsliv och om företagets verksamhet. Studs utgörs av ungefär 30 utvalda studenter varje år. Du kan se medlemmarna i Studs för de senaste åren nedan.",
   "about.primaryButton": "Skapa användare",
-
   "events.title": "Tidigare evenemang",
   "events.intro": "Här kan du se alla tidigare evenemang som Studs har arrangerat tillsammans med företag.",
   "events.groupTitle": "Evenemang",
   "events.noLocation": "Ej angivet",
   "events.primaryButton": "Skapa evenemang",
   "event": "Evengemang",
-
   "eventPost.notPublished": "Evenemanget är ännu inte publicerat",
   "eventPost.edit.label.studsYear": "Studs år",
   "eventPost.edit.label.author": "Skribent",
@@ -52,13 +48,11 @@
   "eventPost.edit.label.published": "Publicerad",
   "eventPost.deletePostTitle": "Ta bort evenemang",
   "eventPost.deletePostDescription": "Är du säker på att du vill ta bort evenemanget",
-
   "blog.title": "Reseblogg",
   "blog.intro": "Här finns alla blogginlägg som lagts upp under resans gång.",
   "blog.groupTitle": "Studieresa",
   "blog.primaryButton": "Skapa blogginlägg",
   "blog.secondaryButton": "Läs mer",
-  
   "blogPost.notPublished": "Blogginlägget är ännu inte publicerat",
   "blogPost.edit.label.studsYear": "Studs år",
   "blogPost.edit.label.editing": "Redigerar",
@@ -85,33 +79,24 @@
   "email": "Email",
   "phone": "Telefon",
   "role": "Roll",
-
   "groups.title": "Möt grupperna",
   "groups.intro": "Studs består av sex olika grupper med varsitt arbetsområde och varsin ledare, där alla gruppers insats är lika viktiga för att projektet ska lyckas. Mycket av arbetet i Studs sker grupperna emellan och det är därför viktigt att du som gruppmedlem är samarbetsvillig och förstår att vi alla arbetar mot ett gemensamt mål. Studs kommer inte att bara ge dig goda kunskaper inom allt vad projektarbete innebär, utan du kommer också att ha ett otroligt roligt år och knyta värdefulla relationer med näringslivet och inom gruppen!",
   "groups.contact": "Har du några frågor? Kontakta ",
   "groups.primaryButton": "Ansök",
   "groups.secondaryButton": "Läs mer",
   "groups.manager_not_found": "Ingen gruppledare hittades",
-
   "groups.finance_group_manager.title": "Ekonomigruppen",
   "groups.finance_group_manager.description": "Ekonomigruppen är en liten grupp som jobbar nära varandra och projektledarna med att skapa projektets budget och se till att den efterföljs. Gruppen är även ansvarig för att tillgodose de andra gruppernas ekonomiska behov. Nytt för i år är att gruppen inte kommer behöva hantera någon bokföring eftersom den kommer skötas externt. Kontinuerlig arbetsbelastning under året men mest arbete under hösten samt vid resan.",
-  
   "groups.event_group_manager.title": "Eventgruppen",
   "groups.event_group_manager.description": "Eventgruppen ansvarar för planerandet och genomförandet av alla företagsevent och arbetar tillsammans med företagen för att skapa evenemang som är relevanta, intressanta och roliga både för projektmedlemmarna och företagen. Gruppen hjälper företagen att anpassa eventen efter deras önskemål och genomföra så bra event som möjligt. Arbetet är därmed kreativt då företagen skiljer sig mycket och kräver olika lösningar. Att vara med i eventgruppen innebär en kontinuerlig arbetsbelastning under hösten och våren.",
-
   "groups.info_group_manager.title": "Infogruppen",
   "groups.info_group_manager.description": "Infogruppen ansvarar för att skapa allt innehåll, den grafiska profilen som kommer synas i våra olika kanaler och rapporten. Gruppen består av två fotografer, två redaktörer och två art directors. Fotograferna tar porträttbilder av projektgruppen samt fotograferar alla event och resan. Redaktörerna producerar all text i sociala medier och rapporten. Art directors skapar den grafiska profilen och är ansvariga för webb-, app- och UX-design. De ansvar också för rapportens layout. Kontinuerlig arbetsbelastning under hösten och våren.",
-
   "groups.it_group_manager.title": "IT-gruppen",
   "groups.it_group_manager.description": "IT-gruppen är en liten grupp som ansvarar för Studs webbsida, backend och de interna mobilapplikationerna som finns för både Android och iOS. Du bör ha ett intresse för programmering och/eller webbdesign samt viljan att lära dig nya saker. Det är ett plus om du har tidigare erfarenhet, men det är inget krav. Kontinuerlig arbetsbelastning under hösten och våren.",
-
   "groups.travel_group_manager.title": "Resegruppen",
   "groups.travel_group_manager.description": "Resegruppen ansvarar för all planering och genomförandet av resan som avslutar projektet, allt från resrutt och flyg till koordinering av dagsaktiviteter. Utöver planering och logistik så jobbar vi även med att ta fram inspiration och förslag på resmål. Som medlem i resegruppen leder du hela projektgruppen under resan, ser till att alla har det bra och hanterar oförutsägbara situationer. Kontinuerlig arbetsbelastning under hela året men mest intensivt under hösten och själva resan.",
-
   "groups.sales_group_manager.title": "Säljgruppen",
   "groups.sales_group_manager.description": "Medlemmarna i säljgruppen skapar den första kontakten mellan Studs och företag och säljer in event. Det är viktigt att du som medlem i säljgruppen är utåtriktad och social, och inte tappar glöden om du får ett nej. Säljgruppen jobbar nära flera andra grupper, framförallt eventgruppen som tar över när ett event har blivit bokat. Hög belastning under hösten och en bit in under våren.",
-
-
   "login.intro": "This is where the login page will be.",
   "about.name": "Om oss",
   "events.name": "Evengemang",
@@ -124,8 +109,6 @@
   "login.primaryButton": "Logga in",
   "login.secondaryButton": "Glömt lösenordet?",
   "footer.collaborations": "Samarbeten",
-  
-
   "forgotPassword.title": "Glömt lösenord",
   "forgotPassword.label.email": "E-post",
   "forgotPassword.primaryButton": "Skicka",
@@ -137,7 +120,6 @@
   "resetPassword.primaryButton": "Återställ lösenord",
   "changeSuccess.title": "Lösenord ändrat",
   "changeSuccess.text": "Ditt lösenord har ändrats framgångsrikt. Du kan nu logga in med ditt nya lösenord.",
-
   "editUser.label.creating": "Skapar profil",
   "editUser.label.editing": "Redigerar profil",
   "editUser.label.changePicture": "Ändra profilbild",
@@ -155,7 +137,6 @@
   "editUser.label.permissions": "Behörigheter",
   "editUser.edit.submit": "Spara",
   "edituser.create.submit": "Skapa",
-
   "viewUser.biography": "Biografi",
   "viewUser.noBiography": "Ej angett",
   "viewUser.studsYear": "Studs år",
@@ -164,7 +145,6 @@
   "viewUser.role": "Roll",
   "viewUser.permissions": "Behörigheter",
   "viewUser.noPermissions": "Inga behörigheter",
-
   "none": "Ingen",
   "project_manager": "Projektledare",
   "finance_group": "Ekonomi",
@@ -179,11 +159,9 @@
   "travel_group_manager": "Reseansvarig",
   "sales_group": "Sälj",
   "sales_group_manager": "Säljansvarig",
-
   "admin_permission": "Admin",
   "events_permission": "Event",
   "blog_permission": "Blogg",
-
   "contact.deleteUser": "Raderar användare",
   "contact.deleteUserDescription": "Är du säker på att du vill radera användaren"
-  }
+}
