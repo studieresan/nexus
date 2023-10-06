@@ -1,5 +1,5 @@
 import introBg from "@/assets/images/BigSizeBg.png";
-import logo2023 from "@/assets/images/logo2023.png";
+import logo2024 from "@/assets/images/logo2024.png";
 import React, { useState, useEffect, CSSProperties, useRef } from "react";
 import { Button, Spinner } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
@@ -172,9 +172,9 @@ export function IntroSection({
                 style={{ fontWeight: 200 }}
               >
                 <img
-                  src={logo2023}
+                  src={logo2024}
                   style={{ width: "300px" }}
-                  alt="Studs 2023 Logo"
+                  alt="Studs 2024 Logo"
                 />
               </div>
               <div
