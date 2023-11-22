@@ -89,7 +89,7 @@ export default function Footer({ appData }: FooterProps): JSX.Element {
   const collaborationsLarge = () => {
     return (
       <div className="d-flex d-lg-block flex-wrap flex-lg-nowrap justify-content-center mb-3">
-        <div
+        {/* <div
           className="d-flex justify-content-center justify-content-lg-start flex-row mb-2 gap-3"
           style={{ width: 500 }}
         >
@@ -104,7 +104,7 @@ export default function Footer({ appData }: FooterProps): JSX.Element {
           {companyCircle(fra)}
           {companyCircle(storykit)}
           {companyCircle(visma)}
-        </div>
+        </div> */}
       </div>
     );
   };
@@ -139,8 +139,8 @@ export default function Footer({ appData }: FooterProps): JSX.Element {
 
   return (
     <div className="container-fluid p-4 bg-dark text-white">
-      <div className="row row-cols-2 mb-3">
-        <div className="col-12 col-lg-6 d-flex justify-content-center justify-content-lg-end">
+      <div className="row row-cols-2 mb-3 justify-content-center">
+        <div className="col-12 col-lg-6 d-flex justify-content-center">
           <div className="d-flex row row-cols-1 justify-content-center">
             <div className="col d-flex justify-content-center mb-3 gap-5">
               <img src={studsLogo} style={imgStyle} alt="Studs Logo" />
@@ -157,7 +157,7 @@ export default function Footer({ appData }: FooterProps): JSX.Element {
             </div>
           </div>
         </div>
-        <div className="col-12 col-lg-6 d-flex justify-content-center justify-content-lg-start">
+        {/* <div className="col-12 col-lg-6 d-flex justify-content-center justify-content-lg-start">
           <div className="d-flex row row-cols-1 row-cols-lg-2">
             <div className="d-flex d-lg-none justify-content-center my-3">
               <span className="fs-3 fw-light">
@@ -181,7 +181,7 @@ export default function Footer({ appData }: FooterProps): JSX.Element {
             </div>
             {getCollaborations()}
           </div>
-        </div>
+        </div> */}
       </div>
       <div className="col-12 d-flex justify-content-center">
         <hr className="col-9 opacity-25" style={{ height: 1 }} />
