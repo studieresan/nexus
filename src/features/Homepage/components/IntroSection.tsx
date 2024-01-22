@@ -1,4 +1,4 @@
-import introBg from "@/assets/images/BigSizeBg.png";
+import introBg from "@/assets/images/intro.png";
 import logo2024 from "@/assets/images/logo2024.png";
 import React, { useState, useEffect, CSSProperties, useRef } from "react";
 import { Button, Spinner } from "react-bootstrap";

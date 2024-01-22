@@ -2,9 +2,9 @@
 import { useEffect, useRef, useState } from 'react'
 import { Trans, useTranslation } from 'react-i18next'
 import { IntroSection } from './components/IntroSection'
-import bgContact from '@/assets/images/DSC00833.jpg'
-import bgEvents from '@/assets/images/b48.jpg'
-import bgProject from '@/assets/images/b28.jpg'
+import bgContact from '@/assets/images/contact.jpg'
+import bgEvents from '@/assets/images/events.jpg'
+import bgProject from '@/assets/images/PG.jpg'
 
 import DynamicHero from '@/components/DynamicHero.jsx'
 import Contact from '@/components/Contact.jsx'
