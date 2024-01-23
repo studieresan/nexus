@@ -100,11 +100,12 @@ export default function Header({
   return (
     <Navbar
       style={{
-        background:
-          "linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(60,4,99,1) 47%, rgba(35,11,157,1) 100%)",
+        background: "rgba(57,0,153,1) 100%",
+    
+        padding: '5px',
       }}
       variant="dark"
-      className="px-3"
+      className="px-3 "
       expand="md"
     >
       <Navbar.Toggle
@@ -139,14 +140,19 @@ export default function Header({
             className="d-flex justify-content-center p-2 mx-auto"
             style={{ width: logoDivWidth }}
           >
+
             <Button
+              style={{
+                margin: "0px",
+                padding: "0px",
+              }}
               className="studs-navbar"
               onClick={() => handleNavItemClick("/")}
             >
               <img
-                alt=""
+                alt="Logo"
                 src={studsLogo}
-                width="200px"
+                width="150px"
                 height="100%"
                 className="d-none d-lg-inline-block align-top"
               />
