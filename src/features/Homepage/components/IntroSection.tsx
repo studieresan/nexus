@@ -219,7 +219,7 @@ export function IntroSection({
           </h2>
         </div>
         <div className="w-100 text-center">
-          <button className="btn btn-primary btn-lg">
+          <button className="btn btn-primary btn-lg studs-bg">
             <a
               href="mailto:sales@studs.se"
               className="text-white  text-decoration-none"

@@ -8,7 +8,16 @@ html,body
     overflow-x: hidden; 
 }
 * {
-  font-family: Montserrat, Inter, Avenir, Helvetica, Arial, sans-serif; 
+  font-family: Lato, Montserrat, Inter, Avenir, Helvetica, Arial, sans-serif, aglet-sans; 
+}
+
+/* Change font on heading */
+.fs-1, .fs-4, h2{
+  font-family: aglet-sans;
+}
+
+.fs-5{
+  font-family: Lato;
 }
 
 .btn.btn-primary.studs-bg {
