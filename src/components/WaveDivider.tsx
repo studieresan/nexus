@@ -5,7 +5,7 @@ interface WaveDividerProps {
   fillColor?: string;
 }
 
-const WaveDivider: React.FC<WaveDividerProps> = ({ direction, fillColor = 'white' }) => {
+const WaveDivider: React.FC<WaveDividerProps> = ({ direction, fillColor = '#F5E7E0' }) => {
   if (direction === 'down') {
     return (
       <div className='bg-dark pt-5 d-none d-md-block'>

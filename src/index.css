@@ -6,6 +6,7 @@ html,body
     margin: 0px;
     padding: 0px;
     overflow-x: hidden; 
+    background-color: #F5E7E0 !important; /* !imortant might be risky */
 }
 
 /* The first font mentioned is the font that will  be standard (Lato in this case) */
@@ -14,7 +15,7 @@ html,body
 }
 
 /* Change font on heading */
-.fs-1, .fs-4, h2{
+.fs-1, .fs-4{
   font-family: aglet-sans;
 }
 
