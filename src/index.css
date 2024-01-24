@@ -7,6 +7,8 @@ html,body
     padding: 0px;
     overflow-x: hidden; 
 }
+
+/* The first font mentioned is the font that will  be standard (Lato in this case) */
 * {
   font-family: Lato, Montserrat, Inter, Avenir, Helvetica, Arial, sans-serif, aglet-sans; 
 }
@@ -16,6 +18,7 @@ html,body
   font-family: aglet-sans;
 }
 
+/* Change font of some normal text */
 .fs-5{
   font-family: Lato;
 }
