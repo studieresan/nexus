@@ -40,7 +40,7 @@ function Toasts ({ toasts }: ToastsProps) {
                     className={`d-flex flex-row gap-2${toast.color && (' text-bg-' + toast.color)}`}
                     closeButton={false}
                     onClick={!disableClose ? () => toasts.off(toast) : undefined}
-                  > {toast.color === 'success' ? <BsCheckCircleFill className='text-white' /> : toast.color === 'danger' ? <BsFillExclamationCircleFill className='text-white' /> : <></>}
+                  > {toast.color === 'success' ? <BsCheckCircleFill className='text-egg' /> : toast.color === 'danger' ? <BsFillExclamationCircleFill className='text-egg' /> : <></>}
                     <strong className='me-auto'>{toast.title}</strong>
                     {toast.allowClose && (
                       <Button className='p-1 d-flex justify-content-center align-items-center' variant={toast.color} onClick={() => toasts.off(toast)}>

@@ -138,7 +138,7 @@ export default function Footer({ appData }: FooterProps): JSX.Element {
   };
 
   return (
-    <div className="container-fluid p-4 bg-dark text-white">
+    <div className="container-fluid p-4 bg-dark text-egg">
       <div className="row row-cols-2 mb-3 justify-content-center">
         <div className="col-12 col-lg-6 d-flex justify-content-center">
           <div className="d-flex row row-cols-1 justify-content-center">

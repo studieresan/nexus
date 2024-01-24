@@ -80,9 +80,9 @@ export default function Homepage ({ appData }: { appData: AppData }): JSX.Elemen
   }, [appData.users, i18n.language])
 
   const groupIcons:GroupIcons[] = [
-    { name: 'project', icon: <AiOutlineFundProjectionScreen size={60} className='text-white rounded' /> },
-    { name: 'events', icon: <RiTeamFill size={60} className='text-white rounded' /> },
-    { name: 'contact', icon: <FiSend size={60} className='text-white rounded' /> }
+    { name: 'project', icon: <AiOutlineFundProjectionScreen size={60} className='text-egg rounded' /> },
+    { name: 'events', icon: <RiTeamFill size={60} className='text-egg rounded' /> },
+    { name: 'contact', icon: <FiSend size={60} className='text-egg rounded' /> }
   ]
 
   useEffect(() => {

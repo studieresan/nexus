@@ -24,21 +24,30 @@ html,body
   font-family: Lato;
 }
 
+/* White text */
+.text-egg{
+  color: #F5E7E0 !important;
+}
+/* White background color */
+.bg-egg{
+  color: #F5E7E0 !important;
+}
+
 .btn.btn-primary.studs-bg {
+  
   position: relative;
-  background-image: url('assets/images/buttonPrimary.png');
-  background-color: transparent; /* changed from none to transparent */
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  --bs-btn-bg: transparent;
-  --bs-btn-hover-color: white;
+  --bs-btn-color: #F5E7E0;
+  --bs-btn-bg: #9E0059;
+  --bs-btn-hover-color: #F5E7E0;
   border: none;
   overflow: hidden;
 }
 
 .btn.btn-primary.studs-bg:hover {
-  background-color: transparent; /* added this line to override the Bootstrap hover background color */
+  background-color: #FF0054; /* added this line to override the Bootstrap hover background color */
 }
 
 .btn.btn-primary.studs-bg::before {
@@ -53,10 +62,11 @@ html,body
 }
 
 .btn.btn-primary.studs-bg:hover::before {
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0);
 }
 
 .btn.btn-primary.studs-navbar {
+  
   font-size: 1.25rem;
   font-weight: 300;
   white-space: nowrap;
@@ -65,8 +75,9 @@ html,body
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  --bs-btn-color: black;
   --bs-btn-bg: transparent;
-  --bs-btn-hover-color: white;
+  --bs-btn-hover-color: #FF0054;
   border: none;
   overflow: hidden;
   transition: opacity 0.25s;
