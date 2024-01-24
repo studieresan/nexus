@@ -100,12 +100,12 @@ export default function Header({
   return (
     <Navbar
       style={{
-        background: "rgba(57,0,153,1) 100%",
-    
-        padding: '5px',
+        borderBottom: "100px",
+        background: "linear-gradient(to bottom, rgb(57,0,153), rgb(57,0,153) 90%, #4D4A49 90%, black)",
+        padding: "0px 0px 10px 0px",
       }}
       variant="dark"
-      className="px-3 "
+      className="px-3"
       expand="md"
     >
       <Navbar.Toggle
