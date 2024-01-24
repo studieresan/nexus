@@ -2,7 +2,7 @@ import { Button, Nav, Navbar } from "react-bootstrap";
 import { BiLogIn, BiLogOut } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 import LanguageDropDown from "../LanguageDropdown/index.jsx";
-import studsLogo from "@/assets/images/logo2024.png";
+import studsLogo from "@/assets/images/logo2024h.png";
 import { useTranslation } from "react-i18next";
 import { useContext, useState } from "react";
 import { HandleInstructionsContext } from "@/context";
@@ -101,7 +101,7 @@ export default function Header({
     <Navbar
       style={{
         borderBottom: "100px",
-        background: "linear-gradient(to bottom, #4ECDC4, #4ECDC4 92%, rgba(0,0,0,0.9) 92%, #390099)",
+        background: "linear-gradient(to bottom, #F5E7E0, #F5E7E0 92%, rgba(0,0,0,0.9) 92%, #390099)",
         padding: "0px 0px 10px 0px",
       }}
       variant="dark"

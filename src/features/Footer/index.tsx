@@ -1,5 +1,5 @@
 import { BsFacebook, BsInstagram, BsLinkedin } from "react-icons/bs";
-import studsLogo from "@/assets/images/logo2024.png";
+import studsLogo from "@/assets/images/logo2024f.png";
 import goldman_sachs from "@/assets/images/goldman_sachs.png";
 import karma from "@/assets/images/karma.png";
 import scania from "@/assets/images/scania.png";
