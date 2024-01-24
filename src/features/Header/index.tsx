@@ -101,7 +101,7 @@ export default function Header({
     <Navbar
       style={{
         borderBottom: "100px",
-        background: "linear-gradient(to bottom, rgb(57,0,153), rgb(57,0,153) 90%, #4D4A49 90%, black)",
+        background: "linear-gradient(to bottom, rgb(57,0,153), rgb(57,0,153) 92%, #333231 92%, black)",
         padding: "0px 0px 10px 0px",
       }}
       variant="dark"
