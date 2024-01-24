@@ -214,9 +214,9 @@ export function IntroSection({
         }}
       >
         <div>
-          <h2 className="text-egg text-center">
+          <div className="text-egg text-center fs-2">
             {t("homepage.callToAction.text")}
-          </h2>
+          </div>
         </div>
         <div className="w-100 text-center">
           <button className="btn btn-primary btn-lg studs-bg">
@@ -226,9 +226,9 @@ export function IntroSection({
               rel="noopener noreferrer"
               target="_blank"
             >
-              <h2 className="text-egg text-center">
+              <div className="fs-3 text-egg text-center">
                 {t("homepage.callToAction.button")}
-              </h2>
+              </div>
             </a>
           </button>
         </div>

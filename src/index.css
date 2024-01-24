@@ -15,7 +15,7 @@ html,body
 }
 
 /* Change font on heading */
-.fs-1, .fs-4{
+.fs-1, .fs-2, .fs-4, h2{
   font-family: aglet-sans;
 }
 
