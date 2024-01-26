@@ -18,7 +18,7 @@ export function ForgotPassword({ formData, handleChange, handleStartPasswordRese
   }
 
   return (
-    <div className='d-flex justify-content-center bg-light align-items-center my-5'>
+    <div className='d-flex justify-content-center bg-egg align-items-center my-5'>
       <div className=' col-10 col-sm-8 col-md-7 col-lg-6 col-xl-5 col-xxl-4 col-xxxl-3 bg-dark rounded text-light p-5'>
         <div className="fs-2 fw-light d-flex align-items-center">
           {t('forgotPassword.title')}

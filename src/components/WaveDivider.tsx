@@ -5,14 +5,14 @@ interface WaveDividerProps {
   fillColor?: string;
 }
 
-const WaveDivider: React.FC<WaveDividerProps> = ({ direction, fillColor = 'white' }) => {
+const WaveDivider: React.FC<WaveDividerProps> = ({ direction, fillColor = '#F5E7E0' }) => {
   if (direction === 'down') {
     return (
       <div className='bg-dark pt-5 d-none d-md-block'>
-        <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
+        <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
           <path
             fill={fillColor}
-            d="M0,0 C720,170 720,0 1440,0 L1440,100 L0,100 Z"
+            d="M 0 0 L 0 101 H 1440 Z" //M 0 0 C 1440 100 0 0 1440 100 L 1440 100 L 0 100 Z
             />
         </svg>
       </div>
@@ -20,10 +20,10 @@ const WaveDivider: React.FC<WaveDividerProps> = ({ direction, fillColor = 'white
   } else {
     return (
       <div className='bg-dark d-none d-md-block'>
-        <svg viewBox="0 0 1440 99" preserveAspectRatio="none">
+        <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
           <path
             fill={fillColor}
-            d="M0,100 C720,-100 720,100 1440,100 L1440,0 L0,0 Z"
+            d="M 0 0 H 1440 L 0 101 Z" //
             />
         </svg>
       </div>

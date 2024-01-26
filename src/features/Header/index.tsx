@@ -2,7 +2,7 @@ import { Button, Nav, Navbar } from "react-bootstrap";
 import { BiLogIn, BiLogOut } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 import LanguageDropDown from "../LanguageDropdown/index.jsx";
-import studsLogo from "@/assets/images/logo2024.png";
+import studsLogo from "@/assets/images/logo2024h.png";
 import { useTranslation } from "react-i18next";
 import { useContext, useState } from "react";
 import { HandleInstructionsContext } from "@/context";
@@ -100,8 +100,9 @@ export default function Header({
   return (
     <Navbar
       style={{
-        background:
-          "linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(60,4,99,1) 47%, rgba(35,11,157,1) 100%)",
+        borderBottom: "100px",
+        background: "linear-gradient(to bottom, #F5E7E0, #F5E7E0 92%, rgba(0,0,0,0.9) 92%, #390099)",
+        padding: "0px 0px 10px 0px",
       }}
       variant="dark"
       className="px-3"
@@ -139,14 +140,19 @@ export default function Header({
             className="d-flex justify-content-center p-2 mx-auto"
             style={{ width: logoDivWidth }}
           >
+
             <Button
+              style={{
+                margin: "0px",
+                padding: "0px",
+              }}
               className="studs-navbar"
               onClick={() => handleNavItemClick("/")}
             >
               <img
-                alt=""
+                alt="Logo"
                 src={studsLogo}
-                width="200px"
+                width="150px"
                 height="100%"
                 className="d-none d-lg-inline-block align-top"
               />

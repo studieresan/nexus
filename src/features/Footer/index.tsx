@@ -1,5 +1,5 @@
 import { BsFacebook, BsInstagram, BsLinkedin } from "react-icons/bs";
-import studsLogo from "@/assets/images/logo2024.png";
+import studsLogo from "@/assets/images/logo2024f.png";
 import goldman_sachs from "@/assets/images/goldman_sachs.png";
 import karma from "@/assets/images/karma.png";
 import scania from "@/assets/images/scania.png";
@@ -138,7 +138,7 @@ export default function Footer({ appData }: FooterProps): JSX.Element {
   };
 
   return (
-    <div className="container-fluid p-4 bg-dark text-white">
+    <div className="container-fluid p-4 bg-dark text-egg">
       <div className="row row-cols-2 mb-3 justify-content-center">
         <div className="col-12 col-lg-6 d-flex justify-content-center">
           <div className="d-flex row row-cols-1 justify-content-center">

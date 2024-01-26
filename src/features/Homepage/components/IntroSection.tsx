@@ -30,7 +30,7 @@ const IconWrapper = ({
   <div className="mb-1" style={{ width: "auto", height: "auto" }}>
     {React.createElement(icon, {
       size: iconSize,
-      className: "text-white rounded",
+      className: "text-egg rounded",
     })}
   </div>
 );
@@ -178,7 +178,7 @@ export function IntroSection({
                 />
               </div>
               <div
-                className="d-flex fs-1 text-white justify-content-center justify-content-lg-start"
+                className="d-flex fs-1 text-egg justify-content-center justify-content-lg-start"
                 style={titleStyle}
               >
                 {t("homepage.intro")}
@@ -188,7 +188,7 @@ export function IntroSection({
         </div>
       </div>
       <div className="col-12 bg-dark">&nbsp;</div>
-      <div className="col-10 d-none d-lg-block text-white mx-auto mt-3">
+      <div className="col-10 d-none d-lg-block text-egg mx-auto mt-3">
         <div className="row row-cols-3">
           {overlayGroups && (
             <OverlayGroupList
@@ -214,21 +214,21 @@ export function IntroSection({
         }}
       >
         <div>
-          <h2 className="text-white text-center">
+          <div className="text-egg text-center fs-2">
             {t("homepage.callToAction.text")}
-          </h2>
+          </div>
         </div>
         <div className="w-100 text-center">
-          <button className="btn btn-primary btn-lg">
+          <button className="btn btn-primary btn-lg studs-bg">
             <a
               href="mailto:sales@studs.se"
-              className="text-white  text-decoration-none"
+              className="text-egg  text-decoration-none"
               rel="noopener noreferrer"
               target="_blank"
             >
-              <h2 className="text-white text-center">
+              <div className="fs-3 text-egg text-center">
                 {t("homepage.callToAction.button")}
-              </h2>
+              </div>
             </a>
           </button>
         </div>

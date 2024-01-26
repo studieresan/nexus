@@ -29,12 +29,12 @@ export default function StudsGroups({ appData }: GroupsProps): JSX.Element {
     if (appData.users) {
       const managerTypes = [UserRole.EventGroupManager, UserRole.FinanceGroupManager, UserRole.InfoGroupManager, UserRole.ItGroupManager, UserRole.TravelGroupManager, UserRole.SalesGroupManager]
       const icons: { [key: string]: JSX.Element } = {
-        [UserRole.EventGroupManager]: <AiFillSchedule style={{ backgroundColor: 'white' }} />,
-        [UserRole.FinanceGroupManager]: <GiReceiveMoney style={{ backgroundColor: 'white' }} />,
-        [UserRole.InfoGroupManager]: <GoPencil style={{ backgroundColor: 'white' }} />,
-        [UserRole.ItGroupManager]: <GiProcessor style={{ backgroundColor: 'white' }} />,
-        [UserRole.TravelGroupManager]: <MdTravelExplore style={{ backgroundColor: 'white' }} />,
-        [UserRole.SalesGroupManager]: <BsBuildings style={{ backgroundColor: 'white' }} />
+        [UserRole.EventGroupManager]: <AiFillSchedule style={{ backgroundColor: '#F5E7E0' }} />,
+        [UserRole.FinanceGroupManager]: <GiReceiveMoney style={{ backgroundColor: '#F5E7E0' }} />,
+        [UserRole.InfoGroupManager]: <GoPencil style={{ backgroundColor: '#F5E7E0' }} />,
+        [UserRole.ItGroupManager]: <GiProcessor style={{ backgroundColor: '#F5E7E0' }} />,
+        [UserRole.TravelGroupManager]: <MdTravelExplore style={{ backgroundColor: '#F5E7E0' }} />,
+        [UserRole.SalesGroupManager]: <BsBuildings style={{ backgroundColor: '#F5E7E0' }} />
       }
       const highestStudsYear = Math.max(...appData.users.map((user) => user.studsYear))
       const managers = appData.users.filter((user) => managerTypes.includes(user.info.role) && user.studsYear === highestStudsYear)
