@@ -134,6 +134,12 @@ export default function Header({
               >
                 {t("groups.name")}
               </Button>
+              <Button
+                className="studs-navbar"
+                onClick={() => handleNavItemClick("/contact")}
+              >
+                {t("contact.name")}
+              </Button>
             </Nav>
           </div>
           <div
