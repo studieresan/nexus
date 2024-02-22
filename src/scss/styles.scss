@@ -27,3 +27,27 @@ $grid-breakpoints: map-merge(
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
 @import url('https://use.typekit.net/vxq8ozq.css');
 @import url('https://fonts.googleapis.com/css?family=Lato:400,700');
+
+/* Change font on headings */
+.fs-1, .fs-2, .fs-4, h2{
+  font-family: aglet-sans;
+}
+
+/* Change font of some normal text */
+.fs-5{
+  font-family: Lato;
+}
+
+/* White text */
+.text-egg{
+  color: #F5E7E0;
+}
+/* White background color */
+.bg-egg{
+  color: #F5E7E0;
+}
+
+html,body
+{
+    background-color: #F5E7E0;
+}
