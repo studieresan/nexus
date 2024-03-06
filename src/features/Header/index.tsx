@@ -101,7 +101,8 @@ export default function Header({
     <Navbar
       style={{
         borderBottom: "100px",
-        background: "linear-gradient(to bottom, #F5E7E0, #F5E7E0 92%, rgba(0,0,0,0.9) 92%, #390099)",
+        background:
+          "linear-gradient(to bottom, #F5E7E0, #F5E7E0 92%, rgba(0,0,0,0.9) 92%, #390099)",
         padding: "0px 0px 10px 0px",
       }}
       variant="dark"
@@ -113,8 +114,9 @@ export default function Header({
         onClick={() => setNavbarCollapsed(!navbarCollapsed)} // Toggle the collapsed state when the button is clicked
       />
       <Navbar.Collapse id="basic-navbar-nav" in={!navbarCollapsed}>
-        <div className="d-flex flex-column flex-md-row w-100">
-          <div className="d-flex justify-content-center">
+        <div className="row w-100">
+          {/* Left side items */}
+          <div className="col-5 d-flex justify-content-start">
             <Nav className="align-items-center gap-2">
               <Button
                 className="studs-navbar"
@@ -142,11 +144,9 @@ export default function Header({
               </Button>
             </Nav>
           </div>
-          <div
-            className="d-flex justify-content-center p-2 mx-auto"
-            style={{ width: logoDivWidth }}
-          >
 
+          {/* Center logo */}
+          <div className="col-2 d-flex justify-content-center">
             <Button
               style={{
                 margin: "0px",
@@ -165,8 +165,10 @@ export default function Header({
               <AiOutlineHome size={30} className="d-inline-block d-lg-none" />
             </Button>
           </div>
-          <div className="d-flex flex-column flex-md-row justify-content-center">
-            <Nav className="align-items-center gap-2 p-2 p-md-0">
+
+          {/* Right side items */}
+          <div className="col-5 d-flex justify-content-end">
+            <Nav className="align-items-center gap-2">
               <LanguageDropDown />
               <Button
                 className="studs-navbar"
