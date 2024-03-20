@@ -200,38 +200,6 @@ export function IntroSection({
           )}
         </div>
       </div>
-      <div
-        className={
-          (windowWidth >= 992 ? "position-absolute" : "position-relative") +
-          " p-2 rounded-3"
-        }
-        id="contact-sales-call-to-action"
-        style={{
-          backgroundColor: "rgba(0,0,0,0.0)",
-          left: windowWidth >= 992 ? "1%" : "0",
-          top: windowWidth >= 992 ? "35%" : "0",
-          width: "500px",
-          margin: windowWidth >= 992 ? "0" : "0 auto",
-          marginTop: windowWidth >= 992 ? "0" : "50px",
-        }}
-      >
-      <div className="text-light text-center fs-2"
-           style={{fontWeight: 600}}
-      >
-          {t("homepage.callToAction.text")}
-      </div>
-      <div className="text-light text-center fs-2"
-           style={{fontWeight: 600}}
-      >
-          {t("homepage.callToAction.button")}
-          <a
-            href="mailto:sales@studs.se"
-            className="text-light  text-decoration-none"
-            rel="noopener noreferrer"
-            target="_blank"
-          > sales@studs.se</a>
-      </div>
-      </div>
     </div>
   );
 }

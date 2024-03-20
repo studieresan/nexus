@@ -4,6 +4,7 @@ import { AppDataContext, HandleInstructionsContext, HandleModalsContext } from '
 import Header from './features/Header/index'
 import Homepage from './features/Homepage/index'
 import About from './features/About/index'
+import ContactPage from './features/Contact/index'
 import Events from './features/Events/index'
 import Groups from './features/StudsGroups/index'
 import Blog from './features/BlogPosts/index'
@@ -53,6 +54,7 @@ function App() {
           <Routes>
             <Route path='/' element={<Homepage appData={appData} />} />
             <Route path='/about' element={waveDividedElement(<About appData={appData} handleModals={handleModals} />)} />
+            <Route path='/contact' element={waveDividedElement(<ContactPage appData={appData} handleModals={handleModals} />)} />
             <Route path='/events' element={waveDividedElement(<Events appData={appData} handleModals={handleModals} />)} />
             <Route path='/groups' element={waveDividedElement(<Groups appData={appData} />)} />
             <Route path='/blog' element={waveDividedElement(<Blog appData={appData} handleModals={handleModals} />)} />
