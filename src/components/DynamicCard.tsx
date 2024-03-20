@@ -52,7 +52,7 @@ export default function DynamicCard ({ element, handleClickCard, handleClickEdit
         }}
       >
         <div ref={imageRef} className='d-flex flex-column bg-dark h-100' style={{ transitionDuration: '0.2s', backgroundImage: `url(${element.bgImg})`, backgroundSize: 'cover', backgroundPosition: 'center', filter: 'brightness(80%)', position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }} />
-        <div className='d-flex flex-column h-100 p-3 p-lg-5 pb-lg-3 text-egg text-shadow-1' style={{ position: 'relative' }}>
+        <div className='d-flex flex-column h-100 p-3 p-lg-5 pb-lg-3 text-light text-shadow-1' style={{ position: 'relative' }}>
           <div className={`pt-5 ${element.danger ? 'mt-3' : 'mt-5'} mb-4`}>
             {element.danger && <small className='lead text-warning'>{element.danger}</small>}
             {element.cardTitle

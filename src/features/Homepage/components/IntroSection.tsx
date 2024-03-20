@@ -32,7 +32,7 @@ const IconWrapper = ({
   <div className="mb-1" style={{ width: "auto", height: "auto" }}>
     {React.createElement(icon, {
       size: iconSize,
-      className: "text-egg rounded",
+      className: "text-light rounded",
     })}
   </div>
 );
@@ -180,7 +180,7 @@ export function IntroSection({
                 />
               </div>
               <div
-                className="d-flex fs-1 text-egg justify-content-center justify-content-lg-start"
+                className="d-flex fs-1 text-light justify-content-center justify-content-lg-start"
                 style={titleStyle}
               >
                 {t("homepage.intro")}
@@ -190,7 +190,7 @@ export function IntroSection({
         </div>
       </div>
       <div className="col-12 bg-dark">&nbsp;</div>
-      <div className="col-10 d-none d-lg-block text-egg mx-auto mt-3">
+      <div className="col-10 d-none d-lg-block text-light mx-auto mt-3">
         <div className="row row-cols-3">
           {overlayGroups && (
             <OverlayGroupList
@@ -215,18 +215,18 @@ export function IntroSection({
           marginTop: windowWidth >= 992 ? "0" : "50px",
         }}
       >
-      <div className="text-egg text-center fs-2"
+      <div className="text-light text-center fs-2"
            style={{fontWeight: 600}}
       >
           {t("homepage.callToAction.text")}
       </div>
-      <div className="text-egg text-center fs-2"
+      <div className="text-light text-center fs-2"
            style={{fontWeight: 600}}
       >
           {t("homepage.callToAction.button")}
           <a
             href="mailto:sales@studs.se"
-            className="text-egg  text-decoration-none"
+            className="text-light  text-decoration-none"
             rel="noopener noreferrer"
             target="_blank"
           > sales@studs.se</a>

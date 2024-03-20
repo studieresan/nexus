@@ -1,9 +1,8 @@
 
-// Custom Variables
+// Custom Variables to overide the bootstrap colors for dark and light
 $dark: #390099;
-
-/* Byt alla "egg" till "light" och sedan ta borty allt med egg nedanför */
 $light: #F5E7E0;
+
 // Import Bootstrap functions, variables, and mixins
 @import "~bootstrap/scss/functions";
 @import "~bootstrap/scss/variables";
@@ -38,15 +37,6 @@ $grid-breakpoints: map-merge(
 /* Change font of some normal text */
 .fs-5{
   font-family: Lato;
-}
-
-/* White text */
-.text-egg{
-  color: #F5E7E0;
-}
-/* White background color */
-.bg-egg{
-  color: #F5E7E0;
 }
 
 html,body
