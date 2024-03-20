@@ -102,7 +102,7 @@ export default function Header({
       style={{
         background:
           "linear-gradient(to top, #390099, rgba(0,0,0,0.9) 10px, #F5E7E0 10px, #F5E7E0)",
-        padding: "0px 0px 10px 0px",
+        padding: "10px 0px 20px 0px",
       }}
       variant="light"
       className="px-3"
