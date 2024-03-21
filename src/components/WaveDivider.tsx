@@ -12,7 +12,7 @@ const WaveDivider: React.FC<WaveDividerProps> = ({ direction, fillColor = '#F5E7
         <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
           <path
             fill={fillColor}
-            d="M 0 0 L 0 101 H 1440 Z" //M 0 0 C 1440 100 0 0 1440 100 L 1440 100 L 0 100 Z
+            d="M 0 0 L 0 101 H 1440 Z" 
             />
         </svg>
       </div>
@@ -23,7 +23,7 @@ const WaveDivider: React.FC<WaveDividerProps> = ({ direction, fillColor = '#F5E7
         <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
           <path
             fill={fillColor}
-            d="M 0 0 H 1440 L 0 101 Z" //
+            d="M 0 0 H 1440 L 0 101 Z" 
             />
         </svg>
       </div>

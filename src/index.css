@@ -6,31 +6,11 @@ html,body
     margin: 0px;
     padding: 0px;
     overflow-x: hidden; 
-    background-color: #F5E7E0 !important; /* !imortant might be risky */
 }
 
 /* The first font mentioned is the font that will  be standard (Lato in this case) */
 * {
   font-family: Lato, Montserrat, Inter, Avenir, Helvetica, Arial, sans-serif, aglet-sans; 
-}
-
-/* Change font on heading */
-.fs-1, .fs-2, .fs-4, h2{
-  font-family: aglet-sans;
-}
-
-/* Change font of some normal text */
-.fs-5{
-  font-family: Lato;
-}
-
-/* White text */
-.text-egg{
-  color: #F5E7E0 !important;
-}
-/* White background color */
-.bg-egg{
-  color: #F5E7E0 !important;
 }
 
 .btn.btn-primary.studs-bg {

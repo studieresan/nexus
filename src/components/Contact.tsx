@@ -70,7 +70,7 @@ export default function Contact({ element }: ContactProps): JSX.Element {
   if (element.navbar) {
     return (
       <div className={`d-flex flex-column align-items-center ${hover}`} onClick={() => handleClickContact(element.id)}>
-        <div className="d-flex ratio ratio-1x1 rounded-circle bg-egg overflow-hidden flex-shrink-0" style={{ width: 50, height: 50 }}>
+        <div className="d-flex ratio ratio-1x1 rounded-circle bg-light overflow-hidden flex-shrink-0" style={{ width: 50, height: 50 }}>
           {element.picture ? (
             <img src={element.picture} className="card-img-top img-cover" alt="alt" />
           ) : (
@@ -84,7 +84,7 @@ export default function Contact({ element }: ContactProps): JSX.Element {
   if (element.vertical) {
     return (
       <div className={`d-flex flex-column align-items-center ${hover} px-0 px-sm-3 py-3`} onClick={() => handleClickContact(element.id)}>
-        <div className="d-flex ratio ratio-1x1 rounded-circle bg-egg overflow-hidden flex-shrink-0" style={{ width: element.lg ? 287 : 120, height: element.lg ? 287 : 120 }}>
+        <div className="d-flex ratio ratio-1x1 rounded-circle bg-light overflow-hidden flex-shrink-0" style={{ width: element.lg ? 287 : 120, height: element.lg ? 287 : 120 }}>
           {element.picture ? (
             <img src={element.picture} className="card-img-top img-cover" alt="alt" />
           ) : (
