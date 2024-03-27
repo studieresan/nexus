@@ -105,7 +105,7 @@ export default function DynamicCard({
             </div>
             <div className="d-flex align-items-center gap-2 ">
               <BsCalendarDate />
-              <small>{element.dateText}1</small>
+              <small>{element.dateText}</small>
             </div>
           </div>
           {(toolsToShow.edit || toolsToShow.delete) && (
