@@ -1,20 +1,21 @@
-import { User } from './User'
+import { User } from "./User";
 
 export interface BlogFields {
-    readonly id: string
-    title: string
-    description: string
-    date: Date
-    studsYear: number
-    pictures: string[]
-    frontPicture: string
-    published: boolean
+  readonly id: string;
+  title: string;
+  description: string;
+  date: Date;
+  studsYear: number;
+  pictures: string[];
+  frontPicture: string;
+  published: boolean;
+  eventDate: Date;
 }
 
 export interface BlogPost extends BlogFields {
-    author: User
+  author: User;
 }
 
 export interface BlogPostStringifiedAuthor extends BlogFields {
-    author: string
+  author: string;
 }
