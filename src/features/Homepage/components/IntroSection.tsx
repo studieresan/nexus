@@ -116,19 +116,6 @@ export function IntroSection({
   const windowWidth = useWindowWidth();
   const bottomRef = useRef<HTMLDivElement>(null);
 
-  // useEffect(() => {
-  //   if (bottomRef.current) {
-  //     setTimeout(() => {
-  //       if (bottomRef.current) {
-  //         bottomRef.current.scrollIntoView({
-  //           behavior: 'smooth',
-  //           block: 'end',
-  //         });
-  //       }
-  //     }, 500); // 500ms delay before scrolling
-  //   }
-  // }, [i18n.language]);
-
   const titleWrap = windowWidth < 992 ? "normal" : "pre-line";
 
   const titleStyle: CSSProperties = {
@@ -146,16 +133,13 @@ export function IntroSection({
         className="col-12 w-100 position-relative"
         style={{ minHeight: "200px" }}
       >
-        <div
-          className="image-container d-none d-lg-flex justify-content-end"
-          style={{ marginRight: -100 }}
-        >
+        <div className="image-container d-none d-lg-flex justify-content-end">
           <img
             src={introBg}
             style={{
               top: 0,
               right: 0,
-              width: "75%",
+              width: "60%",
               height: "100%",
               objectFit: "cover",
               filter: "",
