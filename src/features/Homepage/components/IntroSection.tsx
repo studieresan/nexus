@@ -126,8 +126,8 @@ export function IntroSection({
   return (
     <div
       ref={bottomRef}
-      className="row row-cols-1 g-0 bg-dark pb-5"
-      style={{ position: "relative" }}
+      className="row row-cols-1 g-0 bg-dark md-pb-2"
+      style={{ position: "relative", padding-bottom: "120px"  }}
     >
       <div
         className="col-12 w-100 position-relative"
