@@ -24,6 +24,7 @@ export default function Footer({ appData }: FooterProps): JSX.Element {
   const [projectManagers, setProjectManagers] = useState<User[] | null>(null);
   const windowWidth = useWindowWidth();
 
+  const iconStyle: CSSProperties = { color: "white" };
   let textPos = "text-start";
   if (windowWidth < 992) {
     textPos = "text-center";
@@ -191,19 +192,19 @@ export default function Footer({ appData }: FooterProps): JSX.Element {
           className="text-muted mx-1"
           href="https://www.facebook.com/StudsKTH/"
         >
-          <BsFacebook size={38} />
+          <BsFacebook size={38} style={iconStyle} />
         </a>
         <a
           className="text-muted mx-1"
           href="https://www.linkedin.com/company/studs/"
         >
-          <BsLinkedin size={38} />
+          <BsLinkedin size={38} style={iconStyle} />
         </a>
         <a
           className="text-muted mx-1"
           href="https://www.instagram.com/studskth/"
         >
-          <BsInstagram size={38} />
+          <BsInstagram size={38} style={iconStyle} />
         </a>
       </div>
     </div>

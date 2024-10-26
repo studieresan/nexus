@@ -126,12 +126,12 @@ export function IntroSection({
   return (
     <div
       ref={bottomRef}
-      className="row row-cols-1 g-0 bg-dark md-pb-2"
-      style={{ position: "relative", padding-bottom: "120px"  }}
+      className="row row-cols-1 g-0 bg-dark md-pb-2 "
+      style={{ position: "relative"}}
     >
       <div
         className="col-12 w-100 position-relative"
-        style={{ minHeight: "200px" }}
+        style={{ minHeight: "350px" }}
       >
         <div className="image-container d-none d-lg-flex justify-content-end">
           <img
