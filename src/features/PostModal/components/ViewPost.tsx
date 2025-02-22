@@ -117,7 +117,7 @@ export default function ViewPost({
         </Modal.Title>
       </Modal.Header>
       <Modal.Body className="p-4">
-        <h1 className="fw-bold">{post.title}1</h1>
+        <h1 className="fw-bold">{post.title}</h1>
         {inputBlocks &&
           inputBlocks.map((block, index) => (
             <div key={index}>
