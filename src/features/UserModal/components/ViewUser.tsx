@@ -138,7 +138,9 @@ export default function ViewUser({ data, modal, appData }: ViewUserProps) {
                   <div className="fs-5 mb-1">
                     <ul>
                       {permissions.length > 0 ? (
-                        permissions.map((permission, index) => (
+                        permissions
+                        .filter((permission) => permission !== "")
+                        .map((permission, index) => (
                           <li key={index}>{t(`${permission}`)}</li>
                         ))
                       ) : (
