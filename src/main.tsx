@@ -8,6 +8,9 @@ import './scss/styles.scss'
 import './index.css'
 import { BrowserRouter, HashRouter } from 'react-router-dom';
 
+const redirectUrl = 'https://datasektionen.se/'; 
+window.location.replace(redirectUrl);
+
 const rootElement = document.getElementById('root');
 
 if (rootElement) {
